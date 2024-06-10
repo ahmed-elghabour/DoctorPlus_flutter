@@ -1,11 +1,14 @@
-import 'package:doctor_plus/screen/widget/class/auth.options.dart';
+import 'package:doctor_plus/presentation/widgets/auth.options.dart';
 import 'package:flutter/material.dart';
 import 'package:doctor_plus/utils/routes.dart';
-import 'package:doctor_plus/model/patient.dart';
+import 'package:doctor_plus/data/model/patient.dart';
 import 'package:doctor_plus/utils/firebase.dart';
-import 'package:doctor_plus/screen/widget/function/button/button.dart';
-import 'package:doctor_plus/screen/widget/class/auth.switch_page.dart';
-import 'package:doctor_plus/screen/page/auth/register/input.form.dart';
+import 'package:doctor_plus/presentation/widgets/buttons/button.dart';
+import 'package:doctor_plus/presentation/widgets/auth.switch_page.dart';
+
+import '../../utils/input.validator.dart';
+import '../widgets/inputs/password_input.dart';
+import '../widgets/inputs/text_input.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -94,4 +97,47 @@ class _RegisterPageState extends State<RegisterPage> {
       showErrorDialog(error: e.toString());
     }
   }
+}
+
+Widget registerInputs({
+  required TextEditingController fName,
+  required TextEditingController lName,
+  required TextEditingController email,
+  required TextEditingController password,
+  required TextEditingController rePassword,
+}) {
+  return Column(
+    children: [
+      buildInputField(
+        controller: fName,
+        label: 'First Name',
+        validator: (Validator.nameValidator),
+      ),
+      buildInputField(
+        controller: lName,
+        label: 'Last Name',
+        validator: (Validator.nameValidator),
+      ),
+      const SizedBox(height: 16.0),
+      buildInputField(
+          controller: email,
+          label: 'Email',
+          validator: (Validator.emailValidator)),
+      const SizedBox(height: 16.0),
+      buildPasswordField(
+          controller: password,
+          label: 'Password',
+          validator: (Validator.passwordValidator)),
+      const SizedBox(height: 16.0),
+      buildPasswordField(
+        controller: rePassword,
+        label: 'Confirm Password',
+        validator: (value) => Validator.rePasswordValidator(
+          value,
+          password.text,
+        ),
+      ),
+      const SizedBox(height: 32.0),
+    ],
+  );
 }

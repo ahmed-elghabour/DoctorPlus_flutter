@@ -1,4 +1,4 @@
-import 'package:doctor_plus/model/user.dart';
+import 'package:doctor_plus/data/model/user.dart';
 
 class Patient extends SystemUser {
   Patient.login({

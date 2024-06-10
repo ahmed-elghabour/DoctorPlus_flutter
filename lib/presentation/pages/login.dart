@@ -1,11 +1,14 @@
-import 'package:doctor_plus/screen/widget/class/auth.options.dart';
 import 'package:flutter/material.dart';
 import 'package:doctor_plus/utils/routes.dart';
-import 'package:doctor_plus/model/patient.dart';
 import 'package:doctor_plus/utils/firebase.dart';
-import 'package:doctor_plus/screen/widget/function/button/button.dart';
-import 'package:doctor_plus/screen/page/auth/login/input.form.dart';
-import 'package:doctor_plus/screen/widget/class/auth.switch_page.dart';
+import 'package:doctor_plus/data/model/patient.dart';
+import 'package:doctor_plus/utils/input.validator.dart';
+import 'package:doctor_plus/presentation/widgets/inputs/text_input.dart';
+import 'package:doctor_plus/presentation/widgets/auth.options.dart';
+import 'package:doctor_plus/presentation/widgets/buttons/button.dart';
+import 'package:doctor_plus/presentation/widgets/auth.switch_page.dart';
+
+import '../widgets/inputs/password_input.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -84,4 +87,28 @@ class _LoginPageState extends State<LoginPage> {
       showErrorDialog(error: e.toString());
     }
   }
+}
+
+
+
+Widget loginInputs({
+  required TextEditingController email,
+  required TextEditingController password,
+}) {
+  return Column(
+    children: [
+      const SizedBox(height: 16.0),
+      buildInputField(
+        controller: email,
+        label: 'Email',
+        validator: (Validator.emailValidator),
+      ),
+      const SizedBox(height: 16.0),
+      buildPasswordField(
+          controller: password,
+          label: 'Password',
+          validator: (Validator.passwordValidator)),
+      const SizedBox(height: 32.0),
+    ],
+  );
 }

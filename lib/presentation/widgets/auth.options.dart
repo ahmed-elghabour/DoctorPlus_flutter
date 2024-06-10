@@ -1,4 +1,4 @@
-import 'package:doctor_plus/screen/widget/function/button/option.button.dart';
+import 'package:doctor_plus/presentation/widgets/buttons/option.button.dart';
 import 'package:flutter/material.dart';
 
 class ExternalSignOptions extends StatelessWidget {

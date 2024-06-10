@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../function/button/text.button.dart';
+import 'buttons/text.button.dart';
 
 class SwitchAuthPage extends StatelessWidget {
   final String label, link, route;
