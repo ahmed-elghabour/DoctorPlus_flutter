@@ -11,9 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:doctor_plus/utils/routes.dart';
 import 'package:doctor_plus/data/model/patient.dart';
 import 'package:doctor_plus/utils/firebase.dart';
-import 'package:doctor_plus/presentation/widgets/auth.switch_page.dart';
+import 'package:doctor_plus/presentation/widgets/auth_switch_page.dart';
 
-import '../../utils/input.validator.dart';
+import '../../utils/input_validator.dart';
 import '../widgets/signin_option.dart';
 import '../widgets/terms_conditions.dart';
 

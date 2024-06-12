@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:doctor_plus/utils/input.validator.dart';
+import 'package:doctor_plus/utils/input_validator.dart';
 import 'package:doctor_plus/presentation/widgets/inputs.dart';
 import 'package:doctor_plus/presentation/widgets/buttons.dart';
 import 'package:doctor_plus/presentation/widgets/check_box.dart';

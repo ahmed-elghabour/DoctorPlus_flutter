@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:doctor_plus/utils/input.validator.dart';
+import 'package:doctor_plus/utils/input_validator.dart';
 import 'package:doctor_plus/presentation/widgets/inputs.dart';
 import 'package:doctor_plus/presentation/widgets/buttons.dart';
 import 'package:doctor_plus/presentation/widgets/drop_downs.dart';
@@ -28,8 +28,7 @@ class _RegisterGeneralState extends State<RegisterGeneral> {
 
   @override
   Widget build(BuildContext context) {
-    return 
-    Form(
+    return Form(
       key: _formKey,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
