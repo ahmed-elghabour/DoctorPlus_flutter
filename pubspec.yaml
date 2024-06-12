@@ -12,16 +12,20 @@ dependencies:
   flutter:
     sdk: flutter
 
-  http:
-  intl:
-  flutter_bloc:
-  fluttertoast:
-  firebase_core:
-  firebase_auth:
-  toastification:
-  cupertino_icons:
-  shared_preferences:
-  font_awesome_flutter:
+  flutter_localizations:
+    sdk: flutter
+
+
+  http: 
+  image_picker:
+  flutter_bloc: 
+  fluttertoast: 
+  firebase_core: 
+  firebase_auth: 
+  toastification: 
+  cupertino_icons: 
+  shared_preferences: 
+  font_awesome_flutter: 
 
 dev_dependencies:
   flutter_test:
@@ -34,7 +38,6 @@ flutter:
 
   assets:
     - assets/
-
   # fonts:
   #   - family: Schyler
   #     fonts:
@@ -49,3 +52,5 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_intl:
+  enabled: true

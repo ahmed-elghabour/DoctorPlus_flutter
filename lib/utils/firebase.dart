@@ -1,4 +1,4 @@
-import 'package:doctor_plus/model/user.dart';
+import 'package:doctor_plus/data/model/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class CustomFirebase {
