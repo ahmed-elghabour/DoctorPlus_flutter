@@ -1,23 +1,68 @@
 import 'package:flutter/material.dart';
+import '../widgets/signin_option.dart';
 import 'package:doctor_plus/utils/routes.dart';
 import 'package:doctor_plus/utils/firebase.dart';
 import 'package:doctor_plus/data/model/patient.dart';
 import 'package:doctor_plus/utils/input.validator.dart';
-import 'package:doctor_plus/presentation/widgets/inputs/text_input.dart';
-import 'package:doctor_plus/presentation/widgets/auth.options.dart';
-import 'package:doctor_plus/presentation/widgets/buttons/button.dart';
+import 'package:doctor_plus/presentation/widgets/inputs.dart';
+import 'package:doctor_plus/presentation/widgets/buttons.dart';
+import 'package:doctor_plus/presentation/widgets/check_box.dart';
+import 'package:doctor_plus/presentation/widgets/terms_conditions.dart';
 import 'package:doctor_plus/presentation/widgets/auth.switch_page.dart';
 
-import '../widgets/inputs/password_input.dart';
-
-class LoginPage extends StatefulWidget {
+class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 45),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Text(
+                  "Welcome Back",
+                  style: TextStyle(
+                      fontSize: 28,
+                      color: Colors.blueAccent,
+                      fontWeight: FontWeight.bold),
+                ),
+                const Text(
+                  "We're excited to have you back, can't wait to see what you've been up to since you last logged in.",
+                  style: TextStyle(
+                      fontSize: 16, height: 1.5, color: Colors.black54),
+                ),
+                const LoginInputs(),
+                signInOptions(),
+                Center(child: termsAndConditions()),
+                const SwitchAuthPage(
+                  link: "Create new",
+                  route: Routes.register,
+                  label: "Don`t have an account?",
+                ),
+                const SizedBox(height: 16.0),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
-class _LoginPageState extends State<LoginPage> {
+class LoginInputs extends StatefulWidget {
+  const LoginInputs({super.key});
+  @override
+  State<LoginInputs> createState() => _LoginInputsState();
+}
+
+class _LoginInputsState extends State<LoginInputs> {
+  bool rememberMe = false;
+  bool showPassword = false;
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -31,40 +76,49 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(16.0),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  loginInputs(
-                    email: _emailController,
-                    password: _passwordController,
-                  ),
-                  buildSubmitButton(
-                    label: "Login",
-                    onPressed: () {
-                      if (_formKey.currentState?.validate() == true) {
-                        loginUser();
-                      }
-                    },
-                  ),
-                  const SwitchAuthPage(
-                    link: "Create new",
-                    route: Routes.register,
-                    label: "Don`t have an account?",
-                  ),
-                  const SizedBox(height: 16.0),
-                  const ExternalSignOptions()
-                ],
+    return Form(
+      key: _formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          const SizedBox(height: 16.0),
+          buildEmailField(
+            controller: _emailController,
+            validator: (Validator.emailValidator),
+          ),
+          const SizedBox(height: 16.0),
+          buildPasswordField(
+              label: 'Password',
+              showPassword: showPassword,
+              controller: _passwordController,
+              validator: (Validator.passwordValidator),
+              changePasswordVisibility: () =>
+                  setState(() => showPassword = !showPassword)),
+          const SizedBox(height: 32.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              customCheckBox(
+                value: rememberMe,
+                label: "Remember me",
+                onChanged: (val) => setState(() => rememberMe = val ??= false),
               ),
+              const Text("Forgot Password?"),
+            ],
+          ),
+          FractionallySizedBox(
+            widthFactor: .5,
+            child: buildSubmitButton(
+              label: "Login",
+              onPressed: () {
+                if (_formKey.currentState?.validate() == true) {
+                  loginUser();
+                }
+              },
             ),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -87,28 +141,4 @@ class _LoginPageState extends State<LoginPage> {
       showErrorDialog(error: e.toString());
     }
   }
-}
-
-
-
-Widget loginInputs({
-  required TextEditingController email,
-  required TextEditingController password,
-}) {
-  return Column(
-    children: [
-      const SizedBox(height: 16.0),
-      buildInputField(
-        controller: email,
-        label: 'Email',
-        validator: (Validator.emailValidator),
-      ),
-      const SizedBox(height: 16.0),
-      buildPasswordField(
-          controller: password,
-          label: 'Password',
-          validator: (Validator.passwordValidator)),
-      const SizedBox(height: 32.0),
-    ],
-  );
 }

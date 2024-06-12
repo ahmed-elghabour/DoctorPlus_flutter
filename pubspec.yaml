@@ -16,16 +16,16 @@ dependencies:
     sdk: flutter
 
 
-  http: null
-  intl: null
-  flutter_bloc: null
-  fluttertoast: null
-  firebase_core: null
-  firebase_auth: null
-  toastification: null
-  cupertino_icons: null
-  shared_preferences: null
-  font_awesome_flutter: null
+  http: 
+  image_picker:
+  flutter_bloc: 
+  fluttertoast: 
+  firebase_core: 
+  firebase_auth: 
+  toastification: 
+  cupertino_icons: 
+  shared_preferences: 
+  font_awesome_flutter: 
 
 dev_dependencies:
   flutter_test:

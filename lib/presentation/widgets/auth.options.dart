@@ -1,4 +1,4 @@
-import 'package:doctor_plus/presentation/widgets/buttons/option.button.dart';
+import 'buttons.dart';
 import 'package:flutter/material.dart';
 
 class ExternalSignOptions extends StatelessWidget {
@@ -16,16 +16,21 @@ class ExternalSignOptions extends StatelessWidget {
       children: <Widget>[
         buildOptionButton(
           src: 'google',
-          onTap: () => dialog(msg: "google"),
+          onTap: () => dialog(msg: "Google"),
         ),
         buildOptionButton(
-          src: 'github',
-          onTap: () => dialog(msg: "github"),
+          src: 'apple',
+          onTap: () => dialog(msg: "Apple ID"),
         ),
         buildOptionButton(
-          src: 'facebook',
-          onTap: () => dialog(msg: "facebook"),
+          icon: Icons.phone_android,
+          iconSize: 28,
+          onTap: () => dialog(msg: "Phone"),
         ),
+        // buildOptionButton(
+        //   src: 'facebook',
+        //   onTap: () => dialog(msg: "facebook"),
+        // ),
       ],
     );
   }
