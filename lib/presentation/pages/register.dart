@@ -26,8 +26,8 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   int index = 0;
+  // ignore: unused_field
   final PageController _pageController = PageController();
- 
 
   @override
   Widget build(BuildContext context) {
