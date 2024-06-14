@@ -67,6 +67,7 @@ class _LoginInputsState extends State<LoginInputs> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+
   @override
   void dispose() {
     _emailController.dispose();
@@ -107,16 +108,14 @@ class _LoginInputsState extends State<LoginInputs> {
               const Text("Forgot Password?"),
             ],
           ),
-          FractionallySizedBox(
+          buildSubmitButton(
             widthFactor: .5,
-            child: buildSubmitButton(
-              label: "Login",
-              onPressed: () {
-                if (_formKey.currentState?.validate() == true) {
-                  loginUser();
-                }
-              },
-            ),
+            label: "Login",
+            onPressed: () {
+              if (_formKey.currentState?.validate() == true) {
+                loginUser();
+              }
+            },
           ),
         ],
       ),

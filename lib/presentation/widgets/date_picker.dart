@@ -37,7 +37,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
       readOnly: true,
       decoration: InputDecoration(
         labelText: 'Birth Date',
-        border: const OutlineInputBorder(),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(18)),
         suffixIcon: IconButton(
           icon: const Icon(Icons.calendar_today),
           onPressed: () {
