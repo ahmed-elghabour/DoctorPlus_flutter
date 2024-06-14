@@ -1,4 +1,4 @@
-import 'package:doctor_plus/presentation/widgets/auth.options.dart';
+import 'package:doctor_plus/presentation/widgets/auth_options.dart';
 import 'package:flutter/material.dart';
 
 Widget signInOptions() {

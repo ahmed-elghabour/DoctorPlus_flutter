@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:doctor_plus/utils/input.validator.dart';
+import 'package:doctor_plus/utils/input_validator.dart';
 import 'package:doctor_plus/presentation/widgets/inputs.dart';
-import 'package:doctor_plus/presentation/widgets/drop_down.dart';
+import 'package:doctor_plus/presentation/widgets/buttons.dart';
+import 'package:doctor_plus/presentation/widgets/drop_downs.dart';
 import 'package:doctor_plus/presentation/widgets/date_picker.dart';
 import 'package:doctor_plus/presentation/widgets/image_picker.dart';
 
@@ -27,48 +28,59 @@ class _RegisterGeneralState extends State<RegisterGeneral> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SingleChildScrollView(
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+    return Form(
+      key: _formKey,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 10),
+            child: CustomImagePicker(),
+          ),
+          Row(
             children: <Widget>[
-              const CustomImagePicker(),
-              const SizedBox(height: 16.0),
-              buildTextField(
-                controller: _fNameController,
-                label: 'First Name',
-                validator: (Validator.nameValidator),
+              Expanded(
+                child: buildTextField(
+                  controller: _fNameController,
+                  label: 'First Name',
+                  validator: (Validator.nameValidator),
+                ),
               ),
-              const SizedBox(height: 16.0),
-              buildTextField(
-                controller: _lNameController,
-                label: 'Last Name',
-                validator: (Validator.nameValidator),
-              ),
-              const SizedBox(height: 16.0),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 2,
-                    child: CustomDropDownMenu(
-                      value: gender,
-                      list: const ['Male', 'Female'],
-                      onChanged: (String? newVal) =>
-                          setState(() => gender = newVal!),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  const Expanded(
-                    flex: 3,
-                    child: CustomDatePicker(),
-                  ),
-                ],
+              const SizedBox(width: 10),
+              Expanded(
+                child: buildTextField(
+                  controller: _lNameController,
+                  label: 'Last Name',
+                  validator: (Validator.nameValidator),
+                ),
               ),
             ],
           ),
-        ),
+          const SizedBox(height: 16.0),
+          const SizedBox(height: 16.0),
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: genderDropDownMenu(
+                  value: gender,
+                  onChanged: (String? newVal) =>
+                      setState(() => gender = newVal!),
+                ),
+              ),
+              const SizedBox(width: 10),
+              const Expanded(child: CustomDatePicker()),
+            ],
+          ),
+          const SizedBox(height: 16.0),
+          const SizedBox(height: 8.0),
+          FractionallySizedBox(
+            widthFactor: .5,
+            child: buildSubmitButton(
+              label: "Register",
+              onPressed: () {},
+            ),
+          ),
+        ],
       ),
     );
   }

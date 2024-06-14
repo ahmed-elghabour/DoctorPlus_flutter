@@ -9,6 +9,7 @@ Doctor Plus is a healthcare management app designed to streamline interactions b
 ## Features
 
 ### For Patients
+
 - **Sign Up/Login**: Easy onboarding and secure login.
 - **Doctor Search**: Search by name, department, or location.
 - **Reservations**: Schedule appointments, filter by doctor’s name, location, department, and view prices.
@@ -22,6 +23,7 @@ Doctor Plus is a healthcare management app designed to streamline interactions b
 - **Profile Management**: Update personal details and preferences.
 
 ### For Doctors
+
 - **Sign Up/Login**: Easy onboarding and secure login.
 - **Manual Acceptance**: Doctors manually accept patient reservations.
 - **Agenda Management**: View and manage schedules.
@@ -31,6 +33,7 @@ Doctor Plus is a healthcare management app designed to streamline interactions b
 - **Profile Management**: Update personal and professional details.
 
 ### For Admins
+
 - **Doctor Acceptance**: Approve or reject doctor applications.
 - **Complaints Handling**: Manage complaints from both patients and doctors.
 - **Statistics**: View app usage statistics and reports.
@@ -39,12 +42,14 @@ Doctor Plus is a healthcare management app designed to streamline interactions b
 ## User Stories
 
 ### Muhammed Gamal
+
 - Sign-up flow for doctors and patients.
 - Manual acceptance by doctors, including setting prices and managing agendas.
 - Admin management.
 - Patient history.
 
 ### Abdulrahman Khallaf
+
 - Chatbot implementation.
 - Patient reservation system, including:
   - Viewing all doctors.
@@ -54,6 +59,7 @@ Doctor Plus is a healthcare management app designed to streamline interactions b
 - Profile management.
 
 ### Ahmed Elgamal
+
 - Search functionality for doctors by names and departments.
 - Patient reservation system, including:
   - Providing feedback.
@@ -62,6 +68,7 @@ Doctor Plus is a healthcare management app designed to streamline interactions b
   - Appointment cancellations.
 
 ### Ahmed Elghabour
+
 - Favorite list management for doctors.
 - Doctor reservation system, including:
   - Notifications for incoming reservations.
@@ -70,6 +77,7 @@ Doctor Plus is a healthcare management app designed to streamline interactions b
 - Profile management.
 
 ### Amr Yahia
+
 - Handling complaints.
 - Doctor reservation system, including:
   - Viewing schedules.
@@ -77,12 +85,18 @@ Doctor Plus is a healthcare management app designed to streamline interactions b
   - Tracking the number of patients per day.
 
 ### Ahmed Amgad
+
 - Home screen design:
   - Drawer menu.
   - Footer section.
   - Specializations.
   - Branding.
 - Admin functionalities.
+
+### Missing Sections
+
+- Doctor Profile
+- Reservations Screen
 
 ## Technology Stack
 
@@ -93,5 +107,6 @@ Doctor Plus is a healthcare management app designed to streamline interactions b
 ## Getting Started
 
 ### Prerequisites
+
 - Flutter SDK
 - Firebase account

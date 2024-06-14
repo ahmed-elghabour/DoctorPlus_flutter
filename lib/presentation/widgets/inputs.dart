@@ -8,10 +8,10 @@ Widget buildEmailField({
     validator: validator,
     controller: controller,
     keyboardType: TextInputType.emailAddress,
-    decoration: InputDecoration(
+    decoration: const InputDecoration(
       labelText: "Email Address",
-      prefixIcon: const Icon(Icons.email),
-      border: OutlineInputBorder(borderRadius: BorderRadius.circular(18)),
+      prefixIcon: Icon(Icons.email),
+      border: OutlineInputBorder(),
     ),
   );
 }
@@ -29,7 +29,7 @@ Widget buildNumberField({
     decoration: InputDecoration(
       labelText: label,
       prefixIcon: Icon(icon),
-      border: OutlineInputBorder(borderRadius: BorderRadius.circular(18)),
+      border: const OutlineInputBorder(),
     ),
   );
 }
@@ -52,7 +52,7 @@ Widget buildPasswordField({
         icon: Icon(showPassword ? Icons.visibility : Icons.visibility_off),
         onPressed: changePasswordVisibility,
       ),
-      border: OutlineInputBorder(borderRadius: BorderRadius.circular(18)),
+      border: const OutlineInputBorder(),
     ),
   );
 }
@@ -73,7 +73,7 @@ Widget buildTextField({
       prefixIcon: Icon(
         icon,
       ),
-      border: OutlineInputBorder(borderRadius: BorderRadius.circular(18)),
+      border: const OutlineInputBorder(),
     ),
   );
 }
