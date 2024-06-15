@@ -37,32 +37,7 @@ class _PatientAdditionalInfoState extends State<PatientAdditionalInfo> {
               title: "Allergy",
               list: patientInfo['allergies']!['options'] as List<String>,
               onChanged: (newVal) => setState(() => allergies = newVal!)),
-          customAdditionaInfo(
-              value: disease,
-              title: "Disease",
-              selectedlist: diseaseList,
-              list: patientInfo['disease']!['options'] as List<String>,
-              onRemove: (val) => setState(() => diseaseList.remove(val)),
-              onChanged: (newVal) => setState(
-                    () {
-                      disease = newVal!;
-                      diseaseList.add(disease);
-                    },
-                  )),
 
-          customAdditionaInfo(
-              value: medication,
-              title: "Medication",
-              selectedlist: medicationList,
-              list: patientInfo['medication']!['options'] as List<String>,
-              onRemove: (val) => setState(() => medicationList.remove(val)),
-              onChanged: (newVal) => setState(
-                    () {
-                      medication = newVal!;
-                      medicationList.add(medication);
-                    },
-                  )),
-          //==========================
           additionalInfo(
               value: exercise,
               title: "Exercise",
@@ -94,6 +69,33 @@ class _PatientAdditionalInfoState extends State<PatientAdditionalInfo> {
               title: "mentalHealth",
               list: patientInfo['mentalHealth']!['options'] as List<String>,
               onChanged: (newVal) => setState(() => mentalHealth = newVal!)),
+          customAdditionaInfo(
+              value: disease,
+              title: "Disease",
+              selectedlist: diseaseList,
+              list: patientInfo['disease']!['options'] as List<String>,
+              onRemove: (val) => setState(() => diseaseList.remove(val)),
+              onChanged: (newVal) => setState(
+                    () {
+                      disease = newVal!;
+                      diseaseList.add(disease);
+                    },
+                  )),
+          //==========================
+
+          customAdditionaInfo(
+              value: medication,
+              title: "Medication",
+              selectedlist: medicationList,
+              list: patientInfo['medication']!['options'] as List<String>,
+              onRemove: (val) => setState(() => medicationList.remove(val)),
+              onChanged: (newVal) => setState(
+                    () {
+                      medication = newVal!;
+                      medicationList.add(medication);
+                    },
+                  )),
+          const SizedBox(height: 8),
         ],
       ),
     );

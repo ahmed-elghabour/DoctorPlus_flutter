@@ -38,6 +38,7 @@ Widget customAdditionaInfo({
   required void Function(String?) onRemove,
 }) {
   return Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
     children: <Widget>[
       additionalInfo(
         title: title,
@@ -54,6 +55,7 @@ Widget customAdditionaInfo({
                 borderRadius: BorderRadius.circular(18),
               ),
               child: Wrap(
+                alignment: WrapAlignment.center,
                 children: selectedlist
                     .map((val) => Padding(
                           padding: const EdgeInsetsDirectional.only(
