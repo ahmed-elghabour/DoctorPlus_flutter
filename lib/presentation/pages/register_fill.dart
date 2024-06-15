@@ -24,27 +24,24 @@ class _RegisterFillDataState extends State<RegisterFillData> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Expanded(
-              flex: 200,
-              child: PageView(
-                controller: _pageController,
-                children: [
-                  RegisterGeneral(
-                    onNext: () => _goToPage(1),
-                  ),
-                  RegisterAdditional(
-                    onPrevious: () => _goToPage(0),
-                    onSubmit: () {},
-                  ),
-                ],
-              ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Expanded(
+            child: PageView(
+              controller: _pageController,
+              children: [
+                RegisterGeneral(
+                  onNext: () => _goToPage(1),
+                ),
+                RegisterAdditional(
+                  onPrevious: () => _goToPage(0),
+                  onSubmit: () {},
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

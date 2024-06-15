@@ -29,11 +29,16 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
           child: DropdownButton<String>(
             value: widget.value,
             isExpanded: true,
+            alignment: Alignment.center,
             onChanged: widget.onChanged,
             items: widget.list.map<DropdownMenuItem<String>>((String val) {
               return DropdownMenuItem<String>(
                 value: val,
-                child: Center(child: Text(val)),
+                child: Center(
+                    child: Text(
+                  val,
+                  textAlign: TextAlign.center,
+                )),
               );
             }).toList(),
           ),

@@ -116,3 +116,30 @@ const List<String> doctorSpecialties = [
   'Obstetrics and Gynecology',
   'Physical Medicine and Rehabilitation',
 ];
+
+const List<String> universities = [
+  'Select Choice',
+  'Cairo University',
+  'Tanta University',
+  'Minia University',
+  'Assiut University',
+  'Zagazig University',
+  'Mansoura University',
+  'Ain Shams University',
+  'Alexandria University',
+  'Suez Canal University',
+  'South Valley University',
+  'Misr University for Science and Technology (MUST)',
+];
+
+const List<String> doctorDgrees = [
+  'Select Choice',
+  'Doctor of Medicine (MD)',
+  'Doctor of Optometry (OD)',
+  'Doctor of Pharmacy (PharmD)',
+  'Doctor of Dental Surgery (DDS)',
+  'Doctor of Dental Medicine (DMD)',
+  'Doctor of Nursing Practice (DNP)',
+  'Doctor of Osteopathic Medicine (DO)',
+  'Doctor of Veterinary Medicine (DVM)',
+];

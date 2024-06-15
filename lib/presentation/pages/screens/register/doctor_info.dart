@@ -12,7 +12,9 @@ class DoctorAdditionalInfo extends StatefulWidget {
 }
 
 class _DoctorAdditionalInfoState extends State<DoctorAdditionalInfo> {
+  String degree = 'Select Choice';
   String specialty = 'Select Choice';
+  String university = 'Select Choice';
   late TextEditingController _dateController;
   @override
   void initState() {
@@ -57,10 +59,43 @@ class _DoctorAdditionalInfoState extends State<DoctorAdditionalInfo> {
           ],
         ),
         additionalInfo(
+            value: university,
+            title: "University",
+            list: universities,
+            onChanged: (newVal) => setState(() => university = newVal!)),
+        additionalInfo(
+            value: degree,
+            title: "Degree",
+            list: doctorDgrees,
+            onChanged: (newVal) => setState(() => degree = newVal!)),
+        additionalInfo(
             value: specialty,
             title: "Specialty",
             list: doctorSpecialties,
             onChanged: (newVal) => setState(() => specialty = newVal!)),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            const Wrap(
+              direction: Axis.vertical,
+              children: [
+                Text("* Upload"),
+                SizedBox(height: 3),
+                Text("This Field will be reviewed by the admin",
+                    style: TextStyle(
+                        color: Colors.redAccent,
+                        fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.bold)),
+              ],
+            ),
+            IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  size: 34,
+                  Icons.document_scanner_outlined,
+                )),
+          ],
+        )
       ],
     );
   }

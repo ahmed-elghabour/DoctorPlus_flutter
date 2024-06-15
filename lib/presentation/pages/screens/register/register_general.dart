@@ -37,67 +37,65 @@ class _RegisterGeneralState extends State<RegisterGeneral> {
       child: Center(
         child: Form(
           key: _formKey,
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10),
-                  child: CustomImagePicker(),
-                ),
-                buildTextField(
-                  controller: _fNameController,
-                  label: 'First Name',
-                  validator: (Validator.nameValidator),
-                ),
-                const SizedBox(height: 8.0),
-                buildTextField(
-                  controller: _lNameController,
-                  label: 'Last Name',
-                  validator: (Validator.nameValidator),
-                ),
-                const SizedBox(height: 8.0),
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: CustomDropDownMenu(
-                        value: gender,
-                        list: const ["Male", "Female"],
-                        onChanged: (String? newVal) =>
-                            setState(() => gender = newVal!),
-                      ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: CustomImagePicker(),
+              ),
+              buildTextField(
+                controller: _fNameController,
+                label: 'First Name',
+                validator: (Validator.nameValidator),
+              ),
+              const SizedBox(height: 8.0),
+              buildTextField(
+                controller: _lNameController,
+                label: 'Last Name',
+                validator: (Validator.nameValidator),
+              ),
+              const SizedBox(height: 8.0),
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: CustomDropDownMenu(
+                      value: gender,
+                      list: const ["Male", "Female"],
+                      onChanged: (String? newVal) =>
+                          setState(() => gender = newVal!),
                     ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                        child: customDatePicker(
-                      label: 'Birth Date',
-                      controller: _birthDateController,
-                      onPressed: () async {
-                        final DateTime? picked = await showDatePicker(
-                          context: context,
-                          helpText: "Select Birth Date",
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(1900),
-                          lastDate: DateTime(2100),
-                        );
-                        if (picked != null) {
-                          setState(() {
-                            _birthDateController.text =
-                                DateFormat('yyyy-MM-dd').format(picked);
-                          });
-                        }
-                      },
-                    )),
-                  ],
-                ),
-                const SizedBox(height: 8.0),
-                buildSubmitButton(
-                  widthFactor: .7,
-                  label: "Next",
-                  onPressed: widget.onNext,
-                ),
-              ],
-            ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                      child: customDatePicker(
+                    label: 'Birth Date',
+                    controller: _birthDateController,
+                    onPressed: () async {
+                      final DateTime? picked = await showDatePicker(
+                        context: context,
+                        helpText: "Select Birth Date",
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(1900),
+                        lastDate: DateTime(2100),
+                      );
+                      if (picked != null) {
+                        setState(() {
+                          _birthDateController.text =
+                              DateFormat('yyyy-MM-dd').format(picked);
+                        });
+                      }
+                    },
+                  )),
+                ],
+              ),
+              const SizedBox(height: 8.0),
+              buildSubmitButton(
+                widthFactor: .7,
+                label: "Next",
+                onPressed: widget.onNext,
+              ),
+            ],
           ),
         ),
       ),
