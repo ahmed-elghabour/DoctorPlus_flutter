@@ -35,11 +35,11 @@ Widget buildNumberField({
 }
 
 Widget buildPasswordField({
-  bool showPassword = false,
   required String label,
-  required void Function()? changePasswordVisibility,
+  bool showPassword = false,
   required TextEditingController controller,
   required String? Function(String?)? validator,
+  required void Function()? changePasswordVisibility,
 }) {
   return TextFormField(
     obscureText: !showPassword,
@@ -47,7 +47,7 @@ Widget buildPasswordField({
     controller: controller,
     decoration: InputDecoration(
       labelText: label,
-      // prefixIcon: const Icon(Icons.lock),
+      prefixIcon: const Icon(Icons.lock),
       suffixIcon: IconButton(
         icon: Icon(showPassword ? Icons.visibility : Icons.visibility_off),
         onPressed: changePasswordVisibility,

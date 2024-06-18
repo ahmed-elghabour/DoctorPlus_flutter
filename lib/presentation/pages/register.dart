@@ -1,3 +1,6 @@
+import 'package:doctor_plus/presentation/widgets/auth.switch_page.dart';
+import 'package:doctor_plus/presentation/widgets/signin_option.dart';
+import 'package:doctor_plus/presentation/widgets/terms_conditions.dart';
 import 'package:flutter/material.dart';
 import '../../utils/input_validator.dart';
 import 'package:doctor_plus/utils/routes.dart';
@@ -19,13 +22,11 @@ class _RegisterPageState extends State<RegisterPage> {
   bool showRePassword = false;
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _rePasswordController = TextEditingController();
 
   @override
   void dispose() {
-    _phoneController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     _rePasswordController.dispose();
@@ -44,54 +45,36 @@ class _RegisterPageState extends State<RegisterPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                    child: CustomImagePicker(),
-                  ),
                   buildEmailField(
                     controller: _emailController,
                     validator: (Validator.emailValidator),
                   ),
                   const SizedBox(height: 16.0),
-                  buildNumberField(
-                      controller: _phoneController,
-                      label: 'Phone Number',
-                      icon: Icons.phone_android,
-                      validator: (Validator.emailValidator)),
+                  buildPasswordField(
+                    label: 'Password',
+                    showPassword: showBoth ? true : showPassword,
+                    controller: _passwordController,
+                    validator: (Validator.passwordValidator),
+                    changePasswordVisibility: () => setState(() {
+                      showPassword = !showPassword;
+                      if (showBoth) {
+                        showRePassword = showBoth = false;
+                      }
+                    }),
+                  ),
                   const SizedBox(height: 16.0),
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: buildPasswordField(
-                          label: 'Password',
-                          showPassword: showBoth ? true : showPassword,
-                          controller: _passwordController,
-                          validator: (Validator.passwordValidator),
-                          changePasswordVisibility: () => setState(() {
-                            showPassword = !showPassword;
-                            if (showBoth) {
-                              showRePassword = showBoth = false;
-                            }
-                          }),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: buildPasswordField(
-                          label: 'Re-Password',
-                          showPassword: showBoth ? true : showRePassword,
-                          controller: _rePasswordController,
-                          validator: (value) => Validator.rePasswordValidator(
-                              value, _passwordController.text),
-                          changePasswordVisibility: () => setState(() {
-                            showRePassword = !showRePassword;
-                            if (showBoth) {
-                              showPassword = showBoth = false;
-                            }
-                          }),
-                        ),
-                      ),
-                    ],
+                  buildPasswordField(
+                    label: 'Confirm Password',
+                    showPassword: showBoth ? true : showRePassword,
+                    controller: _rePasswordController,
+                    validator: (value) => Validator.rePasswordValidator(
+                        value, _passwordController.text),
+                    changePasswordVisibility: () => setState(() {
+                      showRePassword = !showRePassword;
+                      if (showBoth) {
+                        showPassword = showBoth = false;
+                      }
+                    }),
                   ),
                   customCheckBox(
                     value: showBoth,
@@ -104,18 +87,24 @@ class _RegisterPageState extends State<RegisterPage> {
                     }),
                   ),
                   const SizedBox(height: 8.0),
-                  FractionallySizedBox(
+                  buildSubmitButton(
                     widthFactor: .5,
-                    child: buildSubmitButton(
-                      label: "Register",
-                      onPressed: () {
-                        Navigator.of(context).pushNamed(Routes.registerFill);
-                        // if (_formKey.currentState?.validate() == true) {
-                        //   createNewUser();
-                        // }
-                      },
-                    ),
+                    label: "Register",
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(Routes.registerFill);
+                      // if (_formKey.currentState?.validate() == true) {
+                      //   createNewUser();
+                      // }
+                    },
                   ),
+                  signInOptions(),
+                  Center(child: termsAndConditions()),
+                  const SwitchAuthPage(
+                    link: "Login",
+                    route: Routes.register,
+                    label: "Already have an account?",
+                  ),
+                  const SizedBox(height: 16.0),
                 ],
               ),
             ),

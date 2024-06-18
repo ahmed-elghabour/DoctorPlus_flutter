@@ -1,8 +1,12 @@
-import 'package:doctor_plus/data/demo.dart';
-import 'package:doctor_plus/presentation/widgets/additional_info.dart';
-import 'package:doctor_plus/presentation/widgets/date_picker.dart';
-import 'package:flutter/material.dart';
+import 'dart:io';
+import 'package:doctor_plus/presentation/widgets/files_uploaded.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter/material.dart';
+import 'package:doctor_plus/data/demo.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:doctor_plus/presentation/widgets/date_picker.dart';
+import 'package:doctor_plus/presentation/widgets/popup_dialog.dart';
+import 'package:doctor_plus/presentation/widgets/additional_info.dart';
 
 class DoctorAdditionalInfo extends StatefulWidget {
   const DoctorAdditionalInfo({super.key});
@@ -12,6 +16,8 @@ class DoctorAdditionalInfo extends StatefulWidget {
 }
 
 class _DoctorAdditionalInfoState extends State<DoctorAdditionalInfo> {
+  List<File> _pdfFiles = [];
+  List<String> degreesList = [];
   String degree = 'Select Choice';
   String specialty = 'Select Choice';
   String university = 'Select Choice';
@@ -64,39 +70,104 @@ class _DoctorAdditionalInfoState extends State<DoctorAdditionalInfo> {
             list: universities,
             onChanged: (newVal) => setState(() => university = newVal!)),
         additionalInfo(
-            value: degree,
-            title: "Degree",
-            list: doctorDgrees,
-            onChanged: (newVal) => setState(() => degree = newVal!)),
-        additionalInfo(
             value: specialty,
             title: "Specialty",
             list: doctorSpecialties,
             onChanged: (newVal) => setState(() => specialty = newVal!)),
+        customAdditionaInfo(
+            value: degree,
+            title: "Degree",
+            list: doctorDgrees,
+            selectedlist: degreesList,
+            onRemove: (val) => setState(() => degreesList.remove(val)),
+            onChanged: (newVal) => setState(() {
+                  degree = newVal!;
+                  degreesList.add(newVal);
+                })),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            const Wrap(
+            Wrap(
               direction: Axis.vertical,
               children: [
-                Text("* Upload"),
-                SizedBox(height: 3),
-                Text("This Field will be reviewed by the admin",
-                    style: TextStyle(
-                        color: Colors.redAccent,
-                        fontStyle: FontStyle.italic,
-                        fontWeight: FontWeight.bold)),
+                const Text("* Upload"),
+                const SizedBox(height: 3),
+                _buildHintText(
+                    label: "This Field will be reviewed by the admin"),
               ],
             ),
             IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  size: 34,
-                  Icons.document_scanner_outlined,
-                )),
+              onPressed: () {
+                buildCustomDialog(
+                  widgets: [
+                    SizedBox(
+                      width: double.infinity,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: _buildHintText(
+                            label:
+                                "* Required Documents (merge all files into one)"),
+                      ),
+                    ),
+                    _buildNormalText(label: "Syndicate ID"),
+                    _buildNormalText(label: "Practicing License"),
+                    _buildNormalText(label: "Internship Certificate"),
+                    _buildNormalText(label: "Graduation Certificate"),
+                    degreesList.isNotEmpty
+                        ? _buildNormalText(
+                            label: "Required Degree Certificates")
+                        : const SizedBox(),
+                  ],
+                  okText: "Upload",
+                  context: context,
+                  onOkPressed: () async {
+                    FilePickerResult? result =
+                        await FilePicker.platform.pickFiles(
+                      type: FileType.custom,
+                      allowedExtensions: ['pdf'],
+                      allowMultiple: true,
+                    );
+
+                    if (result != null) {
+                      setState(() {
+                        _pdfFiles =
+                            result.paths.map((path) => File(path!)).toList();
+                      });
+                    }
+                  },
+                );
+              },
+              icon: const Icon(
+                size: 34,
+                Icons.document_scanner_outlined,
+              ),
+            ),
           ],
-        )
+        ),
+        fileUploaded(
+          files: _pdfFiles,
+          onCLear: () => setState(() => _pdfFiles = []),
+        ),
       ],
     );
   }
+}
+
+Text _buildHintText({required String label}) {
+  return Text(
+    label,
+    style: const TextStyle(
+        color: Colors.redAccent,
+        fontStyle: FontStyle.italic,
+        fontWeight: FontWeight.bold),
+  );
+}
+
+Text _buildNormalText({required String label}) {
+  return Text(
+    label,
+    style: const TextStyle(
+      fontStyle: FontStyle.italic,
+    ),
+  );
 }

@@ -134,12 +134,8 @@ const List<String> universities = [
 
 const List<String> doctorDgrees = [
   'Select Choice',
-  'Doctor of Medicine (MD)',
-  'Doctor of Optometry (OD)',
-  'Doctor of Pharmacy (PharmD)',
-  'Doctor of Dental Surgery (DDS)',
-  'Doctor of Dental Medicine (DMD)',
-  'Doctor of Nursing Practice (DNP)',
-  'Doctor of Osteopathic Medicine (DO)',
-  'Doctor of Veterinary Medicine (DVM)',
+  'GP',
+  'Master',
+  'PHD',
+  'Fellowship',
 ];
