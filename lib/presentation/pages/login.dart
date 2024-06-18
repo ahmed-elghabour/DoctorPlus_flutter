@@ -95,7 +95,7 @@ class _LoginInputsState extends State<LoginInputs> {
               validator: (Validator.passwordValidator),
               changePasswordVisibility: () =>
                   setState(() => showPassword = !showPassword)),
-          const SizedBox(height: 32.0),
+          const SizedBox(height: 2.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -104,19 +104,20 @@ class _LoginInputsState extends State<LoginInputs> {
                 label: "Remember me",
                 onChanged: (val) => setState(() => rememberMe = val ??= false),
               ),
-              const Text("Forgot Password?"),
+              buildTextButton(
+                label: "Forgot Password?",
+                onPressed: () {},
+              ),
             ],
           ),
-          FractionallySizedBox(
+          buildSubmitButton(
+            label: "Login",
             widthFactor: .5,
-            child: buildSubmitButton(
-              label: "Login",
-              onPressed: () {
-                if (_formKey.currentState?.validate() == true) {
-                  loginUser();
-                }
-              },
-            ),
+            onPressed: () {
+              if (_formKey.currentState?.validate() == true) {
+                loginUser();
+              }
+            },
           ),
         ],
       ),

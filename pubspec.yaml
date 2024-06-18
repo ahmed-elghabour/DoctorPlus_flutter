@@ -17,11 +17,16 @@ dependencies:
 
 
   http: 
+  intl:
+  googleapis:
+  file_picker:
   image_picker:
   flutter_bloc: 
   fluttertoast: 
   firebase_core: 
   firebase_auth: 
+  awesome_dialog:
+  google_sign_in: 
   toastification: 
   cupertino_icons: 
   shared_preferences: 

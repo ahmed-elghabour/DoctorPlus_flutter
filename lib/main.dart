@@ -12,6 +12,7 @@ import 'package:doctor_plus/utils/shared_preferences.dart';
 import 'package:doctor_plus/presentation/pages/register.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:doctor_plus/domain/cubits/theme/theme_cubit.dart';
+import 'package:doctor_plus/presentation/pages/register_fill.dart';
 import 'package:doctor_plus/domain/cubits/language/language_cubit.dart';
 
 void main() async {
@@ -51,6 +52,7 @@ class MyApp extends StatelessWidget {
             Routes.login: (context) => const LoginPage(),
             Routes.register: (context) => const RegisterPage(),
             Routes.complaint: (context) => const ComplaintsPage(),
+            Routes.registerFill: (context) => const RegisterFillData(),
           },
           initialRoute: SharedPreference().getBool(key: "isLogged") == true
               ? Routes.login
