@@ -1,5 +1,13 @@
 {
     "title": "الطبيب المتميز",
     "login": "تسجيل الدخول",
-    "username": "اسم المستخدم"
+    "username": "اسم المستخدم",
+    "Complaints": "الشكاوى",
+    "Your Name": "اسمك",
+    "Your Email": "البريد الالتكروني الخاص بك",
+    "Complaint About": "شكوى عن",
+    "Patient": "مريض",
+    "Doctor": "طبيب",
+    "What has happened?": "سبب الشكوى",
+    "How can we make things right?": "اقتراح لحل المشكلة"
 }

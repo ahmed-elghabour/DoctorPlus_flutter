@@ -39,15 +39,21 @@ class CustomFirebase {
   }
 
   Future<void> addNewCollection({
-    required String docID,
+    String? docID,
     required String collection,
     required Map<String, dynamic> data,
   }) async {
     try {
-      await FirebaseFirestore.instance
-          .collection(collection)
-          .doc(docID)
-          .set(data);
+      if(docID != null) {
+        await FirebaseFirestore.instance
+            .collection(collection)
+            .doc(docID)
+            .set(data);
+      } else {
+        await FirebaseFirestore.instance
+        .collection(collection)
+        .add(data);
+      }
     } catch (e) {
       throw Exception(e);
     }

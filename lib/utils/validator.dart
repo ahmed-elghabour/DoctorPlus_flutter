@@ -8,6 +8,15 @@ class Validator {
     return null;
   }
 
+  static String? fullNameValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Field is Required';
+    } else if (!RegExp(r'^[a-zA-Z\s]+$').hasMatch(value)) {
+      return 'Please enter a valid name';
+    }
+    return null;
+  }
+
   static String? emailValidator(String? value) {
     if (value == null || value.isEmpty) {
       return 'Field is Required';

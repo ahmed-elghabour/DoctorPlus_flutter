@@ -1,5 +1,8 @@
+import 'package:doctor_plus/utils/firebase.dart';
 import 'package:doctor_plus/utils/validator.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class ComplaintsPage extends StatefulWidget {
   const ComplaintsPage({super.key});
@@ -43,7 +46,7 @@ class _ComplaintsPageState extends State<ComplaintsPage> {
               TextFormField(
                 decoration: const InputDecoration(label: Text("Your Name")),
                 controller: nameController,
-                validator:(Validator.nameValidator),
+                validator:(Validator.fullNameValidator),
               ),
               const SizedBox(
                 height: 10,
@@ -94,7 +97,7 @@ class _ComplaintsPageState extends State<ComplaintsPage> {
                 child: ElevatedButton(
                   onPressed: () {
                     if(formKey.currentState!.validate()) {
-                      
+                      createComplaint();
                     }
                   },
                   child: const Text("Submit"),
@@ -106,5 +109,34 @@ class _ComplaintsPageState extends State<ComplaintsPage> {
         ),
       ),
     );
+  }
+
+  void createComplaint() async {
+    try {
+      await CustomFirebase.instance.addNewCollection(collection: 'Complaints', data: {
+        "personName": nameController.text,
+        "personEmail": emailController.text,
+        "complaintAbout": typeDropdownValue,
+        "body": complaintController.text,
+        "solution": solutionController.text,
+      });
+      Fluttertoast.showToast(
+        msg: "Submitted Successfully",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.blue,
+        textColor: Colors.white,
+        fontSize: 16.0);
+    } on FirebaseException catch (e) { 
+        Fluttertoast.showToast(
+          msg: e.code,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    }
   }
 }

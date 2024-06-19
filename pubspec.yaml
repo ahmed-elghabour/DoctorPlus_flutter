@@ -23,7 +23,7 @@ dependencies:
   file_picker:
   image_picker:
   flutter_bloc: 
-  fluttertoast: 
+  fluttertoast: ^8.2.6 
   firebase_core: 
   firebase_auth: 
   awesome_dialog:
