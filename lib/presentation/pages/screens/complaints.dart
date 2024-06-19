@@ -1,4 +1,4 @@
-import 'package:doctor_plus/utils/input_validator.dart';
+import 'package:doctor_plus/utils/validator.dart';
 import 'package:flutter/material.dart';
 
 class ComplaintsPage extends StatefulWidget {
