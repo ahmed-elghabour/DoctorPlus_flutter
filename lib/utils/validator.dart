@@ -12,7 +12,7 @@ class Validator {
     if (value == null || value.isEmpty) {
       return 'Field is Required';
     } else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-      return 'Please enter a valid email';
+      return 'Please enter a valid email => example@doctor.com';
     }
     return null;
   }
@@ -42,5 +42,21 @@ class Validator {
       return 'Passwords do not match';
     }
     return null;
+  }
+
+  static String firebaseRegisterValidator(String error) {
+    if (error.contains("email-already-in-use")) {
+      return 'The email address is already in use by another account.';
+    } else if (error.contains("invalid-email")) {
+      return 'The email address is not valid.';
+    } else if (error.contains("operation-not-allowed")) {
+      return 'Email/password accounts are not enabled.';
+    } else if (error.contains("weak-password")) {
+      return 'The password is too weak.';
+    } else if (error.contains("user-disabled")) {
+      return 'The user account has been disabled.';
+    } else {
+      return 'An unknown error occurred: $error';
+    }
   }
 }

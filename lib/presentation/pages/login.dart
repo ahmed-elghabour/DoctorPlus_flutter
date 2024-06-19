@@ -3,7 +3,7 @@ import '../widgets/signin_option.dart';
 import 'package:doctor_plus/utils/routes.dart';
 import 'package:doctor_plus/utils/firebase.dart';
 import 'package:doctor_plus/data/model/patient.dart';
-import 'package:doctor_plus/utils/input_validator.dart';
+import 'package:doctor_plus/utils/validator.dart';
 import 'package:doctor_plus/presentation/widgets/inputs.dart';
 import 'package:doctor_plus/presentation/widgets/buttons.dart';
 import 'package:doctor_plus/presentation/widgets/check_box.dart';

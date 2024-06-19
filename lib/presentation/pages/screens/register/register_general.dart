@@ -1,6 +1,6 @@
 import 'package:doctor_plus/presentation/widgets/buttons.dart';
 import 'package:flutter/material.dart';
-import 'package:doctor_plus/utils/input_validator.dart';
+import 'package:doctor_plus/utils/validator.dart';
 import 'package:doctor_plus/presentation/widgets/inputs.dart';
 import 'package:doctor_plus/presentation/widgets/drop_down.dart';
 import 'package:doctor_plus/presentation/widgets/date_picker.dart';

@@ -1,8 +1,10 @@
 import 'package:doctor_plus/presentation/widgets/auth.switch_page.dart';
 import 'package:doctor_plus/presentation/widgets/signin_option.dart';
 import 'package:doctor_plus/presentation/widgets/terms_conditions.dart';
+import 'package:doctor_plus/utils/firebase.dart';
+import 'package:doctor_plus/utils/shared_preferences.dart';
 import 'package:flutter/material.dart';
-import '../../utils/input_validator.dart';
+import '../../utils/validator.dart';
 import 'package:doctor_plus/utils/routes.dart';
 import 'package:doctor_plus/presentation/widgets/inputs.dart';
 import 'package:doctor_plus/presentation/widgets/buttons.dart';
@@ -39,7 +41,7 @@ class _RegisterPageState extends State<RegisterPage> {
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
             child: Form(
               key: _formKey,
               child: Column(
@@ -91,10 +93,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     widthFactor: .5,
                     label: "Register",
                     onPressed: () {
-                      Navigator.of(context).pushNamed(Routes.registerFill);
-                      // if (_formKey.currentState?.validate() == true) {
-                      //   createNewUser();
-                      // }
+                      if (_formKey.currentState?.validate() == true) {
+                        createNewUser();
+                      }
                     },
                   ),
                   signInOptions(),
@@ -114,26 +115,34 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  // void navigate({required String route}) => Navigator.pushNamed(context, route);
+  void navigate({required String route}) =>
+      Navigator.pushReplacementNamed(context, route);
 
-  // void showErrorDialog({required String error}) => showDialog(
-  //     context: context,
-  //     builder: (context) => AlertDialog(
-  //           title: Text(error),
-  //         ));
+  void showErrorDialog({required String error}) => showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+            title: Text(error),
+          ));
 
-  // void createNewUser() async {
-  //   try {
-  //     await CustomFirebase.instance.createAccountWithCredentials(
-  //       user: Patient.register(
-  //           fName: _fNameController.text,
-  //           lName: _lNameController.text,
-  //           email: _emailController.text,
-  //           password: _passwordController.text),
-  //     );
-  //     navigate(route: Routes.login);
-  //   } catch (e) {
-  //     showErrorDialog(error: e.toString());
-  //   }
-  // }
+  void createNewUser() async {
+    try {
+      var user = await CustomFirebase.instance.createAccountWithCredentials(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+      SharedPreference().setString(key: 'userUID', value: user);
+      showErrorDialog(
+          error: SharedPreference().getString(key: "userUID") ?? "");
+      /**
+       * UserCredential(
+       * additionalUserInfo: AdditionalUserInfo(isNewUser: true, profile: {}, providerId: null, username: null, authorizationCode: null),
+       *  credential: null,
+       *  user: User(displayName: null, email: jimmy0@gmail.com, isEmailVerified: false, isAnonymous: false, metadata: UserMetadata(creationTime: 2024-06-18 23:37:43.982Z, lastSignInTime: 2024-06-18 23:37:43.982Z), phoneNumber: null, photoURL: null, providerData, [UserInfo(displayName: null, email: jimmy0@gmail.com, phoneNumber: null, photoURL: null, providerId: password, uid: jimmy0@gmail.com)], refreshToken: null, tenantId: null, uid: BAXS4hYxZYXfm1ihdam6ruwbS8P2))
+       */
+      // navigate(route: Routes.registerFill);
+    } catch (e) {
+      // print(e);
+      showErrorDialog(error: Validator.firebaseRegisterValidator(e.toString()));
+    }
+  }
 }
