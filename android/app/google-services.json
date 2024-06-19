@@ -12,7 +12,12 @@
           "package_name": "com.example.doctor_plus"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "319453744111-63etqau86hn2rijv512ln89s9hvrt59p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBHNIxD_4QY3r8W4Nm7UdCr9NhiWOKMY4g"
@@ -20,7 +25,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "319453744111-63etqau86hn2rijv512ln89s9hvrt59p.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "319453744111-a4r94i3914oe83iotvo6bi7kc9u43s1n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.doctorPlus"
+              }
+            }
+          ]
         }
       }
     }

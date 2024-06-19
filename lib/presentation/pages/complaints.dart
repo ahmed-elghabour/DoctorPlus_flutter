@@ -123,7 +123,7 @@ class _ComplaintsPageState extends State<ComplaintsPage> {
       Fluttertoast.showToast(
         msg: "Submitted Successfully",
         toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
+        gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.blue,
         textColor: Colors.white,
@@ -132,7 +132,7 @@ class _ComplaintsPageState extends State<ComplaintsPage> {
         Fluttertoast.showToast(
           msg: e.code,
           toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
+          gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
           backgroundColor: Colors.red,
           textColor: Colors.white,
