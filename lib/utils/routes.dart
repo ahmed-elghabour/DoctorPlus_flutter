@@ -5,5 +5,6 @@ class Routes {
   static const String registerFill = "auth/register-fill";
   // A.Rahman
   static const String profile = "user/profile";
+  static const String complaint = "/profile/complaint";
   // end
 }

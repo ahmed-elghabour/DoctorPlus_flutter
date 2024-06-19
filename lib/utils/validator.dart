@@ -59,4 +59,12 @@ class Validator {
       return 'An unknown error occurred: $error';
     }
   }
+
+  static String? complaintBodyValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'complaint body is required';
+    }
+
+    return null;
+  }
 }
