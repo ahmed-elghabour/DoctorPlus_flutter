@@ -43,4 +43,12 @@ class Validator {
     }
     return null;
   }
+
+  static String? complaintBodyValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'complaint body is required';
+    }
+
+    return null;
+  }
 }
