@@ -6,5 +6,6 @@ class Routes {
   // A.Rahman
   static const String profile = "user/profile";
   static const String complaint = "/profile/complaint";
+  static const String doctorHome = "/doctor";
   // end
 }

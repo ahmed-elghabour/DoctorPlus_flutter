@@ -1,4 +1,5 @@
 import 'package:doctor_plus/presentation/pages/complaints.dart';
+import 'package:doctor_plus/presentation/pages/doctor_home.dart';
 
 import 'utils/firebase_options.dart';
 import 'package:flutter/material.dart';
@@ -53,10 +54,11 @@ class MyApp extends StatelessWidget {
             Routes.register: (context) => const RegisterPage(),
             Routes.complaint: (context) => const ComplaintsPage(),
             Routes.registerFill: (context) => const RegisterFillData(),
+            Routes.doctorHome: (context) => const DoctorHome(),
           },
           initialRoute: SharedPreference().getBool(key: "isLogged") == true
               ? Routes.login
-              : Routes.complaint,
+              : Routes.doctorHome,
         );
       }),
     );
