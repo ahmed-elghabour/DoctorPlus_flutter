@@ -1,5 +1,5 @@
+import 'package:doctor_plus/presentation/widgets/patients_carousel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 
 class PatientList extends StatefulWidget {
@@ -58,7 +58,8 @@ class _PatientListState extends State<PatientList> {
                 },
               )
           ],
-        )
+        ),
+        const PatientsCarousel()
       ],
     );
   }
