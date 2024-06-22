@@ -15,25 +15,24 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-
-  http: 
+  http:
   intl:
   crypto:
   googleapis:
   file_picker:
   image_picker:
-  flutter_bloc: 
-  fluttertoast: ^8.2.6 
-  firebase_core: 
-  firebase_auth: 
+  flutter_bloc:
+  fluttertoast: ^8.2.6
+  firebase_core:
+  firebase_auth:
   awesome_dialog:
-  google_sign_in: 
-  toastification: 
-  cupertino_icons: 
+  google_sign_in:
+  toastification:
+  cupertino_icons:
   cloud_firestore:
   firebase_storage:
-  shared_preferences: 
-  font_awesome_flutter: 
+  shared_preferences:
+  font_awesome_flutter:
 
 dev_dependencies:
   flutter_test:
