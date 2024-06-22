@@ -102,7 +102,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   Center(child: termsAndConditions()),
                   const SwitchAuthPage(
                     link: "Login",
-                    route: Routes.register,
+                    route: Routes.login,
                     label: "Already have an account?",
                   ),
                   const SizedBox(height: 16.0),
