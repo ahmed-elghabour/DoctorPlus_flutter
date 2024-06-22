@@ -1,3 +1,4 @@
+import 'package:doctor_plus/domain/cubits/doctorReservations/doctor_reservation_cubit.dart';
 import 'package:doctor_plus/presentation/pages/complaints.dart';
 import 'package:doctor_plus/presentation/pages/doctor_home.dart';
 
@@ -32,6 +33,13 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => ThemeCubit()),
         BlocProvider(create: (_) => LanguageCubit()),
+        BlocProvider(
+           create: (context) {
+            final cubit = DoctorReservationCubit();
+            cubit.fetchReservations();
+            return cubit;
+          },
+        )
       ],
       child:
           BlocBuilder<LanguageCubit, LanguageState>(builder: (context, state) {
