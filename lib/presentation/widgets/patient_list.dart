@@ -29,13 +29,24 @@ class _PatientListState extends State<PatientList> {
               TextButton(
                 child: Row(
                   children: [
-                    Text(
-                      datePicked,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        color: Colors.grey
-                      ),
-                    ),
+                    if(datePicked == DateFormat('yyyy-MM-dd').format(DateTime.now()))
+                      const Text(
+                        "Today",
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey
+                        ),
+                      )
+                    else 
+                      Text(
+                          datePicked,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey
+                          ),
+                        ),
+                    
+                    
                     const Icon(
                       Icons.arrow_drop_down,
                       color: Colors.grey,
