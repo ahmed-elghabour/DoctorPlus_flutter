@@ -1,6 +1,6 @@
 import 'package:doctor_plus/presentation/Doctor%20Home/widgets/doctorHome_info_card.dart';
 import 'package:doctor_plus/presentation/Doctor%20Home/widgets/patient_list.dart';
-import 'package:doctor_plus/utils/greeting.dart';
+import 'package:doctor_plus/presentation/Doctor%20Home/utils/greeting.dart';
 import 'package:flutter/material.dart';
 
 class DoctorHome extends StatefulWidget {
