@@ -1,7 +1,9 @@
 import 'package:doctor_plus/core/widgets/appbar_icon.dart';
 import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
+import 'package:doctor_plus/presentation/widgets/image_picker.dart';
 import 'package:doctor_plus/utils/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -31,133 +33,136 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ],
         ),
-        body: SingleChildScrollView(
-          child: Stack(
-            children: [
-              Column(
-                children: [
-                  const SizedBox(height: 60),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 80),
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(30),
-                          topRight: Radius.circular(30),
-                        ),
+        body: Padding(
+          padding: const EdgeInsets.only(top: 100),
+          child: Container(
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(30),
+              ),
+            ),
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                const Positioned.fill(
+                  top: -70,
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: CustomImagePicker(
+                      imageSize: 70,
+                      icon: Icons.edit,
+                      frameColor: Colors.white,
+                    ),
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Spacer(),
+                    Text(
+                      "A.Rahman Khallaf",
+                      style: _buildTextStyle(
+                        size: 25,
+                        color: Colors.black87,
+                        weight: FontWeight.w600,
                       ),
+                    ),
+                    Text(
+                      "a.rahman@gmail.com",
+                      style: _buildTextStyle(
+                        size: 18,
+                        color: Colors.black45,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    const RowNavigatorWidget(),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 19, horizontal: 20),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.max,
                         children: [
-                          const SizedBox(height: 90),
-                          const NameWidget(name: "A.Rahman Khallaf"),
-                          const EmailWidget(email: "a.rahman@gmail.com"),
-                          const SizedBox(height: 10),
-                          const RowNavigatorWidget(),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 19, horizontal: 20),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          color: const Color.fromARGB(
-                                              255, 234, 242, 255),
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
-                                      padding: const EdgeInsets.all(15),
-                                      width: 60,
-                                      child: Image.asset("assets/icons/id.png"),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    const Text(
-                                      "Personal Information",
-                                      style: TextStyle(
-                                          fontSize: 19,
-                                          fontWeight: FontWeight.w400),
-                                    )
-                                  ],
-                                ),
-                                const Divider(
-                                  height: 20,
-                                  thickness: 1,
-                                  color: Colors.black12,
-                                ),
-                                Row(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          color: const Color.fromARGB(
-                                              255, 233, 250, 239),
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
-                                      padding: const EdgeInsets.all(15),
-                                      width: 60,
-                                      child:
-                                          Image.asset("assets/icons/tests.png"),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    const Text(
-                                      "My Test & Diagnostic",
-                                      style: TextStyle(
-                                          fontSize: 19,
-                                          fontWeight: FontWeight.w400),
-                                    )
-                                  ],
-                                ),
-                                const Divider(
-                                  height: 20,
-                                  thickness: 1,
-                                  color: Colors.black12,
-                                ),
-                                Row(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          color: const Color.fromARGB(
-                                              255, 255, 238, 239),
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
-                                      padding: const EdgeInsets.all(15),
-                                      width: 60,
-                                      child: Image.asset(
-                                          "assets/icons/payment.png"),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    const Text(
-                                      "Payment",
-                                      style: TextStyle(
-                                          fontSize: 19,
-                                          fontWeight: FontWeight.w400),
-                                    )
-                                  ],
-                                )
-                              ],
-                            ),
+                          Row(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                    color: const Color.fromARGB(
+                                        255, 234, 242, 255),
+                                    borderRadius: BorderRadius.circular(20)),
+                                padding: const EdgeInsets.all(15),
+                                width: 60,
+                                child: Image.asset("assets/icons/id.png"),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              const Text(
+                                "Personal Information",
+                                style: TextStyle(
+                                    fontSize: 19, fontWeight: FontWeight.w400),
+                              )
+                            ],
+                          ),
+                          const Divider(
+                            height: 20,
+                            thickness: 1,
+                            color: Colors.black12,
+                          ),
+                          Row(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                    color: const Color.fromARGB(
+                                        255, 233, 250, 239),
+                                    borderRadius: BorderRadius.circular(20)),
+                                padding: const EdgeInsets.all(15),
+                                width: 60,
+                                child: Image.asset("assets/icons/tests.png"),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              const Text(
+                                "My Test & Diagnostic",
+                                style: TextStyle(
+                                    fontSize: 19, fontWeight: FontWeight.w400),
+                              )
+                            ],
+                          ),
+                          const Divider(
+                            height: 20,
+                            thickness: 1,
+                            color: Colors.black12,
+                          ),
+                          Row(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                    color: const Color.fromARGB(
+                                        255, 255, 238, 239),
+                                    borderRadius: BorderRadius.circular(20)),
+                                padding: const EdgeInsets.all(15),
+                                width: 60,
+                                child: Image.asset("assets/icons/payment.png"),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              const Text(
+                                "Payment",
+                                style: TextStyle(
+                                    fontSize: 19, fontWeight: FontWeight.w400),
+                              )
+                            ],
                           )
                         ],
                       ),
                     ),
-                  ),
-                ],
-              ),
-              const Positioned.fill(
-                  top: 60,
-                  child: Align(
-                    alignment: Alignment.topCenter,
-                    child: ProfileImage(),
-                  ))
-            ],
+                    const Spacer(flex: 2),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -208,67 +213,48 @@ class RowNavigatorWidget extends StatelessWidget {
   }
 }
 
-class EmailWidget extends StatelessWidget {
-  const EmailWidget({super.key, required this.email});
-  final String email;
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(5.0),
-      child: Text(
-        email,
-        style: const TextStyle(fontSize: 18, color: Colors.black45),
-      ),
-    );
-  }
+TextStyle _buildTextStyle(
+    {required Color color, required double size, FontWeight? weight}) {
+  return TextStyle(
+    color: color,
+    fontSize: size,
+    fontWeight: weight,
+  );
 }
 
-class NameWidget extends StatelessWidget {
-  const NameWidget({super.key, required this.name});
-  final String name;
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      name,
-      style: const TextStyle(
-          fontSize: 25, fontWeight: FontWeight.w600, color: Colors.black87),
-    );
-  }
-}
+// class ProfileImage extends StatelessWidget {
+//   const ProfileImage({
+//     super.key,
+//   });
 
-class ProfileImage extends StatelessWidget {
-  const ProfileImage({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        const CircleAvatar(
-          backgroundColor: Color.fromARGB(255, 255, 255, 255),
-          radius: 80,
-          child: CircleAvatar(
-            radius: 75,
-            backgroundImage: NetworkImage(
-                "https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg"),
-          ),
-        ),
-        // Edit Icon
-        Positioned(
-          bottom: 10,
-          right: 0,
-          child: CircleAvatar(
-            radius: 19,
-            backgroundColor: const Color.fromARGB(255, 248, 248, 248),
-            child: Image.asset(
-              "assets/icons/edit.png",
-              width: 18,
-              height: 18,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Stack(
+//       children: [
+//         const CircleAvatar(
+//           backgroundColor: Color.fromARGB(255, 255, 255, 255),
+//           radius: 80,
+//           child: CircleAvatar(
+//             radius: 75,
+//             backgroundImage: NetworkImage(
+//                 "https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg"),
+//           ),
+//         ),
+//         // Edit Icon
+//         Positioned(
+//           bottom: 10,
+//           right: 0,
+//           child: CircleAvatar(
+//             radius: 19,
+//             backgroundColor: const Color.fromARGB(255, 248, 248, 248),
+//             child: Image.asset(
+//               "assets/icons/edit.png",
+//               width: 18,
+//               height: 18,
+//             ),
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }
