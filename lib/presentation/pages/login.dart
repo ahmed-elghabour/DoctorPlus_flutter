@@ -134,9 +134,9 @@ class _LoginInputsState extends State<LoginInputs> {
   void loginUser() async {
     try {
       await CustomFirebase.instance.signWithCredentials(
-          user: Patient.login(
+          
               email: _emailController.text,
-              password: _passwordController.text));
+              password: _passwordController.text);
       navigate(route: Routes.home);
     } catch (e) {
       showErrorDialog(error: e.toString());
