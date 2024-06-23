@@ -1,11 +1,11 @@
 import 'package:doctor_plus/core/theming/colors.dart';
 import 'package:doctor_plus/domain/cubits/doctorReservations/doctor_reservation_cubit.dart';
 import 'package:doctor_plus/presentation/appointments/pages/appointments.dart';
-import 'package:doctor_plus/presentation/pages/complaints.dart';
-import 'package:doctor_plus/presentation/Doctor%20Home/pages/doctor_home.dart';
+import 'package:doctor_plus/presentation/patient%20home/complaints.dart';
+import 'package:doctor_plus/presentation/doctor%20home/pages/doctor_home.dart';
 
-import 'package:doctor_plus/presentation/pages/profile.dart';
-import 'package:doctor_plus/presentation/pages/settings.dart';
+import 'package:doctor_plus/presentation/profile/profile.dart';
+import 'package:doctor_plus/presentation/profile/settings.dart';
 
 import 'utils/firebase_options.dart';
 import 'package:flutter/material.dart';
@@ -13,13 +13,13 @@ import 'package:doctor_plus/utils/routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:doctor_plus/generated/l10n.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:doctor_plus/presentation/pages/home.dart';
-import 'package:doctor_plus/presentation/pages/login.dart';
+import 'package:doctor_plus/presentation/patient%20home/home.dart';
+import 'package:doctor_plus/presentation/auth/login/login.dart';
 import 'package:doctor_plus/utils/shared_preferences.dart';
-import 'package:doctor_plus/presentation/pages/register.dart';
+import 'package:doctor_plus/presentation/auth/signup/register.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:doctor_plus/domain/cubits/theme/theme_cubit.dart';
-import 'package:doctor_plus/presentation/pages/register_fill.dart';
+import 'package:doctor_plus/presentation/auth/widgets/register_fill.dart';
 import 'package:doctor_plus/domain/cubits/language/language_cubit.dart';
 
 void main() async {
@@ -69,7 +69,7 @@ class MyApp extends StatelessWidget {
             Routes.profile: (context) => const ProfilePage(),
             Routes.settings: (context) => const SettingsPage(),
           },
-          initialRoute: SharedPreference().getBool(key: "isLogged") == true
+          initialRoute: SharedPreference().getBool(key: "isLogged") != true
               ? Routes.login
               : Routes.home,
         );

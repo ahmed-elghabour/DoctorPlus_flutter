@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:doctor_plus/presentation/pages/screens/register/register_general.dart';
-import 'package:doctor_plus/presentation/pages/screens/register/register_additional.dart';
+import 'package:doctor_plus/presentation/auth/signup/register_general.dart';
+import 'package:doctor_plus/presentation/auth/signup/register_additional.dart';
 
 class RegisterFillData extends StatefulWidget {
   const RegisterFillData({super.key});

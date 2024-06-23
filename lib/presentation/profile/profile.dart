@@ -1,6 +1,6 @@
 import 'package:doctor_plus/core/widgets/appbar_icon.dart';
 import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
-import 'package:doctor_plus/presentation/widgets/image_picker.dart';
+import 'package:doctor_plus/core/widgets/image_picker.dart';
 import 'package:doctor_plus/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';

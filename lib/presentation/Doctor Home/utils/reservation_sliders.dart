@@ -1,6 +1,6 @@
 import 'package:doctor_plus/data/model/doctor_reservation.dart';
-import 'package:doctor_plus/presentation/Doctor%20Home/utils/random_colors.dart';
-import 'package:doctor_plus/presentation/Doctor%20Home/widgets/patient_card.dart';
+import 'package:doctor_plus/presentation/doctor%20home/utils/random_colors.dart';
+import 'package:doctor_plus/presentation/doctor%20home/widgets/patient_card.dart';
 import 'package:flutter/material.dart';
 
 List<Widget> getSliders(List<List<DoctorReservation>>chunkedReservations) {

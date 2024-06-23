@@ -1,6 +1,6 @@
 import 'package:doctor_plus/data/demo.dart';
 import 'package:flutter/material.dart';
-import 'package:doctor_plus/presentation/widgets/additional_info.dart';
+import 'package:doctor_plus/presentation/auth/widgets/additional_info.dart';
 
 class PatientAdditionalInfo extends StatefulWidget {
   const PatientAdditionalInfo({super.key});

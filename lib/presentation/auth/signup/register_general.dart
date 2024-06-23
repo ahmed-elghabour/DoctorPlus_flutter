@@ -1,10 +1,10 @@
-import 'package:doctor_plus/presentation/widgets/buttons.dart';
+import 'package:doctor_plus/core/widgets/buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:doctor_plus/utils/validator.dart';
-import 'package:doctor_plus/presentation/widgets/inputs.dart';
-import 'package:doctor_plus/presentation/widgets/drop_down.dart';
-import 'package:doctor_plus/presentation/widgets/date_picker.dart';
-import 'package:doctor_plus/presentation/widgets/image_picker.dart';
+import 'package:doctor_plus/core/widgets/inputs.dart';
+import 'package:doctor_plus/core/widgets/drop_down.dart';
+import 'package:doctor_plus/core/widgets/date_picker.dart';
+import 'package:doctor_plus/core/widgets/image_picker.dart';
 import 'package:intl/intl.dart';
 
 class RegisterGeneral extends StatefulWidget {

@@ -1,6 +1,6 @@
-import 'package:doctor_plus/presentation/pages/screens/register/doctor_info.dart';
-import 'package:doctor_plus/presentation/pages/screens/register/patient_info.dart';
-import 'package:doctor_plus/presentation/widgets/buttons.dart';
+import 'package:doctor_plus/presentation/auth/signup/doctor_info.dart';
+import 'package:doctor_plus/presentation/auth/signup/patient_info.dart';
+import 'package:doctor_plus/core/widgets/buttons.dart';
 import 'package:flutter/material.dart';
 
 class RegisterAdditional extends StatefulWidget {
