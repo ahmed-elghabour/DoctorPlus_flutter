@@ -55,12 +55,12 @@ class _ProfilePageState extends State<ProfilePage> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         const SizedBox(height: 90),
-                        NameWidget(name: "A.Rahman Khallaf"),
-                        EmailWidget(email: "a.rahman@gmail.com"),
+                        const NameWidget(name: "A.Rahman Khallaf"),
+                        const EmailWidget(email: "a.rahman@gmail.com"),
                         const SizedBox(height: 10),
-                        RowNavigatorWidget(),
+                        const RowNavigatorWidget(),
                         Container(
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                               vertical: 19, horizontal: 20),
                           child: Column(
                             children: [
@@ -68,18 +68,18 @@ class _ProfilePageState extends State<ProfilePage> {
                                 children: [
                                   Container(
                                     decoration: BoxDecoration(
-                                        color:
-                                            Color.fromARGB(255, 234, 242, 255),
+                                        color: const Color.fromARGB(
+                                            255, 234, 242, 255),
                                         borderRadius:
                                             BorderRadius.circular(20)),
-                                    padding: EdgeInsets.all(15),
-                                    child: Image.asset("assets/icons/id.png"),
+                                    padding: const EdgeInsets.all(15),
                                     width: 60,
+                                    child: Image.asset("assets/icons/id.png"),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 10,
                                   ),
-                                  Text(
+                                  const Text(
                                     "Personal Information",
                                     style: TextStyle(
                                         fontSize: 19,
@@ -96,19 +96,19 @@ class _ProfilePageState extends State<ProfilePage> {
                                 children: [
                                   Container(
                                     decoration: BoxDecoration(
-                                        color:
-                                            Color.fromARGB(255, 233, 250, 239),
+                                        color: const Color.fromARGB(
+                                            255, 233, 250, 239),
                                         borderRadius:
                                             BorderRadius.circular(20)),
-                                    padding: EdgeInsets.all(15),
+                                    padding: const EdgeInsets.all(15),
+                                    width: 60,
                                     child:
                                         Image.asset("assets/icons/tests.png"),
-                                    width: 60,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 10,
                                   ),
-                                  Text(
+                                  const Text(
                                     "My Test & Diagnostic",
                                     style: TextStyle(
                                         fontSize: 19,
@@ -125,19 +125,19 @@ class _ProfilePageState extends State<ProfilePage> {
                                 children: [
                                   Container(
                                     decoration: BoxDecoration(
-                                        color:
-                                            Color.fromARGB(255, 255, 238, 239),
+                                        color: const Color.fromARGB(
+                                            255, 255, 238, 239),
                                         borderRadius:
                                             BorderRadius.circular(20)),
-                                    padding: EdgeInsets.all(15),
+                                    padding: const EdgeInsets.all(15),
+                                    width: 60,
                                     child:
                                         Image.asset("assets/icons/payment.png"),
-                                    width: 60,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 10,
                                   ),
-                                  Text(
+                                  const Text(
                                     "Payment",
                                     style: TextStyle(
                                         fontSize: 19,
@@ -261,7 +261,7 @@ class ProfileImage extends StatelessWidget {
           right: 0,
           child: CircleAvatar(
             radius: 19,
-            backgroundColor: Color.fromARGB(255, 248, 248, 248),
+            backgroundColor: const Color.fromARGB(255, 248, 248, 248),
             child: Image.asset(
               "assets/icons/edit.png",
               width: 18,
