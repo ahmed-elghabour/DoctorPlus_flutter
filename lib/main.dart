@@ -72,10 +72,6 @@ class MyApp extends StatelessWidget {
           initialRoute: SharedPreference().getBool(key: "isLogged") == true
               ? Routes.login
               : Routes.home,
-          // initialRoute: SharedPreference().getBool(key: "isLogged") == true
-          // ? Routes.home
-          // : Routes.login,
-          initialRoute: Routes.home,
         );
       }),
     );
