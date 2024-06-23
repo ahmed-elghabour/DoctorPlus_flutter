@@ -23,32 +23,25 @@ class DoctorAppointments extends StatelessWidget {
           ),
         ],
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 8,
-                ),
-                MultiBlocProvider(
-                  providers: [
-                    BlocProvider(
-                        create: (context) => UpcomingAppointmentsCubit()
-                          ..getUpcomingAppointments()),
-                    BlocProvider(
-                        create: (context) => CompletedAppointmentsCubit()
-                          ..getCompletedAppointments()),
-                    BlocProvider(
-                        create: (context) => CancelledAppointmentsCubit()
-                          ..getCancelledAppointments()),
-                  ],
-                  child: AppointmentsTabs(),
-                )
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                    create: (context) =>
+                        UpcomingAppointmentsCubit()..getUpcomingAppointments()),
+                BlocProvider(
+                    create: (context) => CompletedAppointmentsCubit()
+                      ..getCompletedAppointments()),
+                BlocProvider(
+                    create: (context) => CancelledAppointmentsCubit()
+                      ..getCancelledAppointments()),
               ],
-            ),
-          ),
+              child: AppointmentsTabs(),
+            )
+          ],
         ),
       ),
     );

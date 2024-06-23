@@ -59,7 +59,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Spacer(),
+                    const SizedBox(height: 100),
+                    // const Spacer(),
                     Text(
                       "A.Rahman Khallaf",
                       style: _buildTextStyle(
@@ -158,7 +159,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         ],
                       ),
                     ),
-                    const Spacer(flex: 2),
+                    // const Spacer(flex: 2),
                   ],
                 ),
               ],
