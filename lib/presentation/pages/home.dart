@@ -96,8 +96,7 @@ class HomePage extends StatelessWidget {
                 children: [
                   const Text(
                     'Welcome to Doctor Plus',
-                    style: TextStyle(
-                        fontSize: 24, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 8),
                   const Text('How are you today?'),
@@ -143,8 +142,7 @@ class HomePage extends StatelessWidget {
                   const SizedBox(height: 16),
                   const Text(
                     'Doctor Speciality',
-                    style: TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 8),
                   const SingleChildScrollView(
@@ -167,8 +165,7 @@ class HomePage extends StatelessWidget {
                   const SizedBox(height: 16),
                   const Text(
                     'Recommendation Doctor',
-                    style: TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 8),
                   const DoctorCard(
@@ -197,6 +194,32 @@ class HomePage extends StatelessWidget {
                       rating: 4.7,
                       reviews: 3241),
                   // Add more doctors as needed
+                  // Footer
+                  const SizedBox(height: 16),
+                  Container(
+                    color: Colors.blue,
+                    padding: const EdgeInsets.all(16),
+                    child: const Column(
+                      children: [
+                        Text(
+                          'About Us',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          'Doctor Plus is a healthcare management app designed to streamline interactions between doctors, patients, and administrators. The app features user-friendly interfaces for sign-up, login, profile management, reservations, notifications, and more.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -232,25 +255,25 @@ class HomePage extends StatelessWidget {
         showUnselectedLabels: true,
         onTap: (index) {
           switch (index) {
-      case 0:
-        navigate(context, route: Routes.home);
-        break;
-      case 1:
-      //TODO: add route
-        // navigate(context, route: '/favorites');
-        break;
-      case 2:
-      //TODO: add route
-        // navigate(context, route: '/search');
-        break;
-      case 3:
-      //TODO: add route
-        //navigate(context, route: '/notifications');
-        break;
-      case 4:
-        navigate(context, route: Routes.complaint);
-        break;
-    }
+            case 0:
+              navigate(context, route: Routes.home);
+              break;
+            case 1:
+              //TODO: add route
+              // navigate(context, route: '/favorites');
+              break;
+            case 2:
+              //TODO: add route
+              // navigate(context, route: '/search');
+              break;
+            case 3:
+              //TODO: add route
+              //navigate(context, route: '/notifications');
+              break;
+            case 4:
+              navigate(context, route: Routes.complaint);
+              break;
+          }
         },
       ),
     );
