@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class PatientCard extends StatelessWidget {
   final String patientId;
@@ -35,8 +34,8 @@ class PatientCard extends StatelessWidget {
           child: Text(
             "${reservationDate.hour.toString().padLeft(2, '0')}:${reservationDate.minute.toString().padLeft(2, '0')}",
             style: TextStyle(
-                color: color,
-                fontWeight: FontWeight.bold,
+              color: color,
+              fontWeight: FontWeight.bold,
             ),
           )
         )

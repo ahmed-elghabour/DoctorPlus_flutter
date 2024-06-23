@@ -3,17 +3,13 @@ import 'package:doctor_plus/presentation/Doctor%20Home/widgets/patient_list.dart
 import 'package:doctor_plus/presentation/Doctor%20Home/utils/greeting.dart';
 import 'package:flutter/material.dart';
 
-class DoctorHome extends StatefulWidget {
+class DoctorHome extends StatelessWidget {
   const DoctorHome({super.key});
 
   @override
-  State<DoctorHome> createState() => _DoctorHomeState();
-}
-
-class _DoctorHomeState extends State<DoctorHome> {
-  final String doctorName = "Amr";
-  @override
   Widget build(BuildContext context) {
+    final String doctorName = "Amr";
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(

@@ -35,13 +35,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => ThemeCubit()),
         BlocProvider(create: (_) => LanguageCubit()),
-        BlocProvider(
-          create: (context) {
-            final cubit = DoctorReservationCubit();
-            cubit.fetchReservations();
-            return cubit;
-          },
-        )
+        BlocProvider(create: (_) => DoctorReservationCubit())
       ],
       child:
           BlocBuilder<LanguageCubit, LanguageState>(builder: (context, state) {
@@ -72,7 +66,7 @@ class MyApp extends StatelessWidget {
           },
           initialRoute: SharedPreference().getBool(key: "isLogged") == true
               ? Routes.login
-              : Routes.doctorHome,
+              : Routes.doctorAppointments,
         );
       }),
     );

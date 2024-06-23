@@ -3,7 +3,9 @@ import 'package:doctor_plus/presentation/Doctor%20Home/utils/doctor_reservations
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DoctorReservationCubit extends Cubit<List<DoctorReservation>> {
-  DoctorReservationCubit() : super([]);
+  DoctorReservationCubit() : super([]) {
+    fetchReservations();
+  }
 
    void fetchReservations() {
     DoctorService.getReservations()?.listen((data) {

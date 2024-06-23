@@ -5,19 +5,9 @@ import 'package:doctor_plus/presentation/Doctor%20Home/utils/reservation_chunks.
 import 'package:doctor_plus/presentation/Doctor%20Home/widgets/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-class PatientsCarousel extends StatefulWidget {
+class PatientsCarousel extends StatelessWidget {
   const PatientsCarousel({super.key});
-  
-  @override
-  State<PatientsCarousel> createState() => _PatientsCarouselState();
-}
 
-class _PatientsCarouselState extends State<PatientsCarousel> {
-  @override
-  void initState() {
-    super.initState();
-  }
-  
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DoctorReservationCubit, List<DoctorReservation>>(
@@ -27,7 +17,8 @@ class _PatientsCarouselState extends State<PatientsCarousel> {
         }
         List<List<DoctorReservation>> chunkedReservations = chunkedReservList(reservations, 4);
         List<Widget> reservationSliders = getSliders(chunkedReservations);
-        return PatientCarouselSlider(chunkedReservations:chunkedReservations, reservationSliders:reservationSliders);       
-    });
+        return PatientCarouselSlider(chunkedReservations: chunkedReservations, reservationSliders: reservationSliders);       
+      }
+    );
   }
 }
