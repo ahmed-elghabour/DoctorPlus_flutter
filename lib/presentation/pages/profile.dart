@@ -34,118 +34,134 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ],
       ),
-      body: Stack(
-        children: [
-          Positioned.fill(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 140),
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            Column(
+              children: [
+                const SizedBox(height: 60),
+                Padding(
+                  padding: const EdgeInsets.only(top: 80),
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
+                      ),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        const SizedBox(height: 90),
+                        NameWidget(name: "A.Rahman Khallaf"),
+                        EmailWidget(email: "a.rahman@gmail.com"),
+                        const SizedBox(height: 10),
+                        RowNavigatorWidget(),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 19, horizontal: 20),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        color:
+                                            Color.fromARGB(255, 234, 242, 255),
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
+                                    padding: EdgeInsets.all(15),
+                                    child: Image.asset("assets/icons/id.png"),
+                                    width: 60,
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    "Personal Information",
+                                    style: TextStyle(
+                                        fontSize: 19,
+                                        fontWeight: FontWeight.w400),
+                                  )
+                                ],
+                              ),
+                              const Divider(
+                                height: 20,
+                                thickness: 1,
+                                color: Colors.black12,
+                              ),
+                              Row(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        color:
+                                            Color.fromARGB(255, 233, 250, 239),
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
+                                    padding: EdgeInsets.all(15),
+                                    child:
+                                        Image.asset("assets/icons/tests.png"),
+                                    width: 60,
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    "My Test & Diagnostic",
+                                    style: TextStyle(
+                                        fontSize: 19,
+                                        fontWeight: FontWeight.w400),
+                                  )
+                                ],
+                              ),
+                              const Divider(
+                                height: 20,
+                                thickness: 1,
+                                color: Colors.black12,
+                              ),
+                              Row(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        color:
+                                            Color.fromARGB(255, 255, 238, 239),
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
+                                    padding: EdgeInsets.all(15),
+                                    child:
+                                        Image.asset("assets/icons/payment.png"),
+                                    width: 60,
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    "Payment",
+                                    style: TextStyle(
+                                        fontSize: 19,
+                                        fontWeight: FontWeight.w400),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    const SizedBox(height: 90),
-                    NameWidget(name: "A.Rahman Khallaf"),
-                    EmailWidget(email: "a.rahman@gmail.com"),
-                    const SizedBox(height: 10),
-                    RowNavigatorWidget(),
-                    Container(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 19, horizontal: 20),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                    color: Color.fromARGB(255, 234, 242, 255),
-                                    borderRadius: BorderRadius.circular(20)),
-                                padding: EdgeInsets.all(15),
-                                child: Image.asset("assets/icons/id.png"),
-                                width: 60,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                "Personal Information",
-                                style: TextStyle(
-                                    fontSize: 19, fontWeight: FontWeight.w400),
-                              )
-                            ],
-                          ),
-                          const Divider(
-                            height: 20,
-                            thickness: 1,
-                            color: Colors.black12,
-                          ),
-                          Row(
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                    color: Color.fromARGB(255, 233, 250, 239),
-                                    borderRadius: BorderRadius.circular(20)),
-                                padding: EdgeInsets.all(15),
-                                child: Image.asset("assets/icons/tests.png"),
-                                width: 60,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                "My Test & Diagnostic",
-                                style: TextStyle(
-                                    fontSize: 19, fontWeight: FontWeight.w400),
-                              )
-                            ],
-                          ),
-                          const Divider(
-                            height: 20,
-                            thickness: 1,
-                            color: Colors.black12,
-                          ),
-                          Row(
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                    color: Color.fromARGB(255, 255, 238, 239),
-                                    borderRadius: BorderRadius.circular(20)),
-                                padding: EdgeInsets.all(15),
-                                child: Image.asset("assets/icons/payment.png"),
-                                width: 60,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                "Payment",
-                                style: TextStyle(
-                                    fontSize: 19, fontWeight: FontWeight.w400),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
+              ],
             ),
-          ),
-          const Positioned.fill(
-              top: 60,
-              child: Align(
-                alignment: Alignment.topCenter,
-                child: ProfileImage(),
-              ))
-        ],
+            const Positioned.fill(
+                top: 60,
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  child: ProfileImage(),
+                ))
+          ],
+        ),
       ),
     );
   }
