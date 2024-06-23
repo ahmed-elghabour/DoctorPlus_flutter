@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
 
 Widget buildSubmitButton({
+  double widthFactor = 1,
   required String label,
   required void Function()? onPressed,
 }) =>
-    ElevatedButton(
-      onPressed: onPressed,
-      child: Text(label),
+    FractionallySizedBox(
+      widthFactor: widthFactor,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+        ),
+        onPressed: onPressed,
+        child: Text(label),
+      ),
     );
 
 Widget buildTextButton({

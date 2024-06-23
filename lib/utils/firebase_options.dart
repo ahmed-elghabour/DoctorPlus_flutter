@@ -63,6 +63,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '319453744111',
     projectId: 'doctor-plus-13acf',
     storageBucket: 'doctor-plus-13acf.appspot.com',
+    iosClientId: '319453744111-a4r94i3914oe83iotvo6bi7kc9u43s1n.apps.googleusercontent.com',
     iosBundleId: 'com.example.doctorPlus',
   );
 }
