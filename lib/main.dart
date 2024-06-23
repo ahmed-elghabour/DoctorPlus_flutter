@@ -61,13 +61,13 @@ class MyApp extends StatelessWidget {
           routes: {
             Routes.home: (context) => const HomePage(),
             Routes.login: (context) => const LoginPage(),
-            Routes.register: (context) => const RegisterPage(),
-            Routes.complaint: (context) => const ComplaintsPage(),
-            Routes.registerFill: (context) => const RegisterFillData(),
-            Routes.doctorHome: (context) => const DoctorHome(),
-            Routes.doctorAppointments: (context) => const DoctorAppointments(),
             Routes.profile: (context) => const ProfilePage(),
             Routes.settings: (context) => const SettingsPage(),
+            Routes.register: (context) => const RegisterPage(),
+            Routes.doctorHome: (context) => const DoctorHome(),
+            Routes.complaint: (context) => const ComplaintsPage(),
+            Routes.registerFill: (context) => const RegisterFillData(),
+            Routes.doctorAppointments: (context) => const DoctorAppointments(),
           },
           initialRoute: SharedPreference().getBool(key: "isLogged") != true
               ? Routes.login

@@ -14,10 +14,11 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
       child: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        leadingWidth: 48,
         leading: appBarIcon(
           isDefault: isDefault,
           icon: Icons.arrow_back_ios_new_rounded,

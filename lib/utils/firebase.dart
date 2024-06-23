@@ -58,6 +58,7 @@ class CustomFirebase {
 
   signOut() async {
     await FirebaseAuth.instance.signOut();
+    
   }
 
   String hashPassword(String password) {

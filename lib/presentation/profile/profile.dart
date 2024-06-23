@@ -29,7 +29,7 @@ class _ProfilePageState extends State<ProfilePage> {
               isDefault: false,
               iconSize: 30,
               icon: Icons.settings,
-              onTap: () {},
+              onTap: () => navigate(route: Routes.settings),
             ),
           ],
         ),

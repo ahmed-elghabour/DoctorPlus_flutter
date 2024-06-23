@@ -1,3 +1,6 @@
+import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
+import 'package:doctor_plus/utils/firebase.dart';
+import 'package:doctor_plus/utils/routes.dart';
 import 'package:flutter/material.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -11,15 +14,8 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Settings",
-          style: TextStyle(color: Colors.black87),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: Colors.black87,
+      appBar: const MyCustomAppBar(
+        title: "Settings",
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -28,139 +24,93 @@ class _SettingsPageState extends State<SettingsPage> {
             const SizedBox(
               height: 10,
             ),
-            GestureDetector(
+            _buildSettingRow(
+              title: "Notification",
+              icon: Icons.notifications_none_outlined,
               onTap: () {},
-              child: const Row(
-                children: [
-                  Icon(
-                    Icons.notifications_none_outlined,
-                    size: 40,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Expanded(
-                    child: Text("Notification"),
-                  ),
-                  Icon(
-                    Icons.keyboard_arrow_right,
-                    size: 40,
-                  )
-                ],
-              ),
             ),
             const Divider(
               height: 20,
               thickness: 1,
               color: Colors.black12,
             ),
-            GestureDetector(
+            _buildSettingRow(
+              title: "FAQ",
+              icon: Icons.message_outlined,
               onTap: () {},
-              child: const Row(
-                children: [
-                  Icon(
-                    Icons.message_outlined,
-                    size: 40,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Expanded(
-                    child: Text("FAQ"),
-                  ),
-                  Icon(
-                    Icons.keyboard_arrow_right,
-                    size: 40,
-                  )
-                ],
-              ),
             ),
             const Divider(
               height: 20,
               thickness: 1,
               color: Colors.black12,
             ),
-            GestureDetector(
+            _buildSettingRow(
+              title: "Security",
+              icon: Icons.lock_outlined,
               onTap: () {},
-              child: const Row(
-                children: [
-                  Icon(
-                    Icons.lock_outlined,
-                    size: 40,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Expanded(
-                    child: Text("Security"),
-                  ),
-                  Icon(
-                    Icons.keyboard_arrow_right,
-                    size: 40,
-                  )
-                ],
-              ),
             ),
             const Divider(
               height: 20,
               thickness: 1,
               color: Colors.black12,
             ),
-            GestureDetector(
+            _buildSettingRow(
+              title: "Language",
+              icon: Icons.language_outlined,
               onTap: () {},
-              child: const Row(
-                children: [
-                  Icon(
-                    Icons.language_outlined,
-                    size: 40,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Expanded(
-                    child: Text("Language"),
-                  ),
-                  Icon(
-                    Icons.keyboard_arrow_right,
-                    size: 40,
-                  )
-                ],
-              ),
             ),
             const Divider(
               height: 20,
               thickness: 1,
               color: Colors.black12,
             ),
-            GestureDetector(
-              onTap: () {},
-              child: const Row(
-                children: [
-                  Icon(
-                    color: Color.fromARGB(255, 255, 76, 94),
-                    Icons.logout_outlined,
-                    size: 40,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Expanded(
-                    child: Text(
-                      "Logout",
-                      style: TextStyle(color: Color.fromARGB(255, 255, 76, 94)),
-                    ),
-                  ),
-                  Icon(
-                    color: Color.fromARGB(255, 255, 76, 94),
-                    Icons.keyboard_arrow_right,
-                    size: 40,
-                  )
-                ],
-              ),
+            _buildSettingRow(
+              title: "Logout",
+              isSepcial: true,
+              icon: Icons.logout_outlined,
+              onTap: () {
+                CustomFirebase().signOut();
+                Navigator.pushReplacementNamed(context, Routes.login);
+              },
             ),
           ],
         ),
       ),
     );
   }
+}
+
+Widget _buildSettingRow(
+    {required String title,
+    bool isSepcial = false,
+    required IconData icon,
+    required void Function()? onTap}) {
+  return GestureDetector(
+    onTap: onTap,
+    child: Row(
+      children: [
+        Icon(
+          icon,
+          size: 40,
+          color: isSepcial ? Colors.red : Colors.black,
+        ),
+        const SizedBox(
+          width: 10,
+        ),
+        Expanded(
+          child: Text(
+            title,
+            style: TextStyle(
+              color: isSepcial ? Colors.red : Colors.black,
+            ),
+          ),
+        ),
+        Icon(
+          size: 40,
+          Icons.keyboard_arrow_right,
+          color: isSepcial ? Colors.red : Colors.black,
+        )
+      ],
+    ),
+  );
 }
