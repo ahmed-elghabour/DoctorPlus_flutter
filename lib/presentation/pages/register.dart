@@ -9,7 +9,6 @@ import 'package:doctor_plus/utils/routes.dart';
 import 'package:doctor_plus/presentation/widgets/inputs.dart';
 import 'package:doctor_plus/presentation/widgets/buttons.dart';
 import 'package:doctor_plus/presentation/widgets/check_box.dart';
-import 'package:doctor_plus/presentation/widgets/image_picker.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
