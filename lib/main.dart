@@ -75,10 +75,10 @@ class MyApp extends StatelessWidget {
             Routes.profile: (context) => const ProfilePage(),
             Routes.settings: (context) => const SettingsPage(),
           },
-          initialRoute: SharedPreference().getBool(key: "isLogged") == true
-              ? Routes.home
-              : Routes.login,
-          // initialRoute: Routes.home,
+          // initialRoute: SharedPreference().getBool(key: "isLogged") == true
+          // ? Routes.home
+          // : Routes.login,
+          initialRoute: Routes.home,
         );
       }),
     );
