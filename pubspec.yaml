@@ -38,6 +38,8 @@ flutter:
 
   assets:
     - assets/
+    - assets/icons/
+    - assets/imgs/
   # fonts:
   #   - family: Schyler
   #     fonts:

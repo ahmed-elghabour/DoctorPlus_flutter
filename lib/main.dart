@@ -1,3 +1,6 @@
+import 'package:doctor_plus/presentation/pages/profile.dart';
+import 'package:doctor_plus/presentation/pages/settings.dart';
+
 import 'utils/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:doctor_plus/utils/routes.dart';
@@ -48,6 +51,8 @@ class MyApp extends StatelessWidget {
             Routes.home: (context) => const HomePage(),
             Routes.login: (context) => const LoginPage(),
             Routes.register: (context) => const RegisterPage(),
+            Routes.profile: (context) => const ProfilePage(),
+            Routes.settings: (context) => const SettingsPage(),
           },
           initialRoute: SharedPreference().getBool(key: "isLogged") != true
               ? Routes.login

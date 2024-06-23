@@ -4,5 +4,6 @@ class Routes {
   static const String register = "auth/sign-up";
   // A.Rahman
   static const String profile = "user/profile";
+  static const String settings = "user/settings";
   // end
 }
