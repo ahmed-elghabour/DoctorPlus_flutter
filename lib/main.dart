@@ -34,6 +34,13 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => ThemeCubit()),
         BlocProvider(create: (_) => LanguageCubit()),
+        BlocProvider(
+          create: (context) {
+            final cubit = DoctorReservationCubit();
+            cubit.fetchReservations();
+            return cubit;
+          },
+        )
       ],
       child:
           BlocBuilder<LanguageCubit, LanguageState>(builder: (context, state) {
