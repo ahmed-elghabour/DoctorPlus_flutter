@@ -1,6 +1,8 @@
+import 'package:doctor_plus/core/theming/colors.dart';
 import 'package:doctor_plus/core/widgets/app_text_button.dart';
 import 'package:doctor_plus/data/model/appointment.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class AppointmentTile extends StatelessWidget {
   final Appointment appointment;
@@ -31,12 +33,28 @@ class AppointmentTile extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    appointment.doctorName,
-                    style: const TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        appointment.doctorName,
+                        style: const TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {},
+                        borderRadius: BorderRadius.circular(50.0),
+                        splashColor: Colors.blue[100],
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: SvgPicture.asset(
+                            'assets/svgs/chat.svg',
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 4.0),
                   Text(

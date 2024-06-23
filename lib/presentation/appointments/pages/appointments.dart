@@ -13,14 +13,12 @@ class DoctorAppointments extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const CustomAppBar(
                   title: 'My Appointments',
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 8,
                 ),
                 AppointmentsTabs()
               ],
