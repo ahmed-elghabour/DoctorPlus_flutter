@@ -1,3 +1,10 @@
+enum AppointmentStatus {
+  pending,
+  done,
+  cancelled,
+  rescheduled,
+}
+
 class Appointment {
   final String doctorImage;
   final String doctorName;
@@ -6,6 +13,8 @@ class Appointment {
   final String appointmentType;
   final String appointmentDate;
   final String appointmentTime;
+  //
+  final AppointmentStatus status;
 
   Appointment({
     required this.doctorImage,
@@ -15,5 +24,7 @@ class Appointment {
     required this.appointmentType,
     required this.appointmentDate,
     required this.appointmentTime,
+    //
+    required this.status,
   });
 }

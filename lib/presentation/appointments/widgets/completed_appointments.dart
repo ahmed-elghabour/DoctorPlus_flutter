@@ -1,16 +1,16 @@
-import 'package:doctor_plus/domain/cubits/appointments/upcoming_appointments_cubit.dart';
+import 'package:doctor_plus/domain/cubits/appointments/completed_appointments_cubit.dart';
 import 'package:doctor_plus/presentation/appointments/widgets/appointment_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class UpcomingAppointments extends StatelessWidget {
-  const UpcomingAppointments({super.key});
+class CompletedAppointments extends StatelessWidget {
+  const CompletedAppointments({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UpcomingAppointmentsCubit, UpcomingAppointmentsState>(
+    return BlocBuilder<CompletedAppointmentsCubit, CompletedAppointmentsState>(
       builder: (context, state) {
-        if (state is UpcomingAppointmentsLoaded) {
+        if (state is CompletedAppointmentsLoaded) {
           return ListView.builder(
             itemCount: state.appointments.length,
             itemBuilder: (context, index) {
@@ -21,7 +21,7 @@ class UpcomingAppointments extends StatelessWidget {
               );
             },
           );
-        } else if (state is UpcomingAppointmentsLoading) {
+        } else if (state is CompletedAppointmentsLoading) {
           return const Center(
             child: CircularProgressIndicator(),
           );

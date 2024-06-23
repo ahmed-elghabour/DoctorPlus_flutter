@@ -1,6 +1,6 @@
 import 'package:doctor_plus/data/model/appointment.dart';
 
-final List<Appointment> appointments = [
+final List<Appointment> dummyAppointments = [
   Appointment(
     doctorImage:
         'https://www.shutterstock.com/image-vector/young-smiling-doctor-stethoscope-medical-600nw-2116246328.jpg',
@@ -11,6 +11,7 @@ final List<Appointment> appointments = [
     appointmentType: 'General Checkup',
     appointmentDate: '12 June 2024',
     appointmentTime: '10:00 AM',
+    status: AppointmentStatus.cancelled,
   ),
   Appointment(
     doctorImage:
@@ -22,6 +23,7 @@ final List<Appointment> appointments = [
     appointmentType: 'Dental Cleaning',
     appointmentDate: '13 June 2024',
     appointmentTime: '11:00 AM',
+    status: AppointmentStatus.pending,
   ),
   Appointment(
     doctorImage:
@@ -33,6 +35,7 @@ final List<Appointment> appointments = [
     appointmentType: 'Eye Examination',
     appointmentDate: '14 June 2024',
     appointmentTime: '02:00 PM',
+    status: AppointmentStatus.pending,
   ),
   Appointment(
     doctorImage:
@@ -44,6 +47,7 @@ final List<Appointment> appointments = [
     appointmentType: 'Skin Consultation',
     appointmentDate: '15 June 2024',
     appointmentTime: '09:00 AM',
+    status: AppointmentStatus.done,
   ),
   Appointment(
     doctorImage:
@@ -55,6 +59,7 @@ final List<Appointment> appointments = [
     appointmentType: 'Cardiology Consultation',
     appointmentDate: '16 June 2024',
     appointmentTime: '11:30 AM',
+    status: AppointmentStatus.rescheduled,
   ),
   Appointment(
     doctorImage:
@@ -66,6 +71,7 @@ final List<Appointment> appointments = [
     appointmentType: 'Neurology Consultation',
     appointmentDate: '17 June 2024',
     appointmentTime: '01:00 PM',
+    status: AppointmentStatus.pending,
   ),
   Appointment(
     doctorImage:
@@ -77,6 +83,7 @@ final List<Appointment> appointments = [
     appointmentType: 'Orthopedic Consultation',
     appointmentDate: '18 June 2024',
     appointmentTime: '03:00 PM',
+    status: AppointmentStatus.done,
   ),
   Appointment(
     doctorImage:
@@ -88,6 +95,7 @@ final List<Appointment> appointments = [
     appointmentType: 'ENT Consultation',
     appointmentDate: '19 June 2024',
     appointmentTime: '10:00 AM',
+    status: AppointmentStatus.cancelled,
   ),
   Appointment(
     doctorImage:
@@ -99,6 +107,7 @@ final List<Appointment> appointments = [
     appointmentType: 'Pediatric Consultation',
     appointmentDate: '20 June 2024',
     appointmentTime: '04:00 PM',
+    status: AppointmentStatus.done,
   ),
   Appointment(
     doctorImage:
@@ -110,5 +119,6 @@ final List<Appointment> appointments = [
     appointmentType: 'Gastroenterology Consultation',
     appointmentDate: '21 June 2024',
     appointmentTime: '02:30 PM',
+    status: AppointmentStatus.pending,
   ),
 ];

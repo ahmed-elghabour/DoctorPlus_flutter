@@ -1,3 +1,5 @@
+import 'package:doctor_plus/presentation/appointments/widgets/cancelled_appointments.dart';
+import 'package:doctor_plus/presentation/appointments/widgets/completed_appointments.dart';
 import 'package:doctor_plus/presentation/appointments/widgets/upcoming_appointments.dart';
 import 'package:flutter/material.dart';
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
@@ -13,8 +15,8 @@ class AppointmentsTabs extends StatelessWidget {
 
   final List<Widget> _views = [
     const UpcomingAppointments(),
-    const Center(child: Text('Completed')),
-    const Center(child: Text('Cancelled')),
+    const CompletedAppointments(),
+    const CancelledAppointments(),
   ];
 
   @override

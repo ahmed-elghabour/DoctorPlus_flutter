@@ -15,7 +15,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  http:
+  dio:
   intl:
   crypto:
   googleapis:
