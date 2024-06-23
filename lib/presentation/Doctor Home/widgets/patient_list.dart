@@ -1,4 +1,4 @@
-import 'package:doctor_plus/presentation/widgets/patients_carousel.dart';
+import 'package:doctor_plus/presentation/Doctor%20Home/widgets/patients_carousel.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

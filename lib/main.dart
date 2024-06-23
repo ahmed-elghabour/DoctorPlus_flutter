@@ -2,7 +2,7 @@ import 'package:doctor_plus/core/theming/colors.dart';
 import 'package:doctor_plus/domain/cubits/doctorReservations/doctor_reservation_cubit.dart';
 import 'package:doctor_plus/presentation/appointments/pages/appointments.dart';
 import 'package:doctor_plus/presentation/pages/complaints.dart';
-import 'package:doctor_plus/presentation/pages/doctor_home.dart';
+import 'package:doctor_plus/presentation/Doctor%20Home/pages/doctor_home.dart';
 
 import 'utils/firebase_options.dart';
 import 'package:flutter/material.dart';
@@ -72,7 +72,7 @@ class MyApp extends StatelessWidget {
           },
           initialRoute: SharedPreference().getBool(key: "isLogged") == true
               ? Routes.login
-              : Routes.doctorAppointments,
+              : Routes.doctorHome,
         );
       }),
     );
