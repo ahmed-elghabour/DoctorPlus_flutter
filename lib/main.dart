@@ -1,4 +1,6 @@
+import 'package:doctor_plus/core/theming/colors.dart';
 import 'package:doctor_plus/domain/cubits/doctorReservations/doctor_reservation_cubit.dart';
+import 'package:doctor_plus/presentation/appointments/pages/appointments.dart';
 import 'package:doctor_plus/presentation/pages/complaints.dart';
 import 'package:doctor_plus/presentation/pages/doctor_home.dart';
 
@@ -34,7 +36,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => ThemeCubit()),
         BlocProvider(create: (_) => LanguageCubit()),
         BlocProvider(
-           create: (context) {
+          create: (context) {
             final cubit = DoctorReservationCubit();
             cubit.fetchReservations();
             return cubit;
@@ -44,7 +46,10 @@ class MyApp extends StatelessWidget {
       child:
           BlocBuilder<LanguageCubit, LanguageState>(builder: (context, state) {
         return MaterialApp(
-          theme: ThemeData(useMaterial3: false),
+          theme: ThemeData(
+            useMaterial3: false,
+            primaryColor: ColorsManager.mainBlue,
+          ),
           // theme: ThemeData.dark(),
           debugShowCheckedModeBanner: false,
           supportedLocales: S.delegate.supportedLocales,
@@ -63,10 +68,11 @@ class MyApp extends StatelessWidget {
             Routes.complaint: (context) => const ComplaintsPage(),
             Routes.registerFill: (context) => const RegisterFillData(),
             Routes.doctorHome: (context) => const DoctorHome(),
+            Routes.doctorAppointments: (context) => const DoctorAppointments(),
           },
           initialRoute: SharedPreference().getBool(key: "isLogged") == true
               ? Routes.login
-              : Routes.register,
+              : Routes.doctorAppointments,
         );
       }),
     );
