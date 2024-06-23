@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctor_plus/presentation/widgets/card_specialization.dart';
 import 'package:doctor_plus/presentation/widgets/card_doctor.dart';
+import 'package:doctor_plus/presentation/pages/complaints.dart';
 import 'package:doctor_plus/utils/routes.dart';
 
 class HomePage extends StatelessWidget {
@@ -50,7 +51,7 @@ class HomePage extends StatelessWidget {
                 return IconButton(
                   icon: const Icon(Icons.person_sharp),
                   onPressed: () {
-                    // Navigate to profile page
+                    navigate(context, route: Routes.profile);
                   },
                 );
               } else {
@@ -230,7 +231,26 @@ class HomePage extends StatelessWidget {
         showSelectedLabels: true,
         showUnselectedLabels: true,
         onTap: (index) {
-          // Handle the navigation based on index
+          switch (index) {
+      case 0:
+        navigate(context, route: Routes.home);
+        break;
+      case 1:
+      //TODO: add route
+        // navigate(context, route: '/favorites');
+        break;
+      case 2:
+      //TODO: add route
+        // navigate(context, route: '/search');
+        break;
+      case 3:
+      //TODO: add route
+        //navigate(context, route: '/notifications');
+        break;
+      case 4:
+        navigate(context, route: Routes.complaint);
+        break;
+    }
         },
       ),
     );
