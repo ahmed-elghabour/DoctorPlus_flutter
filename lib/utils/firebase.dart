@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypto/crypto.dart';
-import 'package:doctor_plus/data/model/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class CustomFirebase {
@@ -10,10 +9,10 @@ class CustomFirebase {
 
   static CustomFirebase get instance => auth ??= CustomFirebase();
 
-  signWithCredentials({required SystemUser user}) async {
+  signWithCredentials({required String email, required String password}) async {
     try {
-      return await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: user.email, password: user.password);
+      return await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
     } catch (e) {
       throw Exception(e);
     }
@@ -44,15 +43,13 @@ class CustomFirebase {
     required Map<String, dynamic> data,
   }) async {
     try {
-      if(docID != null) {
+      if (docID != null) {
         await FirebaseFirestore.instance
             .collection(collection)
             .doc(docID)
             .set(data);
       } else {
-        await FirebaseFirestore.instance
-        .collection(collection)
-        .add(data);
+        await FirebaseFirestore.instance.collection(collection).add(data);
       }
     } catch (e) {
       throw Exception(e);
@@ -61,6 +58,7 @@ class CustomFirebase {
 
   signOut() async {
     await FirebaseAuth.instance.signOut();
+    
   }
 
   String hashPassword(String password) {

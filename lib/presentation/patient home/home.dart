@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:doctor_plus/presentation/widgets/card_specialization.dart';
-import 'package:doctor_plus/presentation/widgets/card_doctor.dart';
-import 'package:doctor_plus/presentation/pages/complaints.dart';
+import 'package:doctor_plus/core/widgets/card_specialization.dart';
+import 'package:doctor_plus/core/widgets/card_doctor.dart';
+import 'package:doctor_plus/presentation/patient%20home/complaints.dart';
 import 'package:doctor_plus/utils/routes.dart';
 
 class HomePage extends StatelessWidget {
@@ -263,8 +263,7 @@ class HomePage extends StatelessWidget {
               // navigate(context, route: '/favorites');
               break;
             case 2:
-              //TODO: add route
-              // navigate(context, route: '/search');
+              navigate(context, route: '/search');
               break;
             case 3:
               //TODO: add route

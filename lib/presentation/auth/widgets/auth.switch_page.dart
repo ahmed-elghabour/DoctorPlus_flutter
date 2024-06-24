@@ -1,4 +1,4 @@
-import 'buttons.dart';
+import '../../../core/widgets/buttons.dart';
 import 'package:flutter/material.dart';
 
 class SwitchAuthPage extends StatelessWidget {

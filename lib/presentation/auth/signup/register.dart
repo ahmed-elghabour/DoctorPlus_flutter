@@ -1,14 +1,14 @@
-import 'package:doctor_plus/presentation/widgets/auth.switch_page.dart';
-import 'package:doctor_plus/presentation/widgets/signin_option.dart';
-import 'package:doctor_plus/presentation/widgets/terms_conditions.dart';
+import 'package:doctor_plus/presentation/auth/widgets/auth.switch_page.dart';
+import 'package:doctor_plus/presentation/auth/widgets/signin_option.dart';
+import 'package:doctor_plus/presentation/auth/widgets/terms_conditions.dart';
 import 'package:doctor_plus/utils/firebase.dart';
 import 'package:doctor_plus/utils/shared_preferences.dart';
 import 'package:flutter/material.dart';
-import '../../utils/validator.dart';
+import '../../../utils/validator.dart';
 import 'package:doctor_plus/utils/routes.dart';
-import 'package:doctor_plus/presentation/widgets/inputs.dart';
-import 'package:doctor_plus/presentation/widgets/buttons.dart';
-import 'package:doctor_plus/presentation/widgets/check_box.dart';
+import 'package:doctor_plus/core/widgets/inputs.dart';
+import 'package:doctor_plus/core/widgets/buttons.dart';
+import 'package:doctor_plus/core/widgets/check_box.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -92,9 +92,10 @@ class _RegisterPageState extends State<RegisterPage> {
                     widthFactor: .5,
                     label: "Register",
                     onPressed: () {
-                      if (_formKey.currentState?.validate() == true) {
-                        createNewUser();
-                      }
+                      navigate(route: Routes.registerFill);
+                      // if (_formKey.currentState?.validate() == true) {
+                      //   createNewUser();
+                      // }
                     },
                   ),
                   signInOptions(),

@@ -21,28 +21,23 @@ class AppointmentsTabs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return Container(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
-          width: double.infinity,
-          height: MediaQuery.sizeOf(context).height -
-              120, // Set height to the available height
-          child: ContainedTabBarView(
-            tabBarProperties: const TabBarProperties(
-              labelColor: Colors.blue,
-              unselectedLabelColor: Colors.grey,
-              labelStyle:
-                  TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-              unselectedLabelStyle:
-                  TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
-            ),
-            tabs: _tabs,
-            views: _views,
-            onChange: (index) => debugPrint(index.toString()),
-          ),
-        );
-      },
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      width: double.infinity,
+      height: MediaQuery.sizeOf(context).height -
+          168, // Set height to the available height
+      child: ContainedTabBarView(
+        tabBarProperties: const TabBarProperties(
+          labelColor: Colors.blue,
+          unselectedLabelColor: Colors.grey,
+          labelStyle: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+          unselectedLabelStyle:
+              TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
+        ),
+        tabs: _tabs,
+        views: _views,
+        onChange: (index) => debugPrint(index.toString()),
+      ),
     );
   }
 }

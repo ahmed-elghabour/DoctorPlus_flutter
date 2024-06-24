@@ -1,12 +1,12 @@
 import 'dart:io';
-import 'package:doctor_plus/presentation/widgets/files_uploaded.dart';
+import 'package:doctor_plus/core/widgets/files_uploaded.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:doctor_plus/data/demo.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:doctor_plus/presentation/widgets/date_picker.dart';
-import 'package:doctor_plus/presentation/widgets/popup_dialog.dart';
-import 'package:doctor_plus/presentation/widgets/additional_info.dart';
+import 'package:doctor_plus/core/widgets/date_picker.dart';
+import 'package:doctor_plus/core/widgets/popup_dialog.dart';
+import 'package:doctor_plus/presentation/auth/widgets/additional_info.dart';
 
 class DoctorAdditionalInfo extends StatefulWidget {
   const DoctorAdditionalInfo({super.key});
