@@ -1,18 +1,14 @@
 import 'package:doctor_plus/domain/cubits/doctorReservations/patients_number_atDay_cubit.dart';
 import 'package:doctor_plus/domain/cubits/doctorReservations/patients_number_atDay_state.dart';
+import 'package:doctor_plus/presentation/Doctor%20Home/widgets/new_patients_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class doctorHomeCard extends StatefulWidget {
-  const doctorHomeCard({super.key});
-
-  @override
-  State<doctorHomeCard> createState() => _doctorHomeCardState();
-}
-
-class _doctorHomeCardState extends State<doctorHomeCard> {
-  final int newPatients = 40;
+class DoctorHomeCard extends StatelessWidget {
   final int oldPatients = 64;
+
+  const DoctorHomeCard({super.key});
+  
   @override
   Widget build(BuildContext context) {
     context.read<PatientsNumberAtDayCubit>().fetchPatients("764");
@@ -73,70 +69,14 @@ class _doctorHomeCardState extends State<doctorHomeCard> {
                 const SizedBox(
                   height: 15,
                 ),
-                Expanded(
+                const Expanded(
                   child: Row(
                     children: [
-                      Container(
-                        width: 120,
-                        decoration: const BoxDecoration(
-                          color: Color.fromARGB(255, 191, 230, 248),
-                          borderRadius: BorderRadius.all(Radius.circular(15)),
-                        ),
-                        child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                    'New patients',
-                                    style: TextStyle(
-                                        fontSize: 15, color: Colors.black),
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                    '$newPatients',
-                                    style: const TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ])),
-                      ),
-                      const SizedBox(
+                      PatientsBox(patients: 40, patientType: "New Patient",),
+                      SizedBox(
                         width: 10,
                       ),
-                      Container(
-                        width: 120,
-                        decoration: const BoxDecoration(
-                          color: Color.fromARGB(255, 191, 230, 248),
-                          borderRadius: BorderRadius.all(Radius.circular(15)),
-                        ),
-                        child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                    'Old patients',
-                                    style: TextStyle(
-                                        fontSize: 15, color: Colors.black),
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                    '$oldPatients',
-                                    style: const TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ])),
-                      ),
+                      PatientsBox(patients: 64, patientType: "Old Patient",),
                     ],
                   ),
                 )
