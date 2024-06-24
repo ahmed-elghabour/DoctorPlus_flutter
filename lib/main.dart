@@ -6,6 +6,7 @@ import 'package:doctor_plus/presentation/doctor%20home/pages/doctor_home.dart';
 
 import 'package:doctor_plus/presentation/profile/profile.dart';
 import 'package:doctor_plus/presentation/profile/settings.dart';
+import 'package:doctor_plus/presentation/search/pages/search_screen.dart';
 
 import 'utils/firebase_options.dart';
 import 'package:flutter/material.dart';
@@ -68,9 +69,10 @@ class MyApp extends StatelessWidget {
             Routes.complaint: (context) => const ComplaintsPage(),
             Routes.registerFill: (context) => const RegisterFillData(),
             Routes.doctorAppointments: (context) => const DoctorAppointments(),
+            Routes.search: (context) => const SearchScreen(),
           },
           initialRoute: SharedPreference().getBool(key: "isLogged") != true
-              ? Routes.login
+              ? Routes.home
               : Routes.home,
         );
       }),

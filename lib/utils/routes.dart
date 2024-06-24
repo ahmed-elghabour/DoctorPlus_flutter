@@ -11,4 +11,6 @@ class Routes {
   static const String doctorAppointments = "/doctor/appointments";
   static const String settings = "user/settings";
   // end
+
+  static const String search = "/search";
 }
