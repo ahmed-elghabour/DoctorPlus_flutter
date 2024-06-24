@@ -263,8 +263,7 @@ class HomePage extends StatelessWidget {
               // navigate(context, route: '/favorites');
               break;
             case 2:
-              //TODO: add route
-              // navigate(context, route: '/search');
+              navigate(context, route: '/search');
               break;
             case 3:
               //TODO: add route

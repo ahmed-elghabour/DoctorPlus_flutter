@@ -2,6 +2,7 @@ import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
 import 'package:doctor_plus/utils/firebase.dart';
 import 'package:doctor_plus/utils/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -11,6 +12,8 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  void navigate({required String route}) => Navigator.pushNamed(context, route);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,17 +27,19 @@ class _SettingsPageState extends State<SettingsPage> {
             const SizedBox(
               height: 10,
             ),
-            _buildSettingRow(
+            _settingRow(
               title: "Notification",
               icon: Icons.notifications_none_outlined,
-              onTap: () {},
+              onTap: () {
+                navigate(route: Routes.notification);
+              },
             ),
             const Divider(
               height: 20,
               thickness: 1,
               color: Colors.black12,
             ),
-            _buildSettingRow(
+            _settingRow(
               title: "FAQ",
               icon: Icons.message_outlined,
               onTap: () {},
@@ -44,7 +49,7 @@ class _SettingsPageState extends State<SettingsPage> {
               thickness: 1,
               color: Colors.black12,
             ),
-            _buildSettingRow(
+            _settingRow(
               title: "Security",
               icon: Icons.lock_outlined,
               onTap: () {},
@@ -54,7 +59,7 @@ class _SettingsPageState extends State<SettingsPage> {
               thickness: 1,
               color: Colors.black12,
             ),
-            _buildSettingRow(
+            _settingRow(
               title: "Language",
               icon: Icons.language_outlined,
               onTap: () {},
@@ -64,12 +69,14 @@ class _SettingsPageState extends State<SettingsPage> {
               thickness: 1,
               color: Colors.black12,
             ),
-            _buildSettingRow(
+            _settingRow(
               title: "Logout",
-              isSepcial: true,
+              color: Colors.red,
               icon: Icons.logout_outlined,
-              onTap: () {
+              onTap: () async {
                 CustomFirebase().signOut();
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                await prefs.setBool('isLogged', false);
                 Navigator.pushReplacementNamed(context, Routes.login);
               },
             ),
@@ -80,9 +87,9 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 }
 
-Widget _buildSettingRow(
+Widget _settingRow(
     {required String title,
-    bool isSepcial = false,
+    Color color = Colors.black,
     required IconData icon,
     required void Function()? onTap}) {
   return GestureDetector(
@@ -92,7 +99,7 @@ Widget _buildSettingRow(
         Icon(
           icon,
           size: 40,
-          color: isSepcial ? Colors.red : Colors.black,
+          color: color,
         ),
         const SizedBox(
           width: 10,
@@ -101,14 +108,14 @@ Widget _buildSettingRow(
           child: Text(
             title,
             style: TextStyle(
-              color: isSepcial ? Colors.red : Colors.black,
+              color: color,
             ),
           ),
         ),
         Icon(
           size: 40,
           Icons.keyboard_arrow_right,
-          color: isSepcial ? Colors.red : Colors.black,
+          color: color,
         )
       ],
     ),
