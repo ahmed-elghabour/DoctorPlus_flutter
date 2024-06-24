@@ -15,28 +15,29 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  dio:
-  intl:
-  crypto:
-  googleapis:
-  file_picker:
-  image_picker:
-  flutter_bloc:
+  dio: ^5.4.3+1
+  intl: ^0.19.0
+  crypto: ^3.0.3
+  file_picker: ^8.0.5
+  image_picker: ^1.1.2
+  flutter_bloc: ^8.1.6
   fluttertoast: ^8.2.6
-  firebase_core:
-  firebase_auth:
-  awesome_dialog:
-  google_sign_in:
-  toastification:
-  cupertino_icons:
-  cloud_firestore:
-  firebase_storage:
-  shared_preferences:
-  font_awesome_flutter:
+  firebase_core: ^3.1.0
+  firebase_auth: ^5.1.0
+  awesome_dialog: ^3.2.1
+  cupertino_icons: ^1.0.8
+  cloud_firestore: ^5.0.1
   carousel_slider: ^4.2.1
-  flutter_screenutil: ^5.9.0
-  flutter_svg: ^2.0.9
-  contained_tab_bar_view: ^0.8.0
+  firebase_storage: ^12.0.1
+  shared_preferences: ^2.2.3
+  
+  # googleapis: ^13.2.0
+  # google_sign_in: ^6.2.1
+  # toastification: ^2.0.0
+  # font_awesome_flutter: ^10.7.0
+  # flutter_screenutil: ^5.9.0
+  # flutter_svg: ^2.0.9
+  # contained_tab_bar_view: ^0.8.0
 
 dev_dependencies:
   flutter_test:

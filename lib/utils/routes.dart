@@ -5,10 +5,14 @@ class Routes {
   static const String registerFill = "auth/register-fill";
   // A.Rahman
   static const String profile = "user/profile";
+  static const String settings = "user/settings";
+  static const String notification = "user/notification";
+  static const String faq = "user/FAQPage";
   static const String complaint = "/profile/complaint";
   static const String doctorHome = "/doctor";
 
   static const String doctorAppointments = "/doctor/appointments";
-  static const String settings = "user/settings";
   // end
+
+  static const String search = "/search";
 }
