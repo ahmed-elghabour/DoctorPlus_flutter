@@ -123,19 +123,20 @@ class _LoginInputsState extends State<LoginInputs> {
     );
   }
 
-  void navigate({required String route}) => Navigator.pushNamed(context, route);
+  void navigate({required String route}) =>
+      Navigator.pushReplacementNamed(context, route);
 
   void showErrorDialog({required String error}) => showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-            title: Text(error),
-          ));
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(error),
+        ),
+      );
+
   void loginUser() async {
     try {
       await CustomFirebase.instance.signWithCredentials(
-          
-              email: _emailController.text,
-              password: _passwordController.text);
+          email: _emailController.text, password: _passwordController.text);
       navigate(route: Routes.home);
     } catch (e) {
       showErrorDialog(error: e.toString());
