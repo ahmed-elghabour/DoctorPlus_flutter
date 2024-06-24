@@ -69,9 +69,9 @@ class MyApp extends StatelessWidget {
             Routes.registerFill: (context) => const RegisterFillData(),
             Routes.doctorAppointments: (context) => const DoctorAppointments(),
           },
-          initialRoute: SharedPreference().getBool(key: "isLogged") != true
+          initialRoute: SharedPreference().getBool(key: "isLogged") == true
               ? Routes.login
-              : Routes.home,
+              : Routes.doctorHome,
         );
       }),
     );
