@@ -1,4 +1,5 @@
 import 'package:doctor_plus/utils/routes.dart';
+import 'package:doctor_plus/utils/shared_preferences.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -55,8 +56,16 @@ class _ProfilePageState extends State<ProfilePage> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         const SizedBox(height: 90),
-                        const NameWidget(name: "A.Rahman Khallaf"),
-                        const EmailWidget(email: "a.rahman@gmail.com"),
+                        NameWidget(
+                          name:
+                              SharedPreference().getString(key: 'user.name') ??
+                                  'No Name',
+                        ),
+                        EmailWidget(
+                          email:
+                              SharedPreference().getString(key: 'user.email') ??
+                                  'No email',
+                        ),
                         const SizedBox(height: 10),
                         const RowNavigatorWidget(),
                         Container(
@@ -154,11 +163,13 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ],
             ),
-            const Positioned.fill(
+            Positioned.fill(
                 top: 60,
                 child: Align(
                   alignment: Alignment.topCenter,
-                  child: ProfileImage(),
+                  child: ProfileImage(
+                    imageUrl: SharedPreference().getString(key: 'user.image'),
+                  ),
                 ))
           ],
         ),
@@ -240,19 +251,22 @@ class NameWidget extends StatelessWidget {
 class ProfileImage extends StatelessWidget {
   const ProfileImage({
     super.key,
+    required this.imageUrl,
   });
-
+  final String? imageUrl;
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        const CircleAvatar(
-          backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        CircleAvatar(
+          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           radius: 80,
           child: CircleAvatar(
             radius: 75,
-            backgroundImage: NetworkImage(
-                "https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg"),
+            backgroundImage: imageUrl == null
+                ? const AssetImage("assets/imgs/user_template.jpg")
+                    as ImageProvider
+                : NetworkImage(imageUrl!),
           ),
         ),
         // Edit Icon
