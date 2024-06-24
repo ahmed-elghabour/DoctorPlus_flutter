@@ -54,7 +54,9 @@ class _SettingsPageState extends State<SettingsPage> {
             _settingRow(
               title: "Security",
               icon: Icons.lock_outlined,
-              onTap: () {},
+              onTap: () {
+                navigate(route: Routes.security);
+              },
             ),
             const Divider(
               height: 20,
