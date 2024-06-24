@@ -3,10 +3,12 @@ import 'package:doctor_plus/data/model/doctor_reservation.dart';
 import 'package:flutter/material.dart';
 
 class PatientCarouselSlider extends StatefulWidget {
-  final  List<List<DoctorReservation>> chunkedReservations;
+  final List<List<DoctorReservation>> chunkedReservations;
   final List<Widget> reservationSliders;
-  const PatientCarouselSlider({super.key, required this.chunkedReservations, required this.reservationSliders});
-
+  const PatientCarouselSlider(
+      {super.key,
+      required this.chunkedReservations,
+      required this.reservationSliders});
 
   @override
   State<PatientCarouselSlider> createState() => _PatientCarouselSliderState();
@@ -18,14 +20,13 @@ class _PatientCarouselSliderState extends State<PatientCarouselSlider> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         CarouselSlider(
           items: widget.reservationSliders,
           carouselController: _controller,
           options: CarouselOptions(
-            height: MediaQuery.of(context).size.height * 0.35,
+            aspectRatio: 1.1,
+            // height: MediaQuery.sizeOf(context).height,
             viewportFraction: 1,
             onPageChanged: (index, reason) {
               setState(() {
@@ -42,8 +43,8 @@ class _PatientCarouselSliderState extends State<PatientCarouselSlider> {
               child: Container(
                 width: 12.0,
                 height: 12.0,
-                margin: const EdgeInsets.symmetric(
-                    vertical: 8.0, horizontal: 4.0),
+                margin:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: (Theme.of(context).brightness == Brightness.dark
