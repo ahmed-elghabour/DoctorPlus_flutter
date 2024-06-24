@@ -195,7 +195,9 @@ class RowNavigatorWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, Routes.doctorAppointments);
+              },
               child: const Text(
                 "My Appointment",
                 style: TextStyle(color: Colors.black54, fontSize: 17),

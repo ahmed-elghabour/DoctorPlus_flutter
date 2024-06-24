@@ -80,7 +80,7 @@ class MyApp extends StatelessWidget {
           },
           initialRoute: SharedPreference().getBool(key: "isLogged") != true
               ? Routes.home
-              : Routes.doctorHome,
+              : Routes.home,
         );
       }),
     );
