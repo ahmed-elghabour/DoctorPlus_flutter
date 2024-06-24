@@ -3,6 +3,7 @@ import 'package:doctor_plus/domain/cubits/doctorReservations/doctor_reservation_
 import 'package:doctor_plus/presentation/appointments/pages/appointments.dart';
 import 'package:doctor_plus/presentation/patient%20home/complaints.dart';
 import 'package:doctor_plus/presentation/doctor%20home/pages/doctor_home.dart';
+import 'package:doctor_plus/presentation/profile/FAQ.dart';
 import 'package:doctor_plus/presentation/profile/notification.dart';
 
 import 'package:doctor_plus/presentation/profile/profile.dart';
@@ -66,6 +67,7 @@ class MyApp extends StatelessWidget {
             Routes.profile: (context) => const ProfilePage(),
             Routes.settings: (context) => const SettingsPage(),
             Routes.notification: (context) => const NotificationPage(),
+            Routes.faq: (context) => const FAQPage(),
             Routes.register: (context) => const RegisterPage(),
             Routes.doctorHome: (context) => const DoctorHome(),
             Routes.complaint: (context) => const ComplaintsPage(),

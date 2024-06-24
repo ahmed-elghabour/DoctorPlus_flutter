@@ -42,7 +42,9 @@ class _SettingsPageState extends State<SettingsPage> {
             _settingRow(
               title: "FAQ",
               icon: Icons.message_outlined,
-              onTap: () {},
+              onTap: () {
+                navigate(route: Routes.faq);
+              },
             ),
             const Divider(
               height: 20,
