@@ -78,7 +78,7 @@ class MyApp extends StatelessWidget {
             Routes.doctorAppointments: (context) => const DoctorAppointments(),
             Routes.search: (context) => const SearchScreen(),
           },
-          initialRoute: SharedPreference().getBool(key: "isLogged") == true
+          initialRoute: SharedPreference().getBool(key: "isLogged") != true
               ? Routes.home
               : Routes.doctorHome,
         );

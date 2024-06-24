@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 Widget customDatePicker({
+  double iconSize = 20,
   required String label,
+  required IconData icon,
   required void Function()? onPressed,
   required TextEditingController controller,
 }) {
@@ -12,9 +14,9 @@ Widget customDatePicker({
       labelText: label,
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
       suffixIcon: IconButton(
-        icon: const Icon(
-          Icons.calendar_today,
-          size: 15,
+        icon: Icon(
+          icon,
+          size: iconSize,
         ),
         onPressed: onPressed,
       ),

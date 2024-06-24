@@ -45,6 +45,7 @@ class _DoctorAdditionalInfoState extends State<DoctorAdditionalInfo> {
                 flex: 2,
                 child: customDatePicker(
                   label: 'Select Graduation Year',
+                  icon: Icons.calendar_month,
                   controller: _dateController,
                   onPressed: () async {
                     final DateTime? picked = await showDatePicker(
