@@ -24,7 +24,7 @@ class _SettingsPageState extends State<SettingsPage> {
             const SizedBox(
               height: 10,
             ),
-            _buildSettingRow(
+            _settingRow(
               title: "Notification",
               icon: Icons.notifications_none_outlined,
               onTap: () {},
@@ -34,7 +34,7 @@ class _SettingsPageState extends State<SettingsPage> {
               thickness: 1,
               color: Colors.black12,
             ),
-            _buildSettingRow(
+            _settingRow(
               title: "FAQ",
               icon: Icons.message_outlined,
               onTap: () {},
@@ -44,7 +44,7 @@ class _SettingsPageState extends State<SettingsPage> {
               thickness: 1,
               color: Colors.black12,
             ),
-            _buildSettingRow(
+            _settingRow(
               title: "Security",
               icon: Icons.lock_outlined,
               onTap: () {},
@@ -54,7 +54,7 @@ class _SettingsPageState extends State<SettingsPage> {
               thickness: 1,
               color: Colors.black12,
             ),
-            _buildSettingRow(
+            _settingRow(
               title: "Language",
               icon: Icons.language_outlined,
               onTap: () {},
@@ -64,9 +64,9 @@ class _SettingsPageState extends State<SettingsPage> {
               thickness: 1,
               color: Colors.black12,
             ),
-            _buildSettingRow(
+            _settingRow(
               title: "Logout",
-              isSepcial: true,
+              color: Colors.red,
               icon: Icons.logout_outlined,
               onTap: () {
                 CustomFirebase().signOut();
@@ -80,9 +80,9 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 }
 
-Widget _buildSettingRow(
+Widget _settingRow(
     {required String title,
-    bool isSepcial = false,
+    Color color = Colors.black,
     required IconData icon,
     required void Function()? onTap}) {
   return GestureDetector(
@@ -92,7 +92,7 @@ Widget _buildSettingRow(
         Icon(
           icon,
           size: 40,
-          color: isSepcial ? Colors.red : Colors.black,
+          color: color,
         ),
         const SizedBox(
           width: 10,
@@ -101,14 +101,14 @@ Widget _buildSettingRow(
           child: Text(
             title,
             style: TextStyle(
-              color: isSepcial ? Colors.red : Colors.black,
+              color: color,
             ),
           ),
         ),
         Icon(
           size: 40,
           Icons.keyboard_arrow_right,
-          color: isSepcial ? Colors.red : Colors.black,
+          color: color,
         )
       ],
     ),
