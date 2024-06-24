@@ -57,7 +57,7 @@ class HomePage extends StatelessWidget {
               } else {
                 return TextButton(
                   onPressed: () {
-                    navigate(context, route: Routes.login);
+                    Navigator.pushReplacementNamed(context, Routes.login);
                   },
                   child: const Text(
                     'Login',

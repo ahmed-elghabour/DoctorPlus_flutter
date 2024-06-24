@@ -1,5 +1,6 @@
 import 'package:doctor_plus/core/theming/colors.dart';
 import 'package:doctor_plus/domain/cubits/doctorReservations/doctor_reservation_cubit.dart';
+import 'package:doctor_plus/domain/cubits/doctorReservations/patients_number_atDay_cubit.dart';
 // import 'package:doctor_plus/domain/cubits/doctorReservations/patients_number_atDay_cubit.dart';
 import 'package:doctor_plus/presentation/appointments/pages/appointments.dart';
 import 'package:doctor_plus/presentation/patient%20home/complaints.dart';
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => ThemeCubit()),
         BlocProvider(create: (_) => LanguageCubit()),
         BlocProvider(create: (_) => DoctorReservationCubit()),
-        // BlocProvider(create: (_) => PatientsNumberAtDayCubit())
+        BlocProvider(create: (_) => PatientsNumberAtDayCubit())
       ],
       child:
           BlocBuilder<LanguageCubit, LanguageState>(builder: (context, state) {
@@ -79,9 +80,9 @@ class MyApp extends StatelessWidget {
             Routes.doctorAppointments: (context) => const DoctorAppointments(),
             Routes.search: (context) => const SearchScreen(),
           },
-          initialRoute: SharedPreference().getBool(key: "isLogged") == true
+          initialRoute: SharedPreference().getBool(key: "isLogged") != true
               ? Routes.home
-              : Routes.doctorHome,
+              : Routes.home,
         );
       }),
     );

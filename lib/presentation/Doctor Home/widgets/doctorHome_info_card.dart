@@ -8,23 +8,23 @@ class DoctorHomeCard extends StatelessWidget {
   final int oldPatients = 64;
 
   const DoctorHomeCard({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     context.read<PatientsNumberAtDayCubit>().fetchPatients("764");
     return BlocBuilder<PatientsNumberAtDayCubit, PatientsNumAtDayState>(
       builder: (context, state) {
         int patientsNumber = 0;
-        
-        if(state is PatientsNumAtDayPendingState){
+
+        if (state is PatientsNumAtDayPendingState) {
           return const CircularProgressIndicator();
         }
 
-        if(state is PatientsNumAtDayLoadedState) {
+        if (state is PatientsNumAtDayLoadedState) {
           patientsNumber = state.patientsNumber;
         }
 
-        if(state is PatientsNumAtDayFailedState) {
+        if (state is PatientsNumAtDayFailedState) {
           return Center(child: Text(state.message));
         }
         return Container(
@@ -47,7 +47,7 @@ class DoctorHomeCard extends StatelessWidget {
                   alignment: Alignment.centerRight),
               borderRadius: BorderRadius.all(Radius.circular(15))),
           child: Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,11 +72,17 @@ class DoctorHomeCard extends StatelessWidget {
                 const Expanded(
                   child: Row(
                     children: [
-                      PatientsBox(patients: 40, patientType: "New Patient",),
+                      PatientsBox(
+                        patients: 40,
+                        patientType: "New Patient",
+                      ),
                       SizedBox(
                         width: 10,
                       ),
-                      PatientsBox(patients: 64, patientType: "Old Patient",),
+                      PatientsBox(
+                        patients: 64,
+                        patientType: "Old Patient",
+                      ),
                     ],
                   ),
                 )
