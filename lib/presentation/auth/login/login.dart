@@ -1,5 +1,6 @@
 import 'package:doctor_plus/presentation/auth/widgets/auth.switch_page.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../widgets/signin_option.dart';
 import 'package:doctor_plus/utils/routes.dart';
 import 'package:doctor_plus/utils/firebase.dart';
@@ -133,9 +134,11 @@ class _LoginInputsState extends State<LoginInputs> {
   void loginUser() async {
     try {
       await CustomFirebase.instance.signWithCredentials(
-          
-              email: _emailController.text,
-              password: _passwordController.text);
+          email: _emailController.text, password: _passwordController.text);
+
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('isLogged', true);
+
       navigate(route: Routes.home);
     } catch (e) {
       showErrorDialog(error: e.toString());

@@ -2,6 +2,7 @@ import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
 import 'package:doctor_plus/utils/firebase.dart';
 import 'package:doctor_plus/utils/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -11,6 +12,8 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  void navigate({required String route}) => Navigator.pushNamed(context, route);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +30,9 @@ class _SettingsPageState extends State<SettingsPage> {
             _settingRow(
               title: "Notification",
               icon: Icons.notifications_none_outlined,
-              onTap: () {},
+              onTap: () {
+                navigate(route: Routes.notification);
+              },
             ),
             const Divider(
               height: 20,
@@ -68,8 +73,10 @@ class _SettingsPageState extends State<SettingsPage> {
               title: "Logout",
               color: Colors.red,
               icon: Icons.logout_outlined,
-              onTap: () {
+              onTap: () async {
                 CustomFirebase().signOut();
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                await prefs.setBool('isLogged', false);
                 Navigator.pushReplacementNamed(context, Routes.login);
               },
             ),

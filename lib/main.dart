@@ -3,6 +3,7 @@ import 'package:doctor_plus/domain/cubits/doctorReservations/doctor_reservation_
 import 'package:doctor_plus/presentation/appointments/pages/appointments.dart';
 import 'package:doctor_plus/presentation/patient%20home/complaints.dart';
 import 'package:doctor_plus/presentation/doctor%20home/pages/doctor_home.dart';
+import 'package:doctor_plus/presentation/profile/notification.dart';
 
 import 'package:doctor_plus/presentation/profile/profile.dart';
 import 'package:doctor_plus/presentation/profile/settings.dart';
@@ -64,6 +65,7 @@ class MyApp extends StatelessWidget {
             Routes.login: (context) => const LoginPage(),
             Routes.profile: (context) => const ProfilePage(),
             Routes.settings: (context) => const SettingsPage(),
+            Routes.notification: (context) => const NotificationPage(),
             Routes.register: (context) => const RegisterPage(),
             Routes.doctorHome: (context) => const DoctorHome(),
             Routes.complaint: (context) => const ComplaintsPage(),
@@ -71,9 +73,9 @@ class MyApp extends StatelessWidget {
             Routes.doctorAppointments: (context) => const DoctorAppointments(),
             Routes.search: (context) => const SearchScreen(),
           },
-          initialRoute: SharedPreference().getBool(key: "isLogged") != true
+          initialRoute: SharedPreference().getBool(key: "isLogged") == true
               ? Routes.home
-              : Routes.home,
+              : Routes.login,
         );
       }),
     );
