@@ -10,6 +10,7 @@ class PatientsCarousel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<DoctorReservationCubit>().fetchReservations("764");
     return BlocBuilder<DoctorReservationCubit, List<DoctorReservation>>(
       builder: (context, reservations) {
         if (reservations.isEmpty) {
