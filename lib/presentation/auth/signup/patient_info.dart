@@ -1,9 +1,13 @@
+import 'package:doctor_plus/core/widgets/buttons.dart';
 import 'package:doctor_plus/data/demo.dart';
 import 'package:flutter/material.dart';
 import 'package:doctor_plus/presentation/auth/widgets/additional_info.dart';
 
 class PatientAdditionalInfo extends StatefulWidget {
-  const PatientAdditionalInfo({super.key});
+  final void Function() onPrevious;
+  final void Function() onSubmit;
+  const PatientAdditionalInfo(
+      {super.key, required this.onPrevious, required this.onSubmit});
 
   @override
   State<PatientAdditionalInfo> createState() => _PatientAdditionalInfoState();
@@ -96,6 +100,29 @@ class _PatientAdditionalInfoState extends State<PatientAdditionalInfo> {
                     },
                   )),
           const SizedBox(height: 8),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Expanded(
+                  child: buildSubmitButton(
+                    widthFactor: .7,
+                    label: "Previous",
+                    onPressed: widget.onPrevious,
+                  ),
+                ),
+                const SizedBox(width: 10), // Spacer between buttons
+                Expanded(
+                  child: buildSubmitButton(
+                    widthFactor: .7,
+                    label: "Submit",
+                    onPressed: widget.onSubmit,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

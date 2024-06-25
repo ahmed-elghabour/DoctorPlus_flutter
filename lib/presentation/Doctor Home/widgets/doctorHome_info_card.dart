@@ -1,6 +1,6 @@
 import 'package:doctor_plus/domain/cubits/doctorReservations/patients_number_atDay_cubit.dart';
 import 'package:doctor_plus/domain/cubits/doctorReservations/patients_number_atDay_state.dart';
-import 'package:doctor_plus/presentation/Doctor%20Home/widgets/new_patients_box.dart';
+import 'package:doctor_plus/presentation/Doctor%20home/widgets/new_patients_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
