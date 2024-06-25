@@ -1,6 +1,8 @@
 import 'package:doctor_plus/core/widgets/card_doctor.dart';
+import 'package:doctor_plus/core/widgets/custom_floating_action_button.dart';
 import 'package:doctor_plus/domain/cubits/doctorReviews/doctor_reviews_cubit.dart';
 import 'package:doctor_plus/presentation/doctor%20profile/widgets/doctor_profile_tabs.dart';
+import 'package:doctor_plus/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,6 +36,14 @@ class DoctorProfile extends StatelessWidget {
           ),
         ),
       ),
+      floatingActionButton: CustomFloatingActionButton(
+        text: 'Book Appointment',
+        onPressed: () {
+          Navigator.pushNamed(context, Routes.bookAppointment,
+              arguments: '123');
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

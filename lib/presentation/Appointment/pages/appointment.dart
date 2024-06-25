@@ -84,6 +84,7 @@ class _AppointmentPageState extends State<AppointmentPage>
           'Book Appointment',
           style: TextStyle(color: Colors.black),
         ),
+        iconTheme: const IconThemeData(color: Colors.black),
         backgroundColor: Colors.white,
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(100.0),
