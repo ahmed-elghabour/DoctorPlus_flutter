@@ -123,7 +123,8 @@ class _RegisterGeneralState extends State<RegisterGeneral> {
                             } catch (e) {
                               // print("Errooooooooooor: ${e.toString()}");
                               FailureToast.showToast(
-                                  msg: Validator.locationValidator(e.toString()));
+                                  msg: Validator.locationValidator(
+                                      e.toString()));
                             }
                           }),
                     ),
@@ -186,7 +187,6 @@ class _RegisterGeneralState extends State<RegisterGeneral> {
                             location: _locationController.text,
                             birthDate: _birthDateController.text,
                           );
-                      SuccessToast.showToast(msg: "Register Successful");
                       widget.onNext(type.toLowerCase());
                     }
                   },

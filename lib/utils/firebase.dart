@@ -56,9 +56,17 @@ class CustomFirebase {
     }
   }
 
+  getCollectionData(
+      {required String? docID, required String collection}) async {
+    try {
+    return  await FirebaseFirestore.instance.collection(collection).doc(docID).get();
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
   signOut() async {
     await FirebaseAuth.instance.signOut();
-    
   }
 
   String hashPassword(String password) {

@@ -132,7 +132,6 @@ class _RegisterPageState extends State<RegisterPage> {
         password: _passwordController.text,
       );
       await SharedPreference().setString(key: 'userID', value: user);
-      FailureToast.showToast(msg: SharedPreference().getString(key: 'userID')!);
     } catch (e) {
       // print(e);
       showErrorDialog(error: Validator.firebaseRegisterValidator(e.toString()));
