@@ -51,22 +51,27 @@ class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
             ),
           ),
         ),
-        Positioned.fill(
-            top: -9,
-            left: 10,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5.0),
-              child: Align(
-                alignment: Alignment.topLeft,
-                child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 3.0),
-                    color: Colors.white,
-                    child: Text(
-                      widget.label ?? "Sdds",
-                      style: const TextStyle(color: Colors.blue, fontSize: 12, fontWeight: FontWeight.w400),
-                    )),
-              ),
-            )),
+        widget.label == null
+            ? const SizedBox()
+            : Positioned.fill(
+                top: -9,
+                left: 10,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 3.0),
+                        color: Colors.white,
+                        child: Text(
+                          widget.label ?? "Sdds",
+                          style: const TextStyle(
+                              color: Colors.blue,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400),
+                        )),
+                  ),
+                )),
       ],
     );
   }

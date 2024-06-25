@@ -1,3 +1,4 @@
+import 'package:doctor_plus/utils/routes.dart';
 import 'package:flutter/material.dart';
 
 class SearchListviewTile extends StatelessWidget {
@@ -5,10 +6,12 @@ class SearchListviewTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(5.0),
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 8.0),
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, Routes.doctorProfile);
+      },
+      child: const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
         child: ListTile(
           leading: CircleAvatar(
               radius: 25,

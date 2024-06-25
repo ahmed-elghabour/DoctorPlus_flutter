@@ -2,19 +2,19 @@ import 'dart:io';
 
 import 'package:doctor_plus/core/widgets/buttons.dart';
 import 'package:doctor_plus/core/widgets/toast.dart';
+import 'package:doctor_plus/utils/location.dart';
+import 'package:doctor_plus/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:doctor_plus/utils/validator.dart';
 import 'package:doctor_plus/core/widgets/inputs.dart';
 import 'package:doctor_plus/core/widgets/drop_down.dart';
 import 'package:doctor_plus/core/widgets/icon_picker.dart';
 import 'package:doctor_plus/core/widgets/image_picker.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 class RegisterGeneral extends StatefulWidget {
-  final VoidCallback onNext;
+  final Function(String type) onNext;
   const RegisterGeneral({super.key, required this.onNext});
 
   @override
@@ -28,6 +28,7 @@ class _RegisterGeneralState extends State<RegisterGeneral> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _fNameController = TextEditingController();
   final TextEditingController _lNameController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
   final TextEditingController _birthDateController = TextEditingController();
 
@@ -35,6 +36,7 @@ class _RegisterGeneralState extends State<RegisterGeneral> {
   void dispose() {
     _fNameController.dispose();
     _lNameController.dispose();
+    _phoneController.dispose();
     _locationController.dispose();
     _birthDateController.dispose();
     super.dispose();
@@ -80,6 +82,13 @@ class _RegisterGeneralState extends State<RegisterGeneral> {
                 validator: (Validator.nameValidator),
               ),
               const SizedBox(height: 15),
+              buildNumberField(
+                label: "Phone Number",
+                icon: Icons.phone_android,
+                controller: _phoneController,
+                validator: (Validator.phoneValidator),
+              ),
+              const SizedBox(height: 15),
               Row(
                 children: <Widget>[
                   Expanded(
@@ -94,14 +103,27 @@ class _RegisterGeneralState extends State<RegisterGeneral> {
                   ),
                   const SizedBox(width: 10),
                   Expanded(
-                      flex: 3,
-                      child: customIconPicker(
+                    flex: 3,
+                    child: customIconPicker(
                         icon: Icons.location_on,
                         label: 'Address Location',
                         controller: _locationController,
                         validator: (Validator.generalValidator),
-                        onPressed: () async => accessLocation(),
-                      )),
+                        onPressed: () async {
+                          try {
+                            CustomLocation().accessLocation(
+                              callBack: (position) => setState(
+                                () => _locationController.text =
+                                    position.toString(),
+                              ),
+                            );
+                          } catch (e) {
+                            // print("Errooooooooooor: ${e.toString()}");
+                            FailureToast.showToast(
+                                msg: Validator.locationValidator(e.toString()));
+                          }
+                        }),
+                  ),
                 ],
               ),
               const SizedBox(height: 15),
@@ -146,13 +168,23 @@ class _RegisterGeneralState extends State<RegisterGeneral> {
               ),
               const SizedBox(height: 15),
               buildSubmitButton(
-                widthFactor: .7,
                 label: "Next",
+                widthFactor: .7,
                 onPressed: () {
-                  if (_formKey.currentState?.validate() == true) {
-                    SuccessToast.showToast(msg: "Register Successful");
-                    widget.onNext();
-                  }
+                  // Navigator.pushNamed(context, Routes.registerFill);
+                  // if (_formKey.currentState?.validate() == true) {
+                  //   context.read<SignupCubit>().fillGeneralData(
+                  //         type: type,
+                  //         image: image,
+                  //         gender: gender,
+                  //         fName: _fNameController.text,
+                  //         lName: _lNameController.text,
+                  //         location: _locationController.text,
+                  //         birthDate: _birthDateController.text,
+                  //       );
+                  //   SuccessToast.showToast(msg: "Register Successful");
+                  widget.onNext(type.toLowerCase());
+                  // }
                 },
               ),
             ],
@@ -175,42 +207,5 @@ class _RegisterGeneralState extends State<RegisterGeneral> {
       return false;
     }
     return true;
-  }
-
-  Future<void> accessLocation() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      FailureToast.showToast(msg: "Please enable Location Service");
-      return;
-    }
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        FailureToast.showToast(msg: "Please enable Location Permission");
-        return;
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      FailureToast.showToast(
-          msg: "Please open settings and enable Location Permission");
-      return;
-    }
-    final Position position = await Geolocator.getCurrentPosition();
-    var res =
-        await placemarkFromCoordinates(position.latitude, position.longitude);
-    GeneralToast.showToast(msg: res.toString());
-    // print("\n\n Trace: ==============================================");
-    // print("\nLatitude: ${position.latitude}");
-    // print("\nLongitude: ${position.longitude}");
-    // print("\nAddress: ${res.toString()}");
-    // print("End-Trace: ==============================================\n\n ");
-    setState(() {
-      _locationController.clear();
-      _locationController.text = position.toString();
-    });
   }
 }

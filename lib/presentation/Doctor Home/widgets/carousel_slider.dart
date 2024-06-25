@@ -25,7 +25,7 @@ class _PatientCarouselSliderState extends State<PatientCarouselSlider> {
           items: widget.reservationSliders,
           carouselController: _controller,
           options: CarouselOptions(
-            aspectRatio: 1.1,
+            aspectRatio: 16/13,
             // height: MediaQuery.sizeOf(context).height,
             viewportFraction: 1,
             onPageChanged: (index, reason) {

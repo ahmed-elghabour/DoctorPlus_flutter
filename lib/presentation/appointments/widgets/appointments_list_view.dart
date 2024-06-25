@@ -3,7 +3,7 @@ import 'package:doctor_plus/presentation/appointments/widgets/appointment_tile.d
 import 'package:flutter/material.dart';
 
 class AppointmentsListView extends StatelessWidget {
-  final List<Appointment> appointments;
+  final List<AppointmentModel> appointments;
   const AppointmentsListView({super.key, required this.appointments});
 
   @override

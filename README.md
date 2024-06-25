@@ -50,7 +50,9 @@ Doctor Plus is a healthcare management app designed to streamline interactions b
 
 ### Abdulrahman Khallaf
 
+- Chatbot implementation.
 - Patient reservation system, including:
+  - Book Appointment
   - Viewing all doctors.
   - Filtering doctors by name, location, and department.
   - Selecting doctors based on price and availability.
@@ -95,7 +97,6 @@ Doctor Plus is a healthcare management app designed to streamline interactions b
 ### Missing Sections
 
 - Doctor Profile
-- Reservations Screen
 
 ## Technology Stack
 
