@@ -9,14 +9,11 @@ class SearchListview extends StatelessWidget {
     return Expanded(
       child: SizedBox(
         height: MediaQuery.sizeOf(context).height,
-        child: ListView(
-          children: const [
-            SearchListviewTile(),
-            SearchListviewTile(),
-            SearchListviewTile(),
-            SearchListviewTile(),
-            SearchListviewTile(),
-          ],
+        child: ListView.builder(
+          itemCount: 100,
+          itemBuilder: (context, index) {
+            return const SearchListviewTile();
+          },
         ),
       ),
     );

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class AppointmentTile extends StatelessWidget {
-  final Appointment appointment;
+  final AppointmentModel appointment;
   final VoidCallback onCancel;
   final VoidCallback onReschedule;
 
@@ -97,7 +97,7 @@ class AppointmentTile extends StatelessWidget {
                       ),
                       const SizedBox(height: 4.0),
                       Text(
-                        '${appointment.appointmentDate}  |  ${appointment.appointmentTime}',
+                        '${appointment.appointmentDateTime}',
                         style: TextStyle(
                           color: Colors.grey[600],
                         ),
