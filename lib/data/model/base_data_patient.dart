@@ -1,6 +1,13 @@
 class PatientBaseData {
   late List<String> degrees, pdfFiles;
-  late String specialty, university, degree, degreeDate;
+  late String diet,
+      smoke,
+      sleep,
+      stress,
+      exercise,
+      hydration,
+      allergies,
+      mentalHealth;
 
   PatientBaseData({
     required String diet,

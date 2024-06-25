@@ -2,7 +2,7 @@ import 'dart:io';
 
 class DoctorBaseData {
   late List<String> degrees, pdfFiles;
-  late String specialty, university, degree, degreeDate;
+  late String specialty, university, graduationDate;
 
   DoctorBaseData({
     required String specialty,
