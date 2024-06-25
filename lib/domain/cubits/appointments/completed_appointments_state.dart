@@ -8,7 +8,7 @@ final class CompletedAppointmentsInitial extends CompletedAppointmentsState {}
 final class CompletedAppointmentsLoading extends CompletedAppointmentsState {}
 
 final class CompletedAppointmentsLoaded extends CompletedAppointmentsState {
-  final List<Appointment> appointments;
+  final List<AppointmentModel> appointments;
   CompletedAppointmentsLoaded(this.appointments);
 }
 

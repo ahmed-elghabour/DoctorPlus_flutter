@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:doctor_plus/core/dummy/dummy_appointments.dart';
+// import 'package:doctor_plus/core/dummy/dummy_appointments.dart';
 import 'package:doctor_plus/data/model/appointment.dart';
 import 'package:meta/meta.dart';
 
@@ -11,11 +11,11 @@ class CompletedAppointmentsCubit extends Cubit<CompletedAppointmentsState> {
   void getCompletedAppointments() {
     emit(CompletedAppointmentsLoading());
     try {
-      final List<Appointment> appointments =
-          dummyAppointments.where((appointment) {
-        return appointment.status == AppointmentStatus.done;
-      }).toList();
-      emit(CompletedAppointmentsLoaded(appointments));
+      // final List<AppointmentModel> appointments =
+      //     dummyAppointments.where((appointment) {
+      //   return appointment.status == AppointmentStatus.done;
+      // }).toList();
+      // emit(CompletedAppointmentsLoaded(appointments));
     } catch (e) {
       emit(CompletedAppointmentsError(e.toString()));
     }
