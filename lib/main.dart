@@ -3,6 +3,7 @@ import 'package:doctor_plus/domain/cubits/doctorReservations/doctor_reservation_
 import 'package:doctor_plus/domain/cubits/doctorReservations/patients_number_atDay_cubit.dart';
 // import 'package:doctor_plus/domain/cubits/doctorReservations/patients_number_atDay_cubit.dart';
 import 'package:doctor_plus/presentation/appointments/pages/appointments.dart';
+import 'package:doctor_plus/presentation/appointments/pages/payment.dart';
 import 'package:doctor_plus/presentation/patient%20home/complaints.dart';
 import 'package:doctor_plus/presentation/doctor%20home/pages/doctor_home.dart';
 import 'package:doctor_plus/presentation/profile/FAQ.dart';
@@ -73,21 +74,19 @@ class MyApp extends StatelessWidget {
             Routes.search: (context) => const SearchScreen(),
             Routes.profile: (context) => const ProfilePage(),
             Routes.settings: (context) => const SettingsPage(),
-<<<<<<< HEAD
-=======
             Routes.notification: (context) => const NotificationPage(),
             Routes.faq: (context) => const FAQPage(),
             Routes.security: (context) => const SecurityPage(),
             Routes.language: (context) => const LanguagePage(),
->>>>>>> 72862186e4d5c768f3fe1183f5c7fdd5051f6aa3
             Routes.register: (context) => const RegisterPage(),
             Routes.doctorHome: (context) => const DoctorHome(),
             Routes.complaint: (context) => const ComplaintsPage(),
             Routes.registerFill: (context) => const RegisterFillData(),
             Routes.notification: (context) => const NotificationPage(),
             Routes.doctorAppointments: (context) => const DoctorAppointments(),
+            Routes.payment: (context) => const PaymentPage(),
           },
-          initialRoute: Routes.home,
+          initialRoute: Routes.payment,
         );
       }),
     );
