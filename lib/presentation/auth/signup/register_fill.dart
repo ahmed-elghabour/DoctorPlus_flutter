@@ -1,6 +1,7 @@
 import 'package:doctor_plus/core/widgets/toast.dart';
 import 'package:doctor_plus/presentation/auth/signup/doctor_info.dart';
 import 'package:doctor_plus/presentation/auth/signup/patient_info.dart';
+import 'package:doctor_plus/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:doctor_plus/presentation/auth/signup/register_general.dart';
 
@@ -42,11 +43,14 @@ class _RegisterFillDataState extends State<RegisterFillData> {
                   ),
                   PatientAdditionalInfo(
                     onPrevious: () => _goToPage(0),
-                    onSubmit: () {},
+                    onSubmit: () {
+                      Navigator.pushReplacementNamed(context, Routes.home);
+                    },
                   ),
                   DoctorAdditionalInfo(
                     onPrevious: () => _goToPage(0),
-                    onSubmit: () {},
+                    onSubmit: () => Navigator.pushReplacementNamed(
+                        context, Routes.doctorHome),
                   ),
                 ],
               ),

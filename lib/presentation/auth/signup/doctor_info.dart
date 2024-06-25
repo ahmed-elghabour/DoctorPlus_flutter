@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:doctor_plus/core/widgets/buttons.dart';
 import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
 import 'package:doctor_plus/core/widgets/files_uploaded.dart';
-import 'package:doctor_plus/data/model/base_data_doctor.dart';
+import 'package:doctor_plus/data/model/doctor.dart';
 import 'package:doctor_plus/domain/cubits/auth/signup_cubit.dart';
 import 'package:doctor_plus/utils/input.validator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -199,7 +199,7 @@ class _DoctorAdditionalInfoState extends State<DoctorAdditionalInfo> {
                         label: "Submit",
                         onPressed: () {
                           context.read<SignupCubit>().saveDoctorAdditionalData(
-                                data: DoctorBaseData(
+                                data: Doctor.additional(
                                   specialty: specialty,
                                   files: _pdfFiles,
                                   university: university,

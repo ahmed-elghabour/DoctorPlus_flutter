@@ -92,10 +92,10 @@ class _RegisterPageState extends State<RegisterPage> {
                     widthFactor: .5,
                     label: "Register",
                     onPressed: () {
-                      navigate(route: Routes.registerFill);
-                      // if (_formKey.currentState?.validate() == true) {
-                      //   createNewUser();
-                      // }
+                      if (_formKey.currentState?.validate() == true) {
+                        createNewUser();
+                        navigate(route: Routes.registerFill);
+                      }
                     },
                   ),
                   signInOptions(),
@@ -131,13 +131,6 @@ class _RegisterPageState extends State<RegisterPage> {
         password: _passwordController.text,
       );
       SharedPreference().setString(key: 'userID', value: user);
-      /**
-       * UserCredential(
-       * additionalUserInfo: AdditionalUserInfo(isNewUser: true, profile: {}, providerId: null, username: null, authorizationCode: null),
-       *  credential: null,
-       *  user: User(displayName: null, email: jimmy0@gmail.com, isEmailVerified: false, isAnonymous: false, metadata: UserMetadata(creationTime: 2024-06-18 23:37:43.982Z, lastSignInTime: 2024-06-18 23:37:43.982Z), phoneNumber: null, photoURL: null, providerData, [UserInfo(displayName: null, email: jimmy0@gmail.com, phoneNumber: null, photoURL: null, providerId: password, uid: jimmy0@gmail.com)], refreshToken: null, tenantId: null, uid: BAXS4hYxZYXfm1ihdam6ruwbS8P2))
-       */
-      // navigate(route: Routes.registerFill);
     } catch (e) {
       // print(e);
       showErrorDialog(error: Validator.firebaseRegisterValidator(e.toString()));

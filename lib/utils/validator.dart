@@ -36,7 +36,7 @@ class Validator {
   static String? phoneValidator(String? value) {
     if (value == null || value.isEmpty) {
       return 'Field is Required';
-    } else if (!RegExp(r'^01[0125][0-9]$').hasMatch(value)) {
+    } else if (!RegExp(r'^01[0125][0-9]{8}$').hasMatch(value)) {
       return 'Please enter a valid phone number';
     }
     return null;

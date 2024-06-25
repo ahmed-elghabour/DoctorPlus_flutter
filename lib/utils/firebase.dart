@@ -23,14 +23,14 @@ class CustomFirebase {
     try {
       var user = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
-      await addNewCollection(
-        collection: "users",
-        docID: user.user!.uid,
-        data: {
-          "email": email,
-          "password": hashPassword(password),
-        },
-      );
+      // await addNewCollection(
+      //   collection: "users",
+      //   docID: user.user!.uid,
+      //   data: {
+      //     "email": email,
+      //     "password": hashPassword(password),
+      //   },
+      // );
       return user.user!.uid;
     } catch (e) {
       throw Exception(e);

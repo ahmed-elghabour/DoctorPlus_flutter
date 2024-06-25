@@ -1,10 +1,10 @@
 import 'dart:io';
 import 'package:bloc/bloc.dart';
+import 'package:doctor_plus/data/model/doctor.dart';
+import 'package:doctor_plus/data/model/patient.dart';
 import 'package:meta/meta.dart';
 import 'package:doctor_plus/utils/firebase.dart';
 import 'package:doctor_plus/utils/shared_preferences.dart';
-import 'package:doctor_plus/data/model/base_data_doctor.dart';
-import 'package:doctor_plus/data/model/base_data_patient.dart';
 
 part 'signup_state.dart';
 
@@ -32,7 +32,7 @@ class SignupCubit extends Cubit<SignupState> {
     this.birthDate = birthDate;
   }
 
-  saveDoctorAdditionalData({required DoctorBaseData data}) {
+  saveDoctorAdditionalData({required Doctor data}) {
     CustomFirebase().addNewCollection(
         collection: "doctors",
         docID: SharedPreference().getString(key: 'userID'),
@@ -52,26 +52,27 @@ class SignupCubit extends Cubit<SignupState> {
     SharedPreference().setString(key: "userType", value: "doctor");
   }
 
-  savePatientAdditionalData({required PatientBaseData data}) {
-    CustomFirebase().addNewCollection(
-        collection: "patients",
-        docID: SharedPreference().getString(key: 'userID'),
-        data: {
-          "fName": fName,
-          "lName": lName,
-          "phone": phone,
-          "gender": gender,
-          "location": location,
-          "birthDate": birthDate,
-          "diet": data.diet,
-          "smoke": data.smoke,
-          "sleep": data.sleep,
-          "stress": data.stress,
-          "exercise": data.exercise,
-          "hydration": data.hydration,
-          "allergies": data.allergies,
-          "mentalHealth": data.mentalHealth,
-        });
-    SharedPreference().setString(key: "userType", value: "patient");
+  savePatientAdditionalData({required Patient data}) {
+    print(data.toString());
+    // CustomFirebase().addNewCollection(
+    //     collection: "patients",
+    //     docID: SharedPreference().getString(key: 'userID'),
+    //     data: {
+    //       "fName": fName,
+    //       "lName": lName,
+    //       "phone": phone,
+    //       "gender": gender,
+    //       "location": location,
+    //       "birthDate": birthDate,
+    //       "diet": data.diet,
+    //       "smoke": data.smoke,
+    //       "sleep": data.sleep,
+    //       "stress": data.stress,
+    //       "exercise": data.exercise,
+    //       "hydration": data.hydration,
+    //       "allergies": data.allergies,
+    //       "mentalHealth": data.mentalHealth,
+    //     });
+    // SharedPreference().setString(key: "userType", value: "patient");
   }
 }
