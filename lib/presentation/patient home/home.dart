@@ -1,3 +1,4 @@
+import 'package:doctor_plus/presentation/Doctor%20Home/pages/doctor_home.dart';
 import 'package:doctor_plus/presentation/specialization/specialization_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -49,7 +50,7 @@ class HomePage extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: SizedBox(
             width: double.infinity,
-            height: MediaQuery.sizeOf(context).height - 100,
+            height: MediaQuery.sizeOf(context).height,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
