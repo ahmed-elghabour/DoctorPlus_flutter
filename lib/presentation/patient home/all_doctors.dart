@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:doctor_plus/core/widgets/card_doctor.dart';
+import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
 
 class AllDoctorsPage extends StatelessWidget {
   const AllDoctorsPage({super.key});
@@ -7,8 +8,8 @@ class AllDoctorsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('All Doctors'),
+      appBar: const MyCustomAppBar(
+        title: 'All Doctors',
       ),
       body: ListView.builder(
         padding: const EdgeInsets.all(16.0),
