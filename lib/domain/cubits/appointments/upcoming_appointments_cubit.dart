@@ -23,4 +23,15 @@ class UpcomingAppointmentsCubit extends Cubit<UpcomingAppointmentsState> {
       emit(UpcomingAppointmentsError(e.toString()));
     }
   }
+
+  void cancelPatientUpcomingAppointment(
+      {required String appointmentId, required String patientId}) async {
+    emit(UpcomingAppointmentsLoading());
+    try {
+      await AppointmentsRemoteDataSource()
+          .cancelPatientUpcomingAppointment(appointmentId, patientId);
+    } catch (e) {
+      emit(UpcomingAppointmentsError(e.toString()));
+    }
+  }
 }

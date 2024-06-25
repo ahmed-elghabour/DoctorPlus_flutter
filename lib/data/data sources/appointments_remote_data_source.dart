@@ -52,4 +52,16 @@ class AppointmentsRemoteDataSource {
       throw Exception(e);
     }
   }
+
+  Future<void> cancelPatientUpcomingAppointment(
+      String appointmentId, String patientId) async {
+    try {
+      final appointmentsCollection = firestore.collection("appointments");
+      await appointmentsCollection
+          .doc(appointmentId)
+          .update({"status": "cancelled"});
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
 }
