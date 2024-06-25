@@ -18,4 +18,5 @@ class Routes {
 
   static const String search = "/search";
   static const String payment = "/payment";
+  static const String specialization = "/specialization";
 }

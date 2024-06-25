@@ -1,3 +1,4 @@
+import 'package:doctor_plus/presentation/specialization/specialization_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -145,19 +146,38 @@ class HomePage extends StatelessWidget {
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 8),
-                  const SingleChildScrollView(
+                  SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: [
                         SpecializationCard(
-                            title: 'General', icon: Icons.local_hospital),
+                          title: 'General',
+                          icon: Icons.local_hospital,
+                          onTap: () {
+                            navigateToSpecialization(context, 'General');
+                          },
+                        ),
                         SpecializationCard(
-                            title: 'Neurologic',
-                            icon: Icons.face_retouching_natural_rounded),
+                          title: 'Neurologic',
+                          icon: Icons.face_retouching_natural_rounded,
+                          onTap: () {
+                            navigateToSpecialization(context, 'Neurologic');
+                          },
+                        ),
                         SpecializationCard(
-                            title: 'Pediatric', icon: Icons.child_care),
+                          title: 'Pediatric',
+                          icon: Icons.child_care,
+                          onTap: () {
+                            navigateToSpecialization(context, 'Pediatric');
+                          },
+                        ),
                         SpecializationCard(
-                            title: 'Radiology', icon: Icons.radio),
+                          title: 'Radiology',
+                          icon: Icons.radio,
+                          onTap: () {
+                            navigateToSpecialization(context, 'Radiology');
+                          },
+                        ),
                         // Add more specialities as needed
                       ],
                     ),
@@ -280,5 +300,12 @@ class HomePage extends StatelessWidget {
 
   void navigate(BuildContext context, {required String route}) {
     Navigator.pushNamed(context, route);
+  }
+
+  void navigateToSpecialization(BuildContext context, String specialization) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SpecializationPage(specialization: specialization)),
+    );
   }
 }
