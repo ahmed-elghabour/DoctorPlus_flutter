@@ -84,7 +84,7 @@ class MyApp extends StatelessWidget {
             Routes.doctorAppointments: (context) => const DoctorAppointments(),
             Routes.payment: (context) => const PaymentPage(),
           },
-          initialRoute: Routes.payment,
+          initialRoute: Routes.home,
         );
       }),
     );
