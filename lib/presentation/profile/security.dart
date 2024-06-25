@@ -2,35 +2,31 @@ import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class NotificationPage extends StatefulWidget {
-  const NotificationPage({super.key});
+class SecurityPage extends StatefulWidget {
+  const SecurityPage({super.key});
 
   @override
-  State<NotificationPage> createState() => _NotificationPageState();
+  State<SecurityPage> createState() => _SecurityPageState();
 }
 
-class _NotificationPageState extends State<NotificationPage> {
+class _SecurityPageState extends State<SecurityPage> {
   late SharedPreferences pref;
 
   Map<String, Map<String, dynamic>> Data = {
-    "settings.notification.Notification_from_DocNow": {
-      "name": "Notification from DocNow",
+    "settings.security.Remember_Password": {
+      "name": "Remember Password",
       "value": false,
     },
-    "settings.notification.Sound": {
-      "name": "Sound",
+    "settings.security.Face_ID": {
+      "name": "Face ID",
       "value": false,
     },
-    "settings.notification.Vibrate": {
-      "name": "Vibrate",
+    "settings.security.PIN": {
+      "name": "PIN",
       "value": false,
     },
-    "settings.notification.App_Updates": {
-      "name": "App Updates",
-      "value": false,
-    },
-    "settings.notification.Special_Offers": {
-      "name": "Special Offers",
+    "settings.security.Google_Authenticator": {
+      "name": "Google Authenticator",
       "value": false,
     },
   };
@@ -63,7 +59,7 @@ class _NotificationPageState extends State<NotificationPage> {
           itemCount: Data.length,
           itemBuilder: (context, index) {
             String key = Data.keys.elementAt(index);
-            return _notificationRow(
+            return _securityRow(
               title: Data[key]!['name'] ?? '',
               value: Data[key]!['value'] ?? false,
               onChanged: (value) {
@@ -80,7 +76,7 @@ class _NotificationPageState extends State<NotificationPage> {
   }
 }
 
-Widget _notificationRow({
+Widget _securityRow({
   required String title,
   Color color = Colors.black,
   bool value = false,

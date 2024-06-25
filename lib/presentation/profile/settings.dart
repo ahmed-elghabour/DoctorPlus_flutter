@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
 import 'package:doctor_plus/utils/firebase.dart';
 import 'package:doctor_plus/utils/routes.dart';
@@ -54,7 +56,9 @@ class _SettingsPageState extends State<SettingsPage> {
             _settingRow(
               title: "Security",
               icon: Icons.lock_outlined,
-              onTap: () {},
+              onTap: () {
+                navigate(route: Routes.security);
+              },
             ),
             const Divider(
               height: 20,
@@ -64,7 +68,9 @@ class _SettingsPageState extends State<SettingsPage> {
             _settingRow(
               title: "Language",
               icon: Icons.language_outlined,
-              onTap: () {},
+              onTap: () {
+                navigate(route: Routes.language);
+              },
             ),
             const Divider(
               height: 20,
@@ -76,16 +82,45 @@ class _SettingsPageState extends State<SettingsPage> {
               color: Colors.red,
               icon: Icons.logout_outlined,
               onTap: () async {
-                CustomFirebase().signOut();
-                SharedPreferences prefs = await SharedPreferences.getInstance();
-                await prefs.setBool('isLogged', false);
-                Navigator.pushReplacementNamed(context, Routes.login);
+                bool shouldLogout = await showLogoutDialog(context);
+                if (shouldLogout) {
+                  CustomFirebase().signOut();
+                  SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  await prefs.setBool('isLogged', false);
+                  Navigator.pushReplacementNamed(context, Routes.login);
+                }
               },
             ),
           ],
         ),
       ),
     );
+  }
+
+  Future<bool> showLogoutDialog(BuildContext context) async {
+    return await showDialog<bool>(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Logout'),
+            content: const Text(
+                "You'll need to enter your username and password next time you want to login."),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: const Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: const Text(
+                  'Logout',
+                  style: TextStyle(color: Colors.red),
+                ),
+              ),
+            ],
+          ),
+        ) ??
+        false;
   }
 }
 

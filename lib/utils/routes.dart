@@ -8,6 +8,8 @@ class Routes {
   static const String settings = "user/settings";
   static const String notification = "user/notification";
   static const String faq = "user/FAQPage";
+  static const String security = "user/security";
+  static const String language = "user/language";
   static const String complaint = "/profile/complaint";
   static const String doctorHome = "/doctor";
 
