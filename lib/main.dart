@@ -1,6 +1,7 @@
 import 'package:doctor_plus/core/theming/colors.dart';
 import 'package:doctor_plus/domain/cubits/doctorReservations/doctor_reservation_cubit.dart';
 import 'package:doctor_plus/domain/cubits/doctorReservations/patients_number_atDay_cubit.dart';
+import 'package:doctor_plus/presentation/Appointment/pages/appointment.dart';
 // import 'package:doctor_plus/domain/cubits/doctorReservations/patients_number_atDay_cubit.dart';
 import 'package:doctor_plus/presentation/appointments/pages/appointments.dart';
 import 'package:doctor_plus/presentation/appointments/pages/payment.dart';
@@ -84,7 +85,9 @@ class MyApp extends StatelessWidget {
             Routes.registerFill: (context) => const RegisterFillData(),
             Routes.doctorAppointments: (context) => const DoctorAppointments(),
             Routes.payment: (context) => const PaymentPage(),
-            Routes.specialization: (context)=> const SpecializationPage(specialization: ''),
+            Routes.bookAppointment: (context) => const AppointmentPage(),
+            Routes.specialization: (context) =>
+                const SpecializationPage(specialization: ''),
           },
           initialRoute: Routes.home,
         );
