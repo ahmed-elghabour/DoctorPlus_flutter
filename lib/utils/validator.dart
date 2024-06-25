@@ -76,6 +76,14 @@ class Validator {
     }
   }
 
+  static String locationValidator(String error) {
+    if (error.isEmpty) {
+      return 'complaint body is required';
+    }
+
+    return "";
+  }
+
   static String? complaintBodyValidator(String? value) {
     if (value == null || value.isEmpty) {
       return 'complaint body is required';

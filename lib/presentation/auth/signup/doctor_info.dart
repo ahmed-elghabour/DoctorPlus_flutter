@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:doctor_plus/core/widgets/buttons.dart';
 import 'package:doctor_plus/core/widgets/files_uploaded.dart';
 import 'package:doctor_plus/utils/input.validator.dart';
 import 'package:intl/intl.dart';
@@ -10,7 +11,10 @@ import 'package:doctor_plus/core/widgets/popup_dialog.dart';
 import 'package:doctor_plus/presentation/auth/widgets/additional_info.dart';
 
 class DoctorAdditionalInfo extends StatefulWidget {
-  const DoctorAdditionalInfo({super.key});
+  final void Function() onPrevious;
+  final void Function() onSubmit;
+  const DoctorAdditionalInfo(
+      {super.key, required this.onPrevious, required this.onSubmit});
 
   @override
   State<DoctorAdditionalInfo> createState() => _DoctorAdditionalInfoState();
@@ -150,6 +154,29 @@ class _DoctorAdditionalInfoState extends State<DoctorAdditionalInfo> {
         fileUploaded(
           files: _pdfFiles,
           onCLear: () => setState(() => _pdfFiles = []),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Expanded(
+                child: buildSubmitButton(
+                  widthFactor: .7,
+                  label: "Previous",
+                  onPressed: widget.onPrevious,
+                ),
+              ),
+              const SizedBox(width: 10), // Spacer between buttons
+              Expanded(
+                child: buildSubmitButton(
+                  widthFactor: .7,
+                  label: "Submit",
+                  onPressed: widget.onSubmit,
+                ),
+              ),
+            ],
+          ),
         ),
       ],
     );
