@@ -88,6 +88,7 @@ class MyApp extends StatelessWidget {
               Routes.doctorHome: (context) => const DoctorHome(),
               Routes.complaint: (context) => const ComplaintsPage(),
               Routes.registerFill: (context) => const RegisterFillData(),
+              Routes.bookAppointment: (context) => const AppointmentPage(),
               Routes.doctorAppointments: (context) =>
                   const DoctorAppointments(),
               Routes.doctorProfile: (context) => const DoctorProfile(),
