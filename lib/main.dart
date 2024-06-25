@@ -3,6 +3,7 @@ import 'package:doctor_plus/domain/cubits/auth/signup_cubit.dart';
 import 'package:doctor_plus/domain/cubits/doctorReservations/doctor_reservation_cubit.dart';
 import 'package:doctor_plus/domain/cubits/doctorReservations/patients_number_atDay_cubit.dart';
 import 'package:doctor_plus/presentation/Appointment/pages/appointment.dart';
+import 'package:doctor_plus/presentation/Public%20Profile/pages/public_profile.dart';
 // import 'package:doctor_plus/domain/cubits/doctorReservations/patients_number_atDay_cubit.dart';
 import 'package:doctor_plus/presentation/appointments/pages/appointments.dart';
 import 'package:doctor_plus/presentation/doctor%20profile/pages/doctor_profile.dart';
@@ -99,6 +100,10 @@ class MyApp extends StatelessWidget {
 
               Routes.specialization: (context) =>
                   const SpecializationPage(specialization: ''),
+              
+              Routes.publicProfile: (context) => const PublicProfile(),
+
+                  
             },
             // initialRoute: Routes.bookAppointment,
             initialRoute: Routes.home,

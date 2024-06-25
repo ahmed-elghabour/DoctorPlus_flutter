@@ -18,7 +18,7 @@ class PatientsCarousel extends StatelessWidget {
           return const Center(child: Text("No patients at that day"));
         }
         List<List<dynamic>> chunkedReservations = chunkedReservList(reservations, 4);
-        List<Widget> reservationSliders = getSliders(chunkedReservations);
+        List<Widget> reservationSliders = getSliders(chunkedReservations, context);
         return PatientCarouselSlider(chunkedReservations: chunkedReservations, reservationSliders: reservationSliders);       
       }
     );
