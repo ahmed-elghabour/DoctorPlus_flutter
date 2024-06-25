@@ -16,7 +16,7 @@ class PatientCard extends StatelessWidget {
         CircleAvatar(
           backgroundColor: color.withOpacity(0.2),
           radius: 30,
-          child: const Text('AY', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+          child: Text(patientId.split(' ')[0][0].toUpperCase() + patientId.split(' ')[1][0].toUpperCase(), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
         ),
         const SizedBox(width: 10),
         Column(
