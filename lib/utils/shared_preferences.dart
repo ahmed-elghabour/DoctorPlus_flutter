@@ -13,6 +13,8 @@ class SharedPreference {
   Future<void> setBool({required String key, required bool value}) async =>
       await _shared!.setBool(key, value);
 
+
   String? getString({required String key}) => _shared!.getString(key);
   bool? getBool({required String key}) => _shared!.getBool(key);
+
 }

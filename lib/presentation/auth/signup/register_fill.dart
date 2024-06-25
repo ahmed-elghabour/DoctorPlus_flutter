@@ -50,7 +50,7 @@ class _RegisterFillDataState extends State<RegisterFillData> {
                   DoctorAdditionalInfo(
                     onPrevious: () => _goToPage(0),
                     onSubmit: () => Navigator.pushReplacementNamed(
-                        context, Routes.doctorHome),
+                        context, Routes.home),
                   ),
                 ],
               ),

@@ -43,36 +43,34 @@ class SignupCubit extends Cubit<SignupState> {
           "gender": gender,
           "location": location,
           "birthDate": birthDate,
-          "degrees": data.degrees,
-          "specialty": data.specialty,
-          "university": data.university,
-          "specialization": data.specialty,
-          "graduationDate": data.graduationDate,
+          "degrees": data.degrees,//
+          "specialty": data.specialty,//
+          "university": data.university,//
+          "graduationDate": data.graduationDate,//
         });
     SharedPreference().setString(key: "userType", value: "doctor");
   }
 
   savePatientAdditionalData({required Patient data}) {
-    print(data.toString());
-    // CustomFirebase().addNewCollection(
-    //     collection: "patients",
-    //     docID: SharedPreference().getString(key: 'userID'),
-    //     data: {
-    //       "fName": fName,
-    //       "lName": lName,
-    //       "phone": phone,
-    //       "gender": gender,
-    //       "location": location,
-    //       "birthDate": birthDate,
-    //       "diet": data.diet,
-    //       "smoke": data.smoke,
-    //       "sleep": data.sleep,
-    //       "stress": data.stress,
-    //       "exercise": data.exercise,
-    //       "hydration": data.hydration,
-    //       "allergies": data.allergies,
-    //       "mentalHealth": data.mentalHealth,
-    //     });
-    // SharedPreference().setString(key: "userType", value: "patient");
+    CustomFirebase().addNewCollection(
+        collection: "patients",
+        docID: SharedPreference().getString(key: 'userID')!,
+        data: {
+          "fName": fName,
+          "lName": lName,
+          "phone": phone,
+          "gender": gender,
+          "location": location,
+          "birthDate": birthDate,
+          "diet": data.diet,
+          "smoke": data.smoke,
+          "sleep": data.sleep,
+          "stress": data.stress,
+          "exercise": data.exercise,
+          "hydration": data.hydration,
+          "allergies": data.allergies,
+          "mentalHealth": data.mentalHealth,
+        });
+    SharedPreference().setString(key: "userType", value: "patient");
   }
 }

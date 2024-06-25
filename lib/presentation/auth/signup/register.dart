@@ -1,3 +1,4 @@
+import 'package:doctor_plus/core/widgets/toast.dart';
 import 'package:doctor_plus/presentation/auth/widgets/auth.switch_page.dart';
 import 'package:doctor_plus/presentation/auth/widgets/signin_option.dart';
 import 'package:doctor_plus/presentation/auth/widgets/terms_conditions.dart';
@@ -130,7 +131,8 @@ class _RegisterPageState extends State<RegisterPage> {
         email: _emailController.text,
         password: _passwordController.text,
       );
-      SharedPreference().setString(key: 'userID', value: user);
+      await SharedPreference().setString(key: 'userID', value: user);
+      FailureToast.showToast(msg: SharedPreference().getString(key: 'userID')!);
     } catch (e) {
       // print(e);
       showErrorDialog(error: Validator.firebaseRegisterValidator(e.toString()));
