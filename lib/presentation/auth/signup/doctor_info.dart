@@ -2,7 +2,10 @@ import 'dart:io';
 import 'package:doctor_plus/core/widgets/buttons.dart';
 import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
 import 'package:doctor_plus/core/widgets/files_uploaded.dart';
+import 'package:doctor_plus/data/model/base_data_doctor.dart';
+import 'package:doctor_plus/domain/cubits/auth/signup_cubit.dart';
 import 'package:doctor_plus/utils/input.validator.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:doctor_plus/data/demo.dart';
@@ -12,10 +15,13 @@ import 'package:doctor_plus/core/widgets/popup_dialog.dart';
 import 'package:doctor_plus/presentation/auth/widgets/additional_info.dart';
 
 class DoctorAdditionalInfo extends StatefulWidget {
-  final void Function() onPrevious;
-  final void Function() onSubmit;
-  const DoctorAdditionalInfo(
-      {super.key, required this.onPrevious, required this.onSubmit});
+  final VoidCallback onPrevious;
+  final VoidCallback onSubmit;
+  const DoctorAdditionalInfo({
+    super.key,
+    required this.onPrevious,
+    required this.onSubmit,
+  });
 
   @override
   State<DoctorAdditionalInfo> createState() => _DoctorAdditionalInfoState();
@@ -191,7 +197,18 @@ class _DoctorAdditionalInfoState extends State<DoctorAdditionalInfo> {
                       child: buildSubmitButton(
                         widthFactor: .7,
                         label: "Submit",
-                        onPressed: widget.onSubmit,
+                        onPressed: () {
+                          context.read<SignupCubit>().saveDoctorAdditionalData(
+                                data: DoctorBaseData(
+                                  specialty: specialty,
+                                  files: _pdfFiles,
+                                  university: university,
+                                  degrees: degreesList,
+                                  graduationDate: _dateController.text,
+                                ),
+                              );
+                          widget.onSubmit();
+                        },
                       ),
                     ),
                   ],

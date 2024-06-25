@@ -1,12 +1,15 @@
 import 'package:doctor_plus/core/widgets/buttons.dart';
 import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
 import 'package:doctor_plus/data/demo.dart';
+import 'package:doctor_plus/data/model/base_data_patient.dart';
+import 'package:doctor_plus/domain/cubits/auth/signup_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:doctor_plus/presentation/auth/widgets/additional_info.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PatientAdditionalInfo extends StatefulWidget {
-  final void Function() onPrevious;
-  final void Function() onSubmit;
+  final VoidCallback onPrevious;
+  final VoidCallback onSubmit;
   const PatientAdditionalInfo(
       {super.key, required this.onPrevious, required this.onSubmit});
 
@@ -31,7 +34,6 @@ class _PatientAdditionalInfoState extends State<PatientAdditionalInfo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const MyCustomAppBar(
-        
         title: "Patient Additional Info",
       ),
       body: SafeArea(
@@ -50,13 +52,16 @@ class _PatientAdditionalInfoState extends State<PatientAdditionalInfo> {
                   additionalInfo(
                       value: allergies,
                       title: "Allergy",
-                      list: patientInfo['allergies']!['options'] as List<String>,
-                      onChanged: (newVal) => setState(() => allergies = newVal!)),
+                      list:
+                          patientInfo['allergies']!['options'] as List<String>,
+                      onChanged: (newVal) =>
+                          setState(() => allergies = newVal!)),
                   additionalInfo(
                       value: exercise,
                       title: "Exercise",
                       list: patientInfo['exercise']!['options'] as List<String>,
-                      onChanged: (newVal) => setState(() => exercise = newVal!)),
+                      onChanged: (newVal) =>
+                          setState(() => exercise = newVal!)),
                   additionalInfo(
                       value: diet,
                       title: "Diet",
@@ -70,8 +75,10 @@ class _PatientAdditionalInfoState extends State<PatientAdditionalInfo> {
                   additionalInfo(
                       value: hydration,
                       title: "Hydration",
-                      list: patientInfo['hydration']!['options'] as List<String>,
-                      onChanged: (newVal) => setState(() => hydration = newVal!)),
+                      list:
+                          patientInfo['hydration']!['options'] as List<String>,
+                      onChanged: (newVal) =>
+                          setState(() => hydration = newVal!)),
                   additionalInfo(
                       value: stress,
                       title: "Stress",
@@ -80,8 +87,8 @@ class _PatientAdditionalInfoState extends State<PatientAdditionalInfo> {
                   additionalInfo(
                       value: mentalHealth,
                       title: "mentalHealth",
-                      list:
-                          patientInfo['mentalHealth']!['options'] as List<String>,
+                      list: patientInfo['mentalHealth']!['options']
+                          as List<String>,
                       onChanged: (newVal) =>
                           setState(() => mentalHealth = newVal!)),
                   customAdditionaInfo(
@@ -89,7 +96,8 @@ class _PatientAdditionalInfoState extends State<PatientAdditionalInfo> {
                       title: "Disease",
                       selectedlist: diseaseList,
                       list: patientInfo['disease']!['options'] as List<String>,
-                      onRemove: (val) => setState(() => diseaseList.remove(val)),
+                      onRemove: (val) =>
+                          setState(() => diseaseList.remove(val)),
                       onChanged: (newVal) => setState(
                             () {
                               disease = newVal!;
@@ -100,7 +108,8 @@ class _PatientAdditionalInfoState extends State<PatientAdditionalInfo> {
                       value: medication,
                       title: "Medication",
                       selectedlist: medicationList,
-                      list: patientInfo['medication']!['options'] as List<String>,
+                      list:
+                          patientInfo['medication']!['options'] as List<String>,
                       onRemove: (val) =>
                           setState(() => medicationList.remove(val)),
                       onChanged: (newVal) => setState(
@@ -111,11 +120,12 @@ class _PatientAdditionalInfoState extends State<PatientAdditionalInfo> {
                           )),
                 ],
               ),
-          
+
               //==========================
-          
+
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -131,13 +141,28 @@ class _PatientAdditionalInfoState extends State<PatientAdditionalInfo> {
                       child: buildSubmitButton(
                         widthFactor: .7,
                         label: "Submit",
-                        onPressed: widget.onSubmit,
+                        onPressed: () {
+                          context.read<SignupCubit>().savePatientAdditionalData(
+                                data: PatientBaseData(
+                                  diet: diet,
+                                  smoke: smoke,
+                                  sleep: sleep,
+                                  stress: stress,
+                                  exercise: exercise,
+                                  allergies: allergies,
+                                  hydration: hydration,
+                                  diseases: diseaseList,
+                                  mentalHealth: mentalHealth,
+                                  medications: medicationList,
+                                ),
+                              );
+                          widget.onSubmit();
+                        },
                       ),
                     ),
                   ],
                 ),
               ),
-              
             ],
           ),
         ),
