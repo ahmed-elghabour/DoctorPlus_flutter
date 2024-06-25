@@ -1,3 +1,5 @@
+import 'package:doctor_plus/presentation/patient%20home/all_doctors.dart';
+import 'package:doctor_plus/presentation/patient%20home/all_specializations.dart';
 import 'package:doctor_plus/presentation/specialization/specialization_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -27,66 +29,29 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Row(
-          children: [
-            SizedBox(width: 8),
-            Text('Doctor Plus'),
-          ],
-        ),
-        actions: [
-          FutureBuilder<User?>(
-            future: Future.value(FirebaseAuth.instance.currentUser),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: CircularProgressIndicator(),
-                );
-              } else if (snapshot.hasData && snapshot.data != null) {
-                return IconButton(
-                  icon: const Icon(Icons.person_sharp),
-                  onPressed: () {
-                    navigate(context, route: Routes.profile);
-                  },
-                );
-              } else {
-                return TextButton(
-                  onPressed: () {
-                    Navigator.pushReplacementNamed(context, Routes.login);
-                  },
-                  child: const Text(
-                    'Login',
-                    style: TextStyle(color: Colors.blue),
-                  ),
-                );
-              }
-            },
+        title: const Text(
+          'Doctor Plus',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
           ),
-        ],
+        ),
+        centerTitle: true,
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 0,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(16),
+          ),
+        ),
       ),
-      /*
-      body: FutureBuilder<String>(
-        future: _getUsername(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else {
-            String username = snapshot.data!;
-            return SingleChildScrollView(
-              child: Column(
-                children: [
-      */
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: SizedBox(
             width: double.infinity,
-            height: MediaQuery.sizeOf(context).height - 100,
+            height: MediaQuery.sizeOf(context).height,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -136,9 +101,26 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
-                const Text(
-                  'Doctor Speciality',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Doctor Speciality',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const AllSpecializationsPage()),
+                        );
+                      },
+                      child: const Text('See More'),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 8),
                 SingleChildScrollView(
@@ -146,8 +128,8 @@ class HomePage extends StatelessWidget {
                   child: Row(
                     children: doctorSpecialties.skip(1).map((specialization) {
                       return SizedBox(
-                        width: 150, // Set the desired width
-                        height: 120, // Set the desired height
+                        width: 150,
+                        height: 120,
                         child: SpecializationCard(
                           title: specialization,
                           imagePath:
@@ -160,11 +142,26 @@ class HomePage extends StatelessWidget {
                     }).toList(),
                   ),
                 ),
-
                 const SizedBox(height: 16),
-                const Text(
-                  'Recommendation Doctor',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Recommendation Doctor',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const AllDoctorsPage()),
+                        );
+                      },
+                      child: const Text('See More'),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 8),
                 Expanded(
@@ -181,91 +178,70 @@ class HomePage extends StatelessWidget {
                         itemCount: 5),
                   ),
                 ),
-
-                // Footer
-                // const SizedBox(height: 16),
-                // Container(
-                //   color: Colors.blue,
-                //   padding: const EdgeInsets.all(16),
-                //   child: const Column(
-                //     children: [
-                //       Text(
-                //         'About Us',
-                //         style: TextStyle(
-                //           fontSize: 20,
-                //           fontWeight: FontWeight.bold,
-                //           color: Colors.white,
-                //         ),
-                //       ),
-                //       SizedBox(height: 8),
-                //       Text(
-                //         'Doctor Plus is a healthcare management app designed to streamline interactions between doctors, patients, and administrators. The app features user-friendly interfaces for sign-up, login, profile management, reservations, notifications, and more.',
-                //         textAlign: TextAlign.center,
-                //         style: TextStyle(
-                //           color: Colors.white,
-                //         ),
-                //       ),
-                //     ],
-                //   ),
-                // ),
               ],
             ),
           ),
         ),
       ),
-      bottomNavigationBar: buildBottomNavigationBar(context),
-    );
-  }
+      bottomNavigationBar: FutureBuilder<User?>(
+        future: Future.value(FirebaseAuth.instance.currentUser),
+        builder: (context, snapshot) {
+          bool isLoggedIn = snapshot.hasData && snapshot.data != null;
 
-  BottomNavigationBar buildBottomNavigationBar(BuildContext context) {
-    return BottomNavigationBar(
-      items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.favorite),
-          label: 'Favorites',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.search),
-          label: 'Search',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person_rounded),
-          label: 'Profile',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.comment),
-          label: 'Complaints',
-        ),
-      ],
-      selectedItemColor: Colors.blue,
-      unselectedItemColor: Colors.grey,
-      showSelectedLabels: true,
-      showUnselectedLabels: true,
-      onTap: (index) {
-        switch (index) {
-          case 0:
-            navigate(context, route: Routes.home);
-            break;
-          case 1:
-            //TODO: add route
-            // navigate(context, route: '/favorites');
-            break;
-          case 2:
-            navigate(context, route: '/search');
-            break;
-          case 3:
-            //TODO: add route
-            //navigate(context, route: '/notifications');
-            break;
-          case 4:
-            navigate(context, route: Routes.complaint);
-            break;
-        }
-      },
+          return BottomNavigationBar(
+            items: <BottomNavigationBarItem>[
+              const BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: 'Home',
+              ),
+              const BottomNavigationBarItem(
+                icon: Icon(Icons.favorite),
+                label: 'Favorites',
+              ),
+              const BottomNavigationBarItem(
+                icon: Icon(Icons.search),
+                label: 'Search',
+              ),
+              const BottomNavigationBarItem(
+                icon: Icon(Icons.comment),
+                label: 'Complaints',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(isLoggedIn ? Icons.person_rounded : Icons.login),
+                label: isLoggedIn ? 'Profile' : 'Login',
+              ),
+            ],
+            selectedItemColor: Colors.blue,
+            unselectedItemColor: Colors.grey,
+            showSelectedLabels: true,
+            showUnselectedLabels: true,
+            onTap: (index) {
+              switch (index) {
+                case 0:
+                  navigate(context, route: Routes.home);
+                  break;
+                case 1:
+                  // TODO: Add route for Favorites
+                  // navigate(context, route: '/favorites');
+                  break;
+                case 2:
+                  navigate(context, route: '/search');
+                  break;
+                case 3:
+                  navigate(context, route: Routes.complaint);
+                  break;
+                case 4:
+                  if (isLoggedIn) {
+                    navigate(context, route: Routes.profile);
+                  } else {
+                    navigate(context, route: Routes.login);
+                  }
+                  break;
+              }
+            },
+          );
+        },
+      ),
     );
   }
 
@@ -277,8 +253,9 @@ class HomePage extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) =>
-              SpecializationPage(specialization: specialization)),
+        builder: (context) =>
+            SpecializationPage(specialization: specialization),
+      ),
     );
   }
 }

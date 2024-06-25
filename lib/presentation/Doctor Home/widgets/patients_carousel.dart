@@ -6,11 +6,13 @@ import 'package:doctor_plus/presentation/doctor%20home/widgets/carousel_slider.d
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 class PatientsCarousel extends StatelessWidget {
-  const PatientsCarousel({super.key});
+  final String datePicked;
+  const PatientsCarousel({super.key, required this.datePicked});
 
   @override
   Widget build(BuildContext context) {
-    context.read<DoctorReservationCubit>().fetchReservations("764");
+    //TODO: Doctor ID
+    context.read<DoctorReservationCubit>().fetchReservations("764", datePicked);
     return BlocBuilder<DoctorReservationCubit, List<DoctorReservation>>(
       builder: (context, reservations) {
         if (reservations.isEmpty) {

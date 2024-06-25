@@ -1,6 +1,6 @@
-import 'package:doctor_plus/data/model/doctor_reservation.dart';
+import 'package:equatable/equatable.dart';
 
-abstract class PatientsNumAtDayState {
+abstract class PatientsNumAtDayState extends Equatable{
   const PatientsNumAtDayState();
 
   @override
