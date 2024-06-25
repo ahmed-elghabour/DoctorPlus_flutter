@@ -29,6 +29,7 @@ class _AppointmentPageState extends State<AppointmentPage>
     'patientImage': '',
     'patientName': '',
     'appointmentType': '',
+    'paymentMethod': '',
     'appointmentDateTime': null,
     'status': 'upcoming',
   };
@@ -79,14 +80,20 @@ class _AppointmentPageState extends State<AppointmentPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Book Appointment'),
+        title: const Text(
+          'Book Appointment',
+          style: TextStyle(color: Colors.black),
+        ),
+        backgroundColor: Colors.white,
         bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(80.0),
+          preferredSize: const Size.fromHeight(100.0),
           child: Column(
             children: [
               _buildTimeline(),
               TabBar(
                 controller: _tabController,
+                labelColor: Colors.blueAccent,
+                indicatorColor: Colors.blueAccent,
                 tabs: const [
                   Tab(text: 'Date & Time'),
                   Tab(text: 'Payment'),
@@ -360,6 +367,7 @@ class _AppointmentPageState extends State<AppointmentPage>
         patientImage: _appointmentData['patientImage'],
         patientName: _appointmentData['patientName'],
         appointmentType: _appointmentData['appointmentType'],
+        paymentMethod: _appointmentData['paymentMethod'],
         appointmentDateTime: _appointmentData['appointmentDateTime'],
         status: AppointmentStatus.upcoming,
       );

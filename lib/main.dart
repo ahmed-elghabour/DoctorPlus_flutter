@@ -100,6 +100,7 @@ class MyApp extends StatelessWidget {
               Routes.specialization: (context) =>
                   const SpecializationPage(specialization: ''),
             },
+            // initialRoute: Routes.bookAppointment,
             initialRoute: Routes.home,
           );
         }),
