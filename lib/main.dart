@@ -4,11 +4,13 @@ import 'package:doctor_plus/domain/cubits/doctorReservations/patients_number_atD
 // import 'package:doctor_plus/domain/cubits/doctorReservations/patients_number_atDay_cubit.dart';
 import 'package:doctor_plus/presentation/appointments/pages/appointments.dart';
 import 'package:doctor_plus/presentation/doctor%20profile/pages/doctor_profile.dart';
+import 'package:doctor_plus/presentation/appointments/pages/payment.dart';
 import 'package:doctor_plus/presentation/patient%20home/complaints.dart';
 import 'package:doctor_plus/presentation/doctor%20home/pages/doctor_home.dart';
 import 'package:doctor_plus/presentation/profile/FAQ.dart';
 import 'package:doctor_plus/presentation/profile/language.dart';
 import 'package:doctor_plus/presentation/profile/notification.dart';
+import 'package:doctor_plus/presentation/specialization/specialization_page.dart';
 
 import 'package:doctor_plus/presentation/profile/profile.dart';
 import 'package:doctor_plus/presentation/profile/security.dart';
@@ -86,6 +88,9 @@ class MyApp extends StatelessWidget {
               Routes.doctorAppointments: (context) =>
                   const DoctorAppointments(),
               Routes.doctorProfile: (context) => const DoctorProfile(),
+              Routes.payment: (context) => const PaymentPage(),
+              Routes.specialization: (context) =>
+                  const SpecializationPage(specialization: ''),
             },
             initialRoute: Routes.home,
           );
