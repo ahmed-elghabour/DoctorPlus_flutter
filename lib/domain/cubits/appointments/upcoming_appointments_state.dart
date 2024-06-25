@@ -8,7 +8,7 @@ final class UpcomingAppointmentsInitial extends UpcomingAppointmentsState {}
 final class UpcomingAppointmentsLoading extends UpcomingAppointmentsState {}
 
 final class UpcomingAppointmentsLoaded extends UpcomingAppointmentsState {
-  final List<Appointment> appointments;
+  final List<AppointmentModel> appointments;
   UpcomingAppointmentsLoaded(this.appointments);
 }
 

@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
-import 'package:doctor_plus/core/dummy/dummy_appointments.dart';
+import 'package:doctor_plus/data/data%20sources/remote_data_source.dart';
+// import 'package:doctor_plus/core/dummy/dummy_appointments.dart';
 import 'package:doctor_plus/data/model/appointment.dart';
+import 'package:doctor_plus/data/repositories/appointments_repository.dart';
 import 'package:meta/meta.dart';
 
 part 'cancelled_appointments_state.dart';
@@ -8,14 +10,14 @@ part 'cancelled_appointments_state.dart';
 class CancelledAppointmentsCubit extends Cubit<CancelledAppointmentsState> {
   CancelledAppointmentsCubit() : super(CancelledAppointmentsInitial());
 
-  void getCancelledAppointments() {
+  void getDoctorCancelledAppointments({required String doctorId}) async {
     emit(CancelledAppointmentsLoading());
     try {
-      final List<Appointment> appointments =
-          dummyAppointments.where((appointment) {
-        return appointment.status == AppointmentStatus.cancelled;
-      }).toList();
-      emit(CancelledAppointmentsLoaded(appointments));
+      List<AppointmentModel> doctorPendingAppointments =
+          await AppointmentsRepository(remoteDataSource: RemoteDataSource())
+              .getDoctorCancelledAppointments(doctorId);
+
+      emit(CancelledAppointmentsLoaded(doctorPendingAppointments));
     } catch (e) {
       emit(CancelledAppointmentsError(e.toString()));
     }

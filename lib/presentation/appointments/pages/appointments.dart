@@ -30,14 +30,14 @@ class DoctorAppointments extends StatelessWidget {
             MultiBlocProvider(
               providers: [
                 BlocProvider(
-                    create: (context) =>
-                        UpcomingAppointmentsCubit()..getUpcomingAppointments()),
+                    create: (context) => UpcomingAppointmentsCubit()
+                      ..getDoctorUpcomingAppointments(doctorId: '123')),
                 BlocProvider(
                     create: (context) => CompletedAppointmentsCubit()
-                      ..getCompletedAppointments()),
+                      ..getDoctorCompletedAppointments(doctorId: '123')),
                 BlocProvider(
                     create: (context) => CancelledAppointmentsCubit()
-                      ..getCancelledAppointments()),
+                      ..getDoctorCancelledAppointments(doctorId: '123')),
               ],
               child: AppointmentsTabs(),
             )
