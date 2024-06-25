@@ -73,18 +73,13 @@ class MyApp extends StatelessWidget {
             Routes.search: (context) => const SearchScreen(),
             Routes.profile: (context) => const ProfilePage(),
             Routes.settings: (context) => const SettingsPage(),
-<<<<<<< HEAD
-=======
             Routes.notification: (context) => const NotificationPage(),
-            Routes.faq: (context) => const FAQPage(),
             Routes.security: (context) => const SecurityPage(),
             Routes.language: (context) => const LanguagePage(),
->>>>>>> 72862186e4d5c768f3fe1183f5c7fdd5051f6aa3
             Routes.register: (context) => const RegisterPage(),
             Routes.doctorHome: (context) => const DoctorHome(),
             Routes.complaint: (context) => const ComplaintsPage(),
             Routes.registerFill: (context) => const RegisterFillData(),
-            Routes.notification: (context) => const NotificationPage(),
             Routes.doctorAppointments: (context) => const DoctorAppointments(),
           },
           initialRoute: Routes.home,
