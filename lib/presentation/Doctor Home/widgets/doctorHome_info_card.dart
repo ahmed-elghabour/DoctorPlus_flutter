@@ -28,7 +28,6 @@ class DoctorHomeCard extends StatelessWidget {
         if (state is PatientsNumAtDayFailedState) {
           return Center(child: Text(state.message));
         }
-                print(DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day));
         return Container(
           margin: const EdgeInsets.only(top: 10),
           width: MediaQuery.of(context).size.width,

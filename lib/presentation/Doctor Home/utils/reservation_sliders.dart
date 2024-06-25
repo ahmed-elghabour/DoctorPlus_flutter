@@ -9,7 +9,7 @@ List<Widget> getSliders(List<List<dynamic>>chunkedReservations) {
         print(item['patientId']);
         return Container(
           margin: const EdgeInsets.symmetric(vertical: 10.0),
-          child: PatientCard(patientId: item['patientId'], reservationType: item['appointmentType'], reservationDate: item['appointmentDateTime'], color: getRandomColor(),)
+          child: PatientCard(patientId: item['patientName'], reservationType: item['appointmentType'], reservationDate: item['appointmentDateTime'], color: getRandomColor(),)
         );
       }).toList(),
     );
