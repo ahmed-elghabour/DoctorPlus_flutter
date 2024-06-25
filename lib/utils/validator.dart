@@ -1,4 +1,11 @@
 class Validator {
+  static String? generalValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Field is Required';
+    }
+    return null;
+  }
+
   static String? nameValidator(String? value) {
     if (value == null || value.isEmpty) {
       return 'Field is Required';

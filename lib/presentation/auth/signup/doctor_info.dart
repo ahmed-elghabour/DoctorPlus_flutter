@@ -1,10 +1,11 @@
 import 'dart:io';
 import 'package:doctor_plus/core/widgets/files_uploaded.dart';
+import 'package:doctor_plus/utils/input.validator.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:doctor_plus/data/demo.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:doctor_plus/core/widgets/date_picker.dart';
+import 'package:doctor_plus/core/widgets/icon_picker.dart';
 import 'package:doctor_plus/core/widgets/popup_dialog.dart';
 import 'package:doctor_plus/presentation/auth/widgets/additional_info.dart';
 
@@ -43,10 +44,11 @@ class _DoctorAdditionalInfoState extends State<DoctorAdditionalInfo> {
             const Expanded(flex: 1, child: Text('Graduation Year')),
             Expanded(
                 flex: 2,
-                child: customDatePicker(
+                child: customIconPicker(
                   label: 'Select Graduation Year',
                   icon: Icons.calendar_month,
                   controller: _dateController,
+                  validator: (Validator.nameValidator),
                   onPressed: () async {
                     final DateTime? picked = await showDatePicker(
                       context: context,

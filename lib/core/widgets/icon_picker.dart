@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 
-Widget customDatePicker({
+Widget customIconPicker({
   double iconSize = 20,
+  bool isCenter = false,
   required String label,
   required IconData icon,
   required void Function()? onPressed,
+  required String? Function(String?) validator,
   required TextEditingController controller,
 }) {
-  return TextField(
+  return TextFormField(
+    validator: validator,
     controller: controller,
-    readOnly: true,
+    // readOnly: true,
+    textAlign: isCenter ? TextAlign.center : TextAlign.start,
     decoration: InputDecoration(
       labelText: label,
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
@@ -23,3 +27,4 @@ Widget customDatePicker({
     ),
   );
 }
+

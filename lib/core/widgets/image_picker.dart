@@ -1,16 +1,19 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 class CustomImagePicker extends StatefulWidget {
+  final File? image;
   final IconData icon;
   final Color frameColor;
   final double imageSize;
   final String imagePath;
+  final void Function()? onFileSelected;
   const CustomImagePicker({
     super.key,
-    this.icon = Icons.add,
+    this.image,
     this.imageSize = 60,
+    this.onFileSelected,
+    this.icon = Icons.add,
     this.frameColor = Colors.black,
     this.imagePath = 'assets/profile.png',
   });
@@ -20,19 +23,6 @@ class CustomImagePicker extends StatefulWidget {
 }
 
 class _CustomImagePickerState extends State<CustomImagePicker> {
-  File? _image;
-
-  Future<void> _pickImage() async {
-    final pickedFile =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-
-    if (pickedFile != null) {
-      setState(() {
-        _image = File(pickedFile.path);
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -43,8 +33,8 @@ class _CustomImagePickerState extends State<CustomImagePicker> {
           child: CircleAvatar(
             radius: widget.imageSize,
             backgroundColor: Colors.transparent,
-            backgroundImage: _image != null
-                ? FileImage(_image!)
+            backgroundImage: widget.image != null
+                ? FileImage(widget.image!)
                 : AssetImage(widget.imagePath) as ImageProvider,
           ),
         ),
@@ -52,7 +42,7 @@ class _CustomImagePickerState extends State<CustomImagePicker> {
           bottom: 5,
           right: 0,
           child: GestureDetector(
-            onTap: _pickImage,
+            onTap: widget.onFileSelected,
             child: CircleAvatar(
               radius: 15,
               backgroundColor: Colors.blue,

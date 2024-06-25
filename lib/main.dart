@@ -60,27 +60,25 @@ class MyApp extends StatelessWidget {
           // locale: Locale(context.read<LanguageCubit>().language),
           localizationsDelegates: const [
             S.delegate,
-            GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
           routes: {
+            Routes.faq: (context) => const FAQPage(),
             Routes.home: (context) => const HomePage(),
             Routes.login: (context) => const LoginPage(),
+            Routes.search: (context) => const SearchScreen(),
             Routes.profile: (context) => const ProfilePage(),
             Routes.settings: (context) => const SettingsPage(),
-            Routes.notification: (context) => const NotificationPage(),
-            Routes.faq: (context) => const FAQPage(),
             Routes.register: (context) => const RegisterPage(),
             Routes.doctorHome: (context) => const DoctorHome(),
             Routes.complaint: (context) => const ComplaintsPage(),
             Routes.registerFill: (context) => const RegisterFillData(),
+            Routes.notification: (context) => const NotificationPage(),
             Routes.doctorAppointments: (context) => const DoctorAppointments(),
-            Routes.search: (context) => const SearchScreen(),
           },
-          initialRoute: SharedPreference().getBool(key: "isLogged") != true
-              ? Routes.home
-              : Routes.home,
+          initialRoute: Routes.home,
         );
       }),
     );
