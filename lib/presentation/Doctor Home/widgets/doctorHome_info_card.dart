@@ -14,7 +14,7 @@ class DoctorHomeCard extends StatelessWidget {
     context.read<PatientsNumberAtDayCubit>().fetchPatients("764");
     return BlocBuilder<PatientsNumberAtDayCubit, PatientsNumAtDayState>(
       builder: (context, state) {
-        int patientsNumber = 0;
+        List<int> patientsNumber = [];
 
         if (state is PatientsNumAtDayPendingState) {
           return const CircularProgressIndicator();
@@ -27,6 +27,7 @@ class DoctorHomeCard extends StatelessWidget {
         if (state is PatientsNumAtDayFailedState) {
           return Center(child: Text(state.message));
         }
+                print(DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day));
         return Container(
           margin: const EdgeInsets.only(top: 10),
           width: MediaQuery.of(context).size.width,
@@ -60,7 +61,7 @@ class DoctorHomeCard extends StatelessWidget {
                   height: 5,
                 ),
                 Text(
-                  '$patientsNumber',
+                  patientsNumber[2].toString(),
                   style: const TextStyle(
                       fontSize: 29,
                       color: Colors.black,
@@ -69,19 +70,19 @@ class DoctorHomeCard extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                const Expanded(
+                Expanded(
                   child: Row(
                     children: [
                       PatientsBox(
-                        patients: 40,
-                        patientType: "New Patient",
+                        patients:patientsNumber[0],
+                        patientType: "New Patients",
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       PatientsBox(
-                        patients: 64,
-                        patientType: "Old Patient",
+                        patients: patientsNumber[1],
+                        patientType: "Old Patients",
                       ),
                     ],
                   ),

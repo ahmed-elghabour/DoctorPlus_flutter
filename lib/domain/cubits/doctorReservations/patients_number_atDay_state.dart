@@ -1,3 +1,5 @@
+import 'package:doctor_plus/data/model/doctor_reservation.dart';
+
 abstract class PatientsNumAtDayState {
   const PatientsNumAtDayState();
 
@@ -8,7 +10,7 @@ abstract class PatientsNumAtDayState {
 final class PatientsNumAtDayInitState extends PatientsNumAtDayState{}
 
 class PatientsNumAtDayLoadedState extends PatientsNumAtDayState{
-  final int patientsNumber;
+  final List<int> patientsNumber;
 
   const PatientsNumAtDayLoadedState(this.patientsNumber);
 

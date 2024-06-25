@@ -15,8 +15,25 @@ class DoctorService {
     });
   }
   
-  static Stream<int> getPatientsNumAtDay(String doctorId){
+  static Stream<List<int>> getPatientsNumAtDay(String doctorId){
     final reservationStream = reservations.where('doctorId', isEqualTo: doctorId).snapshots();
-    return reservationStream.map((snapshot) => snapshot.docs.length);
+    return reservationStream.map((QuerySnapshot query) {
+      int newCount = 0;
+      int oldCount = 0;
+      int todayCount = 0;
+      DateTime now = DateTime.now();
+      for(var doc in query.docs) {
+        DoctorReservation reservation = DoctorReservation.fromFireStore(doc);
+        DateTime reservationDate = reservation.reservationDate;
+        if (reservationDate.isAfter(DateTime(now.year, now.month, now.day))) {
+          newCount++;
+        } else if (reservationDate.isBefore(DateTime(now.year, now.month, now.day))) {
+          oldCount++;
+        } else {
+          todayCount++;
+        }
+      }
+      return [newCount, oldCount, todayCount];
+    });
   }
 }
