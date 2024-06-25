@@ -1,3 +1,4 @@
+import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
 import 'package:doctor_plus/utils/firebase.dart';
 import 'package:doctor_plus/utils/validator.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -31,9 +32,8 @@ class _ComplaintsPageState extends State<ComplaintsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Complaints"),
-        centerTitle: true,
+      appBar: const MyCustomAppBar(
+        title: 'Complaints',
       ),
       body: Form(
         key: formKey,
