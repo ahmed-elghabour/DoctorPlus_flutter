@@ -1,4 +1,5 @@
 import 'package:doctor_plus/core/theming/colors.dart';
+import 'package:doctor_plus/domain/cubits/auth/signup_cubit.dart';
 import 'package:doctor_plus/domain/cubits/doctorReservations/doctor_reservation_cubit.dart';
 import 'package:doctor_plus/domain/cubits/doctorReservations/patients_number_atDay_cubit.dart';
 // import 'package:doctor_plus/domain/cubits/doctorReservations/patients_number_atDay_cubit.dart';
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(create: (_) => ThemeCubit()),
+          BlocProvider(create: (_) => SignupCubit()),
           BlocProvider(create: (_) => LanguageCubit()),
           BlocProvider(create: (_) => DoctorReservationCubit()),
           BlocProvider(create: (_) => PatientsNumberAtDayCubit())
