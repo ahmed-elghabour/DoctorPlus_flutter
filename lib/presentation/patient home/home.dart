@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:doctor_plus/core/widgets/card_specialization.dart';
 import 'package:doctor_plus/core/widgets/card_doctor.dart';
+import 'package:doctor_plus/data/demo.dart';
 import 'package:doctor_plus/utils/routes.dart';
 
 class HomePage extends StatelessWidget {
@@ -26,15 +27,10 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
+        title: const Row(
           children: [
-            Image.asset(
-              'assets/appIcon.png',
-              width: 32,
-              height: 32,
-            ),
-            const SizedBox(width: 8),
-            const Text('Doctor Plus'),
+            SizedBox(width: 8),
+            Text('Doctor Plus'),
           ],
         ),
         actions: [
@@ -148,39 +144,23 @@ class HomePage extends StatelessWidget {
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
-                    children: [
-                      SpecializationCard(
-                        title: 'General',
-                        icon: Icons.local_hospital,
-                        onTap: () {
-                          navigateToSpecialization(context, 'General');
-                        },
-                      ),
-                      SpecializationCard(
-                        title: 'Neurologic',
-                        icon: Icons.face_retouching_natural_rounded,
-                        onTap: () {
-                          navigateToSpecialization(context, 'Neurologic');
-                        },
-                      ),
-                      SpecializationCard(
-                        title: 'Pediatric',
-                        icon: Icons.child_care,
-                        onTap: () {
-                          navigateToSpecialization(context, 'Pediatric');
-                        },
-                      ),
-                      SpecializationCard(
-                        title: 'Radiology',
-                        icon: Icons.radio,
-                        onTap: () {
-                          navigateToSpecialization(context, 'Radiology');
-                        },
-                      ),
-                      // Add more specialities as needed
-                    ],
+                    children: doctorSpecialties.skip(1).map((specialization) {
+                      return SizedBox(
+                        width: 150, // Set the desired width
+                        height: 120, // Set the desired height
+                        child: SpecializationCard(
+                          title: specialization,
+                          imagePath:
+                              'assets/specializations/$specialization.png',
+                          onTap: () {
+                            navigateToSpecialization(context, specialization);
+                          },
+                        ),
+                      );
+                    }).toList(),
                   ),
                 ),
+
                 const SizedBox(height: 16),
                 const Text(
                   'Recommendation Doctor',
@@ -253,8 +233,8 @@ class HomePage extends StatelessWidget {
           label: 'Search',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.notifications),
-          label: 'Notifications',
+          icon: Icon(Icons.person_rounded),
+          label: 'Profile',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.comment),
