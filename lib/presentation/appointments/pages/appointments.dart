@@ -31,13 +31,13 @@ class DoctorAppointments extends StatelessWidget {
               providers: [
                 BlocProvider(
                     create: (context) => UpcomingAppointmentsCubit()
-                      ..getDoctorPendingAppointments(doctorId: '123')),
+                      ..getDoctorUpcomingAppointments(doctorId: '123')),
                 BlocProvider(
                     create: (context) => CompletedAppointmentsCubit()
-                      ..getCompletedAppointments()),
+                      ..getDoctorCompletedAppointments(doctorId: '123')),
                 BlocProvider(
                     create: (context) => CancelledAppointmentsCubit()
-                      ..getCancelledAppointments()),
+                      ..getDoctorCancelledAppointments(doctorId: '123')),
               ],
               child: AppointmentsTabs(),
             )

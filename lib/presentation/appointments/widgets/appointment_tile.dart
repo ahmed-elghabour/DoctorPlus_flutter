@@ -1,3 +1,4 @@
+import 'package:doctor_plus/core/helpers/utils_helper.dart';
 import 'package:doctor_plus/core/widgets/app_text_button.dart';
 import 'package:doctor_plus/data/model/appointment.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class AppointmentTile extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            (appointment.status == AppointmentStatus.done)
+            (appointment.status == AppointmentStatus.completed)
                 ? const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -58,7 +59,9 @@ class AppointmentTile extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 30,
-                  backgroundImage: NetworkImage(appointment.doctorImage),
+                  backgroundImage: NetworkImage(appointment.doctorImage.isEmpty
+                      ? "https://www.shutterstock.com/image-vector/young-smiling-doctor-stethoscope-medical-600nw-2116246328.jpg"
+                      : appointment.doctorImage),
                 ),
                 const SizedBox(width: 12.0),
                 Expanded(
@@ -97,12 +100,13 @@ class AppointmentTile extends StatelessWidget {
                       ),
                       const SizedBox(height: 4.0),
                       Text(
-                        '${appointment.appointmentDateTime}',
+                        UtilsHelper.formatTimestamp(
+                            appointment.appointmentDateTime),
                         style: TextStyle(
                           color: Colors.grey[600],
                         ),
                       ),
-                      (appointment.status == AppointmentStatus.pending ||
+                      (appointment.status == AppointmentStatus.upcoming ||
                               appointment.status ==
                                   AppointmentStatus.rescheduled)
                           ? Column(

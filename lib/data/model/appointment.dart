@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 enum AppointmentStatus {
-  pending,
-  done,
+  upcoming,
+  completed,
   cancelled,
   rescheduled,
 }
@@ -44,10 +44,10 @@ class AppointmentModel {
           patientName: json['patientName'],
           appointmentType: json['appointmentType'],
           appointmentDateTime: json['appointmentDateTime'],
-          status: json['status'] == "pending"
-              ? AppointmentStatus.pending
-              : json['status'] == "done"
-                  ? AppointmentStatus.done
+          status: json['status'] == "upcoming"
+              ? AppointmentStatus.upcoming
+              : json['status'] == "completed"
+                  ? AppointmentStatus.completed
                   : json['status'] == "cancelled"
                       ? AppointmentStatus.cancelled
                       : AppointmentStatus.rescheduled,
@@ -62,9 +62,9 @@ class AppointmentModel {
         'patientName': patientName,
         'appointmentType': appointmentType,
         'appointmentDateTime': appointmentDateTime,
-        'status': status == AppointmentStatus.pending
+        'status': status == AppointmentStatus.upcoming
             ? "pending"
-            : status == AppointmentStatus.done
+            : status == AppointmentStatus.completed
                 ? "done"
                 : status == AppointmentStatus.cancelled
                     ? "cancelled"
