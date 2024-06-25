@@ -40,8 +40,8 @@ class SpecializationPage extends StatelessWidget {
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
-                  .collection('doctorDummy')
-                  .where('specialization', isEqualTo: specialization)
+                  .collection('doctors')
+                  .where('specialty', isEqualTo: specialization)
                   .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
@@ -54,8 +54,8 @@ class SpecializationPage extends StatelessWidget {
                   children: snapshot.data!.docs.map((doc) {
                     var data = doc.data() as Map<String, dynamic>;
                     return SpecializationDoctorCard(
-                      name: data['name'],
-                      speciality: data['speciality'],
+                      name: data['fName'],
+                      speciality: data['specialty'],
                       imageUrl: data['image_url'],
                     );
                   }).toList(),
