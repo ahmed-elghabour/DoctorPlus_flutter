@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctor_plus/presentation/specialization/specialization_doctors.dart';
+import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
 
 class SpecializationPage extends StatelessWidget {
   final String specialization;
@@ -11,37 +12,27 @@ class SpecializationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: MyCustomAppBar(title: specialization),
       body: Column(
         children: [
-          Container(
-            color: Colors.blue,
-            padding:
-                const EdgeInsets.only(top: 40, left: 16, right: 16, bottom: 16),
-            child: Row(
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
               children: [
-                IconButton(
-                  icon: const Icon(Icons.arrow_back, color: Colors.white),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                const SizedBox(width: 16),
                 CircleAvatar(
                   radius: 30,
                   backgroundImage:
                       AssetImage('assets/specializations/$specialization.png'),
                 ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Text(
-                    specialization,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    overflow: TextOverflow.ellipsis,
+                const SizedBox(height: 16),
+                Text(
+                  specialization,
+                  style: const TextStyle(
+                    color: Colors.blue,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
                   ),
+                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),

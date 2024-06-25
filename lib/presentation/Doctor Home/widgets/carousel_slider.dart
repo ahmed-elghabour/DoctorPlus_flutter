@@ -1,9 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:doctor_plus/data/model/doctor_reservation.dart';
 import 'package:flutter/material.dart';
 
 class PatientCarouselSlider extends StatefulWidget {
-  final List<List<DoctorReservation>> chunkedReservations;
+  final List<List<dynamic>> chunkedReservations;
   final List<Widget> reservationSliders;
   const PatientCarouselSlider(
       {super.key,
