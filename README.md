@@ -97,7 +97,6 @@ Doctor Plus is a healthcare management app designed to streamline interactions b
 ### Missing Sections
 
 - Doctor Profile
-- Reservations Screen
 
 ## Technology Stack
 
