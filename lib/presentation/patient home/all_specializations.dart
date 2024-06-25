@@ -21,9 +21,8 @@ class AllSpecializationsPage extends StatelessWidget {
             mainAxisSpacing: 16,
             childAspectRatio: 3 / 2,
           ),
-          itemCount: doctorSpecialties.length - 1, // Adjust itemCount
+          itemCount: doctorSpecialties.length - 1,
           itemBuilder: (context, index) {
-            // Skip the first element
             final specialization = doctorSpecialties[index + 1];
             return SpecializationCard(
               title: specialization,
