@@ -16,7 +16,7 @@ class PatientsCarousel extends StatelessWidget {
     return BlocBuilder<DoctorReservationCubit, List<dynamic>>(
         builder: (context, reservations) {
       if (reservations.isEmpty) {
-        return const Center(child: Text("Nso patients at that day"));
+        return const Center(child: Text("No patients at that day"));
       }
       List<List<dynamic>> chunkedReservations =
           chunkedReservList(reservations, 4);
