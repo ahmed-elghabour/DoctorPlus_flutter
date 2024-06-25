@@ -9,4 +9,12 @@ class UtilsHelper {
 
     return dateFormat.format(dateTime);
   }
+
+  static String smallFormatTimestamp(Timestamp timestamp) {
+    DateTime dateTime = timestamp.toDate();
+
+    DateFormat dateFormat = DateFormat('dd-MM-yyyy');
+
+    return dateFormat.format(dateTime);
+  }
 }
