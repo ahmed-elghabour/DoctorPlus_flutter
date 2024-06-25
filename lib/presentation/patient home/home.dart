@@ -1,4 +1,5 @@
-import 'package:doctor_plus/presentation/Doctor%20Home/pages/doctor_home.dart';
+import 'package:doctor_plus/presentation/patient%20home/all_doctors.dart';
+import 'package:doctor_plus/presentation/patient%20home/all_specializations.dart';
 import 'package:doctor_plus/presentation/specialization/specialization_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -100,9 +101,26 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
-                const Text(
-                  'Doctor Speciality',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Doctor Speciality',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const AllSpecializationsPage()),
+                        );
+                      },
+                      child: const Text('See More'),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 8),
                 SingleChildScrollView(
@@ -125,9 +143,25 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
-                const Text(
-                  'Recommendation Doctor',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Recommendation Doctor',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const AllDoctorsPage()),
+                        );
+                      },
+                      child: const Text('See More'),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 8),
                 Expanded(
