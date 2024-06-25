@@ -18,15 +18,15 @@ class ExternalSignOptions extends StatelessWidget {
           src: 'google',
           onTap: () => dialog(msg: "Google"),
         ),
-        buildOptionButton(
-          src: 'apple',
-          onTap: () => dialog(msg: "Apple ID"),
-        ),
-        buildOptionButton(
-          icon: Icons.phone_android,
-          iconSize: 28,
-          onTap: () => dialog(msg: "Phone"),
-        ),
+        // buildOptionButton(
+        //   src: 'apple',
+        //   onTap: () => dialog(msg: "Apple ID"),
+        // ),
+        // buildOptionButton(
+        //   icon: Icons.phone_android,
+        //   iconSize: 28,
+        //   onTap: () => dialog(msg: "Phone"),
+        // ),
         // buildOptionButton(
         //   src: 'facebook',
         //   onTap: () => dialog(msg: "facebook"),

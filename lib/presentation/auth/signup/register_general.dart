@@ -28,6 +28,7 @@ class _RegisterGeneralState extends State<RegisterGeneral> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _fNameController = TextEditingController();
   final TextEditingController _lNameController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
   final TextEditingController _birthDateController = TextEditingController();
 
@@ -35,6 +36,7 @@ class _RegisterGeneralState extends State<RegisterGeneral> {
   void dispose() {
     _fNameController.dispose();
     _lNameController.dispose();
+    _phoneController.dispose();
     _locationController.dispose();
     _birthDateController.dispose();
     super.dispose();
@@ -78,6 +80,13 @@ class _RegisterGeneralState extends State<RegisterGeneral> {
                 controller: _lNameController,
                 label: 'Last Name',
                 validator: (Validator.nameValidator),
+              ),
+              const SizedBox(height: 15),
+              buildNumberField(
+                label: "Phone Number",
+                icon: Icons.phone_android,
+                controller: _phoneController,
+                validator: (Validator.phoneValidator),
               ),
               const SizedBox(height: 15),
               Row(
