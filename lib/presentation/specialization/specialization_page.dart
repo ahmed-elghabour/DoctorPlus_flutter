@@ -40,7 +40,7 @@ class SpecializationPage extends StatelessWidget {
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
-                  .collection('doctors')
+                  .collection('doctorDummy')
                   .where('specialization', isEqualTo: specialization)
                   .snapshots(),
               builder: (context, snapshot) {
