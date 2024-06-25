@@ -1,9 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class PatientCard extends StatelessWidget {
   final String patientId;
   final String reservationType;
-  final DateTime reservationDate;
+  final Timestamp reservationDate;
   final Color color;
   const PatientCard({super.key, required this.patientId, required this.reservationType, required this.reservationDate, required this.color});
   
@@ -32,7 +33,7 @@ class PatientCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
           child: Text(
-            "${reservationDate.hour.toString().padLeft(2, '0')}:${reservationDate.minute.toString().padLeft(2, '0')}",
+            "${reservationDate.toDate().hour.toString().padLeft(2, '0')}:${reservationDate.toDate().minute.toString().padLeft(2, '0')}",
             style: TextStyle(
               color: color,
               fontWeight: FontWeight.bold,

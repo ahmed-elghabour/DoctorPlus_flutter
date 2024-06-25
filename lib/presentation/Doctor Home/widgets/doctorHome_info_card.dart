@@ -11,7 +11,8 @@ class DoctorHomeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<PatientsNumberAtDayCubit>().fetchPatients("764");
+    //TODO: doctor ID
+    context.read<PatientsNumberAtDayCubit>().fetchPatients("789");
     return BlocBuilder<PatientsNumberAtDayCubit, PatientsNumAtDayState>(
       builder: (context, state) {
         List<int> patientsNumber = [];
