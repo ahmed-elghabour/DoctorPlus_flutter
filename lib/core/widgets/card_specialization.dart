@@ -2,25 +2,43 @@ import 'package:flutter/material.dart';
 
 class SpecializationCard extends StatelessWidget {
   final String title;
-  final IconData icon;
+  final String imagePath;
   final VoidCallback onTap;
 
-  const SpecializationCard({required this.title, required this.icon, required this.onTap, Key? key}) : super(key: key);
+  const SpecializationCard({
+    Key? key,
+    required this.title,
+    required this.imagePath,
+    required this.onTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: onTap,
       child: Card(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              Icon(icon, size: 48, color: Colors.blue),
-              const SizedBox(height: 8),
-              Text(title, style: const TextStyle(fontSize: 16)),
-            ],
-          ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(imagePath, width: 58, height: 58),
+            const SizedBox(height: 8),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Text(
+                title,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+              ),
+            ),
+          ],
         ),
       ),
     );

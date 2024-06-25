@@ -134,7 +134,7 @@ class AppointmentTile extends StatelessWidget {
                                           color: Colors.white,
                                         ),
                                         backgroundColor: Colors.red[500]!,
-                                        onPressed: onReschedule,
+                                        onPressed: onCancel,
                                       ),
                                     ),
                                   ],
