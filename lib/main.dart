@@ -6,6 +6,7 @@ import 'package:doctor_plus/presentation/appointments/pages/appointments.dart';
 import 'package:doctor_plus/presentation/patient%20home/complaints.dart';
 import 'package:doctor_plus/presentation/doctor%20home/pages/doctor_home.dart';
 import 'package:doctor_plus/presentation/profile/FAQ.dart';
+import 'package:doctor_plus/presentation/profile/language.dart';
 import 'package:doctor_plus/presentation/profile/notification.dart';
 
 import 'package:doctor_plus/presentation/profile/profile.dart';
@@ -73,6 +74,7 @@ class MyApp extends StatelessWidget {
             Routes.notification: (context) => const NotificationPage(),
             Routes.faq: (context) => const FAQPage(),
             Routes.security: (context) => const SecurityPage(),
+            Routes.language: (context) => const LanguagePage(),
             Routes.register: (context) => const RegisterPage(),
             Routes.doctorHome: (context) => const DoctorHome(),
             Routes.complaint: (context) => const ComplaintsPage(),

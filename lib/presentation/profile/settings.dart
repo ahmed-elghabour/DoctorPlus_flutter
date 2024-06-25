@@ -66,7 +66,9 @@ class _SettingsPageState extends State<SettingsPage> {
             _settingRow(
               title: "Language",
               icon: Icons.language_outlined,
-              onTap: () {},
+              onTap: () {
+                navigate(route: Routes.language);
+              },
             ),
             const Divider(
               height: 20,
