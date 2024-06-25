@@ -1,8 +1,6 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:doctor_plus/data/model/doctor.dart';
-import 'package:doctor_plus/data/model/patient.dart';
 import 'package:doctor_plus/utils/firebase.dart';
 import 'package:doctor_plus/utils/shared_preferences.dart';
 import 'package:meta/meta.dart';

@@ -130,9 +130,7 @@ class _RegisterPageState extends State<RegisterPage> {
         email: _emailController.text,
         password: _passwordController.text,
       );
-      SharedPreference().setString(key: 'userUID', value: user);
-      showErrorDialog(
-          error: SharedPreference().getString(key: "userUID") ?? "");
+      SharedPreference().setString(key: 'userID', value: user);
       /**
        * UserCredential(
        * additionalUserInfo: AdditionalUserInfo(isNewUser: true, profile: {}, providerId: null, username: null, authorizationCode: null),
