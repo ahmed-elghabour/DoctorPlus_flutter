@@ -7,6 +7,7 @@ import 'package:doctor_plus/presentation/Appointment/pages/appointment.dart';
 import 'package:doctor_plus/presentation/appointments/pages/appointments.dart';
 import 'package:doctor_plus/presentation/doctor%20profile/pages/doctor_profile.dart';
 import 'package:doctor_plus/presentation/appointments/pages/payment.dart';
+import 'package:doctor_plus/presentation/patient%20home/all_specializations.dart';
 import 'package:doctor_plus/presentation/patient%20home/complaints.dart';
 import 'package:doctor_plus/presentation/doctor%20home/pages/doctor_home.dart';
 import 'package:doctor_plus/presentation/profile/FAQ.dart';
@@ -93,6 +94,9 @@ class MyApp extends StatelessWidget {
                   const DoctorAppointments(),
               Routes.doctorProfile: (context) => const DoctorProfile(),
               Routes.payment: (context) => const PaymentPage(),
+              Routes.allSpecialization: (context) => const AllSpecializationsPage(),
+              Routes.allDoctors: (context) => const AllSpecializationsPage(),
+
               Routes.specialization: (context) =>
                   const SpecializationPage(specialization: ''),
             },

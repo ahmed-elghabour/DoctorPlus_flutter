@@ -5,33 +5,33 @@ class AppointmentsRepository {
   final AppointmentsRemoteDataSource remoteDataSource;
   AppointmentsRepository({required this.remoteDataSource});
 
-  Future<List<AppointmentModel>> getDoctorUpcomingAppointments(
-      String doctorId) async {
+  Future<List<AppointmentModel>> getPatientUpcomingAppointments(
+      String patientId) async {
     try {
       List<dynamic> appointments =
-          await remoteDataSource.getDoctorUpcomingAppointments(doctorId);
+          await remoteDataSource.getPatientUpcomingAppointments(patientId);
       return appointments.map((e) => AppointmentModel.fromJson(e)).toList();
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<List<AppointmentModel>> getDoctorCompletedAppointments(
-      String doctorId) async {
+  Future<List<AppointmentModel>> getPatientCompletedAppointments(
+      String patientId) async {
     try {
       List<dynamic> appointments =
-          await remoteDataSource.getDoctorCompletedAppointments(doctorId);
+          await remoteDataSource.getPatientCompletedAppointments(patientId);
       return appointments.map((e) => AppointmentModel.fromJson(e)).toList();
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<List<AppointmentModel>> getDoctorCancelledAppointments(
-      String doctorId) async {
+  Future<List<AppointmentModel>> getPatientCancelledAppointments(
+      String patientId) async {
     try {
       List<dynamic> appointments =
-          await remoteDataSource.getDoctorCancelledAppointments(doctorId);
+          await remoteDataSource.getPatientCancelledAppointments(patientId);
       return appointments.map((e) => AppointmentModel.fromJson(e)).toList();
     } catch (e) {
       rethrow;

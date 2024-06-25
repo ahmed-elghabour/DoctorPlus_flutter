@@ -10,15 +10,26 @@ part 'upcoming_appointments_state.dart';
 class UpcomingAppointmentsCubit extends Cubit<UpcomingAppointmentsState> {
   UpcomingAppointmentsCubit() : super(UpcomingAppointmentsInitial());
 
-  void getDoctorUpcomingAppointments({required String doctorId}) async {
+  void getPatientUpcomingAppointments({required String patientId}) async {
     emit(UpcomingAppointmentsLoading());
     try {
-      List<AppointmentModel> doctorPendingAppointments =
+      List<AppointmentModel> patientPendingAppointments =
           await AppointmentsRepository(
                   remoteDataSource: AppointmentsRemoteDataSource())
-              .getDoctorUpcomingAppointments(doctorId);
+              .getPatientUpcomingAppointments(patientId);
 
-      emit(UpcomingAppointmentsLoaded(doctorPendingAppointments));
+      emit(UpcomingAppointmentsLoaded(patientPendingAppointments));
+    } catch (e) {
+      emit(UpcomingAppointmentsError(e.toString()));
+    }
+  }
+
+  void cancelPatientUpcomingAppointment(
+      {required String appointmentId, required String patientId}) async {
+    emit(UpcomingAppointmentsLoading());
+    try {
+      await AppointmentsRemoteDataSource()
+          .cancelPatientUpcomingAppointment(appointmentId, patientId);
     } catch (e) {
       emit(UpcomingAppointmentsError(e.toString()));
     }

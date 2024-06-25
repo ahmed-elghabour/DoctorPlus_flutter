@@ -2,20 +2,14 @@ import 'dart:io';
 
 import 'package:doctor_plus/core/widgets/buttons.dart';
 import 'package:doctor_plus/core/widgets/toast.dart';
-import 'package:doctor_plus/domain/cubits/auth/signup_cubit.dart';
-import 'package:doctor_plus/utils/firebase.dart';
 import 'package:doctor_plus/utils/location.dart';
 import 'package:doctor_plus/utils/routes.dart';
-import 'package:doctor_plus/utils/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:doctor_plus/utils/validator.dart';
 import 'package:doctor_plus/core/widgets/inputs.dart';
 import 'package:doctor_plus/core/widgets/drop_down.dart';
 import 'package:doctor_plus/core/widgets/icon_picker.dart';
 import 'package:doctor_plus/core/widgets/image_picker.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
@@ -34,6 +28,7 @@ class _RegisterGeneralState extends State<RegisterGeneral> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _fNameController = TextEditingController();
   final TextEditingController _lNameController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
   final TextEditingController _birthDateController = TextEditingController();
 
@@ -41,6 +36,7 @@ class _RegisterGeneralState extends State<RegisterGeneral> {
   void dispose() {
     _fNameController.dispose();
     _lNameController.dispose();
+    _phoneController.dispose();
     _locationController.dispose();
     _birthDateController.dispose();
     super.dispose();
@@ -84,6 +80,13 @@ class _RegisterGeneralState extends State<RegisterGeneral> {
                 controller: _lNameController,
                 label: 'Last Name',
                 validator: (Validator.nameValidator),
+              ),
+              const SizedBox(height: 15),
+              buildNumberField(
+                label: "Phone Number",
+                icon: Icons.phone_android,
+                controller: _phoneController,
+                validator: (Validator.phoneValidator),
               ),
               const SizedBox(height: 15),
               Row(
@@ -168,7 +171,7 @@ class _RegisterGeneralState extends State<RegisterGeneral> {
                 label: "Next",
                 widthFactor: .7,
                 onPressed: () {
-                  Navigator.pushNamed(context, Routes.registerFill);
+                  // Navigator.pushNamed(context, Routes.registerFill);
                   // if (_formKey.currentState?.validate() == true) {
                   //   context.read<SignupCubit>().fillGeneralData(
                   //         type: type,

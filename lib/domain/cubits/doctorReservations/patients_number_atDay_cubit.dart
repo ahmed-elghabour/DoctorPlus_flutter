@@ -8,8 +8,8 @@ class PatientsNumberAtDayCubit extends Cubit<PatientsNumAtDayState> {
   void fetchPatients(String doctorId) {
     emit(PatientsNumAtDayPendingState());
     try {
-      DoctorService.getPatientsNumAtDay(doctorId).listen((count) {
-        emit(PatientsNumAtDayLoadedState(count));
+      DoctorService.getPatientsNumAtDay(doctorId).listen((data) {
+        emit(PatientsNumAtDayLoadedState(data));
       });
     } catch (e) {
       emit(PatientsNumAtDayFailedState(e.toString()));

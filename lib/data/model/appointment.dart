@@ -8,6 +8,8 @@ enum AppointmentStatus {
 }
 
 class AppointmentModel {
+  final String id;
+
   final String doctorId;
   final String doctorImage;
   final String doctorName;
@@ -23,6 +25,7 @@ class AppointmentModel {
   final AppointmentStatus status;
 
   AppointmentModel({
+    required this.id,
     required this.doctorImage,
     required this.doctorName,
     required this.patientImage,
@@ -36,6 +39,7 @@ class AppointmentModel {
 
   AppointmentModel.fromJson(Map<String, dynamic> json)
       : this(
+          id: json['id'],
           doctorId: json['doctorId'],
           doctorImage: json['doctorImage'],
           doctorName: json['doctorName'],
@@ -54,6 +58,7 @@ class AppointmentModel {
         );
 
   Map<String, dynamic> toJson() => {
+        'id': id,
         'doctorId': doctorId,
         'doctorImage': doctorImage,
         'doctorName': doctorName,

@@ -21,6 +21,7 @@ class _AppointmentPageState extends State<AppointmentPage>
   String? _userEmail;
 
   final Map<String, dynamic> _appointmentData = {
+    'id': '123456',
     'doctorId': '123',
     'doctorImage': '',
     'doctorName': 'ahmed elghabour',
@@ -357,6 +358,7 @@ class _AppointmentPageState extends State<AppointmentPage>
       _appointmentData['status'] = "upcoming";
 
       AppointmentModel appointment = AppointmentModel(
+        id: _appointmentData['id'],
         doctorId: _appointmentData['doctorId'],
         doctorImage: _appointmentData['doctorImage'],
         doctorName: _appointmentData['doctorName'],

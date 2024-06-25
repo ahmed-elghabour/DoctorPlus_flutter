@@ -1,4 +1,6 @@
-abstract class PatientsNumAtDayState {
+import 'package:equatable/equatable.dart';
+
+abstract class PatientsNumAtDayState extends Equatable{
   const PatientsNumAtDayState();
 
   @override
@@ -8,7 +10,7 @@ abstract class PatientsNumAtDayState {
 final class PatientsNumAtDayInitState extends PatientsNumAtDayState{}
 
 class PatientsNumAtDayLoadedState extends PatientsNumAtDayState{
-  final int patientsNumber;
+  final List<int> patientsNumber;
 
   const PatientsNumAtDayLoadedState(this.patientsNumber);
 
