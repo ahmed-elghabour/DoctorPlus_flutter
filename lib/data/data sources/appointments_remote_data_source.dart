@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class RemoteDataSource {
-  RemoteDataSource();
-
+class AppointmentsRemoteDataSource {
   var firestore = FirebaseFirestore.instance;
 
   Future<List<dynamic>> getDoctorUpcomingAppointments(String doctorId) async {

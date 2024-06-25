@@ -1,4 +1,4 @@
-import 'package:doctor_plus/presentation/Doctor%20Home/widgets/doctorHome_info_card.dart';
+import 'package:doctor_plus/presentation/doctor%20home/widgets/doctorHome_info_card.dart';
 import 'package:doctor_plus/presentation/doctor%20home/widgets/patient_list.dart';
 import 'package:doctor_plus/presentation/doctor%20home/utils/greeting.dart';
 import 'package:flutter/material.dart';

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctor_plus/core/widgets/card_specialization.dart';
 import 'package:doctor_plus/core/widgets/card_doctor.dart';
-import 'package:doctor_plus/presentation/patient%20home/complaints.dart';
 import 'package:doctor_plus/utils/routes.dart';
 
 class HomePage extends StatelessWidget {

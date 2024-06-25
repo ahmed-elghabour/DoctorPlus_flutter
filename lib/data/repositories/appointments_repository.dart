@@ -1,8 +1,8 @@
-import 'package:doctor_plus/data/data%20sources/remote_data_source.dart';
+import 'package:doctor_plus/data/data%20sources/appointments_remote_data_source.dart';
 import 'package:doctor_plus/data/model/appointment.dart';
 
 class AppointmentsRepository {
-  final RemoteDataSource remoteDataSource;
+  final AppointmentsRemoteDataSource remoteDataSource;
   AppointmentsRepository({required this.remoteDataSource});
 
   Future<List<AppointmentModel>> getDoctorUpcomingAppointments(
