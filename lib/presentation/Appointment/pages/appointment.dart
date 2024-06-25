@@ -29,6 +29,7 @@ class _AppointmentPageState extends State<AppointmentPage>
     'patientImage': '',
     'patientName': '',
     'appointmentType': '',
+    'paymentMethod': '',
     'appointmentDateTime': null,
     'status': 'upcoming',
   };
@@ -360,6 +361,7 @@ class _AppointmentPageState extends State<AppointmentPage>
         patientImage: _appointmentData['patientImage'],
         patientName: _appointmentData['patientName'],
         appointmentType: _appointmentData['appointmentType'],
+        paymentMethod: _appointmentData['paymentMethod'],
         appointmentDateTime: _appointmentData['appointmentDateTime'],
         status: AppointmentStatus.upcoming,
       );

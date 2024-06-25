@@ -32,6 +32,7 @@ class AppointmentsRepository {
     try {
       List<dynamic> appointments =
           await remoteDataSource.getPatientCancelledAppointments(patientId);
+
       return appointments.map((e) => AppointmentModel.fromJson(e)).toList();
     } catch (e) {
       rethrow;

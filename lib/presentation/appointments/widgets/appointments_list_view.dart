@@ -21,22 +21,55 @@ class AppointmentsListView extends StatelessWidget {
       itemBuilder: (context, index) {
         return AppointmentTile(
           appointment: appointments[index],
-          onCancel: () {
-            // first we change the status of the appointment to cancelled in database
-            upcomingAppointmentsCubit.cancelPatientUpcomingAppointment(
-              appointmentId: appointments[index].id,
-              patientId: '123',
-            );
+          onCancel: () async {
+            bool shouldCancelApppointment =
+                await showCancelAppointmentDialog(context);
 
-            // then i get the appointments again
-            upcomingAppointmentsCubit.getPatientUpcomingAppointments(
-                patientId: '123');
-            cancelledAppointmentsCubit.getPatientCancelledAppointments(
-                patientId: '123');
+            if (shouldCancelApppointment) {
+              // first we change the status of the appointment to cancelled in database
+              upcomingAppointmentsCubit.cancelPatientUpcomingAppointment(
+                appointmentId: appointments[index].id,
+                patientId: '123',
+              );
+
+              // then i get the appointments again
+              upcomingAppointmentsCubit.getPatientUpcomingAppointments(
+                  patientId: '123');
+              cancelledAppointmentsCubit.getPatientCancelledAppointments(
+                  patientId: '123');
+            }
           },
           onReschedule: () {},
         );
       },
     );
+  }
+
+  Future<bool> showCancelAppointmentDialog(BuildContext context) async {
+    return await showDialog<bool>(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Appointment'),
+            content: const Text(
+                "You are about to cancel this appointment. Are you sure ?"),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: const Text(
+                  'No',
+                  style: TextStyle(color: Colors.red),
+                ),
+              ),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: const Text(
+                  'Yes',
+                  style: TextStyle(color: Colors.green),
+                ),
+              ),
+            ],
+          ),
+        ) ??
+        false;
   }
 }

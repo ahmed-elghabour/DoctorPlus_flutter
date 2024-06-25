@@ -19,6 +19,7 @@ class AppointmentModel {
   final String patientName;
 
   final String appointmentType;
+  final String paymentMethod;
 
   final Timestamp appointmentDateTime;
 
@@ -31,6 +32,7 @@ class AppointmentModel {
     required this.patientImage,
     required this.patientName,
     required this.appointmentType,
+    required this.paymentMethod,
     required this.doctorId,
     required this.patientId,
     required this.appointmentDateTime,
@@ -47,6 +49,7 @@ class AppointmentModel {
           patientImage: json['patientImage'],
           patientName: json['patientName'],
           appointmentType: json['appointmentType'],
+          paymentMethod: json['paymentMethod'],
           appointmentDateTime: json['appointmentDateTime'],
           status: json['status'] == "upcoming"
               ? AppointmentStatus.upcoming
@@ -66,6 +69,7 @@ class AppointmentModel {
         'patientImage': patientImage,
         'patientName': patientName,
         'appointmentType': appointmentType,
+        'paymentMethod': paymentMethod,
         'appointmentDateTime': appointmentDateTime,
         'status': status == AppointmentStatus.upcoming
             ? "pending"
