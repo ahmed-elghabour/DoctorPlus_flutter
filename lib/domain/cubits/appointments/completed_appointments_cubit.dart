@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:doctor_plus/data/data%20sources/appointments_remote_data_source.dart';
 // import 'package:doctor_plus/core/dummy/dummy_appointments.dart';
 import 'package:doctor_plus/data/model/appointment.dart';
@@ -10,15 +10,15 @@ part 'completed_appointments_state.dart';
 class CompletedAppointmentsCubit extends Cubit<CompletedAppointmentsState> {
   CompletedAppointmentsCubit() : super(CompletedAppointmentsInitial());
 
-  void getDoctorCompletedAppointments({required String doctorId}) async {
+  void getPatientCompletedAppointments({required String patientId}) async {
     emit(CompletedAppointmentsLoading());
     try {
-      List<AppointmentModel> doctorPendingAppointments =
+      List<AppointmentModel> patientPendingAppointments =
           await AppointmentsRepository(
                   remoteDataSource: AppointmentsRemoteDataSource())
-              .getDoctorCompletedAppointments(doctorId);
+              .getPatientCompletedAppointments(patientId);
 
-      emit(CompletedAppointmentsLoaded(doctorPendingAppointments));
+      emit(CompletedAppointmentsLoaded(patientPendingAppointments));
     } catch (e) {
       emit(CompletedAppointmentsError(e.toString()));
     }

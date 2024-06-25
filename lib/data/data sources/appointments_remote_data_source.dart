@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class AppointmentsRemoteDataSource {
   var firestore = FirebaseFirestore.instance;
 
-  Future<List<dynamic>> getDoctorUpcomingAppointments(String doctorId) async {
+  Future<List<dynamic>> getPatientUpcomingAppointments(String patientId) async {
     try {
       final appointmentsCollection = firestore.collection("appointments");
       final QuerySnapshot querySnapshot = await appointmentsCollection
@@ -19,7 +19,8 @@ class AppointmentsRemoteDataSource {
     }
   }
 
-  Future<List<dynamic>> getDoctorCompletedAppointments(String doctorId) async {
+  Future<List<dynamic>> getPatientCompletedAppointments(
+      String patientId) async {
     try {
       final appointmentsCollection = firestore.collection("appointments");
       final QuerySnapshot querySnapshot = await appointmentsCollection
@@ -35,7 +36,8 @@ class AppointmentsRemoteDataSource {
     }
   }
 
-  Future<List<dynamic>> getDoctorCancelledAppointments(String doctorId) async {
+  Future<List<dynamic>> getPatientCancelledAppointments(
+      String patientId) async {
     try {
       final appointmentsCollection = firestore.collection("appointments");
       final QuerySnapshot querySnapshot = await appointmentsCollection
