@@ -44,13 +44,16 @@ class _RegisterFillDataState extends State<RegisterFillData> {
                   PatientAdditionalInfo(
                     onPrevious: () => _goToPage(0),
                     onSubmit: () {
+                      SuccessToast.showToast(msg: "Register Successfully");
                       Navigator.pushReplacementNamed(context, Routes.home);
                     },
                   ),
                   DoctorAdditionalInfo(
                     onPrevious: () => _goToPage(0),
-                    onSubmit: () => Navigator.pushReplacementNamed(
-                        context, Routes.home),
+                    onSubmit: () {
+                      SuccessToast.showToast(msg: "Register Successfully");
+                      Navigator.pushReplacementNamed(context, Routes.home);
+                    },
                   ),
                 ],
               ),
