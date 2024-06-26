@@ -30,7 +30,7 @@ class PatientHome extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'Book and schedule with nearest doctor',
+                    'Book with nearest doctor',
                     style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
                   const SizedBox(height: 8),
@@ -38,8 +38,8 @@ class PatientHome extends StatelessWidget {
                     onPressed: () {
                       // Handle the navigation
                     },
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white),
+                    style:
+                        ElevatedButton.styleFrom(backgroundColor: Colors.white),
                     child: const Text(
                       'Find Nearby',
                       style: TextStyle(color: Colors.blue),
@@ -111,7 +111,7 @@ class PatientHome extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         SizedBox(
-          height: 300,
+          height: 250,
           child: ListView.builder(
               itemBuilder: (context, index) {
                 return const DoctorCard(
