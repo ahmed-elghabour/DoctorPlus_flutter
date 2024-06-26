@@ -115,7 +115,8 @@ class HomePage extends StatelessWidget {
                   break;
                 case 4:
                   if (isLoggedIn) {
-                    navigate(context, route: Routes.profile);
+                    
+                    navigate(context, route: SharedPreference().getString(key: 'userType') == 'patient' ? Routes.profile : Routes.doctorProfile);
                   } else {
                     navigate(context, route: Routes.login);
                   }
