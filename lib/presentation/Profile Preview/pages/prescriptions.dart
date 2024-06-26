@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
-import 'package:doctor_plus/presentation/Public%20Profile/utils/prescription_service.dart';
+import 'package:doctor_plus/presentation/Profile%20Preview/utils/prescription_service.dart';
 import 'package:doctor_plus/utils/firebase.dart';
 import 'package:doctor_plus/utils/shared_preferences.dart';
 import 'package:flutter/material.dart';
