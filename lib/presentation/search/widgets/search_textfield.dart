@@ -1,15 +1,20 @@
 import 'package:doctor_plus/core/theming/colors.dart';
+import 'package:doctor_plus/domain/cubits/doctors/recommended_doctors_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SearchTextfield extends StatelessWidget {
   const SearchTextfield({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(15.0),
+    return Padding(
+      padding: const EdgeInsets.all(15.0),
       child: TextField(
-        decoration: InputDecoration(
+        onChanged: (query) {
+          BlocProvider.of<DoctorsCubit>(context).searchDoctors(query);
+        },
+        decoration: const InputDecoration(
           hintText: "Search for doctor or department",
           prefixIcon: Padding(
             padding: EdgeInsets.all(10.0),
