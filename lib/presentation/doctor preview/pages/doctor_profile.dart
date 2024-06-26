@@ -1,5 +1,6 @@
 import 'package:doctor_plus/core/widgets/card_doctor.dart';
 import 'package:doctor_plus/core/widgets/custom_floating_action_button.dart';
+import 'package:doctor_plus/data/model/doctor.dart';
 import 'package:doctor_plus/domain/cubits/doctorReviews/doctor_reviews_cubit.dart';
 import 'package:doctor_plus/presentation/doctor%20preview/widgets/doctor_profile_tabs.dart';
 import 'package:doctor_plus/utils/routes.dart';
@@ -21,11 +22,23 @@ class DoctorProfile extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
             children: [
-              const DoctorCard(
-                name: "Dr. John Doe",
-                speciality: "Cardiologist",
-                rating: 4.5,
-                reviews: 123,
+              DoctorCard(
+                doctor: Doctor(
+                  degrees: [
+                    'MBBS',
+                    'MD',
+                  ],
+                  birthDate: "1990-01-01",
+                  fName: 'John',
+                  lName: 'Doe',
+                  phone: '1234567890',
+                  specialty: 'Dermatologist',
+                  university: 'University of XYZ',
+                  graduationDate: "2020-01-01",
+                  type: 'Dermatologist',
+                  gender: 'Male',
+                  location: 'XYZ, ABC, DEF',
+                ),
               ),
               BlocProvider(
                 create: (context) =>

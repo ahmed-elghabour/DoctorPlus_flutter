@@ -1,10 +1,12 @@
 import 'package:doctor_plus/core/widgets/card_doctor.dart';
 import 'package:doctor_plus/core/widgets/card_specialization.dart';
 import 'package:doctor_plus/data/demo.dart';
+import 'package:doctor_plus/domain/cubits/recommendedDoctors/recommended_doctors_cubit.dart';
 import 'package:doctor_plus/presentation/patient%20home/all_doctors.dart';
 import 'package:doctor_plus/presentation/patient%20home/all_specializations.dart';
 import 'package:doctor_plus/presentation/specialization/specialization_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PatientHome extends StatelessWidget {
   const PatientHome({super.key});
@@ -110,17 +112,29 @@ class PatientHome extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 8),
-        SizedBox(
-          height: 250,
-          child: ListView.builder(
-              itemBuilder: (context, index) {
-                return const DoctorCard(
-                    name: 'Dr. Cullan Sullivan',
-                    speciality: 'Cardiologist | RSUD Soetomo',
-                    rating: 4.7,
-                    reviews: 3241);
-              },
-              itemCount: 5),
+        BlocBuilder<RecommendedDoctorsCubit, RecommendedDoctorsState>(
+          builder: (context, state) {
+            if (state is RecommendedDoctorsLoaded) {
+              return SizedBox(
+                height: 250,
+                child: ListView.builder(
+                    itemBuilder: (context, index) {
+                      return DoctorCard(
+                        doctor: state.recommendedDoctors[index],
+                      );
+                    },
+                    itemCount: state.recommendedDoctors.length),
+              );
+            } else if (state is RecommendedDoctorsLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else {
+              return const Center(
+                child: Text("Errorr loading doctors"),
+              );
+            }
+          },
         ),
       ],
     );

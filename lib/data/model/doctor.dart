@@ -23,6 +23,10 @@ class Doctor {
     required this.gender,
     required this.location,
     required this.birthDate,
+    this.image,
+    this.description = '',
+    this.reviews = const [],
+    // this.workingHours = const DoctorWorkingHours( days: [], endTimes: [], startTimes: [], ),
   });
 
   Doctor.additional({
@@ -63,5 +67,13 @@ class Doctor {
       'location': location,
       'birthDate': birthDate,
     };
+  }
+
+  double getRating() {
+    double sum = 0;
+    for (var element in reviews) {
+      sum += element.rateStars;
+    }
+    return sum / reviews.length;
   }
 }

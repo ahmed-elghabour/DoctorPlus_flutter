@@ -1,18 +1,22 @@
+import 'package:doctor_plus/data/model/doctor.dart';
 import 'package:doctor_plus/utils/routes.dart';
 import 'package:flutter/material.dart';
 
 class DoctorCard extends StatelessWidget {
-  final String name;
-  final String speciality;
-  final double rating;
-  final int reviews;
+  // final String name;
+  // final String speciality;
+  // final double rating;
+  // final int reviews;
+
+  final Doctor doctor;
 
   const DoctorCard({
     super.key,
-    required this.name,
-    required this.speciality,
-    required this.rating,
-    required this.reviews,
+    required this.doctor,
+    // required this.name,
+    // required this.speciality,
+    // required this.rating,
+    // required this.reviews,
   });
 
   @override
@@ -41,7 +45,7 @@ class DoctorCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          name,
+                          '${doctor.fName}  ${doctor.lName}',
                           style: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
@@ -55,7 +59,7 @@ class DoctorCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      speciality,
+                      doctor.specialty,
                       style: const TextStyle(fontSize: 16),
                     ),
                     const SizedBox(height: 8),
@@ -64,7 +68,7 @@ class DoctorCard extends StatelessWidget {
                         const Icon(Icons.star, color: Colors.yellow, size: 20),
                         const SizedBox(width: 4),
                         Text(
-                          '$rating ($reviews reviews)',
+                          '${doctor.getRating()} (${doctor.reviews.length} reviews)',
                           style: const TextStyle(fontSize: 16),
                         ),
                       ],

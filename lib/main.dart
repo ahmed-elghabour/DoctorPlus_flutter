@@ -2,6 +2,7 @@ import 'package:doctor_plus/core/theming/colors.dart';
 import 'package:doctor_plus/domain/cubits/auth/signup_cubit.dart';
 import 'package:doctor_plus/domain/cubits/doctorReservations/doctor_reservation_cubit.dart';
 import 'package:doctor_plus/domain/cubits/doctorReservations/patients_number_atDay_cubit.dart';
+import 'package:doctor_plus/domain/cubits/recommendedDoctors/recommended_doctors_cubit.dart';
 import 'package:doctor_plus/presentation/Appointment/pages/appointment.dart';
 import 'package:doctor_plus/presentation/Public%20Profile/pages/prescriptions.dart';
 import 'package:doctor_plus/presentation/Public%20Profile/pages/public_profile.dart';
@@ -62,7 +63,8 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (_) => SignupCubit()),
           BlocProvider(create: (_) => LanguageCubit()),
           BlocProvider(create: (_) => DoctorReservationCubit()),
-          BlocProvider(create: (_) => PatientsNumberAtDayCubit())
+          BlocProvider(create: (_) => PatientsNumberAtDayCubit()),
+          BlocProvider(create: (_) => RecommendedDoctorsCubit()),
         ],
         child: BlocBuilder<LanguageCubit, LanguageState>(
             builder: (context, state) {

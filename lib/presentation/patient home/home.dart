@@ -1,15 +1,9 @@
 import 'package:doctor_plus/core/theming/styles.dart';
 import 'package:doctor_plus/presentation/Doctor%20Home/pages/doctor_home.dart';
-import 'package:doctor_plus/presentation/patient%20home/all_doctors.dart';
-import 'package:doctor_plus/presentation/patient%20home/all_specializations.dart';
 import 'package:doctor_plus/presentation/patient%20home/patient_home.dart';
-import 'package:doctor_plus/presentation/specialization/specialization_page.dart';
 import 'package:doctor_plus/utils/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:doctor_plus/core/widgets/card_specialization.dart';
-import 'package:doctor_plus/core/widgets/card_doctor.dart';
-import 'package:doctor_plus/data/demo.dart';
 import 'package:doctor_plus/utils/routes.dart';
 
 class HomePage extends StatelessWidget {
@@ -59,7 +53,9 @@ class HomePage extends StatelessWidget {
                 'Welcome to Doctor Plus',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
-              SharedPreference().getString(key: "userType") == "doctor"? const DoctorHome() : const PatientHome()
+              SharedPreference().getString(key: "userType") == "doctor"
+                  ? const DoctorHome()
+                  : const PatientHome()
             ],
           ),
         ),
@@ -113,8 +109,11 @@ class HomePage extends StatelessWidget {
                   break;
                 case 4:
                   if (isLoggedIn) {
-                    
-                    navigate(context, route: SharedPreference().getString(key: 'userType') == 'patient' ? Routes.profile : Routes.doctorProfile);
+                    navigate(context,
+                        route: SharedPreference().getString(key: 'userType') ==
+                                'patient'
+                            ? Routes.profile
+                            : Routes.doctorProfile);
                   } else {
                     navigate(context, route: Routes.login);
                   }
@@ -130,5 +129,4 @@ class HomePage extends StatelessWidget {
   void navigate(BuildContext context, {required String route}) {
     Navigator.pushNamed(context, route);
   }
-
 }
