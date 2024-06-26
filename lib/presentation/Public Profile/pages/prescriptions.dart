@@ -96,7 +96,7 @@ class _PrescriptionsState extends State<Prescriptions> {
                                                   color: Colors.grey
                                               ),
                                             ),
-                                            Spacer(),
+                                            const Spacer(),
                                             FutureBuilder(
                                               future: getDoctorName(prescription['doctorId']),
                                               builder: (context, snapshot) {
