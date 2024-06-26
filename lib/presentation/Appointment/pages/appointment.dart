@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctor_plus/data/model/appointment.dart';
+import 'package:doctor_plus/utils/firebase.dart';
+import 'package:doctor_plus/utils/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -17,8 +19,6 @@ class _AppointmentPageState extends State<AppointmentPage>
   String? _selectedTime;
   String? _appointmentType;
   String? _paymentMethod;
-  String? _userId;
-  String? _userEmail;
 
   final Map<String, dynamic> _appointmentData = {
     'id': '123456',
@@ -38,37 +38,9 @@ class _AppointmentPageState extends State<AppointmentPage>
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
-    _loadUserEmail();
   }
 
-  Future<void> _loadUserEmail() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _userEmail = prefs.getString('user.email');
-    });
-    if (_userEmail != null) {
-      _fetchUserId();
-    }
-  }
-
-  Future<void> _fetchUserId() async {
-    if (_userEmail != null) {
-      QuerySnapshot userSnapshot = await FirebaseFirestore.instance
-          .collection('users')
-          .where('email', isEqualTo: _userEmail)
-          .limit(1)
-          .get();
-
-      if (userSnapshot.docs.isNotEmpty) {
-        setState(() {
-          _userId = userSnapshot.docs.first.id;
-          _appointmentData['patientId'] = _userId;
-          _appointmentData['patientName'] =
-              "${userSnapshot.docs.first['fName']} ${userSnapshot.docs.first['lName']}";
-        });
-      }
-    }
-  }
+  
 
   @override
   void dispose() {
@@ -348,7 +320,7 @@ class _AppointmentPageState extends State<AppointmentPage>
         _selectedTime != null &&
         _appointmentType != null &&
         _paymentMethod != null &&
-        _userId != null) {
+        SharedPreference().getString(key: "userID") != null) {
       _appointmentData['appointmentDateTime'] = Timestamp.fromDate(DateTime(
         _selectedDate!.year,
         _selectedDate!.month,
@@ -372,10 +344,10 @@ class _AppointmentPageState extends State<AppointmentPage>
         appointmentDateTime: _appointmentData['appointmentDateTime'],
         status: AppointmentStatus.upcoming,
       );
-
-      await FirebaseFirestore.instance
-          .collection('appointments')
-          .add(appointment.toJson());
+      await CustomFirebase().addNewCollection(
+        collection: "appointments",
+        data: appointment.toJson(),
+      );
 
       ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Appointment booked successfully!')));

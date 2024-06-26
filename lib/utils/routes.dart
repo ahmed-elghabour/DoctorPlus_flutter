@@ -1,5 +1,8 @@
 class Routes {
   static const String admin = "admin";
+  static const String adminStatistics = "admin/statisticsPage";
+  static const String adminComplaints = "admin/complaints_page";
+  static const String doctorManagement = "admin/doctor_management_page";
 
   static const String home = "/";
   static const String login = "auth/login";
