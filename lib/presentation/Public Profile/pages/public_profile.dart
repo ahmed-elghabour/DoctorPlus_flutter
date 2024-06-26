@@ -1,5 +1,6 @@
 import 'package:doctor_plus/data/model/appointment.dart';
 import 'package:doctor_plus/presentation/profile/profile.dart';
+import 'package:doctor_plus/utils/firebase.dart';
 import 'package:doctor_plus/utils/shared_preferences.dart';
 import 'package:flutter/material.dart';
 
@@ -40,14 +41,72 @@ class PublicProfile extends StatelessWidget {
                         NameWidget(
                           name: patient['patientName']
                         ),
-                        EmailWidget(
-                          email: patient['patientEmail']
+                        FutureBuilder<Map<String, dynamic>>(
+                          future: getPatientData(patient),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState == ConnectionState.waiting) {
+                              return const CircularProgressIndicator();
+                            } else if (snapshot.hasError) {
+                              return Text('Error: ${snapshot.error}');
+                            } else if (!snapshot.hasData || snapshot.data == null) {
+                              return const Text('No data found');
+                            }
+                            final data = snapshot.data!;
+                            final filteredData = data.entries
+                                .where((entry) =>
+                                    entry.key != 'lName' &&
+                                    entry.key != 'birthDate' &&
+                                    entry.key != 'fName' &&
+                                    entry.key != 'phone' &&
+                                    entry.key != 'location')
+                                .toList();
+                            return Column(
+                              children: [
+                                EmailWidget(
+                                  email: data['phone']
+                                ),
+
+                                Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: filteredData.map((entry) {
+                                        return Padding(
+                                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                entry.key,
+                                                style: const TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 16,
+                                                ),
+                                              ),
+                                              Text(
+                                                entry.value =='Select Choice' ? 'NA' : entry.value,
+                                                style: const TextStyle(
+                                                  fontSize: 16,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      }).toList(),
+                                    ),
+                                  )
+                              ],
+                            );
+                          }
                         ),
                         const SizedBox(height: 10),
+                        
                         Container(
                           padding: const EdgeInsets.symmetric(
                               vertical: 19, horizontal: 20),
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Row(
                                 children: [
@@ -65,42 +124,13 @@ class PublicProfile extends StatelessWidget {
                                     width: 10,
                                   ),
                                   const Text(
-                                    "Personal Information",
+                                    "Prescriptions",
                                     style: TextStyle(
                                         fontSize: 19,
                                         fontWeight: FontWeight.w400),
                                   )
                                 ],
                               ),
-                              const Divider(
-                                height: 20,
-                                thickness: 1,
-                                color: Colors.black12,
-                              ),
-                              Row(
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        color: const Color.fromARGB(
-                                            255, 255, 238, 239),
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
-                                    padding: const EdgeInsets.all(15),
-                                    width: 60,
-                                    child:
-                                        Image.asset("assets/icons/payment.png"),
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  const Text(
-                                    "Payment",
-                                    style: TextStyle(
-                                        fontSize: 19,
-                                        fontWeight: FontWeight.w400),
-                                  )
-                                ],
-                              )
                             ],
                           ),
                         )
@@ -117,12 +147,17 @@ class PublicProfile extends StatelessWidget {
                   child:  CircleAvatar(
                     backgroundColor: const Color.fromARGB(255, 224, 219, 175),
                     radius: 70,
-                    child: Text(patient['patientName'].split(' ')[0][0].toUpperCase() + patient['patientName'].split(' ')[1][0].toUpperCase(), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 28),),
+                    child: Text(patient['patientName'].split(' ')[0][0].toUpperCase() + patient['patientName'].split(' ')[1][0].toUpperCase(), style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 28),),
                   ),
                 ))
           ],
         ),
       ),
     );
+  }
+
+   Future<Map<String, dynamic>>getPatientData(Map<String,dynamic> patient) async {
+    var data = await CustomFirebase().getDocumentData(docID: patient['patientId']!);
+    return data;
   }
 }

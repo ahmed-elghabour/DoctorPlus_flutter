@@ -1,5 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class PaymentPage extends StatefulWidget {
   const PaymentPage({Key? key}) : super(key: key);
@@ -133,14 +135,81 @@ class _PaymentPageState extends State<PaymentPage> {
     );
   }
 
-  void _redirectToPaymentGateway(BuildContext context) {
-    // -------------> Implement redirecting to Visa payment gateway here instead show dialog !!!
+  Future<String> getPaymentKey(Map<String, dynamic> obj) async {
+  final String baseUrl = dotenv.env['BASE_URL']!; 
+  final String authRequest = dotenv.env['AUTH_REQUEST']!; 
+  final String orderRequest = dotenv.env['ORDER']!; 
+  final String paymentKeyRequest = dotenv.env['PAYMENT_KEY']!; 
+  final String apiKey = dotenv.env['API_KEY']!;
+  final String integrationId = dotenv.env['INTEGRATION_ID']!;
 
+  try {
+    // Get Auth Token
+    Response authResponse = await Dio().post(
+      '$baseUrl$authRequest',
+      data: {
+        'api_key': apiKey,
+      },
+    );
+    String authToken = authResponse.data['token'];
+    // Create Order
+    Response orderResponse = await Dio().post(
+      '$baseUrl$orderRequest',
+      data: {
+        'auth_token': authToken,
+        'delivery_needed': "false",
+        'amount_cents': '${250 * 100}',
+        'currency': "EGP",
+        'items': [
+          {
+            'name': obj['doctorName'],
+            'amount_cents': '${250}',
+            'description': obj['status'],
+            'quantity': "1",
+          }
+        ],
+      },
+    );
+    String orderId = orderResponse.data['id'];
+    // // Get Payment Key
+    Response paymentKeyResponse = await Dio().post(
+      '$baseUrl$paymentKeyRequest',
+      data: {
+        'auth_token': authToken,
+        'amount_cents': 250,
+        'expiration': 3600,
+        'order_id': orderId,
+        'billing_data': obj['patientName'],
+        'currency': "EGP",
+        'integration_id': integrationId,
+      },
+    );
+
+    String key = paymentKeyResponse.data['token'];
+    return key;
+  } catch (e) {
+    throw Exception('Failed to get payment key');
+  }
+}
+
+  void _redirectToPaymentGateway(BuildContext context) async{
+    // -------------> Implement redirecting to Visa payment gateway here instead show dialog !!!
+    // String key = await getPaymentKey({
+    //   'appointmentDateTime':"June 26, 2024 at 7:47:41 AM UTC+3",
+    //   'appointmentType':'anything',
+    //   'doctorId':'123',
+    //   'doctorName':'Ahmed',
+    //   'patientEmail':'ahmed@gmail.com',
+    //   'patientId':"456",
+    //   'patientName':'Amr',
+    //   'patientPhone':'0100099820',
+    //   'status':'upcoming'
+    // });
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Redirecting to Visa Payment Gateway'),
+          title: Text(dotenv.env['IFRAME_ID']!),
           content:
               const Text('You will be redirected to complete the payment.'),
           actions: [

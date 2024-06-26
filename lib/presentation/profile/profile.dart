@@ -12,35 +12,33 @@ class ProfilePage extends StatefulWidget {
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
-Future<Patient> getCurrentUser() async {
-  String? userId = SharedPreference().getString(key: "userID");
-
-  DocumentSnapshot snapshot =
-      await FirebaseFirestore.instance.collection('patients').doc(userId).get();
-
-  return snapshot.data() as Patient;
-}
-
 class _ProfilePageState extends State<ProfilePage> {
   void navigate({required String route}) => Navigator.pushNamed(context, route);
-  late Patient? currentUser;
+  String? userId = SharedPreference().getString(key: "userID");
 
-  Future<void> loadCurrentUser() async {
-    Patient user = await getCurrentUser();
+  Patient? currentUser;
+
+  Future<void> getCurrentUser() async {
+    DocumentSnapshot snapshot = await FirebaseFirestore.instance
+        .collection('patients')
+        .doc(userId)
+        .get();
     setState(() {
-      currentUser = user;
+      // currentUser = snapshot.data() as Patient;
+      print(userId);
     });
   }
 
   @override
   void initState() {
     super.initState();
-    loadCurrentUser();
-    print(currentUser?.email);
+    getCurrentUser();
   }
 
   @override
   Widget build(BuildContext context) {
+    print(currentUser?.email);
+
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 36, 124, 255),
       appBar: AppBar(

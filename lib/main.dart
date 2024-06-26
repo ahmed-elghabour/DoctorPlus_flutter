@@ -6,7 +6,7 @@ import 'package:doctor_plus/presentation/Appointment/pages/appointment.dart';
 import 'package:doctor_plus/presentation/Public%20Profile/pages/public_profile.dart';
 // import 'package:doctor_plus/domain/cubits/doctorReservations/patients_number_atDay_cubit.dart';
 import 'package:doctor_plus/presentation/appointments/pages/appointments.dart';
-import 'package:doctor_plus/presentation/doctor%20profile/pages/doctor_profile.dart';
+import 'package:doctor_plus/presentation/doctor%20preview/pages/doctor_profile.dart';
 import 'package:doctor_plus/presentation/appointments/pages/payment.dart';
 import 'package:doctor_plus/presentation/patient%20home/all_specializations.dart';
 import 'package:doctor_plus/presentation/patient%20home/complaints.dart';
@@ -36,11 +36,13 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:doctor_plus/domain/cubits/theme/theme_cubit.dart';
 import 'package:doctor_plus/presentation/auth/signup/register_fill.dart';
 import 'package:doctor_plus/domain/cubits/language/language_cubit.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await SharedPreference.initialize();
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
 
@@ -102,7 +104,7 @@ class MyApp extends StatelessWidget {
                   const SpecializationPage(specialization: ''),
               Routes.publicProfile: (context) => const PublicProfile(),
             },
-            // initialRoute: Routes.bookAppointment,
+            // initialRoute: Routes.home,
             initialRoute: SharedPreference().getString(key: 'userType') == null
                 ? Routes.login
                 : Routes.home,
