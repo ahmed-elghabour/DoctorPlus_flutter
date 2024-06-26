@@ -5,7 +5,6 @@ import 'package:doctor_plus/presentation/patient%20home/all_doctors.dart';
 import 'package:doctor_plus/presentation/patient%20home/all_specializations.dart';
 import 'package:doctor_plus/presentation/specialization/specialization_page.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PatientHome extends StatelessWidget {
   const PatientHome({super.key});
@@ -42,8 +41,10 @@ class PatientHome extends StatelessWidget {
                       },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white),
-                      child: const Text('Find Nearby',
-                          style: TextStyle(color: Colors.blue)),
+                      child: const Text(
+                        'Find Nearby',
+                        style: TextStyle(color: Colors.blue),
+                      ),
                     ),
                   ],
                 ),
@@ -114,33 +115,15 @@ class PatientHome extends StatelessWidget {
         Expanded(
           child: SizedBox(
             height: 250,
-            child: StreamBuilder<QuerySnapshot>(
-              stream: FirebaseFirestore.instance
-                  .collection('doctors')
-                  .limit(5)
-                  .snapshots(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                  return const Center(child: Text('No doctors available'));
-                }
-                return ListView.builder(
-                  itemCount: snapshot.data!.docs.length,
-                  itemBuilder: (context, index) {
-                    var data = snapshot.data!.docs[index].data()
-                        as Map<String, dynamic>;
-                    return DoctorCard(
-                      name: data['fName'] ?? 'No Name',
-                      speciality: data['specialty'] ?? 'No Speciality',
-                      rating: data['rating'] ?? 0.0,
-                      reviews: data['reviews'] ?? 0,
-                    );
-                  },
-                );
-              },
-            ),
+            child: ListView.builder(
+                itemBuilder: (context, index) {
+                  return const DoctorCard(
+                      name: 'Dr. Cullan Sullivan',
+                      speciality: 'Cardiologist | RSUD Soetomo',
+                      rating: 4.7,
+                      reviews: 3241);
+                },
+                itemCount: 5),
           ),
         ),
       ],

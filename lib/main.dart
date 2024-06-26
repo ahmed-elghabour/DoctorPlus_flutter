@@ -104,7 +104,7 @@ class MyApp extends StatelessWidget {
                   const SpecializationPage(specialization: ''),
               Routes.publicProfile: (context) => const PublicProfile(),
             },
-            // initialRoute: Routes.bookAppointment,
+            // initialRoute: Routes.home,
             initialRoute: SharedPreference().getString(key: 'userType') == null
                 ? Routes.login
                 : Routes.home,
