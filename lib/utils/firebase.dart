@@ -9,16 +9,18 @@ class CustomFirebase {
 
   static CustomFirebase get instance => auth ??= CustomFirebase();
 
-  signWithCredentials({required String email, required String password}) async {
+  signWithEmailAndPassword(
+      {required String email, required String password}) async {
     try {
-      return await FirebaseAuth.instance
+      var user = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
+      return user.user!.uid;
     } catch (e) {
       throw Exception(e);
     }
   }
 
-  createAccountWithCredentials(
+  createAccountWithEmailAndPassword(
       {required String email, required String password}) async {
     try {
       var user = await FirebaseAuth.instance
@@ -56,10 +58,41 @@ class CustomFirebase {
     }
   }
 
-  getCollectionData(
-      {required String? docID, required String collection}) async {
+  getCollectionData({required String collection}) async {
     try {
-    return  await FirebaseFirestore.instance.collection(collection).doc(docID).get();
+      QuerySnapshot snapshot =
+          await FirebaseFirestore.instance.collection(collection).get();
+      return snapshot.docs;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  getDocumentData({required String docID, String? collection}) async {
+    try {
+      if (collection != null) {
+        DocumentSnapshot snapshot = await FirebaseFirestore.instance
+            .collection(collection)
+            .doc(docID)
+            .get();
+        return snapshot.data();
+      } else {
+        DocumentSnapshot snapshot = await FirebaseFirestore.instance
+            .collection("patients")
+            .doc(docID)
+            .get();
+        if (snapshot.data() != null) {
+          return snapshot.data();
+        } else if (snapshot.data() == null) {
+          snapshot = await FirebaseFirestore.instance
+              .collection("doctors")
+              .doc(docID)
+              .get();
+          return snapshot.data();
+        } else {
+          return null;
+        }
+      }
     } catch (e) {
       throw Exception(e);
     }

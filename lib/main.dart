@@ -95,18 +95,17 @@ class MyApp extends StatelessWidget {
                   const DoctorAppointments(),
               Routes.doctorProfile: (context) => const DoctorProfile(),
               Routes.payment: (context) => const PaymentPage(),
-              Routes.allSpecialization: (context) => const AllSpecializationsPage(),
+              Routes.allSpecialization: (context) =>
+                  const AllSpecializationsPage(),
               Routes.allDoctors: (context) => const AllSpecializationsPage(),
-
               Routes.specialization: (context) =>
                   const SpecializationPage(specialization: ''),
-              
               Routes.publicProfile: (context) => const PublicProfile(),
-
-                  
             },
             // initialRoute: Routes.bookAppointment,
-            initialRoute: Routes.home,
+            initialRoute: SharedPreference().getString(key: 'userType') == null
+                ? Routes.login
+                : Routes.home,
           );
         }),
       ),
