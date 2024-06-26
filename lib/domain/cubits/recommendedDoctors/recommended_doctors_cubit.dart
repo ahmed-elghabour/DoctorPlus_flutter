@@ -6,19 +6,32 @@ import 'package:equatable/equatable.dart';
 
 part 'recommended_doctors_state.dart';
 
-class RecommendedDoctorsCubit extends Cubit<RecommendedDoctorsState> {
-  RecommendedDoctorsCubit() : super(RecommendedDoctorsInitial());
+class DoctorsCubit extends Cubit<DoctorsState> {
+  DoctorsCubit() : super(DoctorsInitial());
 
   void getRecommendedDocctors({required String patientId}) async {
-    emit(RecommendedDoctorsLoading());
+    emit(DoctorsLoading());
     try {
       List<Doctor> recommendedDoctors =
           await DoctorsRepository(remoteDataSource: DoctorsRemoteDataSource())
               .getRecommendedDoctors(patientId);
 
-      emit(RecommendedDoctorsLoaded(recommendedDoctors));
+      emit(DoctorsLoaded(recommendedDoctors));
     } catch (e) {
-      emit(RecommendedDoctorsError(e.toString()));
+      emit(DoctorsError(e.toString()));
+    }
+  }
+
+  void getAllDoctors() async {
+    emit(DoctorsLoading());
+    try {
+      List<Doctor> allDoctors =
+          await DoctorsRepository(remoteDataSource: DoctorsRemoteDataSource())
+              .getAllDoctors();
+
+      emit(DoctorsLoaded(allDoctors));
+    } catch (e) {
+      emit(DoctorsError(e.toString()));
     }
   }
 }

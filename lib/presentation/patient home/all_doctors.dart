@@ -13,17 +13,17 @@ class AllDoctorsPage extends StatelessWidget {
       appBar: const MyCustomAppBar(
         title: 'All Doctors',
       ),
-      body: BlocBuilder<RecommendedDoctorsCubit, RecommendedDoctorsState>(
+      body: BlocBuilder<DoctorsCubit, DoctorsState>(
         builder: (context, state) {
-          if (state is RecommendedDoctorsLoaded) {
+          if (state is DoctorsLoaded) {
             return ListView.builder(
                 itemBuilder: (context, index) {
                   return DoctorCard(
-                    doctor: state.recommendedDoctors[index],
+                    doctor: state.doctors[index],
                   );
                 },
-                itemCount: state.recommendedDoctors.length);
-          } else if (state is RecommendedDoctorsLoading) {
+                itemCount: state.doctors.length);
+          } else if (state is DoctorsLoading) {
             return const Center(
               child: CircularProgressIndicator(),
             );

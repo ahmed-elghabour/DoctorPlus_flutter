@@ -112,20 +112,20 @@ class PatientHome extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 8),
-        BlocBuilder<RecommendedDoctorsCubit, RecommendedDoctorsState>(
+        BlocBuilder<DoctorsCubit, DoctorsState>(
           builder: (context, state) {
-            if (state is RecommendedDoctorsLoaded) {
+            if (state is DoctorsLoaded) {
               return SizedBox(
                 height: 250,
                 child: ListView.builder(
                     itemBuilder: (context, index) {
                       return DoctorCard(
-                        doctor: state.recommendedDoctors[index],
+                        doctor: state.doctors[index],
                       );
                     },
-                    itemCount: state.recommendedDoctors.length),
+                    itemCount: state.doctors.length),
               );
-            } else if (state is RecommendedDoctorsLoading) {
+            } else if (state is DoctorsLoading) {
               return const Center(
                 child: CircularProgressIndicator(),
               );

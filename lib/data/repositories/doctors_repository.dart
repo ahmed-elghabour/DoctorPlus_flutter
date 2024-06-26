@@ -14,4 +14,13 @@ class DoctorsRepository {
       rethrow;
     }
   }
+
+  Future<List<Doctor>> getAllDoctors() async {
+    try {
+      List<dynamic> doctors = await remoteDataSource.getAllDoctors();
+      return doctors.map((e) => Doctor.fromJson(e)).toList();
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

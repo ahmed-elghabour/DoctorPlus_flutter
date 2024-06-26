@@ -1,22 +1,22 @@
 part of 'recommended_doctors_cubit.dart';
 
-sealed class RecommendedDoctorsState extends Equatable {
-  const RecommendedDoctorsState();
+sealed class DoctorsState extends Equatable {
+  const DoctorsState();
 
   @override
   List<Object> get props => [];
 }
 
-final class RecommendedDoctorsInitial extends RecommendedDoctorsState {}
+final class DoctorsInitial extends DoctorsState {}
 
-class RecommendedDoctorsLoading extends RecommendedDoctorsState {}
+class DoctorsLoading extends DoctorsState {}
 
-class RecommendedDoctorsLoaded extends RecommendedDoctorsState {
-  final List<Doctor> recommendedDoctors;
-  const RecommendedDoctorsLoaded(this.recommendedDoctors);
+class DoctorsLoaded extends DoctorsState {
+  final List<Doctor> doctors;
+  const DoctorsLoaded(this.doctors);
 }
 
-class RecommendedDoctorsError extends RecommendedDoctorsState {
+class DoctorsError extends DoctorsState {
   final String message;
-  const RecommendedDoctorsError(this.message);
+  const DoctorsError(this.message);
 }

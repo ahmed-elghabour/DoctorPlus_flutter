@@ -12,6 +12,7 @@ import 'package:doctor_plus/presentation/admin/statisticsPage.dart';
 // import 'package:doctor_plus/domain/cubits/doctorReservations/patients_number_atDay_cubit.dart';
 import 'package:doctor_plus/presentation/appointments/pages/appointments.dart';
 import 'package:doctor_plus/presentation/appointments/pages/payment.dart';
+import 'package:doctor_plus/presentation/doctor%20preview/pages/doctor_profile.dart';
 import 'package:doctor_plus/presentation/patient%20home/all_specializations.dart';
 import 'package:doctor_plus/presentation/patient%20home/complaints.dart';
 import 'package:doctor_plus/presentation/doctor%20home/pages/doctor_home.dart';
@@ -26,7 +27,7 @@ import 'package:doctor_plus/presentation/profile/settings.dart';
 import 'package:doctor_plus/presentation/search/pages/search_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'presentation/Doctor Profile/pages/doctor_page.dart';
+// import 'presentation/Doctor Profile/pages/doctor_page.dart';
 import 'utils/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:doctor_plus/utils/routes.dart';
@@ -64,7 +65,10 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (_) => LanguageCubit()),
           BlocProvider(create: (_) => DoctorReservationCubit()),
           BlocProvider(create: (_) => PatientsNumberAtDayCubit()),
-          BlocProvider(create: (_) => RecommendedDoctorsCubit()),
+          BlocProvider(
+              create: (_) => DoctorsCubit()
+                ..getAllDoctors()
+                ..getRecommendedDocctors(patientId: '555')),
         ],
         child: BlocBuilder<LanguageCubit, LanguageState>(
             builder: (context, state) {
