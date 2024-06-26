@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:doctor_plus/data/model/patient.dart';
 import 'package:doctor_plus/utils/routes.dart';
-import 'package:doctor_plus/utils/shared_preferences.dart';
 import 'package:flutter/material.dart';
+
+import '../../utils/shared_preferences.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -9,8 +12,32 @@ class ProfilePage extends StatefulWidget {
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
+Future<Patient> getCurrentUser() async {
+  String? userId = SharedPreference().getString(key: "userID");
+
+  DocumentSnapshot snapshot =
+      await FirebaseFirestore.instance.collection('patients').doc(userId).get();
+
+  return snapshot.data() as Patient;
+}
+
 class _ProfilePageState extends State<ProfilePage> {
   void navigate({required String route}) => Navigator.pushNamed(context, route);
+  late Patient? currentUser;
+
+  Future<void> loadCurrentUser() async {
+    Patient user = await getCurrentUser();
+    setState(() {
+      currentUser = user;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadCurrentUser();
+    print(currentUser?.email);
+  }
 
   @override
   Widget build(BuildContext context) {
