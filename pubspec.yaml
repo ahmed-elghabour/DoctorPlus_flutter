@@ -41,7 +41,7 @@ dependencies:
   webview_flutter: ^2.0.12
 
   # googleapis: ^13.2.0
-  # google_sign_in: ^6.2.1
+  google_sign_in: ^6.2.1
   # toastification: ^2.0.0
   # font_awesome_flutter: ^10.7.0
 
