@@ -1,6 +1,6 @@
 import 'package:doctor_plus/core/theming/styles.dart';
 import 'package:doctor_plus/presentation/Doctor%20Home/pages/doctor_home.dart';
-import 'package:doctor_plus/presentation/patient%20home/patient_home.dart';
+import 'package:doctor_plus/presentation/patient%20home/pages/patient_home.dart';
 import 'package:doctor_plus/utils/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';

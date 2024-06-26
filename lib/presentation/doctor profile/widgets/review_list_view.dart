@@ -1,5 +1,5 @@
 import 'package:doctor_plus/data/model/review.dart';
-import 'package:doctor_plus/presentation/doctor%20preview/widgets/review_tile.dart';
+import 'package:doctor_plus/presentation/doctor%20profile/widgets/review_tile.dart';
 import 'package:flutter/material.dart';
 
 class ReviewsListView extends StatelessWidget {

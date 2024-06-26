@@ -1,5 +1,8 @@
+import 'package:doctor_plus/data/model/doctor.dart';
+
 class Patient {
   late List<String> diseases, medications;
+  late List<Doctor> preferedDoctors;
   late String fName, lName, type, phone, gender, location, birthDate;
   late String diet,
       smoke,
@@ -28,6 +31,7 @@ class Patient {
     required this.hydration,
     required this.mentalHealth,
     required this.allergies,
+    this.preferedDoctors = const [],
   });
 
   Patient.additional({
@@ -62,6 +66,10 @@ class Patient {
       hydration: json['hydration'],
       mentalHealth: json['mentalHealth'],
       allergies: json['allergies'],
+      preferedDoctors: List<Doctor>.from(
+        json['preferedDoctors']
+            .map((doctorJson) => Doctor.fromJson(doctorJson)),
+      ),
     );
   }
 
@@ -84,6 +92,8 @@ class Patient {
       'hydration': hydration,
       'mentalHealth': mentalHealth,
       'allergies': allergies,
+      'preferedDoctors':
+          preferedDoctors.map((doctor) => doctor.toJson()).toList()
     };
   }
 }

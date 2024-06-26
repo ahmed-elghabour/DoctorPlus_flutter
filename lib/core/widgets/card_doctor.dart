@@ -3,20 +3,11 @@ import 'package:doctor_plus/utils/routes.dart';
 import 'package:flutter/material.dart';
 
 class DoctorCard extends StatelessWidget {
-  // final String name;
-  // final String speciality;
-  // final double rating;
-  // final int reviews;
-
   final Doctor doctor;
 
   const DoctorCard({
     super.key,
     required this.doctor,
-    // required this.name,
-    // required this.speciality,
-    // required this.rating,
-    // required this.reviews,
   });
 
   @override

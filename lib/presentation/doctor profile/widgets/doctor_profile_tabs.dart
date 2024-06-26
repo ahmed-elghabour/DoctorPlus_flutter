@@ -1,5 +1,5 @@
-import 'package:doctor_plus/presentation/doctor%20preview/widgets/doctor_about_tab.dart';
-import 'package:doctor_plus/presentation/doctor%20preview/widgets/doctor_reviews_tab.dart';
+import 'package:doctor_plus/presentation/doctor%20profile/widgets/doctor_about_tab.dart';
+import 'package:doctor_plus/presentation/doctor%20profile/widgets/doctor_reviews_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 

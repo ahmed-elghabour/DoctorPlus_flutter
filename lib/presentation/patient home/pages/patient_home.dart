@@ -1,9 +1,9 @@
 import 'package:doctor_plus/core/widgets/card_doctor.dart';
 import 'package:doctor_plus/core/widgets/card_specialization.dart';
 import 'package:doctor_plus/data/demo.dart';
-import 'package:doctor_plus/domain/cubits/recommendedDoctors/recommended_doctors_cubit.dart';
-import 'package:doctor_plus/presentation/patient%20home/all_doctors.dart';
-import 'package:doctor_plus/presentation/patient%20home/all_specializations.dart';
+import 'package:doctor_plus/domain/cubits/doctors/recommended_doctors_cubit.dart';
+import 'package:doctor_plus/presentation/patient%20home/pages/all_doctors.dart';
+import 'package:doctor_plus/presentation/patient%20home/pages/all_specializations.dart';
 import 'package:doctor_plus/presentation/specialization/specialization_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -1,5 +1,5 @@
 import 'package:doctor_plus/core/widgets/buttons.dart';
-import 'package:doctor_plus/presentation/profile/profile.dart';
+import 'package:doctor_plus/presentation/patient%20profile/profile.dart';
 import 'package:doctor_plus/utils/firebase.dart';
 import 'package:doctor_plus/utils/routes.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +8,8 @@ class ProfilePreview extends StatelessWidget {
   const ProfilePreview({super.key});
   @override
   Widget build(BuildContext context) {
-  final Map<String,dynamic> patient = ModalRoute.of(context)!.settings.arguments as Map<String,dynamic> ;
+    final Map<String, dynamic> patient =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 36, 124, 255),
       appBar: AppBar(
@@ -38,43 +39,43 @@ class ProfilePreview extends StatelessWidget {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         const SizedBox(height: 90),
-                        NameWidget(
-                          name: patient['patientName']
-                        ),
+                        NameWidget(name: patient['patientName']),
                         FutureBuilder<Map<String, dynamic>>(
-                          future: getPatientData(patient),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState == ConnectionState.waiting) {
-                              return const CircularProgressIndicator();
-                            } else if (snapshot.hasError) {
-                              return Text('Error: ${snapshot.error}');
-                            } else if (!snapshot.hasData || snapshot.data == null) {
-                              return const Text('No data found');
-                            }
-                            final data = snapshot.data!;
-                            final filteredData = data.entries
-                                .where((entry) =>
-                                    entry.key != 'lName' &&
-                                    entry.key != 'birthDate' &&
-                                    entry.key != 'fName' &&
-                                    entry.key != 'phone' &&
-                                    entry.key != 'location')
-                                .toList();
-                            return Column(
-                              children: [
-                                EmailWidget(
-                                  email: data['phone']
-                                ),
-
-                                Padding(
+                            future: getPatientData(patient),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const CircularProgressIndicator();
+                              } else if (snapshot.hasError) {
+                                return Text('Error: ${snapshot.error}');
+                              } else if (!snapshot.hasData ||
+                                  snapshot.data == null) {
+                                return const Text('No data found');
+                              }
+                              final data = snapshot.data!;
+                              final filteredData = data.entries
+                                  .where((entry) =>
+                                      entry.key != 'lName' &&
+                                      entry.key != 'birthDate' &&
+                                      entry.key != 'fName' &&
+                                      entry.key != 'phone' &&
+                                      entry.key != 'location')
+                                  .toList();
+                              return Column(
+                                children: [
+                                  EmailWidget(email: data['phone']),
+                                  Padding(
                                     padding: const EdgeInsets.all(16.0),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: filteredData.map((entry) {
                                         return Padding(
-                                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 8.0),
                                           child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
                                                 entry.key,
@@ -84,7 +85,9 @@ class ProfilePreview extends StatelessWidget {
                                                 ),
                                               ),
                                               Text(
-                                                entry.value =='Select Choice' ? 'NA' : entry.value,
+                                                entry.value == 'Select Choice'
+                                                    ? 'NA'
+                                                    : entry.value,
                                                 style: const TextStyle(
                                                   fontSize: 16,
                                                 ),
@@ -95,20 +98,20 @@ class ProfilePreview extends StatelessWidget {
                                       }).toList(),
                                     ),
                                   )
-                              ],
-                            );
-                          }
-                        ),
+                                ],
+                              );
+                            }),
                         const SizedBox(height: 10),
                         Padding(
                           padding: const EdgeInsets.only(bottom: 8.0),
                           child: buildSubmitButton(
                             widthFactor: 0.5,
-                                onPressed: () {
-                                  Navigator.pushNamed(context, Routes.prescriptions, arguments: patient);
-                                },
-                                label: 'View Prescriptions',
-                              ),
+                            onPressed: () {
+                              Navigator.pushNamed(context, Routes.prescriptions,
+                                  arguments: patient);
+                            },
+                            label: 'View Prescriptions',
+                          ),
                         ),
                       ],
                     ),
@@ -120,10 +123,17 @@ class ProfilePreview extends StatelessWidget {
                 top: 60,
                 child: Align(
                   alignment: Alignment.topCenter,
-                  child:  CircleAvatar(
+                  child: CircleAvatar(
                     backgroundColor: const Color.fromARGB(255, 224, 219, 175),
                     radius: 70,
-                    child: Text(patient['patientName'].split(' ')[0][0].toUpperCase() + patient['patientName'].split(' ')[1][0].toUpperCase(), style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 28),),
+                    child: Text(
+                      patient['patientName'].split(' ')[0][0].toUpperCase() +
+                          patient['patientName'].split(' ')[1][0].toUpperCase(),
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 28),
+                    ),
                   ),
                 ))
           ],
@@ -132,8 +142,10 @@ class ProfilePreview extends StatelessWidget {
     );
   }
 
-   Future<Map<String, dynamic>>getPatientData(Map<String,dynamic> patient) async {
-    var data = await CustomFirebase().getDocumentData(docID: patient['patientId']!);
+  Future<Map<String, dynamic>> getPatientData(
+      Map<String, dynamic> patient) async {
+    var data =
+        await CustomFirebase().getDocumentData(docID: patient['patientId']!);
     return data;
   }
 }

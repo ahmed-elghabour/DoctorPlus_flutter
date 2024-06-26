@@ -2,29 +2,28 @@ import 'package:doctor_plus/core/theming/colors.dart';
 import 'package:doctor_plus/domain/cubits/auth/signup_cubit.dart';
 import 'package:doctor_plus/domain/cubits/doctorReservations/doctor_reservation_cubit.dart';
 import 'package:doctor_plus/domain/cubits/doctorReservations/patients_number_atDay_cubit.dart';
-import 'package:doctor_plus/domain/cubits/recommendedDoctors/recommended_doctors_cubit.dart';
+import 'package:doctor_plus/domain/cubits/doctors/recommended_doctors_cubit.dart';
 import 'package:doctor_plus/presentation/Appointment/pages/appointment.dart';
 import 'package:doctor_plus/presentation/Profile%20Preview/pages/prescriptions.dart';
 import 'package:doctor_plus/presentation/Profile%20Preview/pages/profile_preview.dart';
 import 'package:doctor_plus/presentation/admin/admin_home.dart';
-import 'package:doctor_plus/presentation/admin/complaints_page.dart';
 import 'package:doctor_plus/presentation/admin/doctor_managment_page.dart';
 import 'package:doctor_plus/presentation/admin/statisticsPage.dart';
 // import 'package:doctor_plus/domain/cubits/doctorReservations/patients_number_atDay_cubit.dart';
 import 'package:doctor_plus/presentation/appointments/pages/appointments.dart';
 import 'package:doctor_plus/presentation/appointments/pages/payment.dart';
-import 'package:doctor_plus/presentation/doctor%20preview/pages/doctor_profile.dart';
-import 'package:doctor_plus/presentation/patient%20home/all_specializations.dart';
-import 'package:doctor_plus/presentation/patient%20home/complaints.dart';
+import 'package:doctor_plus/presentation/doctor%20profile/pages/doctor_profile.dart';
+import 'package:doctor_plus/presentation/patient%20home/pages/all_specializations.dart';
+import 'package:doctor_plus/presentation/patient%20home/pages/complaints.dart';
 import 'package:doctor_plus/presentation/doctor%20home/pages/doctor_home.dart';
-import 'package:doctor_plus/presentation/profile/FAQ.dart';
-import 'package:doctor_plus/presentation/profile/language.dart';
-import 'package:doctor_plus/presentation/profile/notification.dart';
+import 'package:doctor_plus/presentation/patient%20profile/FAQ.dart';
+import 'package:doctor_plus/presentation/patient%20profile/language.dart';
+import 'package:doctor_plus/presentation/patient%20profile/notification.dart';
 import 'package:doctor_plus/presentation/specialization/specialization_page.dart';
 
-import 'package:doctor_plus/presentation/profile/profile.dart';
-import 'package:doctor_plus/presentation/profile/security.dart';
-import 'package:doctor_plus/presentation/profile/settings.dart';
+import 'package:doctor_plus/presentation/patient%20profile/profile.dart';
+import 'package:doctor_plus/presentation/patient%20profile/security.dart';
+import 'package:doctor_plus/presentation/patient%20profile/settings.dart';
 import 'package:doctor_plus/presentation/search/pages/search_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -35,7 +34,7 @@ import 'package:doctor_plus/utils/routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:doctor_plus/generated/l10n.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:doctor_plus/presentation/patient%20home/home.dart';
+import 'package:doctor_plus/presentation/home.dart';
 import 'package:doctor_plus/presentation/auth/login/login.dart';
 import 'package:doctor_plus/utils/shared_preferences.dart';
 import 'package:doctor_plus/presentation/auth/signup/register.dart';
@@ -92,7 +91,7 @@ class MyApp extends StatelessWidget {
             routes: {
               Routes.admin: (context) => const AdminHomePage(),
               Routes.adminStatistics: (context) => StatisticsPage(),
-              Routes.adminComplaints: (context) =>  AdminComplaintsPage(),
+              Routes.adminComplaints: (context) => const ComplaintsPage(),
               Routes.doctorManagement: (context) => DoctorManagmentPage(),
               Routes.faq: (context) => const FAQPage(),
               Routes.home: (context) => const HomePage(),

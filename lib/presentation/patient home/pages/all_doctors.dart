@@ -1,4 +1,4 @@
-import 'package:doctor_plus/domain/cubits/recommendedDoctors/recommended_doctors_cubit.dart';
+import 'package:doctor_plus/domain/cubits/doctors/recommended_doctors_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:doctor_plus/core/widgets/card_doctor.dart';
 import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
