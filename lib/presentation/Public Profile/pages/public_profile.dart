@@ -1,5 +1,6 @@
 import 'package:doctor_plus/data/model/appointment.dart';
 import 'package:doctor_plus/presentation/profile/profile.dart';
+import 'package:doctor_plus/utils/firebase.dart';
 import 'package:doctor_plus/utils/shared_preferences.dart';
 import 'package:flutter/material.dart';
 
@@ -124,5 +125,10 @@ class PublicProfile extends StatelessWidget {
         ),
       ),
     );
+  }
+
+   Future<dynamic>getPtientData(Map<String,dynamic> patient) async {
+    var data = await CustomFirebase().getDocumentData(docID: SharedPreference().getString(key: patient['patientName'])!);
+    return data;
   }
 }

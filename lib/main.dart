@@ -36,11 +36,13 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:doctor_plus/domain/cubits/theme/theme_cubit.dart';
 import 'package:doctor_plus/presentation/auth/signup/register_fill.dart';
 import 'package:doctor_plus/domain/cubits/language/language_cubit.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await SharedPreference.initialize();
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
 
@@ -105,7 +107,7 @@ class MyApp extends StatelessWidget {
             // initialRoute: Routes.bookAppointment,
             initialRoute: SharedPreference().getString(key: 'userType') == null
                 ? Routes.login
-                : Routes.home,
+                : Routes.payment,
           );
         }),
       ),
