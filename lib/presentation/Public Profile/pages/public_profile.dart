@@ -1,6 +1,9 @@
+import 'package:doctor_plus/core/widgets/buttons.dart';
 import 'package:doctor_plus/data/model/appointment.dart';
+import 'package:doctor_plus/presentation/Public%20Profile/pages/prescriptions.dart';
 import 'package:doctor_plus/presentation/profile/profile.dart';
 import 'package:doctor_plus/utils/firebase.dart';
+import 'package:doctor_plus/utils/routes.dart';
 import 'package:doctor_plus/utils/shared_preferences.dart';
 import 'package:flutter/material.dart';
 
@@ -100,40 +103,16 @@ class PublicProfile extends StatelessWidget {
                           }
                         ),
                         const SizedBox(height: 10),
-                        
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 19, horizontal: 20),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        color: const Color.fromARGB(
-                                            255, 234, 242, 255),
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
-                                    padding: const EdgeInsets.all(15),
-                                    width: 60,
-                                    child: Image.asset("assets/icons/id.png"),
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  const Text(
-                                    "Prescriptions",
-                                    style: TextStyle(
-                                        fontSize: 19,
-                                        fontWeight: FontWeight.w400),
-                                  )
-                                ],
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 8.0),
+                          child: buildSubmitButton(
+                            widthFactor: 0.5,
+                                onPressed: () {
+                                  Navigator.pushNamed(context, Routes.prescriptions, arguments: patient);
+                                },
+                                label: 'View Prescriptions',
                               ),
-                            ],
-                          ),
-                        )
+                        ),
                       ],
                     ),
                   ),

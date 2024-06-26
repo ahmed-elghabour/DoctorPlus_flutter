@@ -27,4 +27,10 @@ class Routes {
 
   static const String doctorProfile = "doctor/profile";
   static const String publicProfile = "home/patient/publicProfile";
+<<<<<<< HEAD
+=======
+  static const String prescriptions= "home/patient/publicProfile/prescriptions";
+
+
+>>>>>>> d0eb5bcc207c6822a25dc9be704975d9cb6ef47f
 }
