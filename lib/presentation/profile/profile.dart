@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctor_plus/data/model/patient.dart';
+import 'package:doctor_plus/utils/firebase.dart';
 import 'package:doctor_plus/utils/routes.dart';
 import 'package:flutter/material.dart';
 
@@ -18,27 +19,13 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Patient? currentUser;
 
-  Future<void> getCurrentUser() async {
-    DocumentSnapshot snapshot = await FirebaseFirestore.instance
-        .collection('patients')
-        .doc(userId)
-        .get();
-    setState(() {
-      // currentUser = snapshot.data() as Patient;
-      print(userId);
-    });
-  }
-
   @override
   void initState() {
     super.initState();
-    getCurrentUser();
   }
 
   @override
   Widget build(BuildContext context) {
-    print(currentUser?.email);
-
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 36, 124, 255),
       appBar: AppBar(
