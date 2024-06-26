@@ -1,4 +1,3 @@
-import 'package:doctor_plus/presentation/Public%20Profile/pages/public_profile.dart';
 import 'package:doctor_plus/presentation/doctor%20home/utils/random_colors.dart';
 import 'package:doctor_plus/presentation/doctor%20home/widgets/patient_card.dart';
 import 'package:doctor_plus/utils/routes.dart';
@@ -9,7 +8,7 @@ List<Widget> getSliders(List<List<dynamic>>chunkedReservations, BuildContext con
     return Column(
       children: chunk.map((item) {
         return GestureDetector(
-          onTap: () => Navigator.pushNamed(context, Routes.publicProfile, arguments: item),
+          onTap: () => Navigator.pushNamed(context, Routes.profilePreview, arguments: item),
           child: Container(
             margin: const EdgeInsets.symmetric(vertical: 10.0),
             child: PatientCard(patientId: item['patientName'], reservationType: item['appointmentType'], reservationDate: item['appointmentDateTime'], color: getRandomColor(),)

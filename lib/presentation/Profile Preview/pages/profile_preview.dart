@@ -1,14 +1,11 @@
 import 'package:doctor_plus/core/widgets/buttons.dart';
-import 'package:doctor_plus/data/model/appointment.dart';
-import 'package:doctor_plus/presentation/Public%20Profile/pages/prescriptions.dart';
 import 'package:doctor_plus/presentation/profile/profile.dart';
 import 'package:doctor_plus/utils/firebase.dart';
 import 'package:doctor_plus/utils/routes.dart';
-import 'package:doctor_plus/utils/shared_preferences.dart';
 import 'package:flutter/material.dart';
 
-class PublicProfile extends StatelessWidget {
-  const PublicProfile({super.key});
+class ProfilePreview extends StatelessWidget {
+  const ProfilePreview({super.key});
   @override
   Widget build(BuildContext context) {
   final Map<String,dynamic> patient = ModalRoute.of(context)!.settings.arguments as Map<String,dynamic> ;

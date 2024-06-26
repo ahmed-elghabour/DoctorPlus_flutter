@@ -1,13 +1,14 @@
+import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
-class ComplaintsPage extends StatelessWidget {
-  static const routeName = '/complaintsPage';
+class AdminComplaintsPage extends StatelessWidget {
+  //static const routeName = '/complaintsPage';
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Complaints')),
-      body: const Center(child: Text('Complaints Page')),
+    return const Scaffold(
+      appBar: MyCustomAppBar(title: 'Complaints'),
+      body: Center(child: Text('Complaints Page')),
     );
   }
 }
