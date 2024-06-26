@@ -1,7 +1,9 @@
-import 'package:doctor_plus/presentation/admin/doctor_managment_page.dart';
-import 'package:doctor_plus/presentation/admin/statisticsPage.dart';
-import 'package:doctor_plus/presentation/admin/complaints_page.dart';
+import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:doctor_plus/presentation/admin/complaints_page.dart';
+import 'package:doctor_plus/presentation/admin/statisticsPage.dart';
+import 'package:doctor_plus/presentation/admin/doctor_managment_page.dart';
+import 'package:doctor_plus/utils/routes.dart';
 
 class AdminHomePage extends StatelessWidget {
   const AdminHomePage({super.key});
@@ -9,9 +11,7 @@ class AdminHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Admin Home'),
-      ),
+      appBar: const MyCustomAppBar(title: 'Admin'),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: GridView.count(
@@ -24,21 +24,21 @@ class AdminHomePage extends StatelessWidget {
               'Complaints',
               Icons.report_problem,
               Colors.red,
-              ComplaintsPage.routeName,
+              Routes.adminComplaints,
             ),
             _buildCard(
               context,
               'Statistics',
               Icons.bar_chart,
               Colors.blue,
-              StatisticsPage.routeName,
+              Routes.adminStatistics,
             ),
             _buildCard(
               context,
               'New Doctors',
               Icons.person_add,
               Colors.green,
-              DoctorManagmentPage.routeName,
+              Routes.doctorManagement,
             ),
           ],
         ),
