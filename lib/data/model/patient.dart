@@ -1,15 +1,34 @@
-import 'package:doctor_plus/data/model/user.dart';
-
-class Patient extends SystemUser {
+class Patient {
   late List<String> diseases, medications;
+  late String fName, lName, type, phone, gender, location, birthDate;
   late String diet,
       smoke,
       sleep,
       stress,
       exercise,
       hydration,
-      allergies,
-      mentalHealth;
+      mentalHealth,
+      allergies;
+
+  Patient({
+    required this.diseases,
+    required this.medications,
+    required this.fName,
+    required this.lName,
+    required this.type,
+    required this.phone,
+    required this.gender,
+    required this.location,
+    required this.birthDate,
+    required this.diet,
+    required this.smoke,
+    required this.sleep,
+    required this.stress,
+    required this.exercise,
+    required this.hydration,
+    required this.mentalHealth,
+    required this.allergies,
+  });
 
   Patient.additional({
     required this.diet,
@@ -17,37 +36,54 @@ class Patient extends SystemUser {
     required this.sleep,
     required this.stress,
     required this.exercise,
-    required this.hydration,
     required this.allergies,
-    required this.mentalHealth,
+    required this.hydration,
     required this.diseases,
+    required this.mentalHealth,
     required this.medications,
   });
 
-  Patient.login({
-    required super.email,
-    required super.password,
-  }) : super.login();
-
-  Patient.register({
-    required super.fName,
-    required super.lName,
-    required super.email,
-    required super.password,
-  }) : super.register();
-
-  factory Patient.fromMap(Map<String, dynamic> map) {
-    return Patient.additional(
-      diet: map['diet'] ?? '',
-      smoke: map['smoke'] ?? '',
-      sleep: map['sleep'] ?? '',
-      stress: map['stress'] ?? '',
-      exercise: map['exercise'] ?? '',
-      hydration: map['hydration'] ?? '',
-      allergies: map['allergies'] ?? '',
-      mentalHealth: map['mentalHealth'] ?? '',
-      diseases: List<String>.from(map['diseases'] ?? []),
-      medications: List<String>.from(map['medications'] ?? []),
+  factory Patient.fromJson(Map<String, dynamic> json) {
+    return Patient(
+      diseases: List<String>.from(json['diseases']),
+      medications: List<String>.from(json['medications']),
+      fName: json['fName'],
+      lName: json['lName'],
+      type: json['type'],
+      phone: json['phone'],
+      gender: json['gender'],
+      location: json['location'],
+      birthDate: json['birthDate'],
+      diet: json['diet'],
+      smoke: json['smoke'],
+      sleep: json['sleep'],
+      stress: json['stress'],
+      exercise: json['exercise'],
+      hydration: json['hydration'],
+      mentalHealth: json['mentalHealth'],
+      allergies: json['allergies'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'diseases': diseases,
+      'medications': medications,
+      'fName': fName,
+      'lName': lName,
+      'type': type,
+      'phone': phone,
+      'gender': gender,
+      'location': location,
+      'birthDate': birthDate,
+      'diet': diet,
+      'smoke': smoke,
+      'sleep': sleep,
+      'stress': stress,
+      'exercise': exercise,
+      'hydration': hydration,
+      'mentalHealth': mentalHealth,
+      'allergies': allergies,
+    };
   }
 }

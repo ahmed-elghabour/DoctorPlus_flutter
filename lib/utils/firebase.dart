@@ -60,6 +60,10 @@ class CustomFirebase {
     }
   }
 
+  Future<User?> getCurrentUser() async {
+    return FirebaseAuth.instance.currentUser!;
+  }
+
   Future<void> addNewCollection({
     String? docID,
     required String collection,
