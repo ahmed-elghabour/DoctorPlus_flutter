@@ -1,18 +1,16 @@
 import 'package:doctor_plus/domain/cubits/doctorReservations/patients_number_atDay_cubit.dart';
 import 'package:doctor_plus/domain/cubits/doctorReservations/patients_number_atDay_state.dart';
 import 'package:doctor_plus/presentation/Doctor%20home/widgets/new_patients_box.dart';
+import 'package:doctor_plus/utils/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DoctorHomeCard extends StatelessWidget {
-  final int oldPatients = 64;
-
+class DoctorHomeCard extends StatelessWidget {  
   const DoctorHomeCard({super.key});
 
   @override
   Widget build(BuildContext context) {
-    //TODO: doctor ID
-    context.read<PatientsNumberAtDayCubit>().fetchPatients("789");
+    context.read<PatientsNumberAtDayCubit>().fetchPatients(SharedPreference().getString(key: "userID"));
     return BlocBuilder<PatientsNumberAtDayCubit, PatientsNumAtDayState>(
       builder: (context, state) {
         List<int> patientsNumber = [];

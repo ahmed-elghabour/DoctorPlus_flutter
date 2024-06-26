@@ -38,14 +38,10 @@ class PublicProfile extends StatelessWidget {
                       children: [
                         const SizedBox(height: 90),
                         NameWidget(
-                          name:
-                              SharedPreference().getString(key: 'user.name') ??
-                                  'No Name',
+                          name: patient['patientName']
                         ),
                         EmailWidget(
-                          email:
-                              SharedPreference().getString(key: 'user.email') ??
-                                  'No email',
+                          email: patient['patientEmail']
                         ),
                         const SizedBox(height: 10),
                         Container(
@@ -118,8 +114,10 @@ class PublicProfile extends StatelessWidget {
                 top: 60,
                 child: Align(
                   alignment: Alignment.topCenter,
-                  child: ProfileImage(
-                    imageUrl: SharedPreference().getString(key: 'user.image'),
+                  child:  CircleAvatar(
+                    backgroundColor: const Color.fromARGB(255, 224, 219, 175),
+                    radius: 70,
+                    child: Text(patient['patientName'].split(' ')[0][0].toUpperCase() + patient['patientName'].split(' ')[1][0].toUpperCase(), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 28),),
                   ),
                 ))
           ],

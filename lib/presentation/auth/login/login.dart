@@ -1,4 +1,5 @@
 import 'package:doctor_plus/presentation/auth/widgets/auth.switch_page.dart';
+import 'package:doctor_plus/utils/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../widgets/signin_option.dart';
@@ -96,19 +97,12 @@ class _LoginInputsState extends State<LoginInputs> {
               changePasswordVisibility: () =>
                   setState(() => showPassword = !showPassword)),
           const SizedBox(height: 2.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              customCheckBox(
-                value: rememberMe,
-                label: "Remember me",
-                onChanged: (val) => setState(() => rememberMe = val ??= false),
-              ),
-              buildTextButton(
-                label: "Forgot Password?",
-                onPressed: () {},
-              ),
-            ],
+          Align(
+            alignment: AlignmentDirectional.centerEnd,
+            child: buildTextButton(
+              label: "Forgot Password?",
+              onPressed: () {},
+            ),
           ),
           buildSubmitButton(
             label: "Login",
@@ -141,15 +135,13 @@ class _LoginInputsState extends State<LoginInputs> {
       final String password = _passwordController.text;
 
       // login
-      await CustomFirebase.instance
-          .signWithCredentials(email: email, password: password);
+      var user = await CustomFirebase.instance
+          .signWithEmailAndPassword(email: email, password: password);
+      SharedPreference().setString(key: 'userID', value: user);
 
-      // save user data
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setBool('isLogged', true);
-      await prefs.setString('user.email', email);
-
-      // redirect
+      var res = await CustomFirebase().getDocumentData(docID: user);
+      SharedPreference().setString(
+          key: 'userType', value: res["stress"] != null ? "patient" : "doctor");
       navigate(route: Routes.home);
     } catch (e) {
       showErrorDialog(error: e.toString());

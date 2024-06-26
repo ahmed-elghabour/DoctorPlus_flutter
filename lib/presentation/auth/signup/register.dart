@@ -127,7 +127,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   void createNewUser() async {
     try {
-      var user = await CustomFirebase.instance.createAccountWithCredentials(
+      var user = await CustomFirebase.instance.createAccountWithEmailAndPassword(
         email: _emailController.text,
         password: _passwordController.text,
       );
