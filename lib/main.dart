@@ -107,7 +107,7 @@ class MyApp extends StatelessWidget {
             // initialRoute: Routes.bookAppointment,
             initialRoute: SharedPreference().getString(key: 'userType') == null
                 ? Routes.login
-                : Routes.payment,
+                : Routes.home,
           );
         }),
       ),
