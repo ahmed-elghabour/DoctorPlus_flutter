@@ -15,4 +15,14 @@ class Doctor extends SystemUser {
     required this.graduationDate,
   });
   Doctor.login({required super.email, required super.password}) : super.login();
+
+  factory Doctor.fromMap(Map<String, dynamic> map) {
+    return Doctor.additional(
+      specialty: map['specialty'] ?? '',
+      university: map['university'] ?? '',
+      graduationDate: map['graduationDate'] ?? '',
+      degrees: List<String>.from(map['degrees'] ?? []),
+      files: (map['files'] as List).map((filePath) => File(filePath)).toList(),
+    );
+  }
 }
