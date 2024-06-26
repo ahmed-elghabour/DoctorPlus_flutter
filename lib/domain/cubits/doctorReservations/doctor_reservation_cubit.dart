@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class DoctorReservationCubit extends Cubit<List<dynamic>> {
   DoctorReservationCubit() : super([]);
 
-  void fetchReservations(String doctorId, String datePicked) {
-    DoctorService.getReservations(doctorId, datePicked)?.listen((data) {
+  void fetchReservations(String? doctorId, String datePicked) {
+    DoctorService.getReservations(doctorId!, datePicked)?.listen((data) {
       emit(data);
     });
   }

@@ -20,6 +20,9 @@ class AppointmentModel {
 
   final String appointmentType;
   final String paymentMethod;
+  // final String patientEmail;
+  // final String patientPhone;
+
 
   final Timestamp appointmentDateTime;
 
@@ -37,6 +40,8 @@ class AppointmentModel {
     required this.patientId,
     required this.appointmentDateTime,
     required this.status,
+    // required this.patientEmail,
+    // required this.patientPhone,
   });
 
   AppointmentModel.fromJson(Map<String, dynamic> json)
@@ -51,6 +56,8 @@ class AppointmentModel {
           appointmentType: json['appointmentType'],
           paymentMethod: json['paymentMethod'],
           appointmentDateTime: json['appointmentDateTime'],
+          // patientEmail: json['patientEmail'],
+          // patientPhone: json['patientPhone'],
           status: json['status'] == "upcoming"
               ? AppointmentStatus.upcoming
               : json['status'] == "completed"
@@ -70,6 +77,8 @@ class AppointmentModel {
         'patientName': patientName,
         'appointmentType': appointmentType,
         'paymentMethod': paymentMethod,
+        // 'patientEmail': patientEmail,
+        // 'patientPhone': patientPhone,
         'appointmentDateTime': appointmentDateTime,
         'status': status == AppointmentStatus.upcoming
             ? "pending"

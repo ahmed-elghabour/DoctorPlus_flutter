@@ -72,7 +72,7 @@ class _PatientListState extends State<PatientList> {
               )
           ],
         ),
-        PatientsCarousel(datePicked: datePicked)
+        PatientsCarousel(datePicked: datePicked,)
       ],
     );
   }

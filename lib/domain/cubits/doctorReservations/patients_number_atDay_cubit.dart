@@ -5,10 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class PatientsNumberAtDayCubit extends Cubit<PatientsNumAtDayState> {
   PatientsNumberAtDayCubit() : super(PatientsNumAtDayInitState());
 
-  void fetchPatients(String doctorId) {
+  void fetchPatients(String? doctorId) {
     emit(PatientsNumAtDayPendingState());
     try {
-      DoctorService.getPatientsNumAtDay(doctorId).listen((data) {
+      DoctorService.getPatientsNumAtDay(doctorId!).listen((data) {
         emit(PatientsNumAtDayLoadedState(data));
       });
     } catch (e) {
