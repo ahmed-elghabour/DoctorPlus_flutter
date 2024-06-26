@@ -1,3 +1,4 @@
+import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -8,30 +9,27 @@ class StatisticsPage extends StatelessWidget {
     return FirebaseFirestore.instance
         .collection('doctors')
         .snapshots()
-        .map((snapshot) =>
-            snapshot.docs.map((doc) => doc.data()).toList());
+        .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
   }
 
   Stream<List<Map<String, dynamic>>> _getPatients() {
     return FirebaseFirestore.instance
         .collection('patients')
         .snapshots()
-        .map((snapshot) =>
-            snapshot.docs.map((doc) => doc.data()).toList());
+        .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
   }
 
   Stream<List<Map<String, dynamic>>> _getAppointments() {
     return FirebaseFirestore.instance
         .collection('appointments')
         .snapshots()
-        .map((snapshot) =>
-            snapshot.docs.map((doc) => doc.data()).toList());
+        .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Statistics')),
+      appBar: const MyCustomAppBar(title: 'Statistics'),
       body: SingleChildScrollView(
         child: Column(
           children: [
