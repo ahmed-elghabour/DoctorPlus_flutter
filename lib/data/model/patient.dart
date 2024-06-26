@@ -35,4 +35,19 @@ class Patient extends SystemUser {
     required super.email,
     required super.password,
   }) : super.register();
+
+  factory Patient.fromMap(Map<String, dynamic> map) {
+    return Patient.additional(
+      diet: map['diet'] ?? '',
+      smoke: map['smoke'] ?? '',
+      sleep: map['sleep'] ?? '',
+      stress: map['stress'] ?? '',
+      exercise: map['exercise'] ?? '',
+      hydration: map['hydration'] ?? '',
+      allergies: map['allergies'] ?? '',
+      mentalHealth: map['mentalHealth'] ?? '',
+      diseases: List<String>.from(map['diseases'] ?? []),
+      medications: List<String>.from(map['medications'] ?? []),
+    );
+  }
 }

@@ -3,11 +3,32 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class CustomFirebase {
   static CustomFirebase? auth;
 
   static CustomFirebase get instance => auth ??= CustomFirebase();
+
+  signWithGoogle() async {
+    try {
+      final FirebaseAuth auth = FirebaseAuth.instance;
+      final GoogleSignIn googleSignIn = GoogleSignIn();
+      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+      if (googleUser != null) {
+        final GoogleSignInAuthentication googleAuth =
+            await googleUser.authentication;
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
+        await auth.signInWithCredential(credential);
+        return auth.currentUser?.uid;
+      }
+    } catch (e) {
+      print("Error signing in with Google: $e");
+    }
+  }
 
   signWithEmailAndPassword(
       {required String email, required String password}) async {

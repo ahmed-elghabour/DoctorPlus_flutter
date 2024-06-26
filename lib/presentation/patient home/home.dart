@@ -47,22 +47,20 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: SizedBox(
-            width: double.infinity,
-            height: MediaQuery.sizeOf(context).height,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Welcome to Doctor Plus',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                ),
-                SharedPreference().getString(key: "userType") == "doctor"? const DoctorHome() : const PatientHome()
-              ],
-            ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: SizedBox(
+          width: double.infinity,
+          height: MediaQuery.sizeOf(context).height,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Welcome to Doctor Plus',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+              SharedPreference().getString(key: "userType") == "doctor"? const DoctorHome() : const PatientHome()
+            ],
           ),
         ),
       ),
