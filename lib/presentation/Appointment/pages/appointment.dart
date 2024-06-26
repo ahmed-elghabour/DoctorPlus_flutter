@@ -243,12 +243,12 @@ class _AppointmentPageState extends State<AppointmentPage>
           Column(
             children: [
               'Credit Card',
-              'Master Card',
               'American Express',
               'Capital One',
               'Barclays',
               'Bank Transfer',
-              'Paypal'
+              'Paypal',
+              'Cash'
             ]
                 .map((method) => RadioListTile(
                       title: Text(method),

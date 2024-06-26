@@ -76,6 +76,24 @@ class Validator {
     }
   }
 
+  static String firebaseLoginValidator(String error) {
+    if (error.contains("invalid-email")) {
+      return 'The email address is not valid.';
+    } else if (error.contains("user-disabled")) {
+      return 'The user account has been disabled.';
+    } else if (error.contains("user-not-found")) {
+      return 'No user found with this email.';
+    } else if (error.contains("wrong-password")) {
+      return 'The password is incorrect.';
+    } else if (error.contains("too-many-requests")) {
+      return 'Too many unsuccessful login attempts. Please try again later.';
+    } else if (error.contains("operation-not-allowed")) {
+      return 'Email/password accounts are not enabled.';
+    } else {
+      return 'An unknown error occurred: $error';
+    }
+  }
+
   static String locationValidator(String error) {
     if (error.isEmpty) {
       return 'complaint body is required';

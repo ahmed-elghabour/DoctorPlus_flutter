@@ -1,4 +1,6 @@
 class Routes {
+  static const String admin = "admin";
+
   static const String home = "/";
   static const String login = "auth/login";
   static const String register = "auth/sign-up";
@@ -23,8 +25,6 @@ class Routes {
   static const String allSpecialization = "/all_specialization";
   static const String allDoctors = "/all_doctors";
 
-
   static const String doctorProfile = "doctor/profile";
   static const String publicProfile = "home/patient/publicProfile";
-
 }

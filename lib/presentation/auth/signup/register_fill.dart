@@ -36,10 +36,7 @@ class _RegisterFillDataState extends State<RegisterFillData> {
                 controller: _pageController,
                 children: [
                   RegisterGeneral(
-                    onNext: (type) {
-                      FailureToast.showToast(msg: type);
-                      _goToPage(type == "doctor" ? 2 : 1);
-                    },
+                    onNext: (type) => _goToPage(type == "doctor" ? 2 : 1),
                   ),
                   PatientAdditionalInfo(
                     onPrevious: () => _goToPage(0),

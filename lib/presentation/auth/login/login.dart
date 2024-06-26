@@ -1,3 +1,4 @@
+import 'package:doctor_plus/core/widgets/toast.dart';
 import 'package:doctor_plus/presentation/auth/widgets/auth.switch_page.dart';
 import 'package:doctor_plus/utils/shared_preferences.dart';
 import 'package:flutter/material.dart';
@@ -96,18 +97,25 @@ class _LoginInputsState extends State<LoginInputs> {
               validator: (Validator.passwordValidator),
               changePasswordVisibility: () =>
                   setState(() => showPassword = !showPassword)),
-          const SizedBox(height: 2.0),
-          Align(
-            alignment: AlignmentDirectional.centerEnd,
-            child: buildTextButton(
-              label: "Forgot Password?",
-              onPressed: () {},
-            ),
-          ),
+          const SizedBox(height: 10),
+          // Align(
+          //   alignment: AlignmentDirectional.centerEnd,
+          //   child: buildTextButton(
+          //     label: "Forgot Password?",
+          //     onPressed: () {},
+          //   ),
+          // ),
           buildSubmitButton(
             label: "Login",
             widthFactor: .5,
             onPressed: () {
+              /*   if (_emailController.text == "admin@doctorplus.com" &&
+                  _passwordController.text == "Admin12345") {
+                navigate(route: Routes.admin);
+                SuccessToast.showToast(msg: "Login Successful");
+                return;
+              } 
+              else*/
               if (_formKey.currentState?.validate() == true) {
                 loginUser();
               }
@@ -144,7 +152,8 @@ class _LoginInputsState extends State<LoginInputs> {
           key: 'userType', value: res["stress"] != null ? "patient" : "doctor");
       navigate(route: Routes.home);
     } catch (e) {
-      showErrorDialog(error: e.toString());
+      FailureToast.showToast(
+          msg: Validator.firebaseLoginValidator(e.toString()));
     }
   }
 }

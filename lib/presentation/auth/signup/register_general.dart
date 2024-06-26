@@ -176,19 +176,19 @@ class _RegisterGeneralState extends State<RegisterGeneral> {
                   widthFactor: .7,
                   onPressed: () {
                     // Navigator.pushNamed(context, Routes.registerFill);
-                    if (_formKey.currentState?.validate() == true) {
-                      context.read<SignupCubit>().fillGeneralData(
-                            type: type,
-                            image: image,
-                            gender: gender,
-                            phone: _phoneController.text,
-                            fName: _fNameController.text,
-                            lName: _lNameController.text,
-                            location: _locationController.text,
-                            birthDate: _birthDateController.text,
-                          );
-                      widget.onNext(type.toLowerCase());
-                    }
+                    // if (_formKey.currentState?.validate() == true) {
+                    //   context.read<SignupCubit>().fillGeneralData(
+                    //         type: type,
+                    //         image: image,
+                    //         gender: gender,
+                    //         phone: _phoneController.text,
+                    //         fName: _fNameController.text,
+                    //         lName: _lNameController.text,
+                    //         location: _locationController.text,
+                    //         birthDate: _birthDateController.text,
+                    //       );
+                    widget.onNext(type.toLowerCase());
+                    // }
                   },
                 ),
               ],
