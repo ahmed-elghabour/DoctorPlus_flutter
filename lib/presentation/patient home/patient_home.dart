@@ -26,28 +26,26 @@ class PatientHome extends StatelessWidget {
             children: [
               const Icon(Icons.local_hospital, color: Colors.white, size: 48),
               const SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Book and schedule with nearest doctor',
-                      style: TextStyle(color: Colors.white, fontSize: 18),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Book and schedule with nearest doctor',
+                    style: TextStyle(color: Colors.white, fontSize: 18),
+                  ),
+                  const SizedBox(height: 8),
+                  ElevatedButton(
+                    onPressed: () {
+                      // Handle the navigation
+                    },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white),
+                    child: const Text(
+                      'Find Nearby',
+                      style: TextStyle(color: Colors.blue),
                     ),
-                    const SizedBox(height: 8),
-                    ElevatedButton(
-                      onPressed: () {
-                        // Handle the navigation
-                      },
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white),
-                      child: const Text(
-                        'Find Nearby',
-                        style: TextStyle(color: Colors.blue),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -112,19 +110,17 @@ class PatientHome extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 8),
-        Expanded(
-          child: SizedBox(
-            height: 250,
-            child: ListView.builder(
-                itemBuilder: (context, index) {
-                  return const DoctorCard(
-                      name: 'Dr. Cullan Sullivan',
-                      speciality: 'Cardiologist | RSUD Soetomo',
-                      rating: 4.7,
-                      reviews: 3241);
-                },
-                itemCount: 5),
-          ),
+        SizedBox(
+          height: 300,
+          child: ListView.builder(
+              itemBuilder: (context, index) {
+                return const DoctorCard(
+                    name: 'Dr. Cullan Sullivan',
+                    speciality: 'Cardiologist | RSUD Soetomo',
+                    rating: 4.7,
+                    reviews: 3241);
+              },
+              itemCount: 5),
         ),
       ],
     );
