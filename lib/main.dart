@@ -6,7 +6,7 @@ import 'package:doctor_plus/presentation/Appointment/pages/appointment.dart';
 import 'package:doctor_plus/presentation/Public%20Profile/pages/public_profile.dart';
 // import 'package:doctor_plus/domain/cubits/doctorReservations/patients_number_atDay_cubit.dart';
 import 'package:doctor_plus/presentation/appointments/pages/appointments.dart';
-import 'package:doctor_plus/presentation/doctor%20profile/pages/doctor_profile.dart';
+import 'package:doctor_plus/presentation/doctor%20preview/pages/doctor_profile.dart';
 import 'package:doctor_plus/presentation/appointments/pages/payment.dart';
 import 'package:doctor_plus/presentation/patient%20home/all_specializations.dart';
 import 'package:doctor_plus/presentation/patient%20home/complaints.dart';
