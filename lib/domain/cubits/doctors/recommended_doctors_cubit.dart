@@ -47,4 +47,19 @@ class DoctorsCubit extends Cubit<DoctorsState> {
       emit(DoctorsError(e.toString()));
     }
   }
+
+  void getDoctorById({required String doctorId}) async {
+    emit(PreferedDoctorByIdLoading());
+    try {
+      Doctor? preferedDoctor =
+          await DoctorsRepository(remoteDataSource: DoctorsRemoteDataSource())
+              .getDoctorById(doctorId: doctorId);
+      // if (preferedDoctor == null) {
+      //   emit(PreferedDoctorByIdLoaded(null));
+      // }
+      emit(DoctorByIdLoaded(preferedDoctor));
+    } catch (e) {
+      emit(DoctorsError(e.toString()));
+    }
+  }
 }

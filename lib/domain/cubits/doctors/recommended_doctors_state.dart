@@ -20,3 +20,16 @@ class DoctorsError extends DoctorsState {
   final String message;
   const DoctorsError(this.message);
 }
+
+///////
+class PreferedDoctorByIdLoading extends DoctorsState {}
+
+class DoctorByIdLoaded extends DoctorsState {
+  final Doctor? preferedDoctor;
+  const DoctorByIdLoaded(this.preferedDoctor);
+}
+
+class DoctorByIdError extends DoctorsState {
+  final String message;
+  const DoctorByIdError(this.message);
+}

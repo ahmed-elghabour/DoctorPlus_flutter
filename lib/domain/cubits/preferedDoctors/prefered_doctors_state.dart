@@ -9,10 +9,12 @@ sealed class PreferedDoctorsState extends Equatable {
 
 final class PreferedDoctorsInitial extends PreferedDoctorsState {}
 
+/////////
 final class PreferedDoctorsAdded extends PreferedDoctorsState {}
 
 final class PreferedDoctorsRemoved extends PreferedDoctorsState {}
 
+/////////
 final class PreferedDoctorsLoading extends PreferedDoctorsState {}
 
 final class PreferedDoctorsLoaded extends PreferedDoctorsState {
@@ -20,6 +22,15 @@ final class PreferedDoctorsLoaded extends PreferedDoctorsState {
   const PreferedDoctorsLoaded(this.preferedDoctors);
 }
 
+/////////
+final class PreferedDoctorByIdLoading extends PreferedDoctorsState {}
+
+final class PreferedDoctorByIdLoaded extends PreferedDoctorsState {
+  final Doctor? preferedDoctor;
+  const PreferedDoctorByIdLoaded(this.preferedDoctor);
+}
+
+/////////
 final class PreferedDoctorsError extends PreferedDoctorsState {
   final String message;
   const PreferedDoctorsError(this.message);

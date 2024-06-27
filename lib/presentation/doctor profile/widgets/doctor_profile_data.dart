@@ -1,5 +1,7 @@
 import 'package:doctor_plus/data/model/doctor.dart';
+import 'package:doctor_plus/domain/cubits/preferedDoctors/prefered_doctors_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DoctorProfileData extends StatelessWidget {
   final Doctor doctor;
@@ -36,10 +38,32 @@ class DoctorProfileData extends StatelessWidget {
                         style: const TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
-                      IconButton(
-                        icon: const Icon(Icons.favorite_border_outlined),
-                        onPressed: () {
-                          //  TODO  Add favorite button logic
+                      BlocBuilder<PreferedDoctorsCubit, PreferedDoctorsState>(
+                        builder: (context, state) {
+                          if (state is PreferedDoctorByIdLoaded) {
+                            return IconButton(
+                              icon: const Icon(Icons.favorite),
+                              color: state.preferedDoctor == null
+                                  ? Colors.grey
+                                  : Colors.blue,
+                              onPressed: () {
+                                if (state.preferedDoctor == null) {
+                                  context
+                                      .read<PreferedDoctorsCubit>()
+                                      .addPreferedDoctorToPatient(
+                                          doctor: doctor, patientId: '123');
+                                } else {
+                                  context
+                                      .read<PreferedDoctorsCubit>()
+                                      .removePreferedDoctorFromPatient(
+                                          doctorId: doctor.id,
+                                          patientId: '123');
+                                }
+                              },
+                            );
+                          } else {
+                            return const CircularProgressIndicator();
+                          }
                         },
                       ),
                     ],
