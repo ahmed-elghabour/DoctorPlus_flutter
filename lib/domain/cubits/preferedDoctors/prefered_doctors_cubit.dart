@@ -12,7 +12,7 @@ class PreferedDoctorsCubit extends Cubit<PreferedDoctorsState> {
   void addPreferedDoctorToPatient(String patientId, Doctor doctor) async {
     try {
       await PatientRemoteDataSource()
-          .addPreferedDoctorToPatient(patientId, doctor);
+          .addPreferedDoctorToPatient(patientId: patientId, doctor: doctor);
       emit(PreferedDoctorsAdded());
     } catch (e) {
       emit(PreferedDoctorsError(e.toString()));

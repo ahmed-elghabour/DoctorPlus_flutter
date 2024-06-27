@@ -3,6 +3,7 @@ import 'package:doctor_plus/data/model/review.dart';
 import 'package:doctor_plus/data/model/doctor_working_hours.dart';
 
 class Doctor {
+  late String id;
   File? image;
   late List<File> files;
   late List<String> degrees;
@@ -12,6 +13,7 @@ class Doctor {
   late String type, fName, lName, phone, gender, location, birthDate;
 
   Doctor({
+    this.id = '',
     required this.degrees,
     required this.university,
     required this.specialty,
@@ -39,6 +41,7 @@ class Doctor {
 
   factory Doctor.fromJson(Map<String, dynamic> json) {
     return Doctor(
+      id: json['id'],
       degrees: List<String>.from(json['degrees']),
       university: json['university'],
       specialty: json['specialty'],
@@ -55,6 +58,7 @@ class Doctor {
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
       'degrees': degrees,
       'university': university,
       'specialty': specialty,
