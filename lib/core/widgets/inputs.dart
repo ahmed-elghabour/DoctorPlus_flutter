@@ -61,7 +61,7 @@ Widget buildPasswordField({
 
 Widget buildTextField({
   required String label,
-  IconData icon = Icons.person,
+  IconData? icon,
   required TextEditingController controller,
   required String? Function(String?) validator,
   TextInputType keyboardType = TextInputType.text,
@@ -72,9 +72,7 @@ Widget buildTextField({
     keyboardType: keyboardType,
     decoration: InputDecoration(
       labelText: label,
-      prefixIcon: Icon(
-        icon,
-      ),
+      prefixIcon: icon != null ? Icon(icon) : null,
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
     ),
   );
