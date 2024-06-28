@@ -109,4 +109,23 @@ class Validator {
 
     return null;
   }
+
+  static String feesValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Field is Required';
+    } else if (int.parse(value) <= 0) {
+      return 'Fees must be greater than zero';
+    } else {
+      return "invalid fees";
+    }
+  }
+
+  static String? descriptionValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Field is Required';
+    } else if (value.length < 20) {
+      return 'Too short description';
+    }
+    return null;
+  }
 }

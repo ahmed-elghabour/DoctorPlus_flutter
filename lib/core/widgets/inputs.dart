@@ -17,14 +17,16 @@ Widget buildEmailField({
 }
 
 Widget buildNumberField({
+  bool isCenter = false,
   required String label,
   required IconData icon,
   required TextEditingController controller,
-  required String? Function(String?) validator,
+  String? Function(String?)? validator,
 }) {
   return TextFormField(
     validator: validator,
     controller: controller,
+    textAlign: isCenter ? TextAlign.center : TextAlign.start,
     keyboardType: TextInputType.number,
     decoration: InputDecoration(
       labelText: label,
@@ -73,6 +75,25 @@ Widget buildTextField({
       prefixIcon: Icon(
         icon,
       ),
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
+    ),
+  );
+}
+
+Widget buildMultiLineTextField({
+  required String hint,
+  required String label,
+  required TextEditingController controller,
+  required String? Function(String?) validator,
+}) {
+  return TextFormField(
+    validator: validator,
+    controller: controller,
+    keyboardType: TextInputType.text,
+    maxLines: 3,
+    decoration: InputDecoration(
+      labelText: label,
+      hintText: hint,
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
     ),
   );

@@ -1,13 +1,14 @@
 import 'dart:io';
 import 'package:doctor_plus/data/model/review.dart';
-import 'package:doctor_plus/data/model/doctor_working_hours.dart';
+import 'package:doctor_plus/data/model/doctor_working_.dart';
 
 class Doctor {
   File? image;
   late List<File> files;
-  late List<String> degrees;
   late List<ReviewModel> reviews;
+  late List<String> degrees, workingDays;
   late DoctorWorkingHours workingHours;
+  late String fees, patients, start, end;
   late String university, specialty, graduationDate, description;
   late String type, fName, lName, phone, gender, location, birthDate;
 
