@@ -1,15 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:doctor_plus/core/widgets/toast.dart';
 import 'package:doctor_plus/data/model/appointment.dart';
 import 'package:doctor_plus/utils/firebase.dart';
 import 'package:doctor_plus/utils/shared_preferences.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AppointmentPage extends StatefulWidget {
   const AppointmentPage({super.key});
 
   @override
-  _AppointmentPageState createState() => _AppointmentPageState();
+  State<AppointmentPage> createState() => _AppointmentPageState();
 }
 
 class _AppointmentPageState extends State<AppointmentPage>
@@ -39,8 +39,6 @@ class _AppointmentPageState extends State<AppointmentPage>
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
   }
-
-  
 
   @override
   void dispose() {
@@ -348,12 +346,13 @@ class _AppointmentPageState extends State<AppointmentPage>
         collection: "appointments",
         data: appointment.toJson(),
       );
-
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Appointment booked successfully!')));
+      SuccessToast.showToast(
+        msg: 'Appointment booked successfully!',
+      );
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Please complete all fields')));
+      FailureToast.showToast(
+        msg: 'Please complete all fields',
+      );
     }
   }
 }

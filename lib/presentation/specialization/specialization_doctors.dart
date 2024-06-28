@@ -7,11 +7,11 @@ class SpecializationDoctorCard extends StatelessWidget {
   final String? imageUrl;
 
   const SpecializationDoctorCard({
-    Key? key,
+    super.key,
     required this.name,
     required this.speciality,
     this.imageUrl,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

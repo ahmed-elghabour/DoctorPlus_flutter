@@ -8,7 +8,7 @@ class AllSpecializationsPage extends StatefulWidget {
   const AllSpecializationsPage({super.key});
 
   @override
-  _AllSpecializationsPageState createState() => _AllSpecializationsPageState();
+  State<AllSpecializationsPage> createState() => _AllSpecializationsPageState();
 }
 
 class _AllSpecializationsPageState extends State<AllSpecializationsPage> {

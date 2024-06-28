@@ -6,8 +6,7 @@ import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
 class SpecializationPage extends StatelessWidget {
   final String specialization;
 
-  const SpecializationPage({required this.specialization, Key? key})
-      : super(key: key);
+  const SpecializationPage({required this.specialization, super.key});
 
   @override
   Widget build(BuildContext context) {

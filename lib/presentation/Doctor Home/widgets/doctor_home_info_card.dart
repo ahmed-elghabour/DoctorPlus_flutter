@@ -1,5 +1,5 @@
-import 'package:doctor_plus/domain/cubits/doctorReservations/patients_number_atDay_cubit.dart';
-import 'package:doctor_plus/domain/cubits/doctorReservations/patients_number_atDay_state.dart';
+import 'package:doctor_plus/domain/cubits/doctor%20reservations/patients_number_at_day_cubit.dart';
+import 'package:doctor_plus/domain/cubits/doctor%20reservations/patients_number_at_day_state.dart';
 import 'package:doctor_plus/presentation/Doctor%20home/widgets/new_patients_box.dart';
 import 'package:doctor_plus/utils/shared_preferences.dart';
 import 'package:flutter/material.dart';

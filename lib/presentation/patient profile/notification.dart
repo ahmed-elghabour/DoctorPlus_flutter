@@ -12,7 +12,7 @@ class NotificationPage extends StatefulWidget {
 class _NotificationPageState extends State<NotificationPage> {
   late SharedPreferences pref;
 
-  Map<String, Map<String, dynamic>> Data = {
+  Map<String, Map<String, dynamic>> data = {
     "settings.notification.Notification_from_DocNow": {
       "name": "Notification from DocNow",
       "value": false,
@@ -45,8 +45,8 @@ class _NotificationPageState extends State<NotificationPage> {
     pref = await SharedPreferences.getInstance();
 
     setState(() {
-      for (String key in Data.keys) {
-        Data[key]!['value'] = pref.getBool(key) ?? false;
+      for (String key in data.keys) {
+        data[key]!['value'] = pref.getBool(key) ?? false;
       }
     });
   }
@@ -60,15 +60,15 @@ class _NotificationPageState extends State<NotificationPage> {
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: ListView.builder(
-          itemCount: Data.length,
+          itemCount: data.length,
           itemBuilder: (context, index) {
-            String key = Data.keys.elementAt(index);
+            String key = data.keys.elementAt(index);
             return _notificationRow(
-              title: Data[key]!['name'] ?? '',
-              value: Data[key]!['value'] ?? false,
+              title: data[key]!['name'] ?? '',
+              value: data[key]!['value'] ?? false,
               onChanged: (value) {
                 setState(() {
-                  Data[key]!['value'] = value;
+                  data[key]!['value'] = value;
                   pref.setBool(key, value);
                 });
               },

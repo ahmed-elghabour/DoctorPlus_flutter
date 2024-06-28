@@ -1,14 +1,14 @@
 import 'package:doctor_plus/core/theming/colors.dart';
 import 'package:doctor_plus/domain/cubits/auth/signup_cubit.dart';
-import 'package:doctor_plus/domain/cubits/doctorReservations/doctor_reservation_cubit.dart';
-import 'package:doctor_plus/domain/cubits/doctorReservations/patients_number_atDay_cubit.dart';
+import 'package:doctor_plus/domain/cubits/doctor%20reservations/doctor_reservation_cubit.dart';
+import 'package:doctor_plus/domain/cubits/doctor%20reservations/patients_number_at_day_cubit.dart';
 import 'package:doctor_plus/domain/cubits/doctors/recommended_doctors_cubit.dart';
 import 'package:doctor_plus/presentation/Appointment/pages/appointment.dart';
 import 'package:doctor_plus/presentation/Profile%20Preview/pages/prescriptions.dart';
 import 'package:doctor_plus/presentation/Profile%20Preview/pages/profile_preview.dart';
 import 'package:doctor_plus/presentation/admin/admin_home.dart';
 import 'package:doctor_plus/presentation/admin/doctor_managment_page.dart';
-import 'package:doctor_plus/presentation/admin/statisticsPage.dart';
+import 'package:doctor_plus/presentation/admin/statistics_page.dart';
 // import 'package:doctor_plus/domain/cubits/doctorReservations/patients_number_atDay_cubit.dart';
 import 'package:doctor_plus/presentation/appointments/pages/appointments.dart';
 import 'package:doctor_plus/presentation/appointments/pages/payment.dart';
@@ -90,9 +90,9 @@ class MyApp extends StatelessWidget {
             ],
             routes: {
               Routes.admin: (context) => const AdminHomePage(),
-              Routes.adminStatistics: (context) => StatisticsPage(),
+              Routes.adminStatistics: (context) => const StatisticsPage(),
               Routes.adminComplaints: (context) => const ComplaintsPage(),
-              Routes.doctorManagement: (context) => DoctorManagmentPage(),
+              Routes.doctorManagement: (context) => const DoctorManagmentPage(),
               Routes.faq: (context) => const FAQPage(),
               Routes.home: (context) => const HomePage(),
               Routes.login: (context) => const LoginPage(),

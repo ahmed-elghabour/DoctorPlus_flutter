@@ -61,12 +61,12 @@ class DoctorsRemoteDataSource {
       // Fetch documents where fName or lName contains the query string
       final QuerySnapshot fNameSnapshot = await doctorsCollection
           .where('fName', isGreaterThanOrEqualTo: query)
-          .where('fName', isLessThanOrEqualTo: query + '\uf8ff')
+          .where('fName', isLessThanOrEqualTo: '$query\uf8ff')
           .get();
 
       final QuerySnapshot lNameSnapshot = await doctorsCollection
           .where('lName', isGreaterThanOrEqualTo: query)
-          .where('lName', isLessThanOrEqualTo: query + '\uf8ff')
+          .where('lName', isLessThanOrEqualTo: '$query\uf8ff')
           .get();
 
       // Combine the results from both queries

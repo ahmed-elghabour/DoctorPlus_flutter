@@ -1,5 +1,4 @@
 import 'package:doctor_plus/core/widgets/drop_down.dart';
-import 'package:doctor_plus/core/widgets/inputs.dart';
 import 'package:flutter/material.dart';
 
 Widget additionalInfo({

@@ -1,9 +1,12 @@
 import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
+import 'package:doctor_plus/core/widgets/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AdminComplaintsPage extends StatelessWidget {
   static const routeName = '/complaintsPage';
+
+  const AdminComplaintsPage({super.key});
 
   Stream<List<Map<String, dynamic>>> _getComplaints() {
     return FirebaseFirestore.instance.collection('Complaints').snapshots().map(
@@ -13,9 +16,7 @@ class AdminComplaintsPage extends StatelessWidget {
 
   Future<void> _deleteComplaint(BuildContext context, String id) async {
     await FirebaseFirestore.instance.collection('Complaints').doc(id).delete();
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Complaint deleted successfully')),
-    );
+    SuccessToast.showToast(msg: 'Complaint deleted successfully');
   }
 
   void _showComplaintDialog(
@@ -31,7 +32,7 @@ class AdminComplaintsPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('Body: ${complaint['body']}'),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Text('Solution: ${complaint['solution']}'),
               ],
             ),
@@ -39,10 +40,10 @@ class AdminComplaintsPage extends StatelessWidget {
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: Text('Close'),
+              child: const Text('Close'),
             ),
             IconButton(
-              icon: Icon(Icons.delete, color: Colors.red),
+              icon: const Icon(Icons.delete, color: Colors.red),
               onPressed: () async {
                 await _deleteComplaint(context, complaint['id']);
                 Navigator.of(context).pop();
@@ -57,7 +58,7 @@ class AdminComplaintsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyCustomAppBar(title: 'Complaints'),
+      appBar: const MyCustomAppBar(title: 'Complaints'),
       body: StreamBuilder<List<Map<String, dynamic>>>(
         stream: _getComplaints(),
         builder: (context, snapshot) {
@@ -65,12 +66,12 @@ class AdminComplaintsPage extends StatelessWidget {
             return Center(child: Text('Error: ${snapshot.error}'));
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
 
           final complaints = snapshot.data ?? [];
           if (complaints.isEmpty) {
-            return Center(child: Text('No complaints found.'));
+            return const Center(child: Text('No complaints found.'));
           }
 
           return ListView.builder(

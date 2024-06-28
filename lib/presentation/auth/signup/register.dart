@@ -1,4 +1,3 @@
-import 'package:doctor_plus/core/widgets/toast.dart';
 import 'package:doctor_plus/presentation/auth/widgets/auth.switch_page.dart';
 import 'package:doctor_plus/presentation/auth/widgets/signin_option.dart';
 import 'package:doctor_plus/presentation/auth/widgets/terms_conditions.dart';

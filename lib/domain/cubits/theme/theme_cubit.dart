@@ -1,9 +1,10 @@
-import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+
+
+import 'package:doctor_plus/domain/cubits/theme/theme_state.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../utils/shared_preferences.dart';
 
-part 'theme_state.dart';
 
 class ThemeCubit extends Cubit<ThemeState> {
   ThemeCubit() : super(ThemeInitial());

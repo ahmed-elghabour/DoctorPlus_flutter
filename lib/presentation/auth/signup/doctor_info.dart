@@ -6,7 +6,6 @@ import 'package:doctor_plus/core/widgets/inputs.dart';
 import 'package:doctor_plus/data/model/doctor.dart';
 import 'package:doctor_plus/domain/cubits/auth/signup_cubit.dart';
 import 'package:doctor_plus/utils/validator.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';

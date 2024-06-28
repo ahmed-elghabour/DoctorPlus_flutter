@@ -1,4 +1,4 @@
-import 'package:doctor_plus/domain/cubits/doctorReservations/doctor_reservation_cubit.dart';
+import 'package:doctor_plus/domain/cubits/doctor%20reservations/doctor_reservation_cubit.dart';
 import 'package:doctor_plus/presentation/Doctor%20Home/utils/reservation_sliders.dart';
 import 'package:doctor_plus/presentation/Doctor%20Home/widgets/carousel_slider.dart';
 import 'package:doctor_plus/presentation/doctor%20home/utils/reservation_chunks.dart';

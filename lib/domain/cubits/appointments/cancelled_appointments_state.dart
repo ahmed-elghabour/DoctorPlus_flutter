@@ -1,6 +1,5 @@
 part of 'cancelled_appointments_cubit.dart';
 
-@immutable
 sealed class CancelledAppointmentsState {}
 
 final class CancelledAppointmentsInitial extends CancelledAppointmentsState {}

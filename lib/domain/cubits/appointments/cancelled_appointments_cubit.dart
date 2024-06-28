@@ -3,7 +3,6 @@ import 'package:doctor_plus/data/data%20sources/appointments_remote_data_source.
 // import 'package:patient_plus/core/dummy/dummy_appointments.dart';
 import 'package:doctor_plus/data/model/appointment.dart';
 import 'package:doctor_plus/data/repositories/appointments_repository.dart';
-import 'package:meta/meta.dart';
 
 part 'cancelled_appointments_state.dart';
 

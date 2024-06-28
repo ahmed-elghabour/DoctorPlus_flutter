@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:doctor_plus/core/widgets/buttons.dart';
-import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
 import 'package:doctor_plus/data/demo.dart'; // Assuming this contains patientInfo
 import 'package:doctor_plus/data/model/patient.dart';
 import 'package:doctor_plus/domain/cubits/auth/signup_cubit.dart';

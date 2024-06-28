@@ -2,14 +2,12 @@ import 'package:doctor_plus/core/widgets/toast.dart';
 import 'package:doctor_plus/presentation/auth/widgets/auth.switch_page.dart';
 import 'package:doctor_plus/utils/shared_preferences.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../widgets/signin_option.dart';
 import 'package:doctor_plus/utils/routes.dart';
 import 'package:doctor_plus/utils/firebase.dart';
 import 'package:doctor_plus/utils/validator.dart';
 import 'package:doctor_plus/core/widgets/inputs.dart';
 import 'package:doctor_plus/core/widgets/buttons.dart';
-import 'package:doctor_plus/core/widgets/check_box.dart';
 import 'package:doctor_plus/presentation/auth/widgets/terms_conditions.dart';
 
 class LoginPage extends StatelessWidget {

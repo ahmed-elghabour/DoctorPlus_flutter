@@ -4,12 +4,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class DoctorManagmentPage extends StatelessWidget {
   static const routeName = '/doctorManagementPage';
 
+  const DoctorManagmentPage({super.key});
+
   Stream<List<Map<String, dynamic>>> _getDoctors() {
     return FirebaseFirestore.instance
         .collection('doctors')
         .snapshots()
-        .map((snapshot) =>
-            snapshot.docs.map((doc) => doc.data()).toList());
+        .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
   }
 
   @override
@@ -23,7 +24,7 @@ class DoctorManagmentPage extends StatelessWidget {
             return Center(child: Text('Error: ${snapshot.error}'));
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
 
           final doctors = snapshot.data ?? [];

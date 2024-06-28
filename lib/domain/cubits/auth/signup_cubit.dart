@@ -1,12 +1,10 @@
 import 'dart:io';
-import 'package:bloc/bloc.dart';
 import 'package:doctor_plus/data/model/doctor.dart';
 import 'package:doctor_plus/data/model/patient.dart';
-import 'package:meta/meta.dart';
+import 'package:doctor_plus/domain/cubits/auth/signup_state.dart';
 import 'package:doctor_plus/utils/firebase.dart';
 import 'package:doctor_plus/utils/shared_preferences.dart';
-
-part 'signup_state.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignupCubit extends Cubit<SignupState> {
   SignupCubit() : super(SignupInitial());
@@ -43,10 +41,10 @@ class SignupCubit extends Cubit<SignupState> {
           "gender": gender,
           "location": location,
           "birthDate": birthDate,
-          "degrees": data.degrees,//
-          "specialty": data.specialty,//
-          "university": data.university,//
-          "graduationDate": data.graduationDate,//
+          "degrees": data.degrees, //
+          "specialty": data.specialty, //
+          "university": data.university, //
+          "graduationDate": data.graduationDate, //
         });
     SharedPreference().setString(key: "userType", value: "doctor");
   }

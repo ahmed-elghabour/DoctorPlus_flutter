@@ -1,6 +1,5 @@
-import 'package:bloc/bloc.dart';
 import 'package:doctor_plus/utils/shared_preferences.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'language_state.dart';
 
@@ -14,7 +13,6 @@ class LanguageCubit extends Cubit<LanguageState> {
     } else {
       language == 'en' ? language = 'ar' : language = 'en';
       SharedPreference().setString(key: 'lang', value: language);
-      print(language);
       emit(LanguageChanged());
     }
   }

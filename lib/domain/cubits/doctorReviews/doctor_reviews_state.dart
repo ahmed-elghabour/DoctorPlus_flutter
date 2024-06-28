@@ -1,6 +1,6 @@
-part of 'doctor_reviews_cubit.dart';
 
-@immutable
+import 'package:doctor_plus/data/model/review.dart';
+
 sealed class DoctorReviewsState {}
 
 final class DoctorReviewsInitial extends DoctorReviewsState {}

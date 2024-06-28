@@ -18,7 +18,6 @@ class CustomLocation {
   _grantPermission() async {
     LocationPermission permission = await Geolocator.requestPermission();
     if (permission == LocationPermission.denied) {
-      print("permission-denied");
       throw Exception("permission-denied");
     } else if (permission == LocationPermission.deniedForever) {
       throw Exception("permission-denied_for_ever");

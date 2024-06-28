@@ -26,7 +26,7 @@ class CustomFirebase {
         return auth.currentUser?.uid;
       }
     } catch (e) {
-      print("Error signing in with Google: $e");
+      throw Exception(e);
     }
   }
 

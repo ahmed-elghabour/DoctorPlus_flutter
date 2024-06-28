@@ -5,6 +5,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class StatisticsPage extends StatelessWidget {
   static const routeName = '/statisticsPage';
 
+  const StatisticsPage({super.key});
+
   Stream<List<Map<String, dynamic>>> _getDoctors() {
     return FirebaseFirestore.instance
         .collection('doctors')
@@ -40,7 +42,7 @@ class StatisticsPage extends StatelessWidget {
                   return Center(child: Text('Error: ${snapshot.error}'));
                 }
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 }
 
                 final doctors = snapshot.data ?? [];
@@ -57,7 +59,7 @@ class StatisticsPage extends StatelessWidget {
                   return Center(child: Text('Error: ${snapshot.error}'));
                 }
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 }
 
                 final patients = snapshot.data ?? [];
@@ -74,7 +76,7 @@ class StatisticsPage extends StatelessWidget {
                   return Center(child: Text('Error: ${snapshot.error}'));
                 }
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 }
 
                 final appointments = snapshot.data ?? [];

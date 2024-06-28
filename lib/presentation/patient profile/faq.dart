@@ -24,7 +24,7 @@ class _FAQPageState extends State<FAQPage> {
             const SizedBox(
               height: 10,
             ),
-            _FAQRow(
+            _fAQRow(
               title: "What should I expect during a doctor's appointment?",
               body:
                   """During a doctor's appointment, you can expect to discuss your 
@@ -37,7 +37,7 @@ exam and may order additional tests or procedures if necessary.""",
               thickness: 1,
               color: Colors.black12,
             ),
-            _FAQRow(
+            _fAQRow(
               title: "What should I bring to my doctor's appointment?",
               body:
                   """You should bring your insurance card, a list of current medications, 
@@ -49,7 +49,7 @@ or concerns you want to discuss with the doctor.""",
               thickness: 1,
               color: Colors.black12,
             ),
-            _FAQRow(
+            _fAQRow(
               title: "What if I need to cancel or reschedule my appointment?",
               body:
                   """If you need to cancel or reschedule your appointment, contact the 
@@ -61,7 +61,7 @@ doctor's office as soon as possible. Many offices have a policy that requires
               thickness: 1,
               color: Colors.black12,
             ),
-            _FAQRow(
+            _fAQRow(
               title: "How do I make an appointment with a doctor?",
               body:
                   """You can make an appointment by calling the doctor's office directly, 
@@ -73,7 +73,7 @@ offers appointment scheduling.""",
               thickness: 1,
               color: Colors.black12,
             ),
-            _FAQRow(
+            _fAQRow(
               title: "How early should I arrive for my doctor's appointment?",
               body:
                   """It is recommended to arrive at least 15 minutes before your scheduled 
@@ -85,7 +85,7 @@ paperwork.""",
               thickness: 1,
               color: Colors.black12,
             ),
-            _FAQRow(
+            _fAQRow(
               title: "How long will my doctor's appointment take?",
               body:
                   """The length of a doctor's appointment can vary, but a standard appointment 
@@ -97,7 +97,7 @@ appointments.""",
               thickness: 1,
               color: Colors.black12,
             ),
-            _FAQRow(
+            _fAQRow(
               title: "How much will my doctor's appointment cost?",
               body:
                   """The cost of a doctor's appointment can vary depending on your insurance 
@@ -109,7 +109,7 @@ your insurance provider and the doctor's office for specific cost information.""
               thickness: 1,
               color: Colors.black12,
             ),
-            _FAQRow(
+            _fAQRow(
               title: "What should I look for in a good doctor?",
               body:
                   """When looking for a good doctor, consider their credentials, experience, 
@@ -123,7 +123,7 @@ and respected. Personal recommendations from friends and family can also be help
   }
 }
 
-Widget _FAQRow({
+Widget _fAQRow({
   required String title,
   required String body,
 }) {

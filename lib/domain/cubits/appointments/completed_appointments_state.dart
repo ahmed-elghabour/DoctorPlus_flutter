@@ -1,6 +1,6 @@
-part of 'completed_appointments_cubit.dart';
 
-@immutable
+import 'package:doctor_plus/data/model/appointment.dart';
+
 sealed class CompletedAppointmentsState {}
 
 final class CompletedAppointmentsInitial extends CompletedAppointmentsState {}

@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class PaymentPage extends StatefulWidget {
-  const PaymentPage({Key? key}) : super(key: key);
+  const PaymentPage({super.key});
 
   @override
-  _PaymentPageState createState() => _PaymentPageState();
+  State<PaymentPage> createState() => _PaymentPageState();
 }
 
 class _PaymentPageState extends State<PaymentPage> {
@@ -136,63 +136,63 @@ class _PaymentPageState extends State<PaymentPage> {
   }
 
   Future<String> getPaymentKey(Map<String, dynamic> obj) async {
-  final String baseUrl = dotenv.env['BASE_URL']!; 
-  final String authRequest = dotenv.env['AUTH_REQUEST']!; 
-  final String orderRequest = dotenv.env['ORDER']!; 
-  final String paymentKeyRequest = dotenv.env['PAYMENT_KEY']!; 
-  final String apiKey = dotenv.env['API_KEY']!;
-  final String integrationId = dotenv.env['INTEGRATION_ID']!;
+    final String baseUrl = dotenv.env['BASE_URL']!;
+    final String authRequest = dotenv.env['AUTH_REQUEST']!;
+    final String orderRequest = dotenv.env['ORDER']!;
+    final String paymentKeyRequest = dotenv.env['PAYMENT_KEY']!;
+    final String apiKey = dotenv.env['API_KEY']!;
+    final String integrationId = dotenv.env['INTEGRATION_ID']!;
 
-  try {
-    // Get Auth Token
-    Response authResponse = await Dio().post(
-      '$baseUrl$authRequest',
-      data: {
-        'api_key': apiKey,
-      },
-    );
-    String authToken = authResponse.data['token'];
-    // Create Order
-    Response orderResponse = await Dio().post(
-      '$baseUrl$orderRequest',
-      data: {
-        'auth_token': authToken,
-        'delivery_needed': "false",
-        'amount_cents': '${250 * 100}',
-        'currency': "EGP",
-        'items': [
-          {
-            'name': obj['doctorName'],
-            'amount_cents': '${250}',
-            'description': obj['status'],
-            'quantity': "1",
-          }
-        ],
-      },
-    );
-    String orderId = orderResponse.data['id'];
-    // // Get Payment Key
-    Response paymentKeyResponse = await Dio().post(
-      '$baseUrl$paymentKeyRequest',
-      data: {
-        'auth_token': authToken,
-        'amount_cents': 250,
-        'expiration': 3600,
-        'order_id': orderId,
-        'billing_data': obj['patientName'],
-        'currency': "EGP",
-        'integration_id': integrationId,
-      },
-    );
+    try {
+      // Get Auth Token
+      Response authResponse = await Dio().post(
+        '$baseUrl$authRequest',
+        data: {
+          'api_key': apiKey,
+        },
+      );
+      String authToken = authResponse.data['token'];
+      // Create Order
+      Response orderResponse = await Dio().post(
+        '$baseUrl$orderRequest',
+        data: {
+          'auth_token': authToken,
+          'delivery_needed': "false",
+          'amount_cents': '${250 * 100}',
+          'currency': "EGP",
+          'items': [
+            {
+              'name': obj['doctorName'],
+              'amount_cents': '${250}',
+              'description': obj['status'],
+              'quantity': "1",
+            }
+          ],
+        },
+      );
+      String orderId = orderResponse.data['id'];
+      // // Get Payment Key
+      Response paymentKeyResponse = await Dio().post(
+        '$baseUrl$paymentKeyRequest',
+        data: {
+          'auth_token': authToken,
+          'amount_cents': 250,
+          'expiration': 3600,
+          'order_id': orderId,
+          'billing_data': obj['patientName'],
+          'currency': "EGP",
+          'integration_id': integrationId,
+        },
+      );
 
-    String key = paymentKeyResponse.data['token'];
-    return key;
-  } catch (e) {
-    throw Exception('Failed to get payment key');
+      String key = paymentKeyResponse.data['token'];
+      return key;
+    } catch (e) {
+      throw Exception('Failed to get payment key');
+    }
   }
-}
 
-  void _redirectToPaymentGateway(BuildContext context) async{
+  void _redirectToPaymentGateway(BuildContext context) async {
     // -------------> Implement redirecting to Visa payment gateway here instead show dialog !!!
     // String key = await getPaymentKey({
     //   'appointmentDateTime':"June 26, 2024 at 7:47:41 AM UTC+3",
