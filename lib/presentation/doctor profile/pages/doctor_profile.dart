@@ -1,6 +1,8 @@
 import 'package:doctor_plus/core/widgets/appbar_icon.dart';
 import 'package:doctor_plus/core/widgets/custom_floating_action_button.dart';
+import 'package:doctor_plus/data/model/doctor.dart';
 import 'package:doctor_plus/domain/cubits/doctorReviews/doctor_reviews_cubit.dart';
+import 'package:doctor_plus/presentation/doctor%20profile/widgets/doctor_profile_data.dart';
 import 'package:doctor_plus/presentation/doctor%20profile/widgets/doctor_profile_tabs.dart';
 import 'package:doctor_plus/utils/firebase.dart';
 import 'package:doctor_plus/utils/routes.dart';
@@ -32,24 +34,9 @@ class DoctorProfile extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
             children: [
-              // DoctorProfileData(
-              //   doctor: Doctor.(
-              //     degrees: [
-              //       'MBBS',
-              //       'MD',
-              //     ],
-              //     birthDate: "1990-01-01",
-              //     fName: 'John',
-              //     lName: 'Doe',
-              //     phone: '1234567890',
-              //     specialty: 'Dermatologist',
-              //     university: 'University of XYZ',
-              //     graduationDate: "2020-01-01",
-              //     gender: 'Male',
-              //     location: 'XYZ, ABC, DEF',
-              //     description: 'Doctor Description',
-              //   ),
-              // ),
+              const DoctorProfileData(
+               
+              ),
               BlocProvider(
                 create: (context) =>
                     DoctorReviewsCubit()..getDoctorReviews(doctorId: '123'),

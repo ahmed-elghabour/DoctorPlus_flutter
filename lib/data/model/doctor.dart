@@ -1,40 +1,43 @@
 import 'dart:io';
 import 'package:doctor_plus/data/model/review.dart';
 import 'package:doctor_plus/data/model/doctor_working_.dart';
+import 'package:doctor_plus/data/model/system_user.dart';
 
-class Doctor {
+class Doctor extends SystemUser {
+  @override
   File? image;
-  late String id;
+  // late String id;
   late List<File> files;
   late int fees, patients;
   late List<String> degrees;
   late List<ReviewModel> reviews;
   late DoctorWorkingHours workingDays;
   late String university, specialty, graduationDate, description;
-  late String email, fName, lName, phone, gender, location, birthDate;
+  // late String email, fName, lName, phone, gender, location, birthDate;
 
   Doctor.basic({
-    required this.fName,
-    required this.lName,
-    required this.phone,
-    required this.gender,
-    required this.location,
-    required this.birthDate,
+    required super.fName,
+    required super.lName,
+    required super.phone,
+    required super.email,
+    required super.gender,
+    required super.location,
+    required super.birthDate,
   });
 
   Doctor.gen({
-    this.id = '',
-    this.email = '',
+    super.id = '',
+    required super.fName,
+    required super.lName,
+    required super.phone,
+    required super.email,
+    required super.gender,
+    required super.location,
+    required super.birthDate,
     required this.fees,
-    required this.fName,
-    required this.lName,
-    required this.phone,
-    required this.gender,
     required this.degrees,
-    required this.location,
     required this.patients,
     required this.specialty,
-    required this.birthDate,
     required this.university,
     required this.description,
     required this.workingDays,
@@ -50,8 +53,18 @@ class Doctor {
     required this.workingDays,
     required this.description,
     required this.graduationDate,
-  });
+  }) : super.empty();
 
+  Doctor.profile({
+    required super.id,
+    required super.fName,
+    required super.lName,
+    required super.phone,
+    required super.email,
+    required super.gender,
+    required super.location,
+    required super.birthDate,
+  });
   factory Doctor.fromJson(Map<String, dynamic> json) {
     return Doctor.gen(
       id: json['id'],

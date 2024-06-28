@@ -22,11 +22,11 @@ class DoctorsError extends DoctorsState {
 }
 
 ///////
-class PreferedDoctorByIdLoading extends DoctorsState {}
+class FavoriteDoctorByIdLoading extends DoctorsState {}
 
 class DoctorByIdLoaded extends DoctorsState {
-  final Doctor? preferedDoctor;
-  const DoctorByIdLoaded(this.preferedDoctor);
+  final Doctor? favoriteDoctor;
+  const DoctorByIdLoaded(this.favoriteDoctor);
 }
 
 class DoctorByIdError extends DoctorsState {

@@ -1,8 +1,9 @@
+import 'package:doctor_plus/data/model/system_user.dart';
 
-class Patient {
-  String? id;
+class Patient extends SystemUser {
+  // String? id;
   late List<String> diseases, medications, favouriteDoctors;
-  late String fName, lName, email, phone, gender, location, birthDate;
+  // late String fName, lName, email, phone, gender, location, birthDate;
   late String diet,
       smoke,
       sleep,
@@ -12,14 +13,14 @@ class Patient {
       mentalHealth,
       blood;
   Patient.gen({
-    this.id = '',
-    required this.fName,
-    required this.lName,
-    required this.phone,
-    required this.email,
-    required this.gender,
-    required this.location,
-    required this.birthDate,
+    super.id = '',
+    required super.fName,
+    required super.lName,
+    required super.phone,
+    required super.email,
+    required super.gender,
+    required super.location,
+    required super.birthDate,
     required this.diseases,
     required this.medications,
     required this.blood,
@@ -33,15 +34,16 @@ class Patient {
   });
 
   Patient({
+    super.id = '',
     required this.diseases,
     required this.medications,
-    required this.fName,
-    required this.lName,
-    required this.email,
-    required this.phone,
-    required this.gender,
-    required this.location,
-    required this.birthDate,
+    required super.fName,
+    required super.lName,
+    required super.phone,
+    required super.email,
+    required super.gender,
+    required super.location,
+    required super.birthDate,
     required this.diet,
     required this.smoke,
     required this.sleep,
@@ -64,7 +66,7 @@ class Patient {
     required this.diseases,
     required this.mentalHealth,
     required this.medications,
-  });
+  }) : super.empty();
 
   factory Patient.fromJson(Map<String, dynamic> json) {
     return Patient(

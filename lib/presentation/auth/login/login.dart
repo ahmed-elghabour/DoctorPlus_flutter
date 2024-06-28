@@ -1,7 +1,9 @@
 import 'package:doctor_plus/core/widgets/toast.dart';
+import 'package:doctor_plus/domain/cubits/user/user_cubit.dart';
 import 'package:doctor_plus/presentation/auth/widgets/auth.switch_page.dart';
 import 'package:doctor_plus/utils/shared_preferences.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../widgets/signin_option.dart';
 import 'package:doctor_plus/utils/routes.dart';
 import 'package:doctor_plus/utils/firebase.dart';
@@ -106,7 +108,7 @@ class _LoginInputsState extends State<LoginInputs> {
           buildSubmitButton(
             label: "Login",
             widthFactor: .5,
-            onPressed: () {
+            onPressed: () async {
               /*   if (_emailController.text == "admin@doctorplus.com" &&
                   _passwordController.text == "Admin12345") {
                 navigate(route: Routes.admin);
@@ -116,6 +118,8 @@ class _LoginInputsState extends State<LoginInputs> {
               else*/
               if (_formKey.currentState?.validate() == true) {
                 loginUser();
+                context.read<UserCubit>().loadUserData();
+                navigate(route: Routes.home);
               }
             },
           ),
@@ -148,7 +152,6 @@ class _LoginInputsState extends State<LoginInputs> {
       var res = await CustomFirebase().getDocumentData(docID: user);
       SharedPreference().setString(
           key: 'userType', value: res["stress"] != null ? "patient" : "doctor");
-      navigate(route: Routes.home);
     } catch (e) {
       FailureToast.showToast(
           msg: Validator.firebaseLoginValidator(e.toString()));

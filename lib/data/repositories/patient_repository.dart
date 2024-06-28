@@ -6,21 +6,21 @@ class PatientRepository {
 
   PatientRepository({required this.remoteDataSource});
 
-  Future<List<Doctor>> getPreferedDoctors(String patientId) async {
+  Future<List<Doctor>> getFavoriteDoctors(String patientId) async {
     try {
-      List<dynamic> preferedDoctors =
-          await remoteDataSource.getPreferedDoctors(patientId);
+      List<dynamic> favoriteDoctors =
+          await remoteDataSource.getFavoriteDoctors(patientId);
 
-      return preferedDoctors.map((e) => Doctor.fromJson(e)).toList();
+      return favoriteDoctors.map((e) => Doctor.fromJson(e)).toList();
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<Doctor?> getPreferedDoctorById(
+  Future<Doctor?> getFavoriteDoctorById(
       {required String doctorId, required String patientId}) async {
     try {
-      final doctor = await remoteDataSource.getPreferedDoctorById(
+      final doctor = await remoteDataSource.getFavoriteDoctorById(
           doctorId: doctorId, patientId: patientId);
       if (doctor == null) return null;
       return Doctor.fromJson(doctor);

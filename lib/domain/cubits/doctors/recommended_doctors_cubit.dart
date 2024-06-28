@@ -7,7 +7,10 @@ import 'package:equatable/equatable.dart';
 part 'recommended_doctors_state.dart';
 
 class DoctorsCubit extends Cubit<DoctorsState> {
-  DoctorsCubit() : super(DoctorsInitial());
+  DoctorsCubit() : super(DoctorsInitial()) {
+    getAllDoctors();
+    getRecommendedDocctors(patientId: '555');
+  }
 
   void getRecommendedDocctors({required String patientId}) async {
     emit(DoctorsLoading());
@@ -49,15 +52,15 @@ class DoctorsCubit extends Cubit<DoctorsState> {
   }
 
   void getDoctorById({required String doctorId}) async {
-    emit(PreferedDoctorByIdLoading());
+    emit(FavoriteDoctorByIdLoading());
     try {
-      Doctor? preferedDoctor =
+      Doctor? favoriteDoctor =
           await DoctorsRepository(remoteDataSource: DoctorsRemoteDataSource())
               .getDoctorById(doctorId: doctorId);
       // if (preferedDoctor == null) {
       //   emit(PreferedDoctorByIdLoaded(null));
       // }
-      emit(DoctorByIdLoaded(preferedDoctor));
+      emit(DoctorByIdLoaded(favoriteDoctor));
     } catch (e) {
       emit(DoctorsError(e.toString()));
     }

@@ -1,10 +1,12 @@
 import 'package:doctor_plus/core/theming/styles.dart';
+import 'package:doctor_plus/domain/cubits/user/user_cubit.dart';
 import 'package:doctor_plus/presentation/Doctor%20Home/pages/doctor_home.dart';
 import 'package:doctor_plus/presentation/patient%20home/pages/patient_home.dart';
 import 'package:doctor_plus/utils/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:doctor_plus/utils/routes.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

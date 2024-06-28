@@ -3,6 +3,7 @@ import 'package:doctor_plus/domain/cubits/auth/signup_cubit.dart';
 import 'package:doctor_plus/domain/cubits/doctor%20reservations/doctor_reservation_cubit.dart';
 import 'package:doctor_plus/domain/cubits/doctor%20reservations/patients_number_at_day_cubit.dart';
 import 'package:doctor_plus/domain/cubits/doctors/recommended_doctors_cubit.dart';
+import 'package:doctor_plus/domain/cubits/user/user_cubit.dart';
 import 'package:doctor_plus/presentation/Appointment/pages/appointment.dart';
 import 'package:doctor_plus/presentation/Profile%20Preview/pages/prescriptions.dart';
 import 'package:doctor_plus/presentation/Profile%20Preview/pages/profile_preview.dart';
@@ -60,15 +61,13 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       child: MultiBlocProvider(
         providers: [
+          BlocProvider(create: (_) => UserCubit()),
           BlocProvider(create: (_) => ThemeCubit()),
           BlocProvider(create: (_) => SignupCubit()),
+          BlocProvider(create: (_) => DoctorsCubit()),
           BlocProvider(create: (_) => LanguageCubit()),
           BlocProvider(create: (_) => DoctorReservationCubit()),
           BlocProvider(create: (_) => PatientsNumberAtDayCubit()),
-          BlocProvider(
-              create: (_) => DoctorsCubit()
-                ..getAllDoctors()
-                ..getRecommendedDocctors(patientId: '555')),
         ],
         child: BlocBuilder<LanguageCubit, LanguageState>(
             builder: (context, state) {
