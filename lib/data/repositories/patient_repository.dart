@@ -16,4 +16,16 @@ class PatientRepository {
       rethrow;
     }
   }
+
+  Future<Doctor?> getPreferedDoctorById(
+      {required String doctorId, required String patientId}) async {
+    try {
+      final doctor = await remoteDataSource.getPreferedDoctorById(
+          doctorId: doctorId, patientId: patientId);
+      if (doctor == null) return null;
+      return Doctor.fromJson(doctor);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

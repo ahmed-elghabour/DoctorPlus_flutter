@@ -5,6 +5,16 @@ class DoctorsRepository {
   final DoctorsRemoteDataSource remoteDataSource;
   DoctorsRepository({required this.remoteDataSource});
 
+  Future<Doctor?> getDoctorById({required String doctorId}) async {
+    try {
+      final doctor = await remoteDataSource.getDoctorById(doctorId);
+      if (doctor == null) return null;
+      return Doctor.fromJson(doctor);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<List<Doctor>> getRecommendedDoctors(String patientId) async {
     try {
       List<dynamic> doctors =

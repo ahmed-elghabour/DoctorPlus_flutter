@@ -3,6 +3,24 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class DoctorsRemoteDataSource {
   var firestore = FirebaseFirestore.instance;
 
+  Future<Map<String, dynamic>?> getDoctorById(String doctorId) async {
+    try {
+      final doctorsCollectionRef = firestore.collection('doctors');
+
+      final snapshot =
+          await doctorsCollectionRef.where('id', isEqualTo: doctorId).get();
+
+      if (snapshot.docs.isNotEmpty) {
+        final Map<String, dynamic> doctor = snapshot.docs.first.data();
+        return doctor;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
   Future<List<dynamic>> getRecommendedDoctors(
       {required String patientId}) async {
     try {

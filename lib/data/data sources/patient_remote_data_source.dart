@@ -5,13 +5,13 @@ class PatientRemoteDataSource {
   var firestore = FirebaseFirestore.instance;
 
   Future<void> addPreferedDoctorToPatient(
-      String patientId, Doctor doctor) async {
+      {required String patientId, required Doctor doctor}) async {
     final patientDocRef = firestore.collection('patients').doc(patientId);
     final preferedDoctorsCollectionRef =
         patientDocRef.collection('preferedDoctors');
 
     try {
-      await preferedDoctorsCollectionRef.add(doctor.toJson());
+      await preferedDoctorsCollectionRef.doc(doctor.id).set(doctor.toJson());
     } catch (e) {
       throw Exception(e);
     }
@@ -34,11 +34,37 @@ class PatientRemoteDataSource {
     final preferedDoctorsCollectionRef =
         patientDocRef.collection('preferedDoctors');
 
-    final snapshot = await preferedDoctorsCollectionRef.get();
+    try {
+      final snapshot = await preferedDoctorsCollectionRef.get();
 
-    final List<Map<String, dynamic>> preferedDoctors =
-        snapshot.docs.map((doc) => doc.data()).toList();
+      final List<Map<String, dynamic>> preferedDoctors =
+          snapshot.docs.map((doc) => doc.data()).toList();
 
-    return preferedDoctors;
+      return preferedDoctors;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future<Map<String, dynamic>?> getPreferedDoctorById(
+      {required String patientId, required String doctorId}) async {
+    try {
+      final patientDocRef = firestore.collection('patients').doc(patientId);
+      final preferedDoctorsCollectionRef =
+          patientDocRef.collection('preferedDoctors');
+
+      final snapshot = await preferedDoctorsCollectionRef
+          .where('id', isEqualTo: doctorId)
+          .get();
+
+      if (snapshot.docs.isNotEmpty) {
+        final Map<String, dynamic> preferedDoctor = snapshot.docs.first.data();
+        return preferedDoctor;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
   }
 }

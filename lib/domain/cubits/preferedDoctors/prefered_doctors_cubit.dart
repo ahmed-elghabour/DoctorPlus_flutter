@@ -9,10 +9,11 @@ part 'prefered_doctors_state.dart';
 class PreferedDoctorsCubit extends Cubit<PreferedDoctorsState> {
   PreferedDoctorsCubit() : super(PreferedDoctorsInitial());
 
-  void addPreferedDoctorToPatient(String patientId, Doctor doctor) async {
+  void addPreferedDoctorToPatient(
+      {required String patientId, required Doctor doctor}) async {
     try {
       await PatientRemoteDataSource()
-          .addPreferedDoctorToPatient(patientId, doctor);
+          .addPreferedDoctorToPatient(patientId: patientId, doctor: doctor);
       emit(PreferedDoctorsAdded());
     } catch (e) {
       emit(PreferedDoctorsError(e.toString()));
@@ -20,7 +21,7 @@ class PreferedDoctorsCubit extends Cubit<PreferedDoctorsState> {
   }
 
   void removePreferedDoctorFromPatient(
-      String patientId, String doctorId) async {
+      {required String doctorId, required String patientId}) async {
     try {
       await PatientRemoteDataSource().removePreferedDoctorFromPatient(
           doctorId: doctorId, patientId: patientId);
@@ -37,6 +38,22 @@ class PreferedDoctorsCubit extends Cubit<PreferedDoctorsState> {
           await PatientRepository(remoteDataSource: PatientRemoteDataSource())
               .getPreferedDoctors(patientId);
       emit(PreferedDoctorsLoaded(preferedDoctors));
+    } catch (e) {
+      emit(PreferedDoctorsError(e.toString()));
+    }
+  }
+
+  void getPreferedDoctorById(
+      {required String doctorId, required String patientId}) async {
+    emit(PreferedDoctorByIdLoading());
+    try {
+      Doctor? preferedDoctor =
+          await PatientRepository(remoteDataSource: PatientRemoteDataSource())
+              .getPreferedDoctorById(doctorId: doctorId, patientId: patientId);
+      // if (preferedDoctor == null) {
+      //   emit(PreferedDoctorByIdLoaded(null));
+      // }
+      emit(PreferedDoctorByIdLoaded(preferedDoctor));
     } catch (e) {
       emit(PreferedDoctorsError(e.toString()));
     }

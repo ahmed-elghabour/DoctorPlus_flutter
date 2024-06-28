@@ -1,7 +1,9 @@
-import 'package:doctor_plus/core/widgets/card_doctor.dart';
 import 'package:doctor_plus/core/widgets/custom_floating_action_button.dart';
 import 'package:doctor_plus/data/model/doctor.dart';
 import 'package:doctor_plus/domain/cubits/doctorReviews/doctor_reviews_cubit.dart';
+import 'package:doctor_plus/domain/cubits/doctors/recommended_doctors_cubit.dart';
+import 'package:doctor_plus/domain/cubits/preferedDoctors/prefered_doctors_cubit.dart';
+import 'package:doctor_plus/presentation/doctor%20profile/widgets/doctor_profile_data.dart';
 import 'package:doctor_plus/presentation/doctor%20profile/widgets/doctor_profile_tabs.dart';
 import 'package:doctor_plus/utils/routes.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +24,7 @@ class DoctorProfile extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
             children: [
-              DoctorCard(
+              DoctorProfileData(
                 doctor: Doctor(
                   degrees: [
                     'MBBS',
