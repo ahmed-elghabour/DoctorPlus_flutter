@@ -80,11 +80,42 @@ class CustomFirebase {
     }
   }
 
-  getCollectionData({required String collection}) async {
+  Future<void> addNewNestedCollection({
+    required String docID,
+    required String maincollection,
+    required String nestedcollection,
+    required Map<String, dynamic> data,
+  }) async {
     try {
-      QuerySnapshot snapshot =
-          await FirebaseFirestore.instance.collection(collection).get();
-      return snapshot.docs;
+      await FirebaseFirestore.instance
+          .collection(maincollection)
+          .doc(docID)
+          .collection(nestedcollection)
+          .add(data);
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  getCollectionData({
+    String? docID,
+    bool isNested = false,
+    String? nestedcollection,
+    required String collection,
+  }) async {
+    try {
+      if (isNested) {
+        QuerySnapshot snapshot =
+            await FirebaseFirestore.instance.collection(collection).get();
+        return snapshot.docs;
+      } else {
+        QuerySnapshot snapshot = await FirebaseFirestore.instance
+            .collection(collection)
+            .doc(docID)
+            .collection(nestedcollection!)
+            .get();
+        return snapshot.docs;
+      }
     } catch (e) {
       throw Exception(e);
     }

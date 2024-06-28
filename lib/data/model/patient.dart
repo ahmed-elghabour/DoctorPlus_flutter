@@ -1,4 +1,3 @@
-import 'package:doctor_plus/data/model/doctor.dart';
 
 class Patient {
   String? id;

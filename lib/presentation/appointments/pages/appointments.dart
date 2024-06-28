@@ -1,10 +1,8 @@
+import 'package:doctor_plus/domain/cubits/appointments/appointment_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:doctor_plus/core/widgets/appbar_icon.dart';
 import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
-import 'package:doctor_plus/domain/cubits/appointments/cancelled_appointments_cubit.dart';
-import 'package:doctor_plus/domain/cubits/appointments/completed_appointments_cubit.dart';
-import 'package:doctor_plus/domain/cubits/appointments/upcoming_appointments_cubit.dart';
 import 'package:doctor_plus/presentation/appointments/widgets/appointments_tabs.dart';
 
 class DoctorAppointments extends StatelessWidget {
@@ -30,13 +28,13 @@ class DoctorAppointments extends StatelessWidget {
             MultiBlocProvider(
               providers: [
                 BlocProvider(
-                    create: (context) => UpcomingAppointmentsCubit()
+                    create: (context) => AppointmentCubit()
                       ..getPatientUpcomingAppointments(patientId: '555')),
                 BlocProvider(
-                    create: (context) => CompletedAppointmentsCubit()
+                    create: (context) => AppointmentCubit()
                       ..getPatientCompletedAppointments(patientId: '555')),
                 BlocProvider(
-                    create: (context) => CancelledAppointmentsCubit()
+                    create: (context) => AppointmentCubit()
                       ..getPatientCancelledAppointments(patientId: '555')),
               ],
               child: AppointmentsTabs(),

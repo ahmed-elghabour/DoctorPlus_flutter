@@ -1,6 +1,5 @@
 import 'package:doctor_plus/data/model/appointment.dart';
-import 'package:doctor_plus/domain/cubits/appointments/cancelled_appointments_cubit.dart';
-import 'package:doctor_plus/domain/cubits/appointments/upcoming_appointments_cubit.dart';
+import 'package:doctor_plus/domain/cubits/appointments/appointment_cubit.dart';
 import 'package:doctor_plus/presentation/appointments/widgets/appointment_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,10 +10,8 @@ class AppointmentsListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var upcomingAppointmentsCubit =
-        BlocProvider.of<UpcomingAppointmentsCubit>(context);
-    var cancelledAppointmentsCubit =
-        BlocProvider.of<CancelledAppointmentsCubit>(context);
+    var upcomingAppointmentsCubit = BlocProvider.of<AppointmentCubit>(context);
+    var cancelledAppointmentsCubit = BlocProvider.of<AppointmentCubit>(context);
 
     return ListView.builder(
       itemCount: appointments.length,

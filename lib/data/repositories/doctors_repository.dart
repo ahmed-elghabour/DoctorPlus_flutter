@@ -28,7 +28,6 @@ class DoctorsRepository {
   Future<List<Doctor>> getAllDoctors() async {
     try {
       List<dynamic> doctors = await remoteDataSource.getAllDoctors();
-      print(doctors);
       return doctors.map((e) => Doctor.fromJson(e)).toList();
     } catch (e) {
       rethrow;

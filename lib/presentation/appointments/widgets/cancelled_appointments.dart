@@ -1,4 +1,5 @@
-import 'package:doctor_plus/domain/cubits/appointments/cancelled_appointments_cubit.dart';
+import 'package:doctor_plus/domain/cubits/appointments/appointment_cubit.dart';
+import 'package:doctor_plus/domain/cubits/appointments/appointment_state.dart';
 import 'package:doctor_plus/presentation/appointments/widgets/appointments_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,7 +9,7 @@ class CancelledAppointments extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CancelledAppointmentsCubit, CancelledAppointmentsState>(
+    return BlocBuilder<AppointmentCubit, AppointmentsState>(
       builder: (context, state) {
         if (state is CancelledAppointmentsLoaded) {
           return AppointmentsListView(appointments: state.appointments);
