@@ -120,7 +120,7 @@ class CustomFirebase {
     }
   }
 
-  static void signOut() async {
+  static signOut() async {
     await FirebaseAuth.instance.signOut();
   }
 }

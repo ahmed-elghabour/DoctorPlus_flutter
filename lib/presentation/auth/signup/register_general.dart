@@ -4,7 +4,6 @@ import 'package:doctor_plus/core/widgets/buttons.dart';
 import 'package:doctor_plus/core/widgets/toast.dart';
 import 'package:doctor_plus/domain/cubits/auth/signup_cubit.dart';
 import 'package:doctor_plus/utils/location.dart';
-import 'package:doctor_plus/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:doctor_plus/utils/validator.dart';
 import 'package:doctor_plus/core/widgets/inputs.dart';

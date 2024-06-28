@@ -6,12 +6,13 @@ class PatientRemoteDataSource {
 
   Future<void> addPreferedDoctorToPatient(
       {required String patientId, required Doctor doctor}) async {
-    final patientDocRef = firestore.collection('patients').doc(patientId);
-    final preferedDoctorsCollectionRef =
-        patientDocRef.collection('preferedDoctors');
+    final patientDocRef = firestore
+        .collection('patients')
+        .doc(patientId)
+        .collection("favoriteDoctors");
 
     try {
-      await preferedDoctorsCollectionRef.doc(doctor.id).set(doctor.toJson());
+      await patientDocRef.doc(doctor.id).set(doctor.toJson());
     } catch (e) {
       throw Exception(e);
     }

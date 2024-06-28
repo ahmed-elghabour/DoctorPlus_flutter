@@ -1,9 +1,9 @@
 import 'package:doctor_plus/data/model/doctor.dart';
 
 class Patient {
-  late List<String> diseases, medications;
-  late List<Doctor> preferedDoctors;
-  late String fName, lName, type, phone, gender, location, birthDate;
+  String? id;
+  late List<String> diseases, medications, favouriteDoctors;
+  late String fName, lName, email, phone, gender, location, birthDate;
   late String diet,
       smoke,
       sleep,
@@ -11,14 +11,34 @@ class Patient {
       exercise,
       hydration,
       mentalHealth,
-      allergies;
+      blood;
+  Patient.gen({
+    this.id = '',
+    required this.fName,
+    required this.lName,
+    required this.phone,
+    required this.email,
+    required this.gender,
+    required this.location,
+    required this.birthDate,
+    required this.diseases,
+    required this.medications,
+    required this.blood,
+    required this.diet,
+    required this.smoke,
+    required this.sleep,
+    required this.stress,
+    required this.exercise,
+    required this.hydration,
+    required this.mentalHealth,
+  });
 
   Patient({
     required this.diseases,
     required this.medications,
     required this.fName,
     required this.lName,
-    required this.type,
+    required this.email,
     required this.phone,
     required this.gender,
     required this.location,
@@ -30,8 +50,8 @@ class Patient {
     required this.exercise,
     required this.hydration,
     required this.mentalHealth,
-    required this.allergies,
-    this.preferedDoctors = const [],
+    required this.blood,
+    this.favouriteDoctors = const [],
   });
 
   Patient.additional({
@@ -40,7 +60,7 @@ class Patient {
     required this.sleep,
     required this.stress,
     required this.exercise,
-    required this.allergies,
+    required this.blood,
     required this.hydration,
     required this.diseases,
     required this.mentalHealth,
@@ -53,7 +73,7 @@ class Patient {
       medications: List<String>.from(json['medications']),
       fName: json['fName'],
       lName: json['lName'],
-      type: json['type'],
+      email: json['email'],
       phone: json['phone'],
       gender: json['gender'],
       location: json['location'],
@@ -65,11 +85,8 @@ class Patient {
       exercise: json['exercise'],
       hydration: json['hydration'],
       mentalHealth: json['mentalHealth'],
-      allergies: json['allergies'],
-      preferedDoctors: List<Doctor>.from(
-        json['preferedDoctors']
-            .map((doctorJson) => Doctor.fromJson(doctorJson)),
-      ),
+      blood: json['blood'],
+      favouriteDoctors: List<String>.from(json['favouriteDoctors']),
     );
   }
 
@@ -79,7 +96,7 @@ class Patient {
       'medications': medications,
       'fName': fName,
       'lName': lName,
-      'type': type,
+      'email': email,
       'phone': phone,
       'gender': gender,
       'location': location,
@@ -91,9 +108,8 @@ class Patient {
       'exercise': exercise,
       'hydration': hydration,
       'mentalHealth': mentalHealth,
-      'allergies': allergies,
-      'preferedDoctors':
-          preferedDoctors.map((doctor) => doctor.toJson()).toList()
+      'blood': blood,
+      'favouriteDoctors': favouriteDoctors.map((doctorID) => doctorID).toList()
     };
   }
 }

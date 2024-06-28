@@ -30,30 +30,75 @@ class SignupCubit extends Cubit<SignupState> {
     this.birthDate = birthDate;
   }
 
-  saveDoctorAdditionalData({required Doctor data}) {
-    CustomFirebase().addNewCollection(
-        collection: "doctors",
-        docID: SharedPreference().getString(key: 'userID'),
-        data: {
-          "fName": fName,
-          "lName": lName,
-          "phone": phone,
-          "gender": gender,
-          "type": "doctor",
-          "location": location,
-          "birthDate": birthDate,
-          "degrees": data.degrees, //
-          "specialty": data.specialty, //
-          "university": data.university, //
-          "graduationDate": data.graduationDate, //
-          "description": data.description, //
-          "fees": data.fees, //
-          "patients": data.patients, //
-          "startingWorkHour":data.workingDays.startTimes,
-          "endingWorkHour":data.workingDays.endTimes,
-          "days": data.workingDays.days,
-          // "image": image,
-        });
+  saveDemoDoctorAdditionalData({required Doctor data, required String id}) {
+    CustomFirebase().addNewCollection(collection: "doctors", docID: id, data: {
+      "id": id,
+      "fName": data.fName,
+      "lName": data.lName,
+      "phone": data.phone,
+      "gender": data.gender,
+      "type": "doctor",
+      "location": data.location,
+      "birthDate": data.birthDate,
+      "degrees": data.degrees, //
+      "specialty": data.specialty, //
+      "university": data.university, //
+      "graduationDate": data.graduationDate, //
+      "description": data.description, //
+      "fees": data.fees, //
+      "patients": data.patients, //
+      "startingWorkHour": data.workingDays.startTimes,
+      "endingWorkHour": data.workingDays.endTimes,
+      "days": data.workingDays.days,
+      // "image": image,
+    });
+  }
+
+  saveDemoPatientAdditionalData({required Patient data, required String id}) {
+    CustomFirebase().addNewCollection(collection: "patients", docID: id, data: {
+      "id": id,
+      "type": "patient",
+      "fName": data.fName,
+      "lName": data.lName,
+      "phone": data.phone,
+      "gender": data.gender,
+      "location": data.location,
+      "birthDate": data.birthDate,
+      "diet": data.diet,
+      "smoke": data.smoke,
+      "sleep": data.sleep,
+      "stress": data.stress,
+      "exercise": data.exercise,
+      "hydration": data.hydration,
+      "blood": data.blood,
+      "mentalHealth": data.mentalHealth,
+
+    });
+    SharedPreference().setString(key: "userType", value: "patient");
+  }
+
+  saveDoctorAdditionalData({required Doctor data, required String id}) {
+    CustomFirebase().addNewCollection(collection: "doctors", docID: id, data: {
+      "id": id,
+      "fName": fName,
+      "lName": lName,
+      "phone": phone,
+      "gender": gender,
+      "type": "doctor",
+      "location": location,
+      "birthDate": birthDate,
+      "degrees": data.degrees, //
+      "specialty": data.specialty, //
+      "university": data.university, //
+      "graduationDate": data.graduationDate, //
+      "description": data.description, //
+      "fees": data.fees, //
+      "patients": data.patients, //
+      "startingWorkHour": data.workingDays.startTimes,
+      "endingWorkHour": data.workingDays.endTimes,
+      "days": data.workingDays.days,
+      // "image": image,
+    });
     SharedPreference().setString(key: "userType", value: "doctor");
   }
 
@@ -74,7 +119,7 @@ class SignupCubit extends Cubit<SignupState> {
           "stress": data.stress,
           "exercise": data.exercise,
           "hydration": data.hydration,
-          "allergies": data.allergies,
+          "blood": data.blood,
           "mentalHealth": data.mentalHealth,
         });
     SharedPreference().setString(key: "userType", value: "patient");

@@ -13,38 +13,47 @@ class Doctor {
   late String university, specialty, graduationDate, description;
   late String email, fName, lName, phone, gender, location, birthDate;
 
-  Doctor({
-    this.id = '',
-    this.email = '',
-    required this.degrees,
-    required this.university,
-    required this.specialty,
-    required this.graduationDate,
+  Doctor.basic({
     required this.fName,
     required this.lName,
     required this.phone,
     required this.gender,
     required this.location,
     required this.birthDate,
-    this.description = '',
-    this.reviews = const [],
-    // this.workingHours = const DoctorWorkingHours( days: [], endTimes: [], startTimes: [], ),
   });
 
+  Doctor.gen({
+    this.id = '',
+    this.email = '',
+    required this.fees,
+    required this.fName,
+    required this.lName,
+    required this.phone,
+    required this.gender,
+    required this.degrees,
+    required this.location,
+    required this.patients,
+    required this.specialty,
+    required this.birthDate,
+    required this.university,
+    required this.description,
+    required this.workingDays,
+    required this.graduationDate,
+  });
   Doctor.additional({
+    required this.fees,
     required this.files,
     required this.degrees,
+    required this.patients,
     required this.specialty,
     required this.university,
-    required this.graduationDate,
     required this.workingDays,
     required this.description,
-    required this.fees,
-    required this.patients,
+    required this.graduationDate,
   });
 
   factory Doctor.fromJson(Map<String, dynamic> json) {
-    return Doctor(
+    return Doctor.gen(
       id: json['id'],
       degrees: List<String>.from(json['degrees']),
       university: json['university'],
@@ -55,6 +64,10 @@ class Doctor {
       lName: json['lName'],
       phone: json['phone'],
       gender: json['gender'],
+      fees: json['fees'],
+      patients: json['patients'],
+      description: json['description'],
+      workingDays: DoctorWorkingHours.fromJson(json['workingDays']),
       location: json['location'],
       birthDate: json['birthDate'],
     );

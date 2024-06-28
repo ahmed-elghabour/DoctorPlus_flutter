@@ -6,6 +6,7 @@ import 'package:doctor_plus/core/widgets/inputs.dart';
 import 'package:doctor_plus/data/model/doctor.dart';
 import 'package:doctor_plus/data/model/doctor_working_.dart';
 import 'package:doctor_plus/domain/cubits/auth/signup_cubit.dart';
+import 'package:doctor_plus/utils/shared_preferences.dart';
 import 'package:doctor_plus/utils/validator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -319,6 +320,7 @@ class _DoctorAdditionalInfoState extends State<DoctorAdditionalInfo> {
               label: "Submit",
               onPressed: () {
                 context.read<SignupCubit>().saveDoctorAdditionalData(
+                      id: SharedPreference().getString(key: 'userID')!,
                       data: Doctor.additional(
                         fees: int.parse(_feesController.text),
                         patients: int.parse(_patientsController.text),
