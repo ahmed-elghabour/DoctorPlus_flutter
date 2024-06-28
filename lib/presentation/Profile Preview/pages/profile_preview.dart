@@ -123,16 +123,25 @@ class ProfilePreview extends StatelessWidget {
                 top: 60,
                 child: Align(
                   alignment: Alignment.topCenter,
-                  child: CircleAvatar(
-                    backgroundColor: const Color.fromARGB(255, 224, 219, 175),
-                    radius: 70,
-                    child: Text(
-                      patient['patientName'].split(' ')[0][0].toUpperCase() +
-                          patient['patientName'].split(' ')[1][0].toUpperCase(),
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 28),
+                  child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: Colors.white, // Set the border color
+                      width: 4.0, // Set the border width
+                    ),
+                  ),
+                    child: CircleAvatar(
+                      backgroundColor: Color(0xFFB3CBDB),
+                      radius: 70,
+                      child: Text(
+                        patient['patientName'].split(' ')[0][0].toUpperCase() +
+                            patient['patientName'].split(' ')[1][0].toUpperCase(),
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 28),
+                      ),
                     ),
                   ),
                 ))

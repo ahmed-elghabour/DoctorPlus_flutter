@@ -76,12 +76,14 @@ class _RegisterGeneralState extends State<RegisterGeneral> {
                 buildTextField(
                   controller: _fNameController,
                   label: 'First Name',
+                  icon: Icons.person,
                   validator: (Validator.nameValidator),
                 ),
                 const SizedBox(height: 15),
                 buildTextField(
                   controller: _lNameController,
                   label: 'Last Name',
+                  icon: Icons.person,
                   validator: (Validator.nameValidator),
                 ),
                 const SizedBox(height: 15),

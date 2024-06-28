@@ -1,4 +1,7 @@
+import 'package:doctor_plus/core/widgets/buttons.dart';
 import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
+import 'package:doctor_plus/core/widgets/drop_down.dart';
+import 'package:doctor_plus/core/widgets/inputs.dart';
 import 'package:doctor_plus/utils/firebase.dart';
 import 'package:doctor_plus/utils/validator.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -39,72 +42,54 @@ class _ComplaintsPageState extends State<ComplaintsPage> {
         key: formKey,
         child: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TextFormField(
-                decoration: const InputDecoration(label: Text("Your Name")),
-                controller: nameController,
-                validator:(Validator.fullNameValidator),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                decoration: const InputDecoration(label: Text("Your Email")),
-                controller: emailController,
-                validator: (Validator.emailValidator)
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              DropdownButtonFormField(
-                value: typeDropdownValue,
-                isExpanded: true,
-                items: const[
-                  DropdownMenuItem(value: "Patient",child: Text("Patient"),),
-                  DropdownMenuItem(value: "Doctor",child: Text("Doctor"),),
-                ], 
-                decoration: const InputDecoration(label: Text("Complaint about")),
-                onChanged: (String? value) {  
-                  setState(() {
-                    typeDropdownValue = value!;
-                  });
-                },
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                decoration: const InputDecoration(label: Text("What has happened?")),
-                controller: complaintController,
-                validator: (Validator.complaintBodyValidator),
-                maxLines: null,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                decoration: const InputDecoration(label: Text("How can we make things right?")),
-                controller: solutionController,
-                maxLines: null,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    if(formKey.currentState!.validate()) {
-                      createComplaint();
-                    }
-                  },
-                  child: const Text("Submit"),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                buildTextField(controller: nameController, validator: (Validator.fullNameValidator), label: "Your Name", icon: Icons.person,),
+                const SizedBox(
+                  height: 10,
                 ),
-              )
-              
-            ],
+                buildEmailField(controller: emailController, validator: (Validator.emailValidator)),
+                const SizedBox(
+                  height: 10,
+                ),
+                CustomDropDownMenu(
+                  value: typeDropdownValue,
+                  list: const['Patient', 'Doctor'],
+                  onChanged: (String? value) {  
+                    setState(() {
+                      typeDropdownValue = value!;
+                    });
+                  },
+                  
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                buildMultiLineTextField(hint: "Write here your story", label: "What has happened?", controller: complaintController, validator: (Validator.complaintBodyValidator)),
+                const SizedBox(
+                  height: 10,
+                ),
+                buildMultiLineTextField(hint: "Write here your solutions", label: "How can we make things right?", controller: solutionController, validator: (Validator.complaintBodyValidator)),
+                const SizedBox(
+                  height: 10,
+                ),
+                Center(
+                  child: buildSubmitButton(
+                    label: "Submit", 
+                    onPressed: () {
+                      if(formKey.currentState!.validate()) {
+                        createComplaint();
+                      }
+                    },
+                    widthFactor: 0.4
+                  ),
+                )
+                
+              ],
+            ),
           ),
         ),
       ),
