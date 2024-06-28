@@ -92,11 +92,11 @@ class _RegisterPageState extends State<RegisterPage> {
                     widthFactor: .5,
                     label: "Register",
                     onPressed: () {
+                        // navigate(route: Routes.registerFill);
+                      if (_formKey.currentState?.validate() == true) {
+                        createNewUser();
                         navigate(route: Routes.registerFill);
-                      // if (_formKey.currentState?.validate() == true) {
-                      //   createNewUser();
-                      //   navigate(route: Routes.registerFill);
-                      // }
+                      }
                     },
                   ),
                   signInOptions(),

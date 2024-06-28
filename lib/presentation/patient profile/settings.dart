@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
 import 'package:doctor_plus/utils/firebase.dart';
 import 'package:doctor_plus/utils/routes.dart';
+import 'package:doctor_plus/utils/shared_preferences.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -84,10 +84,8 @@ class _SettingsPageState extends State<SettingsPage> {
               onTap: () async {
                 bool shouldLogout = await showLogoutDialog(context);
                 if (shouldLogout) {
-                  CustomFirebase().signOut();
-                  SharedPreferences prefs =
-                      await SharedPreferences.getInstance();
-                  await prefs.setBool('isLogged', false);
+                  CustomFirebase.signOut();
+                  SharedPreference.signOut();
                   Navigator.pushReplacementNamed(context, Routes.login);
                 }
               },

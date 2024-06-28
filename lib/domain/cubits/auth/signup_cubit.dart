@@ -39,12 +39,20 @@ class SignupCubit extends Cubit<SignupState> {
           "lName": lName,
           "phone": phone,
           "gender": gender,
+          "type": "doctor",
           "location": location,
           "birthDate": birthDate,
           "degrees": data.degrees, //
           "specialty": data.specialty, //
           "university": data.university, //
           "graduationDate": data.graduationDate, //
+          "description": data.description, //
+          "fees": data.fees, //
+          "patients": data.patients, //
+          "startingWorkHour":data.workingDays.startTimes,
+          "endingWorkHour":data.workingDays.endTimes,
+          "days": data.workingDays.days,
+          // "image": image,
         });
     SharedPreference().setString(key: "userType", value: "doctor");
   }

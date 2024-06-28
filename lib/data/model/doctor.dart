@@ -3,30 +3,29 @@ import 'package:doctor_plus/data/model/review.dart';
 import 'package:doctor_plus/data/model/doctor_working_.dart';
 
 class Doctor {
-  late String id;
   File? image;
+  late String id;
   late List<File> files;
+  late int fees, patients;
+  late List<String> degrees;
   late List<ReviewModel> reviews;
-  late List<String> degrees, workingDays;
-  late DoctorWorkingHours workingHours;
-  late String fees, patients, start, end;
+  late DoctorWorkingHours workingDays;
   late String university, specialty, graduationDate, description;
-  late String type, fName, lName, phone, gender, location, birthDate;
+  late String email, fName, lName, phone, gender, location, birthDate;
 
   Doctor({
     this.id = '',
+    this.email = '',
     required this.degrees,
     required this.university,
     required this.specialty,
     required this.graduationDate,
-    required this.type,
     required this.fName,
     required this.lName,
     required this.phone,
     required this.gender,
     required this.location,
     required this.birthDate,
-    this.image,
     this.description = '',
     this.reviews = const [],
     // this.workingHours = const DoctorWorkingHours( days: [], endTimes: [], startTimes: [], ),
@@ -38,6 +37,10 @@ class Doctor {
     required this.specialty,
     required this.university,
     required this.graduationDate,
+    required this.workingDays,
+    required this.description,
+    required this.fees,
+    required this.patients,
   });
 
   factory Doctor.fromJson(Map<String, dynamic> json) {
@@ -47,7 +50,7 @@ class Doctor {
       university: json['university'],
       specialty: json['specialty'],
       graduationDate: json['graduationDate'],
-      type: json['type'],
+      email: json['email'],
       fName: json['fName'],
       lName: json['lName'],
       phone: json['phone'],
@@ -64,7 +67,7 @@ class Doctor {
       'university': university,
       'specialty': specialty,
       'graduationDate': graduationDate,
-      'type': type,
+      'email': email,
       'fName': fName,
       'lName': lName,
       'phone': phone,

@@ -37,7 +37,7 @@ class DoctorService {
       for(var doc in filteredAppointments) {
         AppointmentModel reservation = AppointmentModel.fromJson(doc);
         Timestamp reservationDate = reservation.appointmentDateTime;
-        print(reservationDate.toDate());
+        // print(reservationDate.toDate());
         if (reservationDate.toDate().isAfter(DateTime(now.year, now.month, now.day, 23, 59, 59))) {
           newCount++;
         } else if (reservationDate.toDate().isBefore(DateTime(now.year, now.month, now.day, 0, 0, 0))) {

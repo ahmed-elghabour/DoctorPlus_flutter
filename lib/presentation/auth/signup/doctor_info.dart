@@ -4,6 +4,7 @@ import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
 import 'package:doctor_plus/core/widgets/files_uploaded.dart';
 import 'package:doctor_plus/core/widgets/inputs.dart';
 import 'package:doctor_plus/data/model/doctor.dart';
+import 'package:doctor_plus/data/model/doctor_working_.dart';
 import 'package:doctor_plus/domain/cubits/auth/signup_cubit.dart';
 import 'package:doctor_plus/utils/validator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -319,10 +320,18 @@ class _DoctorAdditionalInfoState extends State<DoctorAdditionalInfo> {
               onPressed: () {
                 context.read<SignupCubit>().saveDoctorAdditionalData(
                       data: Doctor.additional(
-                        specialty: specialty,
+                        fees: int.parse(_feesController.text),
+                        patients: int.parse(_patientsController.text),
+                        workingDays: DoctorWorkingHours(
+                          days: dayes,
+                          startTimes: _startController.text,
+                          endTimes: _endController.text,
+                        ),
                         files: _pdfFiles,
-                        university: university,
+                        specialty: specialty,
                         degrees: degreesList,
+                        university: university,
+                        description: _descriptionController.text,
                         graduationDate: _dateController.text,
                       ),
                     );

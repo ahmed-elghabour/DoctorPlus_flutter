@@ -2,13 +2,16 @@ import 'dart:io';
 
 import 'package:doctor_plus/core/widgets/buttons.dart';
 import 'package:doctor_plus/core/widgets/toast.dart';
+import 'package:doctor_plus/domain/cubits/auth/signup_cubit.dart';
 import 'package:doctor_plus/utils/location.dart';
+import 'package:doctor_plus/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:doctor_plus/utils/validator.dart';
 import 'package:doctor_plus/core/widgets/inputs.dart';
 import 'package:doctor_plus/core/widgets/drop_down.dart';
 import 'package:doctor_plus/core/widgets/icon_picker.dart';
 import 'package:doctor_plus/core/widgets/image_picker.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
@@ -173,19 +176,19 @@ class _RegisterGeneralState extends State<RegisterGeneral> {
                   widthFactor: .7,
                   onPressed: () {
                     // Navigator.pushNamed(context, Routes.registerFill);
-                    // if (_formKey.currentState?.validate() == true) {
-                    //   context.read<SignupCubit>().fillGeneralData(
-                    //         type: type,
-                    //         image: image,
-                    //         gender: gender,
-                    //         phone: _phoneController.text,
-                    //         fName: _fNameController.text,
-                    //         lName: _lNameController.text,
-                    //         location: _locationController.text,
-                    //         birthDate: _birthDateController.text,
-                    //       );
-                    widget.onNext(type.toLowerCase());
-                    // }
+                    if (_formKey.currentState?.validate() == true) {
+                      context.read<SignupCubit>().fillGeneralData(
+                            type: type,
+                            image: image,
+                            gender: gender,
+                            phone: _phoneController.text,
+                            fName: _fNameController.text,
+                            lName: _lNameController.text,
+                            location: _locationController.text,
+                            birthDate: _birthDateController.text,
+                          );
+                      widget.onNext(type.toLowerCase());
+                    }
                   },
                 ),
               ],
