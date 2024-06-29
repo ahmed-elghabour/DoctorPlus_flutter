@@ -10,7 +10,7 @@ class DoctorProfileData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Doctor doctor = context.read<UserCubit>().user as Doctor;
+    // final Doctor doctor = context.read<UserCubit>().user as Doctor;
     return Card(
       elevation: 0,
       margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 2),
@@ -31,11 +31,11 @@ class DoctorProfileData extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        '${doctor.fName}  ${doctor.lName}',
-                        style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
+                      // Text(
+                      //   '${doctor.fName}  ${doctor.lName}',
+                      //   style: const TextStyle(
+                      //       fontSize: 20, fontWeight: FontWeight.bold),
+                      // ),
                       //   BlocBuilder<FavoriteDoctorsCubit, FavoriteDoctorsState>(
                       //     builder: (context, state) {
                       //       if (state is FavoriteDoctorByIdLoaded) {
