@@ -8,6 +8,7 @@ import 'package:doctor_plus/presentation/Appointment/pages/appointment.dart';
 import 'package:doctor_plus/presentation/Profile%20Preview/pages/prescriptions.dart';
 import 'package:doctor_plus/presentation/Profile%20Preview/pages/profile_preview.dart';
 import 'package:doctor_plus/presentation/admin/admin_home.dart';
+import 'package:doctor_plus/presentation/admin/complaints_page.dart';
 import 'package:doctor_plus/presentation/admin/doctor_managment_page.dart';
 import 'package:doctor_plus/presentation/admin/statistics_page.dart';
 // import 'package:doctor_plus/domain/cubits/doctorReservations/patients_number_atDay_cubit.dart';
@@ -90,7 +91,7 @@ class MyApp extends StatelessWidget {
             routes: {
               Routes.admin: (context) => const AdminHomePage(),
               Routes.adminStatistics: (context) => const StatisticsPage(),
-              Routes.adminComplaints: (context) => const ComplaintsPage(),
+              Routes.adminComplaints: (context) =>  const AdminComplaintsPage(),
               Routes.doctorManagement: (context) => const DoctorManagmentPage(),
               Routes.faq: (context) => const FAQPage(),
               Routes.home: (context) => const HomePage(),
