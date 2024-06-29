@@ -36,6 +36,7 @@ class SignupCubit extends Cubit<SignupState> {
       "fName": data.fName,
       "lName": data.lName,
       "phone": data.phone,
+      "email": data.email,
       "gender": data.gender,
       "type": "doctor",
       "location": data.location,
@@ -58,6 +59,7 @@ class SignupCubit extends Cubit<SignupState> {
     CustomFirebase().addNewCollection(collection: "patients", docID: id, data: {
       "id": id,
       "type": "patient",
+      "email": data.email,
       "fName": data.fName,
       "lName": data.lName,
       "phone": data.phone,
@@ -72,7 +74,6 @@ class SignupCubit extends Cubit<SignupState> {
       "hydration": data.hydration,
       "blood": data.blood,
       "mentalHealth": data.mentalHealth,
-
     });
     SharedPreference().setString(key: "userType", value: "patient");
   }

@@ -16,6 +16,7 @@ class Doctor extends SystemUser {
   // late String email, fName, lName, phone, gender, location, birthDate;
 
   Doctor.basic({
+    super.type = 'doctor',
     required super.fName,
     required super.lName,
     required super.phone,
@@ -27,6 +28,7 @@ class Doctor extends SystemUser {
 
   Doctor.gen({
     super.id = '',
+    super.type = 'doctor',
     required super.fName,
     required super.lName,
     required super.phone,
@@ -57,6 +59,7 @@ class Doctor extends SystemUser {
 
   Doctor.profile({
     required super.id,
+    super.type = 'doctor',
     required super.fName,
     required super.lName,
     required super.phone,
@@ -65,9 +68,23 @@ class Doctor extends SystemUser {
     required super.location,
     required super.birthDate,
   });
+  Doctor.test({
+    required super.id,
+    super.type = 'doctor',
+    required super.fName,
+    required super.lName,
+    required super.phone,
+    required super.email,
+    required super.gender,
+    required super.location,
+    required super.birthDate,
+    required this.description,
+  });
+
   factory Doctor.fromJson(Map<String, dynamic> json) {
     return Doctor.gen(
       id: json['id'],
+      type: json['type'],
       degrees: List<String>.from(json['degrees']),
       university: json['university'],
       specialty: json['specialty'],
@@ -80,7 +97,11 @@ class Doctor extends SystemUser {
       fees: json['fees'],
       patients: json['patients'],
       description: json['description'],
-      workingDays: DoctorWorkingHours.fromJson(json['workingDays']),
+      workingDays: DoctorWorkingHours(
+        days: List<String>.from(json['days']),
+        endTimes: json['endingWorkHour'],
+        startTimes: json['startingWorkHour'],
+      ),
       location: json['location'],
       birthDate: json['birthDate'],
     );

@@ -119,9 +119,7 @@ class MyApp extends StatelessWidget {
               Routes.prescriptions: (context) => const Prescriptions(),
             },
             // initialRoute: Routes.home,
-            initialRoute: SharedPreference().getString(key: 'userType') == null
-                ? Routes.login
-                : Routes.home,
+            initialRoute: Routes.home,
           );
         }),
       ),

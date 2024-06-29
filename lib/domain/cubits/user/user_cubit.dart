@@ -6,23 +6,56 @@ import 'package:doctor_plus/utils/shared_preferences.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UserCubit extends Cubit<UserState> {
-  UserCubit() : super(UserStateInitial());
-
-  loadUserData() async {
-    emit(UserLoading());
+  UserCubit() : super(UserStateInitial()) {
+    if (SharedPreference().getString(key: "userID") == null) {
+      emit(UserNotLogged());
+    } else {
+      emit(UserLogged());
+    }
+  }
+  late dynamic user;
+  bool isLoggin = false;
+  loadUserData({String? id}) async {
     await CustomFirebase()
-        .getDocumentData(docID: SharedPreference().getString(key: "userID")!)
+        .getDocumentData(
+            docID: id ?? SharedPreference().getString(key: "userID")!)
         .then((value) {
+      print("Document Value: $value");
       if (value == null) {
         emit(UserLoadingFailure());
       }
+
       if (value["type"] == "doctor") {
+        user = Doctor.fromJson(value);
         emit(UserLoadingSuccess());
-        return Doctor.fromJson(value);
       } else {
+        user = Patient.fromJson(value);
         emit(UserLoadingSuccess());
-        return Patient.fromJson(value);
       }
     });
+    print("Trace Login - Type is: ${user.type}");
   }
+
+  getUser() {
+    if (user == null) {
+      loadUserData(
+          id: SharedPreference().getString(
+        key: "userID",
+      )!);
+    }
+    return user;
+  }
+
+  login() async{
+    await loadUserData();
+    isLoggin = true;
+    emit(UserLogged());
+  }
+
+  logout() {
+    isLoggin = false;
+    emit(UserNotLogged());
+  }
+
+  bool isUsedLogged() => isLoggin;
 }

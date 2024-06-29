@@ -1,5 +1,7 @@
 import 'package:doctor_plus/core/theming/styles.dart';
+import 'package:doctor_plus/data/model/system_user.dart';
 import 'package:doctor_plus/domain/cubits/user/user_cubit.dart';
+import 'package:doctor_plus/domain/cubits/user/user_state.dart';
 import 'package:doctor_plus/presentation/Doctor%20Home/pages/doctor_home.dart';
 import 'package:doctor_plus/presentation/patient%20home/pages/patient_home.dart';
 import 'package:doctor_plus/utils/shared_preferences.dart';
@@ -11,22 +13,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  /*
-  Future<String> _getUsername() async {
-    User? user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      DocumentSnapshot userDoc = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(user.uid)
-          .get();
-      return userDoc.get('username');
-    }
-    return 'Ahmed';
-  }
-  */
-
   @override
   Widget build(BuildContext context) {
+    bool isLogged = context.read<UserCubit>().isUsedLogged();
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -43,24 +32,39 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SizedBox(
-          width: double.infinity,
-          height: MediaQuery.sizeOf(context).height,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Welcome to Doctor Plus',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              SharedPreference().getString(key: "userType") == "doctor"
-                  ? const DoctorHome()
-                  : const PatientHome()
-            ],
-          ),
-        ),
+      body: BlocBuilder<UserCubit, UserState>(
+        builder: (context, state) {
+          if (state is UserNotLogged) {
+            return const PatientHome();
+          } else if (state is UserLogged) {
+            if (state is UserLoading) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is UserLoadingSuccess) {
+              return Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: MediaQuery.sizeOf(context).height,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Welcome to Doctor Plus',
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold),
+                      ),
+                      isLogged ? const PatientHome() : const DoctorHome()
+                    ],
+                  ),
+                ),
+              );
+            } else {
+              return const Text("Errorrrr");
+            }
+          } else {
+            return const Text("Errorr");
+          }
+        },
       ),
       bottomNavigationBar: FutureBuilder<User?>(
         future: Future.value(FirebaseAuth.instance.currentUser),

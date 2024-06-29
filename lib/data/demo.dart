@@ -157,7 +157,7 @@ List<Doctor> demoDoctorData = [
   Doctor.gen(
     fName: "Muhammed",
     lName: "Gamal",
-    email: "dr.jimmy_radiology@gmail.com",
+    email: "dr.jimmy@gmail.com",
     specialty: "Radiology",
     graduationDate: "2024-06-28",
     university: "Alexandria University",
@@ -183,7 +183,7 @@ List<Doctor> demoDoctorData = [
   Doctor.gen(
     fName: "Amr",
     lName: "yahia",
-    email: "dr.amr_ophthalmology@gmail.com",
+    email: "dr.amr@gmail.com",
     specialty: "Ophthalmology",
     graduationDate: "2024-06-28",
     university: "Alexandria University",
@@ -209,7 +209,7 @@ List<Doctor> demoDoctorData = [
   Doctor.gen(
     fName: "Ahmed",
     lName: "El_Gamal",
-    email: "dr.elgamal_gynecology@gmail.com",
+    email: "dr.elgamal@gmail.com",
     specialty: "Gynecology",
     graduationDate: "2024-06-28",
     university: "Alexandria University",
@@ -235,7 +235,7 @@ List<Doctor> demoDoctorData = [
   Doctor.gen(
     fName: "Abdelrahman",
     lName: "khallaf",
-    email: "dr.abdo_urology@gmail.com",
+    email: "dr.abdo@gmail.com",
     specialty: "Urology",
     graduationDate: "2024-06-28",
     university: "Alexandria University",
@@ -261,7 +261,7 @@ List<Doctor> demoDoctorData = [
   Doctor.gen(
     fName: "Ahmed",
     lName: "Amgad",
-    email: "dr.amgad_neurology@gmail.com",
+    email: "dr.amgad@gmail.com",
     specialty: "Neurology",
     graduationDate: "2024-06-28",
     university: "Alexandria University",
@@ -287,7 +287,7 @@ List<Doctor> demoDoctorData = [
   Doctor.gen(
     fName: "Ahmed",
     lName: "Ghabour",
-    email: "dr.ghabour_hepatology@gmail.com",
+    email: "dr.ghabour@gmail.com",
     specialty: "Hepatology",
     graduationDate: "2024-06-28",
     university: "Alexandria University",

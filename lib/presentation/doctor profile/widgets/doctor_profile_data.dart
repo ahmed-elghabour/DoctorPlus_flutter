@@ -10,7 +10,7 @@ class DoctorProfileData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Doctor doctor = context.read<UserCubit>().user as Doctor;
+    final Doctor? doctor = context.read<UserCubit>().getUser() ;
     return Card(
       elevation: 0,
       margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 2),
@@ -32,7 +32,8 @@ class DoctorProfileData extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '${doctor.fName}  ${doctor.lName}',
+                        doctor?.fName ?? 'Null',
+                        // '${doctor.fName}  ${doctor.lName}',
                         style: const TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),

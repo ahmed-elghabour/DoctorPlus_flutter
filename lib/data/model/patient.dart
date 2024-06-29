@@ -14,6 +14,7 @@ class Patient extends SystemUser {
       blood;
   Patient.gen({
     super.id = '',
+    super.type = 'patient',
     required super.fName,
     required super.lName,
     required super.phone,
@@ -35,6 +36,7 @@ class Patient extends SystemUser {
 
   Patient({
     super.id = '',
+    super.type = 'patient',
     required this.diseases,
     required this.medications,
     required super.fName,
@@ -59,34 +61,36 @@ class Patient extends SystemUser {
     required this.diet,
     required this.smoke,
     required this.sleep,
+    required this.blood,
     required this.stress,
     required this.exercise,
-    required this.blood,
-    required this.hydration,
     required this.diseases,
+    required this.hydration,
     required this.mentalHealth,
     required this.medications,
   }) : super.empty();
 
   factory Patient.fromJson(Map<String, dynamic> json) {
     return Patient(
-      diseases: List<String>.from(json['diseases']),
-      medications: List<String>.from(json['medications']),
+      id: json['id'],
+      type: json['type'],
       fName: json['fName'],
       lName: json['lName'],
       email: json['email'],
       phone: json['phone'],
-      gender: json['gender'],
-      location: json['location'],
-      birthDate: json['birthDate'],
       diet: json['diet'],
+      blood: json['blood'],
       smoke: json['smoke'],
       sleep: json['sleep'],
+      gender: json['gender'],
       stress: json['stress'],
       exercise: json['exercise'],
+      location: json['location'],
+      birthDate: json['birthDate'],
       hydration: json['hydration'],
       mentalHealth: json['mentalHealth'],
-      blood: json['blood'],
+      diseases: List<String>.from(json['diseases']),
+      medications: List<String>.from(json['medications']),
       favouriteDoctors: List<String>.from(json['favouriteDoctors']),
     );
   }

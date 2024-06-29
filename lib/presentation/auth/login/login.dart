@@ -109,17 +109,15 @@ class _LoginInputsState extends State<LoginInputs> {
             label: "Login",
             widthFactor: .5,
             onPressed: () async {
-              /*   if (_emailController.text == "admin@doctorplus.com" &&
-                  _passwordController.text == "Admin12345") {
-                navigate(route: Routes.admin);
-                SuccessToast.showToast(msg: "Login Successful");
-                return;
-              } 
-              else*/
               if (_formKey.currentState?.validate() == true) {
-                loginUser();
-                context.read<UserCubit>().loadUserData();
-                navigate(route: Routes.home);
+                try {
+                  await loginUser();
+                  context.read<UserCubit>().login();
+                  navigate(route: Routes.home);
+                } catch (e) {
+                  FailureToast.showToast(
+                      msg: Validator.firebaseLoginValidator(e.toString()));
+                }
               }
             },
           ),
@@ -138,23 +136,17 @@ class _LoginInputsState extends State<LoginInputs> {
         ),
       );
 
-  void loginUser() async {
+  loginUser() async {
     try {
-      // init
-      final String email = _emailController.text;
-      final String password = _passwordController.text;
-
-      // login
-      var user = await CustomFirebase.instance
-          .signWithEmailAndPassword(email: email, password: password);
+      var user = await CustomFirebase.instance.signWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
       SharedPreference().setString(key: 'userID', value: user);
-
-      var res = await CustomFirebase().getDocumentData(docID: user);
-      SharedPreference().setString(
-          key: 'userType', value: res["stress"] != null ? "patient" : "doctor");
+      return user;
     } catch (e) {
-      FailureToast.showToast(
-          msg: Validator.firebaseLoginValidator(e.toString()));
+      print("Erorrrrrrrrrrrrrrrrrrrrrrrr: $e");
+      throw Exception(e);
     }
   }
 }

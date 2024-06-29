@@ -17,7 +17,7 @@ class SharedPreference {
   bool? getBool({required String key}) => _shared!.getBool(key);
 
   static Future<void> signOut() async {
-    await _shared!.setString('userID', "");
-    await _shared!.setString('userType', "");
+    await _shared!.remove('userID');
+    await _shared!.remove('userType');
   }
 }

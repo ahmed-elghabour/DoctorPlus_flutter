@@ -106,7 +106,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   const SizedBox(height: 8.0),
                   buildSubmitButton(
                     widthFactor: .5,
-                    label: "Add Docotr Demo Data",
+                    label: "Add Doctor Demo Data",
                     onPressed: () async {
                       await addDoctors();
                       SuccessToast.showToast(
