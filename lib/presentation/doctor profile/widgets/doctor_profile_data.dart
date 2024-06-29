@@ -10,24 +10,20 @@ class DoctorProfileData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-    final Doctor? doctor = context.read<UserCubit>().getUser() ;
-=======
     // final Doctor doctor = context.read<UserCubit>().user as Doctor;
->>>>>>> f8e1caf0b2fb5f1db81bd778bd3dc157c816bf08
-    return Card(
+    return const Card(
       elevation: 0,
-      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 2),
+      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(16),
         child: Row(
           children: [
-            const CircleAvatar(
+            CircleAvatar(
               radius: 36,
               backgroundImage: NetworkImage(
                   'https://cdn.pixabay.com/photo/2023/11/11/15/03/ai-generated-8381346_1280.jpg'),
             ),
-            const SizedBox(width: 16),
+            SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,20 +31,11 @@ class DoctorProfileData extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-<<<<<<< HEAD
-                      Text(
-                        doctor?.fName ?? 'Null',
-                        // '${doctor.fName}  ${doctor.lName}',
-                        style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-=======
                       // Text(
                       //   '${doctor.fName}  ${doctor.lName}',
                       //   style: const TextStyle(
                       //       fontSize: 20, fontWeight: FontWeight.bold),
                       // ),
->>>>>>> f8e1caf0b2fb5f1db81bd778bd3dc157c816bf08
                       //   BlocBuilder<FavoriteDoctorsCubit, FavoriteDoctorsState>(
                       //     builder: (context, state) {
                       //       if (state is FavoriteDoctorByIdLoaded) {
@@ -79,13 +66,13 @@ class DoctorProfileData extends StatelessWidget {
                       //   ),
                     ],
                   ),
-                  const SizedBox(height: 4),
+                  SizedBox(height: 4),
                   // const Text(
                   //   "doctor.specialty",
                   //   style: TextStyle(fontSize: 16),
                   // ),
-                  const SizedBox(height: 8),
-                  const Row(
+                  SizedBox(height: 8),
+                  Row(
                     children: [
                       Icon(Icons.star, color: Colors.yellow, size: 20),
                       SizedBox(width: 4),
