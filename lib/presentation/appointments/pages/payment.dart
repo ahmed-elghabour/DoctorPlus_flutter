@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
+import 'package:doctor_plus/data/data%20sources/payment_remote_data_source.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -136,57 +137,24 @@ class _PaymentPageState extends State<PaymentPage> {
     );
   }
 
-  Future<String> getPaymentKey(int price) async {
-    final String baseUrl = dotenv.env['BASE_URL']!;
-    final String authRequest = dotenv.env['AUTH_REQUEST']!;
-    final String orderRequest = dotenv.env['ORDER']!;
-    final String paymentKeyRequest = dotenv.env['PAYMENT_KEY']!;
-    final String apiKey = dotenv.env['API_KEY']!;
-    final String integrationId = dotenv.env['INTEGRATION_ID']!;
-
-    try {
-      // Get Auth Token
-      Response authResponse = await Dio().post(
-        '$baseUrl$authRequest',
-        data: {
-          'api_key': apiKey,
-        },
-      );
-      String authToken = authResponse.data['token'];
-      // Create Order
-      Response orderResponse = await Dio().post(
-        '$baseUrl$orderRequest',
-        data: {
-          'auth_token': authToken,
-          'delivery_needed': false,
-          'amount_cents': '${price * 100}',
-          'currency': "EGP"
-        },
-      );
-      int orderId = orderResponse.data['id'];
-      // // Get Payment Key
-      Response paymentKeyResponse = await Dio().post(
-        '$baseUrl$paymentKeyRequest',
-        data: {
-          'auth_token': authToken,
-          'amount_cents': price * 100,
-          'expiration': 3600,
-          'order_id': orderId.toString(),
-          'currency': "EGP",
-          'integration_id': integrationId,
-        },
-      );
-
-      String key = paymentKeyResponse.data['token'];
-      return key;
-    } catch (e) {
-      throw Exception(e);
-    }
-  }
-
   void _redirectToPaymentGateway(BuildContext context) async {
-    String key = await getPaymentKey(260);
-    String url = dotenv.env['IFRAME_LINK']! + key;
+    String authToken = await PaymentRemoteDataSource.getAuthToken();
+    int orderId = await PaymentRemoteDataSource.createOrder(authToken, 260);
+    String paymentURL = await PaymentRemoteDataSource.getPaymentURL(orderId, authToken, 260, {
+      "apartment": "803", 
+      "email": "claudette09@exa.com", 
+      "floor": "42", 
+      "first_name": "Clifford", 
+      "street": "Ethan Land", 
+      "building": "8028", 
+      "phone_number": "+86(8)9135210487", 
+      "shipping_method": "PKG", 
+      "postal_code": "01898", 
+      "city": "Jaskolskiburgh", 
+      "country": "CR", 
+      "last_name": "Nicolas", 
+      "state": "Utah"
+    });
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -196,7 +164,7 @@ class _PaymentPageState extends State<PaymentPage> {
             TextButton(
               onPressed: () async{
                 try {
-                  await launchUrl(Uri.parse(url));
+                  await launchUrl(Uri.parse(paymentURL));
                   Navigator.pop(context);
                 } catch (e) {
                   throw Exception(e);
@@ -208,6 +176,10 @@ class _PaymentPageState extends State<PaymentPage> {
         );
       },
     );
+
+    //     Navigator.push(context,MaterialPageRoute(
+    //   builder: (context) => PaymentWebViewPage(paymentURL: paymentURL,),
+    // ),);
 
    
 

@@ -32,4 +32,5 @@ class Routes {
   static const String profilePreview = "home/patient/publicProfile";
   static const String prescriptions =
       "home/patient/publicProfile/prescriptions";
+
 }
