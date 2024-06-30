@@ -1,6 +1,8 @@
 import 'package:doctor_plus/data/model/patient.dart';
+import 'package:doctor_plus/domain/cubits/user/user_cubit.dart';
 import 'package:doctor_plus/utils/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../utils/shared_preferences.dart';
 
@@ -24,6 +26,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    final Patient patient = context.read<UserCubit>().getUser();
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 36, 124, 255),
       appBar: AppBar(
@@ -67,15 +70,9 @@ class _ProfilePageState extends State<ProfilePage> {
                       children: [
                         const SizedBox(height: 90),
                         NameWidget(
-                          name:
-                              SharedPreference().getString(key: 'user.name') ??
-                                  'No Name',
+                          name: '${patient.fName} ${patient.lName}',
                         ),
-                        EmailWidget(
-                          email:
-                              SharedPreference().getString(key: 'user.email') ??
-                                  'No email',
-                        ),
+                        EmailWidget(email: patient.email),
                         const SizedBox(height: 10),
                         const RowNavigatorWidget(),
                         Container(

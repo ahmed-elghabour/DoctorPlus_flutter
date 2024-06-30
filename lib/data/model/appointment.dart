@@ -1,91 +1,50 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-enum AppointmentStatus {
-  upcoming,
-  completed,
-  cancelled,
-  rescheduled,
-}
+// enum AppointmentStatus {
+//   upcoming,
+//   completed,
+//   cancelled,
+//   rescheduled,
+// }
 
 class AppointmentModel {
-  final String id;
+  String? id;
+  late bool isErgunt;
+  late List<String> patients;
+  late String doctorId, date, type, payment, status;
 
-  final String doctorId;
-  final String doctorImage;
-  final String doctorName;
-
-  final String patientId;
-  final String patientImage;
-  final String patientName;
-
-  final String appointmentType;
-  final String paymentMethod;
-  // final String patientEmail;
-  // final String patientPhone;
-
-
-  final Timestamp appointmentDateTime;
-
-  final AppointmentStatus status;
+  // final AppointmentStatus status;
 
   AppointmentModel({
-    required this.id,
-    required this.doctorImage,
-    required this.doctorName,
-    required this.patientImage,
-    required this.patientName,
-    required this.appointmentType,
-    required this.paymentMethod,
+    this.id = '',
+    required this.type,
+    required this.date,
+    this.isErgunt = false,
+    required this.payment,
     required this.doctorId,
-    required this.patientId,
-    required this.appointmentDateTime,
-    required this.status,
-    // required this.patientEmail,
-    // required this.patientPhone,
+    required this.patients,
+    this.status = 'upcoming',
   });
 
-  AppointmentModel.fromJson(Map<String, dynamic> json)
-      : this(
-          id: json['id'],
-          doctorId: json['doctorId'],
-          doctorImage: json['doctorImage'],
-          doctorName: json['doctorName'],
-          patientId: json['patientId'],
-          patientImage: json['patientImage'],
-          patientName: json['patientName'],
-          appointmentType: json['appointmentType'],
-          paymentMethod: json['paymentMethod'],
-          appointmentDateTime: json['appointmentDateTime'],
-          // patientEmail: json['patientEmail'],
-          // patientPhone: json['patientPhone'],
-          status: json['status'] == "upcoming"
-              ? AppointmentStatus.upcoming
-              : json['status'] == "completed"
-                  ? AppointmentStatus.completed
-                  : json['status'] == "cancelled"
-                      ? AppointmentStatus.cancelled
-                      : AppointmentStatus.rescheduled,
-        );
+  factory AppointmentModel.fromJson(Map<String, dynamic> json) {
+    return AppointmentModel(
+      id: json['id'],
+      type: json['type'],
+      date: json['date'],
+      status: json['status'],
+      payment: json['payment'],
+      isErgunt: json['isErgunt'],
+      doctorId: json['doctorId'],
+      patients: List<String>.from(json['patients']),
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         'id': id,
+        'date': date,
+        'type': type,
+        'status': status,
+        'payment': payment,
+        'isErgunt': isErgunt,
+        'patients': patients,
         'doctorId': doctorId,
-        'doctorImage': doctorImage,
-        'doctorName': doctorName,
-        'patientId': patientId,
-        'patientImage': patientImage,
-        'patientName': patientName,
-        'appointmentType': appointmentType,
-        'paymentMethod': paymentMethod,
-        // 'patientEmail': patientEmail,
-        // 'patientPhone': patientPhone,
-        'appointmentDateTime': appointmentDateTime,
-        'status': status == AppointmentStatus.upcoming
-            ? "pending"
-            : status == AppointmentStatus.completed
-                ? "done"
-                : status == AppointmentStatus.cancelled
-                    ? "cancelled"
-                    : "rescheduled",
       };
 }

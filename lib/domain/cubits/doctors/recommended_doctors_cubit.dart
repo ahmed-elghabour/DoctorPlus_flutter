@@ -9,10 +9,10 @@ part 'recommended_doctors_state.dart';
 class DoctorsCubit extends Cubit<DoctorsState> {
   DoctorsCubit() : super(DoctorsInitial()) {
     getAllDoctors();
-    getRecommendedDocctors(patientId: '555');
+    getRecommendedDoctors(patientId: '555');
   }
-
-  void getRecommendedDocctors({required String patientId}) async {
+  List<Doctor> doctors = [];
+  void getRecommendedDoctors({required String patientId}) async {
     emit(DoctorsLoading());
     try {
       List<Doctor> recommendedDoctors =
@@ -28,11 +28,11 @@ class DoctorsCubit extends Cubit<DoctorsState> {
   void getAllDoctors() async {
     emit(DoctorsLoading());
     try {
-      List<Doctor> allDoctors =
+      doctors =
           await DoctorsRepository(remoteDataSource: DoctorsRemoteDataSource())
               .getAllDoctors();
 
-      emit(DoctorsLoaded(allDoctors));
+      emit(DoctorsLoaded(doctors));
     } catch (e) {
       emit(DoctorsError(e.toString()));
     }
@@ -41,11 +41,13 @@ class DoctorsCubit extends Cubit<DoctorsState> {
   void searchDoctors(String query) async {
     emit(DoctorsLoading());
     try {
-      List<Doctor> allDoctors =
-          await DoctorsRepository(remoteDataSource: DoctorsRemoteDataSource())
-              .searchDoctors(query);
+      List<Doctor> docs = doctors
+          .where((doctor) =>
+              doctor.fName.toLowerCase().contains(query.toLowerCase()) ||
+              doctor.lName.toLowerCase().contains(query.toLowerCase()))
+          .toList();
 
-      emit(DoctorsLoaded(allDoctors));
+      emit(DoctorsLoaded(docs));
     } catch (e) {
       emit(DoctorsError(e.toString()));
     }

@@ -13,46 +13,25 @@ class PatientHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return const Column(
+      children: [
+        FilterByLocation(),
+        SizedBox(height: 16),
+        AllSpecializations(),
+        SizedBox(height: 16),
+        RecommendationDoctors(),
+      ],
+    );
+  }
+}
+
+class AllSpecializations extends StatelessWidget {
+  const AllSpecializations({super.key});
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 8),
-        const Text('How are you today?'),
-        const SizedBox(height: 16),
-        Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: Colors.blue,
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Row(
-            children: [
-              const Icon(Icons.local_hospital, color: Colors.white, size: 48),
-              const SizedBox(width: 16),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Book with nearest doctor',
-                    style: TextStyle(color: Colors.white, fontSize: 18),
-                  ),
-                  const SizedBox(height: 8),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Handle the navigation
-                    },
-                    style:
-                        ElevatedButton.styleFrom(backgroundColor: Colors.white),
-                    child: const Text(
-                      'Find Nearby',
-                      style: TextStyle(color: Colors.blue),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 16),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -91,7 +70,28 @@ class PatientHome extends StatelessWidget {
             }).toList(),
           ),
         ),
-        const SizedBox(height: 16),
+      ],
+    );
+  }
+
+  void navigateToSpecialization(BuildContext context, String specialization) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) =>
+            SpecializationPage(specialization: specialization),
+      ),
+    );
+  }
+}
+
+class RecommendationDoctors extends StatelessWidget {
+  const RecommendationDoctors({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -115,16 +115,22 @@ class PatientHome extends StatelessWidget {
         BlocBuilder<DoctorsCubit, DoctorsState>(
           builder: (context, state) {
             if (state is DoctorsLoaded) {
-              return SizedBox(
-                height: 250,
-                child: ListView.builder(
-                    itemBuilder: (context, index) {
-                      return DoctorCard(
-                        doctor: state.doctors[index],
-                      );
-                    },
-                    itemCount: state.doctors.length),
+              return SingleChildScrollView(
+                child: Column(
+                  children: List.generate(
+                      2,
+                      (index) => DoctorCard(
+                            doctor: state.doctors[index],
+                          )),
+                ),
               );
+              // return ListView.builder(
+              //     itemBuilder: (context, index) {
+              //       return DoctorCard(
+              //         doctor: state.doctors[index],
+              //       );
+              //     },
+              //     itemCount: state.doctors.length);
             } else if (state is DoctorsLoading) {
               return const Center(
                 child: CircularProgressIndicator(),
@@ -139,13 +145,44 @@ class PatientHome extends StatelessWidget {
       ],
     );
   }
+}
 
-  void navigateToSpecialization(BuildContext context, String specialization) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) =>
-            SpecializationPage(specialization: specialization),
+class FilterByLocation extends StatelessWidget {
+  const FilterByLocation({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.blue,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.local_hospital, color: Colors.white, size: 48),
+          const SizedBox(width: 16),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Book with nearest doctor',
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              ),
+              const SizedBox(height: 8),
+              ElevatedButton(
+                onPressed: () {
+                  // Handle the navigation
+                },
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+                child: const Text(
+                  'Find Nearby',
+                  style: TextStyle(color: Colors.blue),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

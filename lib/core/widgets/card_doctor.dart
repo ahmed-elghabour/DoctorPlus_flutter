@@ -1,4 +1,5 @@
 import 'package:doctor_plus/data/model/doctor.dart';
+import 'package:doctor_plus/presentation/doctor%20profile/pages/doctor_preview.dart';
 import 'package:doctor_plus/utils/routes.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,14 @@ class DoctorCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, Routes.doctorProfile);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return DoctorPreview(doctor: doctor);
+            },
+          ),
+        );
       },
       child: Card(
         margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 2),
@@ -54,13 +62,13 @@ class DoctorCard extends StatelessWidget {
                       style: const TextStyle(fontSize: 16),
                     ),
                     const SizedBox(height: 8),
-                    Row(
+                    const Row(
                       children: [
-                        const Icon(Icons.star, color: Colors.yellow, size: 20),
-                        const SizedBox(width: 4),
+                        Icon(Icons.star, color: Colors.yellow, size: 20),
+                        SizedBox(width: 4),
                         Text(
-                          '${doctor.getRating()} (${doctor.reviews.length} reviews)',
-                          style: const TextStyle(fontSize: 16),
+                          "Review", //'${doctor.getRating()} (${doctor.reviews.length} reviews)',
+                          style: TextStyle(fontSize: 16),
                         ),
                       ],
                     ),

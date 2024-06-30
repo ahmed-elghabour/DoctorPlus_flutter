@@ -1,29 +1,25 @@
-import 'package:doctor_plus/data/model/doctor.dart';
-import 'package:doctor_plus/domain/cubits/user/user_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:doctor_plus/data/model/doctor.dart';
 
 class DoctorProfileData extends StatelessWidget {
-  const DoctorProfileData({
-    super.key,
-  });
+  final Doctor doctor;
+  const DoctorProfileData({super.key, required this.doctor});
 
   @override
   Widget build(BuildContext context) {
-    // final Doctor doctor = context.read<UserCubit>().user as Doctor;
-    return const Card(
+    return Card(
       elevation: 0,
-      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
+      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 2),
       child: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Row(
           children: [
-            CircleAvatar(
+            const CircleAvatar(
               radius: 36,
               backgroundImage: NetworkImage(
                   'https://cdn.pixabay.com/photo/2023/11/11/15/03/ai-generated-8381346_1280.jpg'),
             ),
-            SizedBox(width: 16),
+            const SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,11 +27,11 @@ class DoctorProfileData extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // Text(
-                      //   '${doctor.fName}  ${doctor.lName}',
-                      //   style: const TextStyle(
-                      //       fontSize: 20, fontWeight: FontWeight.bold),
-                      // ),
+                      Text(
+                        '${doctor.fName}  ${doctor.lName}',
+                        style: const TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
                       //   BlocBuilder<FavoriteDoctorsCubit, FavoriteDoctorsState>(
                       //     builder: (context, state) {
                       //       if (state is FavoriteDoctorByIdLoaded) {
@@ -66,13 +62,13 @@ class DoctorProfileData extends StatelessWidget {
                       //   ),
                     ],
                   ),
-                  SizedBox(height: 4),
+                  const SizedBox(height: 4),
                   // const Text(
                   //   "doctor.specialty",
                   //   style: TextStyle(fontSize: 16),
                   // ),
-                  SizedBox(height: 8),
-                  Row(
+                  const SizedBox(height: 8),
+                  const Row(
                     children: [
                       Icon(Icons.star, color: Colors.yellow, size: 20),
                       SizedBox(width: 4),

@@ -67,6 +67,8 @@ class SignupCubit extends Cubit<SignupState> {
       "location": data.location,
       "birthDate": data.birthDate,
       "diet": data.diet,
+      "diseases": data.diseases,
+      "medications": data.medications,
       "smoke": data.smoke,
       "sleep": data.sleep,
       "stress": data.stress,

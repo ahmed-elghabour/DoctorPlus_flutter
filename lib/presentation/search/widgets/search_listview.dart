@@ -1,5 +1,5 @@
+import 'package:doctor_plus/core/widgets/card_doctor.dart';
 import 'package:doctor_plus/domain/cubits/doctors/recommended_doctors_cubit.dart';
-import 'package:doctor_plus/presentation/search/widgets/search_listview_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,9 +15,9 @@ class SearchListview extends StatelessWidget {
             child: SizedBox(
               height: MediaQuery.sizeOf(context).height,
               child: ListView.builder(
-                itemCount: 100,
+                itemCount: state.doctors.length,
                 itemBuilder: (context, index) {
-                  return const SearchListviewTile();
+                  return DoctorCard(doctor: state.doctors[index]);
                 },
               ),
             ),

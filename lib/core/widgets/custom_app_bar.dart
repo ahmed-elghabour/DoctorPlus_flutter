@@ -4,12 +4,20 @@ import 'package:flutter/material.dart';
 
 class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final double height;
   final bool isDefault;
   final List<Widget>? actions;
-  const MyCustomAppBar(
-      {super.key, required this.title, this.actions, this.isDefault = true});
+  final PreferredSizeWidget? bottom;
+  const MyCustomAppBar({
+    super.key,
+    this.bottom,
+    this.actions,
+    this.height = 28,
+    required this.title,
+    this.isDefault = true,
+  });
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight + 28);
+  Size get preferredSize => Size.fromHeight(kToolbarHeight + height);
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +27,7 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leadingWidth: 48,
+        bottom: bottom,
         leading: appBarIcon(
           isDefault: isDefault,
           icon: Icons.arrow_back_ios_new_rounded,
@@ -27,8 +36,8 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         centerTitle: true,
         title: Text(
           title,
-          style:  TextStyle(
-            color:isDefault? ColorsManager.darkBlue:Colors.white,
+          style: TextStyle(
+            color: isDefault ? ColorsManager.darkBlue : Colors.white,
             fontWeight: FontWeight.bold,
             fontSize: 18.0,
           ),

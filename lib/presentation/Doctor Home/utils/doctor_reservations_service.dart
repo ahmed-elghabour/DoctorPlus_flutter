@@ -36,11 +36,12 @@ class DoctorService {
           .toList();
       for(var doc in filteredAppointments) {
         AppointmentModel reservation = AppointmentModel.fromJson(doc);
-        Timestamp reservationDate = reservation.appointmentDateTime;
+  DateFormat format = DateFormat("yyyy-MM-dd");
+        DateTime reservationDate = format.parse(reservation.date);
         // print(reservationDate.toDate());
-        if (reservationDate.toDate().isAfter(DateTime(now.year, now.month, now.day, 23, 59, 59))) {
+        if (reservationDate.isAfter(DateTime(now.year, now.month, now.day, 23, 59, 59))) {
           newCount++;
-        } else if (reservationDate.toDate().isBefore(DateTime(now.year, now.month, now.day, 0, 0, 0))) {
+        } else if (reservationDate.isBefore(DateTime(now.year, now.month, now.day, 0, 0, 0))) {
           oldCount++;
         } else {
           todayCount++;

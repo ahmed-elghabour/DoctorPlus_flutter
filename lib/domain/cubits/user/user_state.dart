@@ -2,12 +2,13 @@ sealed class UserState {}
 
 final class UserStateInitial extends UserState {}
 
-final class UserLogged extends UserState {}
-
 final class UserNotLogged extends UserState {}
 
-final class UserLoading extends UserState {}
+final class UserLoggedAndLoading extends UserState {}
 
-final class UserLoadingSuccess extends UserState {}
+final class UserLoggedAndLoadingSuccess extends UserState {
+  final dynamic user;
+  UserLoggedAndLoadingSuccess({required this.user});
+}
 
-final class UserLoadingFailure extends UserState {}
+final class UserLoggedAndLoadingFailure extends UserState {}

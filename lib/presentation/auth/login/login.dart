@@ -145,7 +145,6 @@ class _LoginInputsState extends State<LoginInputs> {
       SharedPreference().setString(key: 'userID', value: user);
       return user;
     } catch (e) {
-      print("Erorrrrrrrrrrrrrrrrrrrrrrrr: $e");
       throw Exception(e);
     }
   }

@@ -144,39 +144,27 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Future<void> addDoctors() async {
     for (var doctor in demoDoctorData) {
-      print("\n\nAdding - ==========================");
-      print("Adding - ${doctor.email}");
       var user = await CustomFirebase().createAccountWithEmailAndPassword(
         email: doctor.email,
         password: "123456",
       );
-      print("Adding - $user");
 
       context
           .read<SignupCubit>()
           .saveDemoDoctorAdditionalData(data: doctor, id: user);
-      print("Adding - Data Added Successfully");
-
-      print("Adding - ==========================\n\n");
     }
   }
 
   Future<void> addPatients() async {
     for (var patient in demoPatientData) {
-      print("\n\nAdding - ==========================");
-      print("Adding - ${patient.email}");
       var user = await CustomFirebase().createAccountWithEmailAndPassword(
         email: patient.email,
         password: "123456",
       );
-      print("Adding - $user");
 
       context
           .read<SignupCubit>()
           .saveDemoPatientAdditionalData(data: patient, id: user);
-      print("Adding - Data Added Successfully");
-
-      print("Adding - ==========================\n\n");
     }
   }
 

@@ -91,7 +91,7 @@ class Patient extends SystemUser {
       mentalHealth: json['mentalHealth'],
       diseases: List<String>.from(json['diseases']),
       medications: List<String>.from(json['medications']),
-      favouriteDoctors: List<String>.from(json['favouriteDoctors']),
+      // favouriteDoctors: List<String>.from(json['favouriteDoctors']),
     );
   }
 

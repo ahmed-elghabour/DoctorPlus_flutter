@@ -1,4 +1,3 @@
-import 'package:doctor_plus/core/helpers/utils_helper.dart';
 import 'package:doctor_plus/core/widgets/app_text_button.dart';
 import 'package:doctor_plus/data/model/appointment.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +23,7 @@ class AppointmentTile extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            (appointment.status == AppointmentStatus.completed)
+            (appointment.status == "completed")
                 ? const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -39,7 +38,7 @@ class AppointmentTile extends StatelessWidget {
                     ],
                   )
                 : const SizedBox(),
-            (appointment.status == AppointmentStatus.cancelled)
+            (appointment.status == "cancelled")
                 ? const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -57,11 +56,10 @@ class AppointmentTile extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CircleAvatar(
+                const CircleAvatar(
                   radius: 30,
-                  backgroundImage: NetworkImage(appointment.doctorImage.isEmpty
-                      ? "https://www.shutterstock.com/image-vector/young-smiling-doctor-stethoscope-medical-600nw-2116246328.jpg"
-                      : appointment.doctorImage),
+                  backgroundImage: NetworkImage(
+                      "https://www.shutterstock.com/image-vector/young-smiling-doctor-stethoscope-medical-600nw-2116246328.jpg"),
                 ),
                 const SizedBox(width: 12.0),
                 Expanded(
@@ -71,9 +69,9 @@ class AppointmentTile extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            appointment.doctorName,
-                            style: const TextStyle(
+                          const Text(
+                            "doctorName",
+                            style: TextStyle(
                               fontSize: 16.0,
                               fontWeight: FontWeight.bold,
                             ),
@@ -93,22 +91,19 @@ class AppointmentTile extends StatelessWidget {
                       ),
                       const SizedBox(height: 4.0),
                       Text(
-                        appointment.appointmentType,
+                        appointment.type,
                         style: TextStyle(
                           color: Colors.grey[600],
                         ),
                       ),
                       const SizedBox(height: 4.0),
                       Text(
-                        UtilsHelper.formatTimestamp(
-                            appointment.appointmentDateTime),
+                        appointment.date,
                         style: TextStyle(
                           color: Colors.grey[600],
                         ),
                       ),
-                      (appointment.status == AppointmentStatus.upcoming ||
-                              appointment.status ==
-                                  AppointmentStatus.rescheduled)
+                      (appointment.status == "upcoming")
                           ? Column(
                               children: [
                                 const Divider(thickness: 1.0),

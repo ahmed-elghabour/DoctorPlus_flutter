@@ -10,7 +10,7 @@ class Doctor extends SystemUser {
   late List<File> files;
   late int fees, patients;
   late List<String> degrees;
-  late List<ReviewModel> reviews;
+  late List<ReviewModel>? reviews;
   late DoctorWorkingHours workingDays;
   late String university, specialty, graduationDate, description;
   // late String email, fName, lName, phone, gender, location, birthDate;
@@ -126,9 +126,11 @@ class Doctor extends SystemUser {
 
   double getRating() {
     double sum = 0;
-    for (var element in reviews) {
+    if (reviews == null) return 0;
+    for (var element in reviews!) {
       sum += element.rateStars;
     }
-    return sum / reviews.length;
+
+    return sum / reviews!.length;
   }
 }

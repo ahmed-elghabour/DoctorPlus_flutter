@@ -25,7 +25,7 @@ class AppointmentsListView extends StatelessWidget {
             if (shouldCancelApppointment) {
               // first we change the status of the appointment to cancelled in database
               upcomingAppointmentsCubit.cancelPatientUpcomingAppointment(
-                appointmentId: appointments[index].id,
+                appointmentId: appointments[index].id!,
                 patientId: '123',
               );
 

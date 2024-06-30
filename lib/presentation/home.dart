@@ -1,10 +1,8 @@
 import 'package:doctor_plus/core/theming/styles.dart';
-import 'package:doctor_plus/data/model/system_user.dart';
 import 'package:doctor_plus/domain/cubits/user/user_cubit.dart';
 import 'package:doctor_plus/domain/cubits/user/user_state.dart';
 import 'package:doctor_plus/presentation/Doctor%20Home/pages/doctor_home.dart';
 import 'package:doctor_plus/presentation/patient%20home/pages/patient_home.dart';
-import 'package:doctor_plus/utils/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:doctor_plus/utils/routes.dart';
@@ -15,56 +13,47 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isLogged = context.read<UserCubit>().isUsedLogged();
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        centerTitle: true,
+        backgroundColor: Colors.white,
         title: Text(
           'Doctor Plus',
           style: TextStyles.font24BlueBold,
         ),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        elevation: 0,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(16),
-          ),
-        ),
       ),
-      body: BlocBuilder<UserCubit, UserState>(
-        builder: (context, state) {
-          if (state is UserNotLogged) {
-            return const PatientHome();
-          } else if (state is UserLogged) {
-            if (state is UserLoading) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (state is UserLoadingSuccess) {
-              return Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: SizedBox(
-                  width: double.infinity,
-                  height: MediaQuery.sizeOf(context).height,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Welcome to Doctor Plus',
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold),
-                      ),
-                      isLogged ? const PatientHome() : const DoctorHome()
-                    ],
-                  ),
-                ),
-              );
-            } else {
-              return const Text("Errorrrr");
-            }
-          } else {
-            return const Text("Errorr");
-          }
-        },
+      body: Column(
+        children: [
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Welcome to Doctor Plus',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+          BlocBuilder<UserCubit, UserState>(
+            builder: (context, state) {
+              if (state is UserLoggedAndLoading) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (state is UserLoggedAndLoadingSuccess) {
+                return Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: state.user.type == "patient"
+                      ? const PatientHome()
+                      : const DoctorHome(),
+                );
+              } else if (state is UserLoggedAndLoadingFailure) {
+                return const Text("Errorrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
+              } else {
+                return const PatientHome();
+              }
+            },
+          ),
+        ],
       ),
       bottomNavigationBar: FutureBuilder<User?>(
         future: Future.value(FirebaseAuth.instance.currentUser),
@@ -116,10 +105,10 @@ class HomePage extends StatelessWidget {
                 case 4:
                   if (isLoggedIn) {
                     navigate(context,
-                        route: SharedPreference().getString(key: 'userType') ==
-                                'patient'
-                            ? Routes.profile
-                            : Routes.doctorProfile);
+                        route:
+                            context.read<UserCubit>().getUserType() == "patient"
+                                ? Routes.profile
+                                : Routes.doctorProfile);
                   } else {
                     navigate(context, route: Routes.login);
                   }

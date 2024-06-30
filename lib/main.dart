@@ -11,7 +11,6 @@ import 'package:doctor_plus/presentation/admin/admin_home.dart';
 import 'package:doctor_plus/presentation/admin/complaints_page.dart';
 import 'package:doctor_plus/presentation/admin/doctor_managment_page.dart';
 import 'package:doctor_plus/presentation/admin/statistics_page.dart';
-// import 'package:doctor_plus/domain/cubits/doctorReservations/patients_number_atDay_cubit.dart';
 import 'package:doctor_plus/presentation/appointments/pages/appointments.dart';
 import 'package:doctor_plus/presentation/appointments/pages/payment.dart';
 import 'package:doctor_plus/presentation/doctor%20profile/pages/doctor_profile.dart';
@@ -106,7 +105,6 @@ class MyApp extends StatelessWidget {
               Routes.doctorHome: (context) => const DoctorHome(),
               Routes.complaint: (context) => const ComplaintsPage(),
               Routes.registerFill: (context) => const RegisterFillData(),
-              Routes.bookAppointment: (context) => const AppointmentPage(),
               Routes.doctorAppointments: (context) =>
                   const DoctorAppointments(),
               Routes.doctorProfile: (context) => const DoctorProfile(),
@@ -114,8 +112,7 @@ class MyApp extends StatelessWidget {
               Routes.allSpecialization: (context) =>
                   const AllSpecializationsPage(),
               Routes.allDoctors: (context) => const AllSpecializationsPage(),
-              Routes.specialization: (context) =>
-                  const SpecializationPage(specialization: ''),
+              
               Routes.profilePreview: (context) => const ProfilePreview(),
               Routes.prescriptions: (context) => const Prescriptions(),
             },

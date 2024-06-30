@@ -1,9 +1,7 @@
-import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
 import 'package:doctor_plus/data/data%20sources/payment_remote_data_source.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class PaymentPage extends StatefulWidget {
   const PaymentPage({super.key});
@@ -18,9 +16,6 @@ class _PaymentPageState extends State<PaymentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MyCustomAppBar(
-        title: 'Payment',
-      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -140,19 +135,20 @@ class _PaymentPageState extends State<PaymentPage> {
   void _redirectToPaymentGateway(BuildContext context) async {
     String authToken = await PaymentRemoteDataSource.getAuthToken();
     int orderId = await PaymentRemoteDataSource.createOrder(authToken, 260);
-    String paymentURL = await PaymentRemoteDataSource.getPaymentURL(orderId, authToken, 260, {
-      "apartment": "803", 
-      "email": "claudette09@exa.com", 
-      "floor": "42", 
-      "first_name": "Clifford", 
-      "street": "Ethan Land", 
-      "building": "8028", 
-      "phone_number": "+86(8)9135210487", 
-      "shipping_method": "PKG", 
-      "postal_code": "01898", 
-      "city": "Jaskolskiburgh", 
-      "country": "CR", 
-      "last_name": "Nicolas", 
+    String paymentURL =
+        await PaymentRemoteDataSource.getPaymentURL(orderId, authToken, 260, {
+      "apartment": "803",
+      "email": "claudette09@exa.com",
+      "floor": "42",
+      "first_name": "Clifford",
+      "street": "Ethan Land",
+      "building": "8028",
+      "phone_number": "+86(8)9135210487",
+      "shipping_method": "PKG",
+      "postal_code": "01898",
+      "city": "Jaskolskiburgh",
+      "country": "CR",
+      "last_name": "Nicolas",
       "state": "Utah"
     });
     showDialog(
@@ -162,7 +158,7 @@ class _PaymentPageState extends State<PaymentPage> {
           title: const Text('You will be redirected to complete the payment.'),
           actions: [
             TextButton(
-              onPressed: () async{
+              onPressed: () async {
                 try {
                   await launchUrl(Uri.parse(paymentURL));
                   Navigator.pop(context);
@@ -180,9 +176,6 @@ class _PaymentPageState extends State<PaymentPage> {
     //     Navigator.push(context,MaterialPageRoute(
     //   builder: (context) => PaymentWebViewPage(paymentURL: paymentURL,),
     // ),);
-
-   
-
   }
 }
 

@@ -8,9 +8,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class UserCubit extends Cubit<UserState> {
   UserCubit() : super(UserStateInitial()) {
     if (SharedPreference().getString(key: "userID") == null) {
+      isLoggin = false;
       emit(UserNotLogged());
     } else {
-      emit(UserLogged());
+      login();
     }
   }
   late dynamic user;
@@ -20,20 +21,14 @@ class UserCubit extends Cubit<UserState> {
         .getDocumentData(
             docID: id ?? SharedPreference().getString(key: "userID")!)
         .then((value) {
-      print("Document Value: $value");
       if (value == null) {
-        emit(UserLoadingFailure());
+        emit(UserLoggedAndLoadingFailure());
       }
-
-      if (value["type"] == "doctor") {
-        user = Doctor.fromJson(value);
-        emit(UserLoadingSuccess());
-      } else {
-        user = Patient.fromJson(value);
-        emit(UserLoadingSuccess());
-      }
+      user = value["type"] == "doctor"
+          ? Doctor.fromJson(value)
+          : Patient.fromJson(value);
+      emit(UserLoggedAndLoadingSuccess(user: user));
     });
-    print("Trace Login - Type is: ${user.type}");
   }
 
   getUser() {
@@ -46,10 +41,10 @@ class UserCubit extends Cubit<UserState> {
     return user;
   }
 
-  login() async{
-    await loadUserData();
+  login() async {
+    emit(UserLoggedAndLoading());
     isLoggin = true;
-    emit(UserLogged());
+    await loadUserData();
   }
 
   logout() {
@@ -58,4 +53,6 @@ class UserCubit extends Cubit<UserState> {
   }
 
   bool isUsedLogged() => isLoggin;
+
+  String getUserType() => user.type as String;
 }
