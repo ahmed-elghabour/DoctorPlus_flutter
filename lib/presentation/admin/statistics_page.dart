@@ -7,48 +7,23 @@ class StatisticsPage extends StatelessWidget {
 
   const StatisticsPage({super.key});
 
-  Stream<List<Map<String, dynamic>>> _getDoctors() {
-    return FirebaseFirestore.instance.collection('doctors').snapshots().map(
-        (snapshot) =>
-            snapshot.docs.map((doc) => {...doc.data(), 'id': doc.id}).toList());
-  }
-
-  Stream<List<Map<String, dynamic>>> _getPatients() {
-    return FirebaseFirestore.instance.collection('patients').snapshots().map(
-        (snapshot) =>
-            snapshot.docs.map((doc) => {...doc.data(), 'id': doc.id}).toList());
-  }
-
-  Stream<List<Map<String, dynamic>>> _getAppointments() {
-    return FirebaseFirestore.instance
-        .collection('appointments')
-        .snapshots()
-        .map((snapshot) =>
-            snapshot.docs.map((doc) => {...doc.data(), 'id': doc.id}).toList());
-  }
-
   Future<Map<String, dynamic>> _getStatistics() async {
     final doctorsSnapshot =
         await FirebaseFirestore.instance.collection('doctors').get();
     final patientsSnapshot =
         await FirebaseFirestore.instance.collection('patients').get();
-    final appointmentsSnapshot =
-        await FirebaseFirestore.instance.collection('appointments').get();
-    final reviewsSnapshot =
-        await FirebaseFirestore.instance.collection('reviews').get();
 
     // Calculate statistics
     final appointmentsPerDay =
-        _calculateAppointmentsPerDay(appointmentsSnapshot.docs);
+        await _calculateAppointmentsPerDay(doctorsSnapshot.docs);
     final mostAppointmentsDoctor =
-        _calculateMostAppointmentsDoctor(appointmentsSnapshot.docs);
+        await _calculateMostAppointmentsDoctor(doctorsSnapshot.docs);
     final highestRatedDoctor =
-        _calculateHighestRatedDoctor(reviewsSnapshot.docs);
+        await _calculateHighestRatedDoctor(doctorsSnapshot.docs);
 
     return {
       'totalDoctors': doctorsSnapshot.docs.length,
       'totalPatients': patientsSnapshot.docs.length,
-      'totalAppointments': appointmentsSnapshot.docs.length,
       'appointmentsPerDay': appointmentsPerDay,
       'mostAppointmentsDoctor': mostAppointmentsDoctor,
       'highestRatedDoctor': highestRatedDoctor,
@@ -85,7 +60,7 @@ class StatisticsPage extends StatelessWidget {
                 ),
                 _buildStatisticsCard(
                   title: 'Total Appointments',
-                  count: data['totalAppointments'] ?? 0,
+                  count: data['appointmentsPerDay']?.values.fold(0, (a, b) => a + b) ?? 0,
                 ),
                 _buildStatisticsCard(
                   title: 'Doctor with Most Appointments',
@@ -117,49 +92,93 @@ class StatisticsPage extends StatelessWidget {
     );
   }
 
-  Map<String, int> _calculateAppointmentsPerDay(
-      List<QueryDocumentSnapshot<Map<String, dynamic>>> appointments) {
+  Future<Map<String, int>> _calculateAppointmentsPerDay(
+      List<QueryDocumentSnapshot<Map<String, dynamic>>> doctors) async {
     final Map<String, int> appointmentsPerDay = {};
 
-    for (var appointment in appointments) {
-      final date = (appointment['appointmentDateTime'] as Timestamp)
-          .toDate()
-          .toIso8601String()
-          .split('T')
-          .first;
-      appointmentsPerDay[date] = (appointmentsPerDay[date] ?? 0) + 1;
+    for (var doctor in doctors) {
+      final appointmentsSnapshot = await FirebaseFirestore.instance
+          .collection('doctors')
+          .doc(doctor.id)
+          .collection('appointments')
+          .get();
+
+      for (var appointment in appointmentsSnapshot.docs) {
+        final date = appointment['date']
+            .toString()
+            .split('T')
+            .first;
+        appointmentsPerDay[date] = (appointmentsPerDay[date] ?? 0) + 1;
+      }
     }
 
     return appointmentsPerDay;
   }
 
-  Map<String, dynamic> _calculateMostAppointmentsDoctor(
-      List<QueryDocumentSnapshot<Map<String, dynamic>>> appointments) {
+  Future<Map<String, dynamic>> _calculateMostAppointmentsDoctor(
+      List<QueryDocumentSnapshot<Map<String, dynamic>>> doctors) async {
     final Map<String, int> doctorAppointmentsCount = {};
 
-    for (var appointment in appointments) {
-      final doctorId = appointment['doctorId'] as String;
-      doctorAppointmentsCount[doctorId] =
-          (doctorAppointmentsCount[doctorId] ?? 0) + 1;
+    for (var doctor in doctors) {
+      final appointmentsSnapshot = await FirebaseFirestore.instance
+          .collection('doctors')
+          .doc(doctor.id)
+          .collection('appointments')
+          .get();
+
+      doctorAppointmentsCount[doctor.id] = appointmentsSnapshot.docs.length;
+    }
+
+    if (doctorAppointmentsCount.isEmpty) {
+      return {
+        'doctorId': 'N/A',
+        'doctorName': 'N/A',
+        'count': 0,
+      };
     }
 
     final mostAppointmentsDoctorId = doctorAppointmentsCount.keys.reduce(
         (a, b) =>
             doctorAppointmentsCount[a]! > doctorAppointmentsCount[b]! ? a : b);
+
+    final doctorSnapshot = await FirebaseFirestore.instance
+        .collection('doctors')
+        .doc(mostAppointmentsDoctorId)
+        .get();
+    final doctorData = doctorSnapshot.data();
+    final doctorName =
+        'Dr. ${doctorData?['fName'] ?? 'Unknown'} ${doctorData?['lName'] ?? ''}';
+
     return {
       'doctorId': mostAppointmentsDoctorId,
+      'doctorName': doctorName,
       'count': doctorAppointmentsCount[mostAppointmentsDoctorId]
     };
   }
 
-  Map<String, dynamic> _calculateHighestRatedDoctor(
-      List<QueryDocumentSnapshot<Map<String, dynamic>>> reviews) {
+  Future<Map<String, dynamic>> _calculateHighestRatedDoctor(
+      List<QueryDocumentSnapshot<Map<String, dynamic>>> doctors) async {
     final Map<String, List<double>> doctorRatings = {};
 
-    for (var review in reviews) {
-      final doctorId = review['doctorId'] as String;
-      final rating = review['rateStars'] as double;
-      doctorRatings[doctorId] = (doctorRatings[doctorId] ?? [])..add(rating);
+    for (var doctor in doctors) {
+      final reviewsSnapshot = await FirebaseFirestore.instance
+          .collection('doctors')
+          .doc(doctor.id)
+          .collection('reviews')
+          .get();
+
+      for (var review in reviewsSnapshot.docs) {
+        final rating = review['rate'] as double;
+        doctorRatings[doctor.id] = (doctorRatings[doctor.id] ?? [])..add(rating);
+      }
+    }
+
+    if (doctorRatings.isEmpty) {
+      return {
+        'doctorId': 'N/A',
+        'doctorName': 'N/A',
+        'rating': 0.0,
+      };
     }
 
     final highestRatedDoctorId = doctorRatings.keys.reduce((a, b) {
@@ -173,7 +192,20 @@ class StatisticsPage extends StatelessWidget {
     final highestAvgRating =
         doctorRatings[highestRatedDoctorId]!.reduce((a, b) => a + b) /
             doctorRatings[highestRatedDoctorId]!.length;
-    return {'doctorId': highestRatedDoctorId, 'rating': highestAvgRating};
+
+    final doctorSnapshot = await FirebaseFirestore.instance
+        .collection('doctors')
+        .doc(highestRatedDoctorId)
+        .get();
+    final doctorData = doctorSnapshot.data();
+    final doctorName =
+        'Dr. ${doctorData?['fName'] ?? 'Unknown'} ${doctorData?['lName'] ?? ''}';
+
+    return {
+      'doctorId': highestRatedDoctorId,
+      'doctorName': doctorName,
+      'rating': highestAvgRating
+    };
   }
 }
 
