@@ -63,7 +63,7 @@ class _ReviewFormState extends State<ReviewForm> {
           ),
           onPressed: () {
             setState(() {
-              _currentRating = index + 1.0;
+              _currentRating = index + 1;
             });
           },
         );

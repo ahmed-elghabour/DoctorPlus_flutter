@@ -16,6 +16,7 @@ class DoctorPreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<DoctorReviewsCubit>().getDoctorReviews(doctorId: doctor.id!);
     return Scaffold(
       appBar: MyCustomAppBar(
         title: 'Dr. ${doctor.fName} ${doctor.lName}',

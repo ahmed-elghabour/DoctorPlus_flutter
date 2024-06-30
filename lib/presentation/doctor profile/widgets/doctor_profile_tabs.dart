@@ -18,7 +18,6 @@ class DoctorProfileTabs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<DoctorReviewsCubit>().getDoctorReviews(doctorId: doctorId);
     final List<Widget> views = [
       const DoctorAboutTab(),
       DoctorReviewsTab(

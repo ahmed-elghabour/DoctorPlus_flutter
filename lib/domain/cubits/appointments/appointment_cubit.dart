@@ -19,22 +19,12 @@ class AppointmentCubit extends Cubit<AppointmentsState> {
       List<Doctor> doctors = await AppointmentsRepository(
               remoteDataSource: AppointmentsRemoteDataSource())
           .getAppointmentedDoctors(doctorsID);
-      print("\n\n\n\n\n=============================");
-      for (var appointment in appointments) {
-        print(appointment.doctorId);
-      }
-      debugPrint("\n\n=============================\n\n");
-      for (var doctor in doctors) {
-        print(doctor.id);
-      }
-      debugPrint("=============================\n\n\n\n\n");
 
       List<AppointmentModel> upcoming = [];
       List<AppointmentModel> canceled = [];
       List<AppointmentModel> completed = [];
 
       for (var appointment in appointments) {
-        debugPrint("Patient Appointments - status: ${appointment.status}");
         if (appointment.status == 'upcoming') {
           upcoming.add(appointment);
         } else if (appointment.status == 'completed') {

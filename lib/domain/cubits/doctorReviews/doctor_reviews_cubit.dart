@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:doctor_plus/data/data%20sources/reviews_remote_data_source.dart';
 import 'package:doctor_plus/data/model/review.dart';
 import 'package:doctor_plus/data/repositories/reviews_repository.dart';
@@ -15,7 +17,7 @@ class DoctorReviewsCubit extends Cubit<DoctorReviewsState> {
           await ReviewsRepository(remoteDataSource: ReviewsRemoteDataSource())
               .getDoctorReviews(doctorId);
 
-      emit(DoctorReviewsLoaded(reviews));
+      emit(DoctorReviewsLoaded(reviews, calcRate()));
     } catch (e) {
       emit(DoctorReviewsError(e.toString()));
     }
@@ -28,9 +30,19 @@ class DoctorReviewsCubit extends Cubit<DoctorReviewsState> {
       await ReviewsRepository(remoteDataSource: ReviewsRemoteDataSource())
           .addDoctorReview(reviewModel, doctorId);
       reviews.add(reviewModel);
-      emit(DoctorReviewsLoaded(reviews));
+      emit(DoctorReviewsLoaded(reviews, calcRate()));
     } catch (e) {
       emit(DoctorReviewsError(e.toString()));
     }
+  }
+
+  calcRate() {
+    print("reviews: ${reviews.length}");
+    List<double> rates = reviews.map((e) => e.rate).toList();
+    double rate = 0;
+    for (double elm in rates) {
+      rate += elm;
+    }
+    return (rate / rates.length).toInt();
   }
 }

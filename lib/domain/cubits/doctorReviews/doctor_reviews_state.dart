@@ -8,7 +8,8 @@ final class DoctorReviewsLoading extends DoctorReviewsState {}
 
 final class DoctorReviewsLoaded extends DoctorReviewsState {
   final List<ReviewModel> doctorReviews;
-  DoctorReviewsLoaded(this.doctorReviews);
+  final int rate;
+  DoctorReviewsLoaded(this.doctorReviews, this.rate);
 }
 
 final class DoctorReviewsError extends DoctorReviewsState {

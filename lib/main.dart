@@ -112,7 +112,6 @@ class MyApp extends StatelessWidget {
               Routes.allSpecialization: (context) =>
                   const AllSpecializationsPage(),
               Routes.allDoctors: (context) => const AllSpecializationsPage(),
-              Routes.profilePreview: (context) => const ProfilePreview(),
               Routes.prescriptions: (context) => const Prescriptions(),
             },
             // initialRoute: Routes.home,

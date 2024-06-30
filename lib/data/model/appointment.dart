@@ -25,11 +25,12 @@ class AppointmentModel {
   });
   AppointmentModel.fetch({
     this.id = '',
+    this.doctorId = '',
+    this.patientId = '',
     required this.type,
     required this.date,
     this.isUrgant = false,
     required this.payment,
-    required this.doctorId,
     this.status = 'upcoming',
   });
 
@@ -52,6 +53,18 @@ class AppointmentModel {
       payment: json['payment'],
       isUrgant: json['isUrgant'],
       doctorId: json['doctorId'],
+      // patients: List<String>.from(json['patients']),
+    );
+  }
+  factory AppointmentModel.fromJsonDoctor(Map<String, dynamic> json) {
+    return AppointmentModel.fetch(
+      id: json['id'],
+      type: json['type'],
+      date: json['date'],
+      status: json['status'],
+      payment: json['payment'],
+      isUrgant: json['isUrgant'],
+      patientId: json['patientId'],
       // patients: List<String>.from(json['patients']),
     );
   }

@@ -1,5 +1,8 @@
+import 'package:doctor_plus/domain/cubits/doctorReviews/doctor_reviews_cubit.dart';
+import 'package:doctor_plus/domain/cubits/doctorReviews/doctor_reviews_state.dart';
 import 'package:flutter/material.dart';
 import 'package:doctor_plus/data/model/doctor.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DoctorProfileData extends StatelessWidget {
   final Doctor doctor;
@@ -68,14 +71,25 @@ class DoctorProfileData extends StatelessWidget {
                   //   style: TextStyle(fontSize: 16),
                   // ),
                   const SizedBox(height: 8),
-                  const Row(
+                  Row(
                     children: [
-                      Icon(Icons.star, color: Colors.yellow, size: 20),
-                      SizedBox(width: 4),
-                      // Text(
-                      //   '${doctor.getRating()} (${doctor.reviews.length} reviews)',
-                      //   style: const TextStyle(fontSize: 16),
-                      // ),
+                      const Icon(Icons.star, color: Colors.yellow, size: 20),
+                      const SizedBox(width: 4),
+                      BlocBuilder<DoctorReviewsCubit, DoctorReviewsState>(
+                        builder: (context, state) {
+                          if (state is DoctorReviewsLoaded) {
+                            return Text(
+                              '${context.read<DoctorReviewsCubit>().calcRate()}/5 Reviews',
+                              style: const TextStyle(fontSize: 16),
+                            );
+                          } else {
+                            return const Text(
+                              'loading...',
+                              style: TextStyle(fontSize: 16),
+                            );
+                          }
+                        },
+                      ),
                     ],
                   ),
                 ],

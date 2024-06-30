@@ -1,4 +1,5 @@
 import 'package:doctor_plus/core/theming/styles.dart';
+import 'package:doctor_plus/domain/cubits/doctor%20reservations/doctor_reservation_cubit.dart';
 import 'package:doctor_plus/domain/cubits/user/user_cubit.dart';
 import 'package:doctor_plus/domain/cubits/user/user_state.dart';
 import 'package:doctor_plus/presentation/Doctor%20Home/pages/doctor_home.dart';
@@ -40,6 +41,11 @@ class HomePage extends StatelessWidget {
               if (state is UserLoggedAndLoading) {
                 return const Center(child: CircularProgressIndicator());
               } else if (state is UserLoggedAndLoadingSuccess) {
+                if (state.user.type == "doctor") {
+                  context
+                      .read<DoctorReservationCubit>()
+                      .fetchReservations(state.user.id);
+                }
                 return Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: state.user.type == "patient"

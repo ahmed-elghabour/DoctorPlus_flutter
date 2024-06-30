@@ -1,5 +1,6 @@
 import 'package:doctor_plus/domain/cubits/doctorReviews/doctor_reviews_cubit.dart';
 import 'package:doctor_plus/domain/cubits/doctorReviews/doctor_reviews_state.dart';
+import 'package:doctor_plus/domain/cubits/user/user_cubit.dart';
 import 'package:doctor_plus/presentation/doctor%20profile/widgets/review_form.dart';
 import 'package:doctor_plus/presentation/doctor%20profile/widgets/review_list_view.dart';
 import 'package:flutter/material.dart';
@@ -15,24 +16,26 @@ class DoctorReviewsTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        FractionallySizedBox(
-          widthFactor: .8,
-          child: ElevatedButton(
-            onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                backgroundColor: Colors.transparent,
-                builder: (context) {
-                  return ReviewForm(
-                    doctorId: doctorId,
-                    doctorName: doctorName,
-                  );
-                },
-              );
-            },
-            child: const Text("Add Review"),
-          ),
-        ),
+        context.read<UserCubit>().getUserType() == 'doctor'
+            ? const SizedBox()
+            : FractionallySizedBox(
+                widthFactor: .8,
+                child: ElevatedButton(
+                  onPressed: () {
+                    showModalBottomSheet(
+                      context: context,
+                      backgroundColor: Colors.transparent,
+                      builder: (context) {
+                        return ReviewForm(
+                          doctorId: doctorId,
+                          doctorName: doctorName,
+                        );
+                      },
+                    );
+                  },
+                  child: const Text("Add Review"),
+                ),
+              ),
         BlocBuilder<DoctorReviewsCubit, DoctorReviewsState>(
           builder: (context, state) {
             // context

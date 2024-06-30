@@ -47,13 +47,15 @@ class DoctorProfile extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: CustomFloatingActionButton(
-        text: 'Book Appointment',
-        onPressed: () {
-          Navigator.pushNamed(context, Routes.bookAppointment,
-              arguments: '123');
-        },
-      ),
+      floatingActionButton: context.read<UserCubit>().getUserType() == 'doctor'
+          ? null
+          : CustomFloatingActionButton(
+              text: 'Book Appointment',
+              onPressed: () {
+                Navigator.pushNamed(context, Routes.bookAppointment,
+                    arguments: '123');
+              },
+            ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }

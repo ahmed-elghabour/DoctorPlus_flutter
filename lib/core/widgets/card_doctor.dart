@@ -61,15 +61,10 @@ class DoctorCard extends StatelessWidget {
                       style: const TextStyle(fontSize: 16),
                     ),
                     const SizedBox(height: 8),
-                    const Row(
-                      children: [
-                        Icon(Icons.star, color: Colors.yellow, size: 20),
-                        SizedBox(width: 4),
-                        Text(
-                          "Review", //'${doctor.getRating()} (${doctor.reviews.length} reviews)',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      ],
+                    Text(
+                      doctor
+                          .phone, //'${doctor.getRating()} (${doctor.reviews.length} reviews)',
+                      style: const TextStyle(fontSize: 16),
                     ),
                   ],
                 ),

@@ -1,17 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:doctor_plus/data/model/patient.dart';
 import 'package:flutter/material.dart';
 
 class PatientCard extends StatelessWidget {
-  final String patientId;
-  final String reservationType;
-  final Timestamp reservationDate;
   final Color color;
-  const PatientCard(
-      {super.key,
-      required this.patientId,
-      required this.reservationType,
-      required this.reservationDate,
-      required this.color});
+  final Patient patient;
+  final String type;
+  final String date;
+  const PatientCard({
+    super.key,
+    required this.color,
+    required this.patient,
+    required this.type,
+    required this.date,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,24 +24,26 @@ class PatientCard extends StatelessWidget {
           backgroundColor: color.withOpacity(0.2),
           radius: 30,
           child: Text(
-            patientId.split(' ')[0][0].toUpperCase() +
-                patientId.split(' ')[1][0].toUpperCase(),
+            '${patient.fName[0].toUpperCase()}${patient.lName[0].toUpperCase()}',
             style: const TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold),
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
           ),
         ),
         const SizedBox(width: 10),
         Column(
           children: [
             Text(
-              patientId,
+              '${patient.fName} ${patient.lName}',
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
               ),
             ),
             Text(
-              reservationType,
+              type,
               style: TextStyle(
                 color: color,
                 fontSize: 14,
@@ -55,7 +59,7 @@ class PatientCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
             ),
             child: Text(
-              "${reservationDate.toDate().hour.toString().padLeft(2, '0')}:${reservationDate.toDate().minute.toString().padLeft(2, '0')}",
+              date,
               style: TextStyle(
                 color: color,
                 fontWeight: FontWeight.bold,
