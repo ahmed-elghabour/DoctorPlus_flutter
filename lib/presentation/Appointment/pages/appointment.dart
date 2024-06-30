@@ -148,7 +148,7 @@ class _AppointmentPageState extends State<AppointmentPage>
                       child: paymentButton(
                           label: "Pay via Card",
                           icon: Icons.credit_card,
-                          isSelected: _paymentMethod == "credit",
+                          isSelected: _paymentMethod == "card",
                           onPressed: () =>
                               setState(() => _paymentMethod = "card")),
                     ),
