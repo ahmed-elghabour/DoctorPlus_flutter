@@ -79,6 +79,8 @@ Widget buildTextField({
 }
 
 Widget buildMultiLineTextField({
+  int maxLines = 3,
+  FocusNode? focusNode,
   required String hint,
   required String label,
   required TextEditingController controller,
@@ -87,8 +89,10 @@ Widget buildMultiLineTextField({
   return TextFormField(
     validator: validator,
     controller: controller,
+    focusNode: focusNode,
+    textAlignVertical: TextAlignVertical.top,
     keyboardType: TextInputType.text,
-    maxLines: 3,
+    maxLines: maxLines,
     decoration: InputDecoration(
       labelText: label,
       hintText: hint,

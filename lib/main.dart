@@ -4,9 +4,8 @@ import 'package:doctor_plus/domain/cubits/doctor%20reservations/doctor_reservati
 import 'package:doctor_plus/domain/cubits/doctor%20reservations/patients_number_at_day_cubit.dart';
 import 'package:doctor_plus/domain/cubits/doctorReviews/doctor_reviews_cubit.dart';
 import 'package:doctor_plus/domain/cubits/doctors/recommended_doctors_cubit.dart';
+import 'package:doctor_plus/domain/cubits/prescriptions/prescription_cubit.dart';
 import 'package:doctor_plus/domain/cubits/user/user_cubit.dart';
-import 'package:doctor_plus/presentation/Profile%20Preview/pages/prescriptions.dart';
-import 'package:doctor_plus/presentation/Profile%20Preview/pages/profile_preview.dart';
 import 'package:doctor_plus/presentation/admin/admin_home.dart';
 import 'package:doctor_plus/presentation/admin/complaints_page.dart';
 import 'package:doctor_plus/presentation/admin/doctor_managment_page.dart';
@@ -65,6 +64,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (_) => SignupCubit()),
           BlocProvider(create: (_) => DoctorsCubit()),
           BlocProvider(create: (_) => LanguageCubit()),
+          BlocProvider(create: (_) => PrescriptionCubit()),
           BlocProvider(create: (_) => DoctorReviewsCubit()),
           BlocProvider(create: (_) => DoctorReservationCubit()),
           BlocProvider(create: (_) => PatientsNumberAtDayCubit()),
@@ -112,7 +112,6 @@ class MyApp extends StatelessWidget {
               Routes.allSpecialization: (context) =>
                   const AllSpecializationsPage(),
               Routes.allDoctors: (context) => const AllSpecializationsPage(),
-              Routes.prescriptions: (context) => const Prescriptions(),
             },
             // initialRoute: Routes.home,
             initialRoute: Routes.home,

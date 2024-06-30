@@ -16,7 +16,7 @@ class DoctorReviewsCubit extends Cubit<DoctorReviewsState> {
       reviews =
           await ReviewsRepository(remoteDataSource: ReviewsRemoteDataSource())
               .getDoctorReviews(doctorId);
-
+      print("reviews: ${reviews.length}");
       emit(DoctorReviewsLoaded(reviews, calcRate()));
     } catch (e) {
       emit(DoctorReviewsError(e.toString()));

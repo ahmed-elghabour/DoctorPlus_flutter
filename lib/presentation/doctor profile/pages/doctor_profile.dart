@@ -1,7 +1,6 @@
 import 'package:doctor_plus/core/widgets/appbar_icon.dart';
 import 'package:doctor_plus/core/widgets/custom_floating_action_button.dart';
 import 'package:doctor_plus/data/model/doctor.dart';
-import 'package:doctor_plus/domain/cubits/doctorReviews/doctor_reviews_cubit.dart';
 import 'package:doctor_plus/domain/cubits/user/user_cubit.dart';
 import 'package:doctor_plus/presentation/doctor%20profile/widgets/doctor_profile_data.dart';
 import 'package:doctor_plus/presentation/doctor%20profile/widgets/doctor_profile_tabs.dart';

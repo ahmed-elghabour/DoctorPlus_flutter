@@ -1,9 +1,6 @@
 import 'package:doctor_plus/domain/cubits/doctor%20reservations/doctor_reservation_cubit.dart';
 import 'package:doctor_plus/domain/cubits/doctor%20reservations/doctor_reservation_state.dart';
-import 'package:doctor_plus/domain/cubits/doctor%20reservations/patients_number_at_day_cubit.dart';
-import 'package:doctor_plus/domain/cubits/doctor%20reservations/patients_number_at_day_state.dart';
 import 'package:doctor_plus/presentation/Doctor%20home/widgets/new_patients_box.dart';
-import 'package:doctor_plus/utils/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,10 +16,6 @@ class DoctorHomeCard extends StatelessWidget {
         }
 
         if (state is DoctorReservationLoaded) {
-          print("loaded");
-          print("loaded - Old: ${state.old}");
-          print("loaded - Current: ${state.current}");
-          print("loaded - NewP: ${state.newP}");
           return Container(
             margin: const EdgeInsets.only(top: 10),
             width: MediaQuery.of(context).size.width,

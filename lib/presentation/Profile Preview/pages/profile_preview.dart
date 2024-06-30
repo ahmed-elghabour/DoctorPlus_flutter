@@ -1,9 +1,9 @@
 import 'package:doctor_plus/core/widgets/buttons.dart';
 import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
 import 'package:doctor_plus/data/model/patient.dart';
+import 'package:doctor_plus/presentation/Profile%20Preview/pages/prescriptions.dart';
 import 'package:doctor_plus/presentation/patient%20profile/profile.dart';
 import 'package:doctor_plus/utils/firebase.dart';
-import 'package:doctor_plus/utils/routes.dart';
 import 'package:flutter/material.dart';
 
 class PatientPreview extends StatelessWidget {
@@ -41,7 +41,7 @@ class PatientPreview extends StatelessWidget {
                         NameWidget(name: "${patient.fName} ${patient.lName}"),
                         Column(
                           children: [
-                            EmailWidget(email: patient.email),
+                            EmailWidget(email: patient.phone),
                             Padding(
                               padding: const EdgeInsets.all(16.0),
                               child: Column(
@@ -66,6 +66,9 @@ class PatientPreview extends StatelessWidget {
                                     entryListWidget(
                                         entry: patient.diseases,
                                         title: "Diseases"),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
                                     entryListWidget(
                                         entry: patient.medications,
                                         title: "Medications"),
@@ -79,8 +82,12 @@ class PatientPreview extends StatelessWidget {
                           child: buildSubmitButton(
                             widthFactor: 0.5,
                             onPressed: () {
-                              Navigator.pushNamed(context, Routes.prescriptions,
-                                  arguments: patient);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        PatientPrescriptions(patient: patient),
+                                  ));
                             },
                             label: 'View Prescriptions',
                           ),

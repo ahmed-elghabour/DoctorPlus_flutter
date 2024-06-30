@@ -268,6 +268,9 @@ class _AppointmentPageState extends State<AppointmentPage>
         docID: appointment.patientId,
         nestedcollection: "appointments",
       );
+      if (_paymentMethod == "card") {
+        
+      }
       SuccessToast.showToast(
         msg: 'Appointment booked successfully!',
       );

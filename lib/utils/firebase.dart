@@ -121,6 +121,20 @@ class CustomFirebase {
     }
   }
 
+  getSnapshotData(
+      {required String collection, String? docID, String? nestedcollection}) {
+    try {
+      Stream<QuerySnapshot> snapshot = FirebaseFirestore.instance
+          .collection(collection)
+          .doc(docID)
+          .collection(nestedcollection!)
+          .snapshots();
+      return snapshot;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
   getDocumentData({required String docID, String? collection}) async {
     try {
       if (collection != null) {
