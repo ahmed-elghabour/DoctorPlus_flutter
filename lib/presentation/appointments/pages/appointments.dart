@@ -1,4 +1,5 @@
 import 'package:doctor_plus/domain/cubits/appointments/appointment_cubit.dart';
+import 'package:doctor_plus/domain/cubits/user/user_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:doctor_plus/core/widgets/appbar_icon.dart';
@@ -10,6 +11,7 @@ class DoctorAppointments extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var user = context.read<UserCubit>().getUser();
     return Scaffold(
       appBar: MyCustomAppBar(
         title: 'My Appointments',
@@ -28,14 +30,9 @@ class DoctorAppointments extends StatelessWidget {
             MultiBlocProvider(
               providers: [
                 BlocProvider(
-                    create: (context) => AppointmentCubit()
-                      ..getPatientUpcomingAppointments(patientId: '555')),
-                BlocProvider(
-                    create: (context) => AppointmentCubit()
-                      ..getPatientCompletedAppointments(patientId: '555')),
-                BlocProvider(
-                    create: (context) => AppointmentCubit()
-                      ..getPatientCancelledAppointments(patientId: '555')),
+                  create: (context) => AppointmentCubit()
+                    ..getPatientAppointments(patientId: user.id),
+                ),
               ],
               child: AppointmentsTabs(),
             )

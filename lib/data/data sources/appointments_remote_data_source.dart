@@ -1,65 +1,40 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:doctor_plus/data/model/appointment.dart';
+import 'package:doctor_plus/utils/firebase.dart';
+import 'package:flutter/material.dart';
 
 class AppointmentsRemoteDataSource {
   var firestore = FirebaseFirestore.instance;
 
-  Future<List<dynamic>> getPatientUpcomingAppointments(String patientId) async {
+  Future<List<dynamic>> getPatientAppointments(String patientId) async {
     try {
-      final appointmentsCollection = firestore.collection("appointments");
-      final QuerySnapshot querySnapshot = await appointmentsCollection
-          .where('status', whereIn: ['upcoming', 'rescheduled']).get();
+      List<AppointmentModel> appointments = [];
+      await CustomFirebase()
+          .getCollectionData(
+              docID: patientId,
+              collection: "patients",
+              nestedcollection: "appointments",
+              isNested: true)
+          .then((value) {
+        for (var element in value) {
+          debugPrint("Patient Appointments - element: ${element.data()}");
+          appointments.add(
+            AppointmentModel.patient(
+              id: element.id,
+              date: element.data().date,
+              type: element.data().type,
+              status: element.data().status,
+              payment: element.data().payment,
+              doctorId: element.data().doctorId,
+              isUrgant: element.data().isUrgant,
+            ),
+          );
+        }
+      });
+      debugPrint(
+          "Patient Appointments - appointmentsDataSource: ${appointments.length}");
 
-      final List<Map<String, dynamic>> filteredAppointments = querySnapshot.docs
-          .map((doc) => doc.data() as Map<String, dynamic>)
-          .toList();
-
-      return filteredAppointments;
-    } catch (e) {
-      throw Exception(e);
-    }
-  }
-
-  Future<List<dynamic>> getPatientCompletedAppointments(
-      String patientId) async {
-    try {
-      final appointmentsCollection = firestore.collection("appointments");
-      final QuerySnapshot querySnapshot = await appointmentsCollection
-          .where('status', whereIn: ['completed']).get();
-
-      final List<Map<String, dynamic>> filteredAppointments = querySnapshot.docs
-          .map((doc) => doc.data() as Map<String, dynamic>)
-          .toList();
-
-      return filteredAppointments;
-    } catch (e) {
-      throw Exception(e);
-    }
-  }
-
-  Future<List<dynamic>> getPatientCancelledAppointments(
-      String patientId) async {
-    try {
-      final appointmentsCollection = firestore.collection("appointments");
-      final QuerySnapshot querySnapshot = await appointmentsCollection
-          .where('status', whereIn: ['cancelled']).get();
-
-      final List<Map<String, dynamic>> filteredAppointments = querySnapshot.docs
-          .map((doc) => doc.data() as Map<String, dynamic>)
-          .toList();
-
-      return filteredAppointments;
-    } catch (e) {
-      throw Exception(e);
-    }
-  }
-
-  Future<void> cancelPatientUpcomingAppointment(
-      String appointmentId, String patientId) async {
-    try {
-      final appointmentsCollection = firestore.collection("appointments");
-      await appointmentsCollection
-          .doc(appointmentId)
-          .update({"status": "cancelled"});
+      return appointments;
     } catch (e) {
       throw Exception(e);
     }

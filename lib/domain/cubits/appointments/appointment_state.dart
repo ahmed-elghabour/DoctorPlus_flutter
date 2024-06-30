@@ -4,38 +4,16 @@ sealed class AppointmentsState {}
 
 final class AppointmentsInitial extends AppointmentsState {}
 
-final class CancelledAppointmentsLoading extends AppointmentsState {}
+final class AppointmentsLoading extends AppointmentsState {}
 
-final class CompletedAppointmentsLoading extends AppointmentsState {}
-
-final class UpcomingAppointmentsLoading extends AppointmentsState {}
-
-final class CancelledAppointmentsLoaded extends AppointmentsState {
-  final List<AppointmentModel> appointments;
-  CancelledAppointmentsLoaded(this.appointments);
+final class AppointmentsLoaded extends AppointmentsState {
+  final List<AppointmentModel> upcoming;
+  final List<AppointmentModel> canceled;
+  final List<AppointmentModel> completed;
+  AppointmentsLoaded(this.upcoming, this.completed, this.canceled);
 }
 
-final class CompletedAppointmentsLoaded extends AppointmentsState {
-  final List<AppointmentModel> appointments;
-  CompletedAppointmentsLoaded(this.appointments);
-}
-
-final class UpcomingAppointmentsLoaded extends AppointmentsState {
-  final List<AppointmentModel> appointments;
-  UpcomingAppointmentsLoaded(this.appointments);
-}
-
-final class CancelledAppointmentsError extends AppointmentsState {
+final class AppointmentsError extends AppointmentsState {
   final String message;
-  CancelledAppointmentsError(this.message);
-}
-
-final class CompletedAppointmentsError extends AppointmentsState {
-  final String message;
-  CompletedAppointmentsError(this.message);
-}
-
-final class UpcomingAppointmentsError extends AppointmentsState {
-  final String message;
-  UpcomingAppointmentsError(this.message);
+  AppointmentsError(this.message);
 }

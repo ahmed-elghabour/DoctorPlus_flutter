@@ -11,9 +11,9 @@ class CompletedAppointments extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AppointmentCubit, AppointmentsState>(
       builder: (context, state) {
-        if (state is CompletedAppointmentsLoaded) {
-          return AppointmentsListView(appointments: state.appointments);
-        } else if (state is CompletedAppointmentsLoading) {
+        if (state is AppointmentsLoaded) {
+          return AppointmentsListView(appointments: state.completed);
+        } else if (state is AppointmentsLoading) {
           return const Center(
             child: CircularProgressIndicator(),
           );

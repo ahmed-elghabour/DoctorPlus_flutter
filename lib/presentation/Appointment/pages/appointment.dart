@@ -5,10 +5,12 @@ import 'package:doctor_plus/core/widgets/icon_picker.dart';
 import 'package:doctor_plus/core/widgets/toast.dart';
 import 'package:doctor_plus/data/model/appointment.dart';
 import 'package:doctor_plus/data/model/doctor.dart';
+import 'package:doctor_plus/domain/cubits/user/user_cubit.dart';
 import 'package:doctor_plus/utils/firebase.dart';
 import 'package:doctor_plus/utils/routes.dart';
 import 'package:doctor_plus/utils/validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 class AppointmentPage extends StatefulWidget {
@@ -184,7 +186,16 @@ class _AppointmentPageState extends State<AppointmentPage>
                 !showSummary
                     ? const SizedBox()
                     : ElevatedButton(
-                        onPressed: _bookAppointment,
+                        onPressed: () => _bookAppointment(
+                          appointment: AppointmentModel(
+                            type: _appointmentType,
+                            date: _dateController.text,
+                            payment: _paymentMethod,
+                            doctorId: widget.doctor.id!,
+                            isUrgant: isUrgant,
+                            patientId: context.read<UserCubit>().getUser().id!,
+                          ),
+                        ),
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 40, vertical: 15),
@@ -244,25 +255,24 @@ class _AppointmentPageState extends State<AppointmentPage>
     return isUrgant ? sum += 100 : sum;
   }
 
-  Future<void> _bookAppointment() async {
+  Future<void> _bookAppointment({required AppointmentModel appointment}) async {
     try {
-      AppointmentModel appointment = AppointmentModel(
-        doctorId: 'doctorId',
-        date: 'doctorImage',
-        type: 'doctorName',
-        status: 'patientId',
-        payment: 'patientImage',
-        patients: ['patientName'],
-      );
       await CustomFirebase().addNewNestedCollection(
         maincollection: "doctors",
-        data: appointment.toJson(),
+        data: appointment.toDoctorJson(),
         docID: appointment.doctorId,
+        nestedcollection: "appointments",
+      );
+      await CustomFirebase().addNewNestedCollection(
+        maincollection: "patients",
+        data: appointment.toPatientJson(),
+        docID: appointment.patientId,
         nestedcollection: "appointments",
       );
       SuccessToast.showToast(
         msg: 'Appointment booked successfully!',
       );
+      Navigator.pushNamed(context, Routes.home);
     } catch (e) {
       FailureToast.showToast(
         msg: 'Appointment Error: $e',

@@ -11,9 +11,11 @@ class UpcomingAppointments extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AppointmentCubit, AppointmentsState>(
       builder: (context, state) {
-        if (state is UpcomingAppointmentsLoaded) {
-          return AppointmentsListView(appointments: state.appointments);
-        } else if (state is UpcomingAppointmentsLoading) {
+        if (state is AppointmentsLoaded) {
+          return Center(
+            child: Text("Upcoming Appointments ${state.upcoming.length}"),
+          ); //AppointmentsListView(appointments: state.upcoming);
+        } else if (state is AppointmentsLoading) {
           return const Center(
             child: CircularProgressIndicator(),
           );

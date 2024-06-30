@@ -104,7 +104,7 @@ class CustomFirebase {
     required String collection,
   }) async {
     try {
-      if (isNested) {
+      if (!isNested) {
         QuerySnapshot snapshot =
             await FirebaseFirestore.instance.collection(collection).get();
         return snapshot.docs;

@@ -5,11 +5,13 @@
 //   rescheduled,
 // }
 
+import 'package:doctor_plus/data/model/patient.dart';
+
 class AppointmentModel {
   String? id;
-  late bool isErgunt;
-  late List<String> patients;
-  late String doctorId, date, type, payment, status;
+  late bool isUrgant;
+  late List<String>? patients;
+  late String doctorId, patientId, date, type, payment, status;
 
   // final AppointmentStatus status;
 
@@ -17,34 +19,63 @@ class AppointmentModel {
     this.id = '',
     required this.type,
     required this.date,
-    this.isErgunt = false,
+    required this.isUrgant,
     required this.payment,
     required this.doctorId,
-    required this.patients,
+    required this.patientId,
+    this.status = 'upcoming',
+  });
+  AppointmentModel.fetch({
+    this.id = '',
+    required this.type,
+    required this.date,
+    this.isUrgant = false,
+    required this.payment,
+    required this.doctorId,
     this.status = 'upcoming',
   });
 
+  AppointmentModel.patient({
+    required this.id,
+    required this.date,
+    required this.type,
+    required this.status,
+    required this.payment,
+    required this.doctorId,
+    required this.isUrgant,
+  });
+
   factory AppointmentModel.fromJson(Map<String, dynamic> json) {
-    return AppointmentModel(
+    return AppointmentModel.fetch(
       id: json['id'],
       type: json['type'],
       date: json['date'],
       status: json['status'],
       payment: json['payment'],
-      isErgunt: json['isErgunt'],
+      isUrgant: json['isUrgant'],
       doctorId: json['doctorId'],
-      patients: List<String>.from(json['patients']),
+      // patients: List<String>.from(json['patients']),
     );
   }
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toDoctorJson() => {
         'id': id,
         'date': date,
         'type': type,
         'status': status,
         'payment': payment,
-        'isErgunt': isErgunt,
-        'patients': patients,
+        'isUrgant': isUrgant,
+        'patientId': patientId,
+        // 'doctorId': doctorId,
+      };
+
+  Map<String, dynamic> toPatientJson() => {
+        'id': id,
+        'date': date,
+        'type': type,
+        'status': status,
+        'payment': payment,
+        'isUrgant': isUrgant,
         'doctorId': doctorId,
       };
 }

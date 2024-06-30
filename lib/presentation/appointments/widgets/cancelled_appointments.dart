@@ -11,9 +11,9 @@ class CancelledAppointments extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AppointmentCubit, AppointmentsState>(
       builder: (context, state) {
-        if (state is CancelledAppointmentsLoaded) {
-          return AppointmentsListView(appointments: state.appointments);
-        } else if (state is CancelledAppointmentsLoading) {
+        if (state is AppointmentsLoaded) {
+          return AppointmentsListView(appointments: state.canceled);
+        } else if (state is AppointmentsLoading) {
           return const Center(
             child: CircularProgressIndicator(),
           );
