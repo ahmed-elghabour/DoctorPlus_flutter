@@ -45,166 +45,168 @@ class _AppointmentPageState extends State<AppointmentPage>
       appBar: const MyCustomAppBar(
         title: 'Book Appointment',
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: customCheckBox(
-                        value: isUrgant,
-                        label: "Is Urgent?",
-                        onChanged: (newVal) =>
-                            setState(() => isUrgant = newVal!),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: customCheckBox(
+                          value: isUrgant,
+                          label: "Is Urgent?",
+                          onChanged: (newVal) =>
+                              setState(() => isUrgant = newVal!),
+                        ),
                       ),
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      flex: 2,
-                      child: customIconPicker(
-                        label: 'Select Reservation Date',
-                        icon: Icons.calendar_month,
-                        controller: _dateController,
-                        validator: (Validator.nameValidator),
-                        onPressed: () async {
-                          final DateTime? picked = await showDatePicker(
-                              context: context,
-                              helpText: "Select Reservation Date",
-                              initialDate: DateTime.now(),
-                              firstDate: DateTime.now(),
-                              lastDate:
-                                  DateTime.now().add(const Duration(days: 60)),
-                              selectableDayPredicate: (DateTime day) {
-                                final List<String> allowedDays =
-                                    widget.doctor.workingDays.days;
-                                switch (day.weekday) {
-                                  case DateTime.sunday:
-                                    return allowedDays.contains('Sunday');
-                                  case DateTime.monday:
-                                    return allowedDays.contains('Monday');
-                                  case DateTime.tuesday:
-                                    return allowedDays.contains('Tuesday');
-                                  case DateTime.wednesday:
-                                    return allowedDays.contains('Wednesday');
-                                  case DateTime.thursday:
-                                    return allowedDays.contains('Thursday');
-                                  case DateTime.friday:
-                                    return allowedDays.contains('Friday');
-                                  case DateTime.saturday:
-                                    return allowedDays.contains('Saturday');
-                                  default:
-                                    return false;
-                                }
-                              });
-                          if (picked != null) {
-                            setState(() {
-                              _dateController.text =
-                                  DateFormat('yyyy-MM-dd').format(picked);
-                            });
-                          }
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                const Text('Appointment Type',
-                    style:
-                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                const SizedBox(height: 10),
-                Wrap(
-                  spacing: 9,
-                  children: ['Examination', 'Consultation']
-                      .map((type) => ChoiceChip(
-                            label: Text(type),
-                            selected: _appointmentType == type,
-                            onSelected: (selected) {
+                      const SizedBox(width: 10),
+                      Expanded(
+                        flex: 2,
+                        child: customIconPicker(
+                          label: 'Select Reservation Date',
+                          icon: Icons.calendar_month,
+                          controller: _dateController,
+                          validator: (Validator.nameValidator),
+                          onPressed: () async {
+                            final DateTime? picked = await showDatePicker(
+                                context: context,
+                                helpText: "Select Reservation Date",
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime.now(),
+                                lastDate:
+                                    DateTime.now().add(const Duration(days: 60)),
+                                selectableDayPredicate: (DateTime day) {
+                                  final List<String> allowedDays =
+                                      widget.doctor.workingDays.days;
+                                  switch (day.weekday) {
+                                    case DateTime.sunday:
+                                      return allowedDays.contains('Sunday');
+                                    case DateTime.monday:
+                                      return allowedDays.contains('Monday');
+                                    case DateTime.tuesday:
+                                      return allowedDays.contains('Tuesday');
+                                    case DateTime.wednesday:
+                                      return allowedDays.contains('Wednesday');
+                                    case DateTime.thursday:
+                                      return allowedDays.contains('Thursday');
+                                    case DateTime.friday:
+                                      return allowedDays.contains('Friday');
+                                    case DateTime.saturday:
+                                      return allowedDays.contains('Saturday');
+                                    default:
+                                      return false;
+                                  }
+                                });
+                            if (picked != null) {
                               setState(() {
-                                _appointmentType = selected ? type : "";
+                                _dateController.text =
+                                    DateFormat('yyyy-MM-dd').format(picked);
                               });
-                            },
-                          ))
-                      .toList(),
-                ),
-                const SizedBox(height: 20),
-                Row(
-                  children: [
-                    Expanded(
-                      child: paymentButton(
-                          label: "Pay via Cash",
-                          icon: Icons.currency_pound,
-                          isSelected: _paymentMethod == "cash",
-                          onPressed: () =>
-                              setState(() => _paymentMethod = "cash")),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: paymentButton(
-                          label: "Pay via Card",
-                          icon: Icons.credit_card,
-                          isSelected: _paymentMethod == "card",
-                          onPressed: () =>
-                              setState(() => _paymentMethod = "card")),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            // const Spacer(),
-            showSummary ? _buildSummaryTab() : const SizedBox(),
-            Row(
-              mainAxisAlignment: showSummary
-                  ? MainAxisAlignment.spaceEvenly
-                  : MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    if (_dateController.text.isEmpty) {
-                      FailureToast.showToast(
-                        msg: 'Please fill all the required fields!',
-                      );
-                    } else {
-                      setState(() {
-                        showSummary = true;
-                      });
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 40, vertical: 15),
-                    backgroundColor: Colors.blue,
-                  ),
-                  child: const Text('Continue'),
-                ),
-                !showSummary
-                    ? const SizedBox()
-                    : ElevatedButton(
-                        onPressed: () => _bookAppointment(
-                          appointment: AppointmentModel(
-                            type: _appointmentType,
-                            date: _dateController.text,
-                            payment: _paymentMethod,
-                            doctorId: widget.doctor.id!,
-                            isUrgant: isUrgant,
-                            patientId: context.read<UserCubit>().getUser().id!,
-                          ),
+                            }
+                          },
                         ),
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 40, vertical: 15),
-                          backgroundColor: Colors.blue,
-                        ),
-                        child: const Text('Book Now'),
                       ),
-              ],
-            ),
-          ],
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  const Text('Appointment Type',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 10),
+                  Wrap(
+                    spacing: 9,
+                    children: ['Examination', 'Consultation']
+                        .map((type) => ChoiceChip(
+                              label: Text(type),
+                              selected: _appointmentType == type,
+                              onSelected: (selected) {
+                                setState(() {
+                                  _appointmentType = selected ? type : "";
+                                });
+                              },
+                            ))
+                        .toList(),
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: paymentButton(
+                            label: "Pay via Cash",
+                            icon: Icons.currency_pound,
+                            isSelected: _paymentMethod == "cash",
+                            onPressed: () =>
+                                setState(() => _paymentMethod = "cash")),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: paymentButton(
+                            label: "Pay via Card",
+                            icon: Icons.credit_card,
+                            isSelected: _paymentMethod == "card",
+                            onPressed: () =>
+                                setState(() => _paymentMethod = "card")),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              // const Spacer(),
+              showSummary ? _buildSummaryTab() : const SizedBox(),
+              Row(
+                mainAxisAlignment: showSummary
+                    ? MainAxisAlignment.spaceEvenly
+                    : MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      if (_dateController.text.isEmpty) {
+                        FailureToast.showToast(
+                          msg: 'Please fill all the required fields!',
+                        );
+                      } else {
+                        setState(() {
+                          showSummary = true;
+                        });
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 40, vertical: 15),
+                      backgroundColor: Colors.blue,
+                    ),
+                    child: const Text('Continue'),
+                  ),
+                  !showSummary
+                      ? const SizedBox()
+                      : ElevatedButton(
+                          onPressed: () => _bookAppointment(
+                            appointment: AppointmentModel(
+                              type: _appointmentType,
+                              date: _dateController.text,
+                              payment: _paymentMethod,
+                              doctorId: widget.doctor.id!,
+                              isUrgant: isUrgant,
+                              patientId: context.read<UserCubit>().getUser().id!,
+                            ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 40, vertical: 15),
+                            backgroundColor: Colors.blue,
+                          ),
+                          child: const Text('Book Now'),
+                        ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -217,7 +219,7 @@ class _AppointmentPageState extends State<AppointmentPage>
         width: double.infinity * .7,
         padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
-            color: Colors.grey, borderRadius: BorderRadius.circular(8)),
+            color: const Color.fromARGB(255, 206, 204, 204), borderRadius: BorderRadius.circular(8)),
         child: Column(
           children: [
             const Text('Booking Information',
