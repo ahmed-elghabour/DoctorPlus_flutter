@@ -4,18 +4,31 @@ import 'package:doctor_plus/data/repositories/reviews_repository.dart';
 import 'package:doctor_plus/domain/cubits/doctorReviews/doctor_reviews_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 class DoctorReviewsCubit extends Cubit<DoctorReviewsState> {
   DoctorReviewsCubit() : super(DoctorReviewsInitial());
 
+  List<ReviewModel> reviews = [];
   void getDoctorReviews({required String doctorId}) async {
     emit(DoctorReviewsLoading());
     try {
-      List<ReviewModel> doctorReviews =
+      reviews =
           await ReviewsRepository(remoteDataSource: ReviewsRemoteDataSource())
               .getDoctorReviews(doctorId);
 
-      emit(DoctorReviewsLoaded(doctorReviews));
+      emit(DoctorReviewsLoaded(reviews));
+    } catch (e) {
+      emit(DoctorReviewsError(e.toString()));
+    }
+  }
+
+  addDoctorReview(
+      {required ReviewModel reviewModel, required String doctorId}) async {
+    emit(DoctorReviewsLoading());
+    try {
+      await ReviewsRepository(remoteDataSource: ReviewsRemoteDataSource())
+          .addDoctorReview(reviewModel, doctorId);
+      reviews.add(reviewModel);
+      emit(DoctorReviewsLoaded(reviews));
     } catch (e) {
       emit(DoctorReviewsError(e.toString()));
     }

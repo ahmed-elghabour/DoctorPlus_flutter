@@ -1,4 +1,3 @@
-
 import 'package:doctor_plus/data/model/review.dart';
 
 sealed class DoctorReviewsState {}

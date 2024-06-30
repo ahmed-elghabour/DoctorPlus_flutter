@@ -1,15 +1,18 @@
 import 'package:doctor_plus/core/widgets/app_text_button.dart';
 import 'package:doctor_plus/data/model/appointment.dart';
+import 'package:doctor_plus/data/model/doctor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class AppointmentTile extends StatelessWidget {
   final AppointmentModel appointment;
+  final Doctor doctor;
   final VoidCallback onCancel;
   final VoidCallback onReschedule;
 
   const AppointmentTile({
     super.key,
+    required this.doctor,
     required this.appointment,
     required this.onCancel,
     required this.onReschedule,
@@ -69,9 +72,9 @@ class AppointmentTile extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
-                            "doctorName",
-                            style: TextStyle(
+                          Text(
+                            "${doctor.fName} ${doctor.lName}",
+                            style: const TextStyle(
                               fontSize: 16.0,
                               fontWeight: FontWeight.bold,
                             ),

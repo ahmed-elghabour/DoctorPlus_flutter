@@ -1,14 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:doctor_plus/data/model/appointment.dart';
 import 'package:doctor_plus/utils/firebase.dart';
-import 'package:flutter/material.dart';
 
 class AppointmentsRemoteDataSource {
   var firestore = FirebaseFirestore.instance;
 
   Future<List<dynamic>> getPatientAppointments(String patientId) async {
     try {
-      List<AppointmentModel> appointments = [];
+      List<Map<String, dynamic>> appointments = [];
       await CustomFirebase()
           .getCollectionData(
               docID: patientId,
@@ -17,24 +15,36 @@ class AppointmentsRemoteDataSource {
               isNested: true)
           .then((value) {
         for (var element in value) {
-          debugPrint("Patient Appointments - element: ${element.data()}");
-          appointments.add(
-            AppointmentModel.patient(
-              id: element.id,
-              date: element.data().date,
-              type: element.data().type,
-              status: element.data().status,
-              payment: element.data().payment,
-              doctorId: element.data().doctorId,
-              isUrgant: element.data().isUrgant,
-            ),
-          );
+          appointments.add({
+            "id": element.id,
+            "date": element.data()["date"],
+            "type": element.data()["type"],
+            "status": element.data()["status"],
+            "payment": element.data()["payment"],
+            "doctorId": element.data()["doctorId"],
+            "isUrgant": element.data()["isUrgant"],
+          });
         }
       });
-      debugPrint(
-          "Patient Appointments - appointmentsDataSource: ${appointments.length}");
 
       return appointments;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future<List<dynamic>> getAppointmentedDoctors(List<String> doctors) async {
+    try {
+      List<Map<String, dynamic>> appointmentedDoctors = [];
+      for (var doctor in doctors) {
+        await CustomFirebase().getDocumentData(docID: doctor).then(
+          (value) {
+            appointmentedDoctors.add(value);
+          },
+        );
+      }
+
+      return appointmentedDoctors;
     } catch (e) {
       throw Exception(e);
     }

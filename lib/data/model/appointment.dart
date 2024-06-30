@@ -5,8 +5,6 @@
 //   rescheduled,
 // }
 
-import 'package:doctor_plus/data/model/patient.dart';
-
 class AppointmentModel {
   String? id;
   late bool isUrgant;
@@ -45,6 +43,18 @@ class AppointmentModel {
     required this.isUrgant,
   });
 
+  factory AppointmentModel.fromJsonPatient(Map<String, dynamic> json) {
+    return AppointmentModel.fetch(
+      id: json['id'],
+      type: json['type'],
+      date: json['date'],
+      status: json['status'],
+      payment: json['payment'],
+      isUrgant: json['isUrgant'],
+      doctorId: json['doctorId'],
+      // patients: List<String>.from(json['patients']),
+    );
+  }
   factory AppointmentModel.fromJson(Map<String, dynamic> json) {
     return AppointmentModel.fetch(
       id: json['id'],

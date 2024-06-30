@@ -1,4 +1,3 @@
-import 'package:doctor_plus/core/helpers/utils_helper.dart';
 import 'package:doctor_plus/core/theming/styles.dart';
 import 'package:doctor_plus/data/model/review.dart';
 import 'package:flutter/material.dart';
@@ -22,11 +21,10 @@ class ReviewTile extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CircleAvatar(
+                const CircleAvatar(
                   radius: 30,
-                  backgroundImage: NetworkImage(review.patientImage.isEmpty
-                      ? "https://static.vecteezy.com/system/resources/previews/019/637/994/original/man-sneezes-and-uses-paper-napkin-how-to-sneeze-right-virus-prevention-spread-flat-illustration-seasonal-allergies-healthcare-concept-vector.jpg"
-                      : review.patientImage),
+                  backgroundImage: NetworkImage(
+                      "https://static.vecteezy.com/system/resources/previews/019/637/994/original/man-sneezes-and-uses-paper-napkin-how-to-sneeze-right-virus-prevention-spread-flat-illustration-seasonal-allergies-healthcare-concept-vector.jpg"),
                 ),
                 const SizedBox(width: 12.0),
                 Expanded(
@@ -44,23 +42,21 @@ class ReviewTile extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            // review.reviewDateTime.toDate()..toString(),
-                            UtilsHelper.smallFormatTimestamp(
-                                review.reviewDateTime),
+                            review.date,
                             style: TextStyles.font13GrayRegular,
                           ),
                         ],
                       ),
                       const SizedBox(height: 4.0),
                       Text(
-                        review.rateStars.toString(),
+                        '${review.rate}',
                         style: TextStyles.font14GrayRegular.copyWith(
                           height: 1.5,
                         ),
                       ),
                       const SizedBox(height: 4.0),
                       Text(
-                        review.reviewText,
+                        review.review,
                         style: TextStyles.font14GrayRegular.copyWith(
                           height: 1.5,
                         ),

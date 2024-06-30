@@ -1,6 +1,5 @@
 import 'package:doctor_plus/data/model/doctor.dart';
 import 'package:doctor_plus/presentation/doctor%20profile/pages/doctor_preview.dart';
-import 'package:doctor_plus/utils/routes.dart';
 import 'package:flutter/material.dart';
 
 class DoctorCard extends StatelessWidget {

@@ -1,5 +1,6 @@
 import 'package:doctor_plus/data/data%20sources/appointments_remote_data_source.dart';
 import 'package:doctor_plus/data/model/appointment.dart';
+import 'package:doctor_plus/data/model/doctor.dart';
 import 'package:doctor_plus/data/repositories/appointments_repository.dart';
 import 'package:doctor_plus/domain/cubits/appointments/appointment_state.dart';
 import 'package:flutter/material.dart';
@@ -14,11 +15,26 @@ class AppointmentCubit extends Cubit<AppointmentsState> {
       List<AppointmentModel> appointments = await AppointmentsRepository(
               remoteDataSource: AppointmentsRemoteDataSource())
           .getPatientAppointments(patientId);
-      debugPrint("Patient Appointments - appointments: ${appointments.length}");
+      List<String> doctorsID = appointments.map((e) => e.doctorId).toList();
+      List<Doctor> doctors = await AppointmentsRepository(
+              remoteDataSource: AppointmentsRemoteDataSource())
+          .getAppointmentedDoctors(doctorsID);
+      print("\n\n\n\n\n=============================");
+      for (var appointment in appointments) {
+        print(appointment.doctorId);
+      }
+      debugPrint("\n\n=============================\n\n");
+      for (var doctor in doctors) {
+        print(doctor.id);
+      }
+      debugPrint("=============================\n\n\n\n\n");
+
       List<AppointmentModel> upcoming = [];
-      List<AppointmentModel> completed = [];
       List<AppointmentModel> canceled = [];
-      appointments.map((appointment) {
+      List<AppointmentModel> completed = [];
+
+      for (var appointment in appointments) {
+        debugPrint("Patient Appointments - status: ${appointment.status}");
         if (appointment.status == 'upcoming') {
           upcoming.add(appointment);
         } else if (appointment.status == 'completed') {
@@ -26,8 +42,8 @@ class AppointmentCubit extends Cubit<AppointmentsState> {
         } else {
           canceled.add(appointment);
         }
-      });
-      emit(AppointmentsLoaded(upcoming, completed, canceled));
+      }
+      emit(AppointmentsLoaded(upcoming, completed, canceled, doctors));
     } catch (e) {
       emit(AppointmentsError(e.toString()));
     }

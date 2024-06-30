@@ -14,4 +14,12 @@ class ReviewsRepository {
       rethrow;
     }
   }
+
+  Future<void> addDoctorReview(ReviewModel reviewModel, String doctorId) async {
+    try {
+      await remoteDataSource.addDoctorReview(reviewModel, doctorId);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

@@ -39,10 +39,9 @@ class DoctorProfile extends StatelessWidget {
               DoctorProfileData(
                 doctor: doctor,
               ),
-              BlocProvider(
-                create: (context) =>
-                    DoctorReviewsCubit()..getDoctorReviews(doctorId: '123'),
-                child: DoctorProfileTabs(),
+              DoctorProfileTabs(
+                doctorId: doctor.id!,
+                doctorName: "${doctor.fName} ${doctor.lName}",
               ),
             ],
           ),

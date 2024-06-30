@@ -6,7 +6,6 @@ import 'package:doctor_plus/domain/cubits/user/user_cubit.dart';
 import 'package:doctor_plus/presentation/Appointment/pages/appointment.dart';
 import 'package:doctor_plus/presentation/doctor%20profile/widgets/doctor_profile_data.dart';
 import 'package:doctor_plus/presentation/doctor%20profile/widgets/doctor_profile_tabs.dart';
-import 'package:doctor_plus/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,10 +26,9 @@ class DoctorPreview extends StatelessWidget {
           child: Column(
             children: [
               DoctorProfileData(doctor: doctor),
-              BlocProvider(
-                create: (context) =>
-                    DoctorReviewsCubit()..getDoctorReviews(doctorId: '123'),
-                child: DoctorProfileTabs(),
+              DoctorProfileTabs(
+                doctorId: doctor.id!,
+                doctorName: "${doctor.fName} ${doctor.lName}",
               ),
             ],
           ),

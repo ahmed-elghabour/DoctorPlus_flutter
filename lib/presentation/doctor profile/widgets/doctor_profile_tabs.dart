@@ -1,23 +1,31 @@
+import 'package:doctor_plus/domain/cubits/doctorReviews/doctor_reviews_cubit.dart';
 import 'package:doctor_plus/presentation/doctor%20profile/widgets/doctor_about_tab.dart';
 import 'package:doctor_plus/presentation/doctor%20profile/widgets/doctor_reviews_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DoctorProfileTabs extends StatelessWidget {
-  DoctorProfileTabs({super.key});
+  final String doctorId;
+  final String doctorName;
+  const DoctorProfileTabs(
+      {super.key, required this.doctorId, required this.doctorName});
 
   final List<Widget> _tabs = const [
     Tab(text: 'About'),
     Tab(text: 'Reviews'),
   ];
 
-  final List<Widget> _views = [
-    const DoctorAboutTab(),
-    const DoctorReviewsTab(),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    context.read<DoctorReviewsCubit>().getDoctorReviews(doctorId: doctorId);
+    final List<Widget> views = [
+      const DoctorAboutTab(),
+      DoctorReviewsTab(
+        doctorId: doctorId,
+        doctorName: doctorName,
+      ),
+    ];
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       width: double.infinity,
@@ -32,7 +40,7 @@ class DoctorProfileTabs extends StatelessWidget {
               TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
         ),
         tabs: _tabs,
-        views: _views,
+        views: views,
         onChange: (index) => debugPrint(index.toString()),
       ),
     );

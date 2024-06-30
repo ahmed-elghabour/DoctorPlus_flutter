@@ -8,13 +8,17 @@ class ReviewsListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: reviews.length,
-      itemBuilder: (context, index) {
-        return ReviewTile(
-          review: reviews[index],
-        );
-      },
-    );
+    return reviews.isEmpty
+        ? const Center(
+            child: Text("No Reviews"),
+          )
+        : ListView.builder(
+            itemCount: reviews.length,
+            itemBuilder: (context, index) {
+              return ReviewTile(
+                review: reviews[index],
+              );
+            },
+          );
   }
 }

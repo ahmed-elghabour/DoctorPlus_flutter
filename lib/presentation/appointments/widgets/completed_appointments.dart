@@ -12,7 +12,10 @@ class CompletedAppointments extends StatelessWidget {
     return BlocBuilder<AppointmentCubit, AppointmentsState>(
       builder: (context, state) {
         if (state is AppointmentsLoaded) {
-          return AppointmentsListView(appointments: state.completed);
+          return AppointmentsListView(
+            appointments: state.completed,
+            doctors: state.doctors,
+          );
         } else if (state is AppointmentsLoading) {
           return const Center(
             child: CircularProgressIndicator(),

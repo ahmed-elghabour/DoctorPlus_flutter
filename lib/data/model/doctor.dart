@@ -82,6 +82,7 @@ class Doctor extends SystemUser {
   });
 
   factory Doctor.fromJson(Map<String, dynamic> json) {
+    print(json);
     return Doctor.gen(
       id: json['id'],
       type: json['type'],
@@ -128,7 +129,7 @@ class Doctor extends SystemUser {
     double sum = 0;
     if (reviews == null) return 0;
     for (var element in reviews!) {
-      sum += element.rateStars;
+      sum += element.rate;
     }
 
     return sum / reviews!.length;
