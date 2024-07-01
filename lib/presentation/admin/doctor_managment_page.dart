@@ -1,12 +1,16 @@
-import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
-class DoctorManagementPage extends StatelessWidget {
+class DoctorManagementPage extends StatefulWidget {
   static const routeName = '/doctorManagementPage';
 
-  DoctorManagementPage({Key? key}) : super(key: key);
+  const DoctorManagementPage({Key? key}) : super(key: key);
 
-  final List<Map<String, dynamic>> dummyDoctors = [
+  @override
+  _DoctorManagementPageState createState() => _DoctorManagementPageState();
+}
+
+class _DoctorManagementPageState extends State<DoctorManagementPage> {
+  List<Map<String, dynamic>> dummyDoctors = [
     {
       'id': '1',
       'fName': 'Amr',
@@ -135,10 +139,16 @@ class DoctorManagementPage extends StatelessWidget {
     },
   ];
 
+  void _removeDoctor(String doctorId) {
+    setState(() {
+      dummyDoctors.removeWhere((doctor) => doctor['id'] == doctorId);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MyCustomAppBar(title: 'New Doctors'),
+      appBar: AppBar(title: const Text('New Doctors')),
       body: ListView.builder(
         itemCount: dummyDoctors.length,
         itemBuilder: (context, index) {
@@ -150,7 +160,11 @@ class DoctorManagementPage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => DoctorDetailPage(doctor: doctor),
+                  builder: (context) => DoctorDetailPage(
+                    doctor: doctor,
+                    onAccept: _removeDoctor,
+                    onReject: _removeDoctor,
+                  ),
                 ),
               );
             },
@@ -163,13 +177,20 @@ class DoctorManagementPage extends StatelessWidget {
 
 class DoctorDetailPage extends StatelessWidget {
   final Map<String, dynamic> doctor;
+  final Function(String) onAccept;
+  final Function(String) onReject;
 
-  const DoctorDetailPage({super.key, required this.doctor});
+  const DoctorDetailPage({
+    Key? key,
+    required this.doctor,
+    required this.onAccept,
+    required this.onReject,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyCustomAppBar(title: '${doctor['fName']} ${doctor['lName']}'),
+      appBar: AppBar(title: Text('${doctor['fName']} ${doctor['lName']}')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -196,7 +217,8 @@ class DoctorDetailPage extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    _acceptDoctor(context, doctor['id']);
+                    onAccept(doctor['id']);
+                    Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,
@@ -206,7 +228,8 @@ class DoctorDetailPage extends StatelessWidget {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    _rejectDoctor(context, doctor['id']);
+                    onReject(doctor['id']);
+                    Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red,
@@ -229,39 +252,30 @@ class DoctorDetailPage extends StatelessWidget {
         children: [
           Text(
             '$title: ',
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-            ),
+            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
-          Expanded(
-            child: Text(
-              value,
-              style: const TextStyle(fontSize: 16),
-            ),
-          ),
+          Flexible(child: Text(value)),
         ],
       ),
     );
   }
-
-  void _acceptDoctor(BuildContext context, String doctorId) {
-    // Logic to accept the doctor
-    Navigator.pop(context);
-  }
-
-  void _rejectDoctor(BuildContext context, String doctorId) {
-    // Logic to reject the doctor
-    Navigator.pop(context);
-  }
 }
 
 void main() {
-  runApp(MaterialApp(
-    title: 'Doctor Management',
-    theme: ThemeData(
-      primarySwatch: Colors.blue,
-    ),
-    home: DoctorManagementPage(),
-  ));
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Doctor Management',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const DoctorManagementPage(),
+    );
+  }
 }
