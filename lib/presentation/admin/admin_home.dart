@@ -1,6 +1,7 @@
-import 'package:doctor_plus/core/widgets/my_custom_app_bar_no_back.dart';
 import 'package:flutter/material.dart';
 import 'package:doctor_plus/utils/routes.dart';
+import 'package:doctor_plus/core/widgets/appbar_icon.dart';
+import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
 
 class AdminHomePage extends StatelessWidget {
   const AdminHomePage({super.key});
@@ -8,7 +9,17 @@ class AdminHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MyCustomAppBarNoBack(title: 'Admin'),
+      appBar: MyCustomAppBar(
+        removeLeading: true,
+        title: 'Admin Dashboard',
+        actions: [
+          appBarIcon(
+              icon: Icons.logout,
+              onTap: () async {
+                Navigator.pushReplacementNamed(context, Routes.login);
+              })
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: GridView.count(

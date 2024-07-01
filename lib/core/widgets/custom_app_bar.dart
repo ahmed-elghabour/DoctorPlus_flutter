@@ -6,6 +6,7 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final double height;
   final bool isDefault;
+  final bool removeLeading;
   final List<Widget>? actions;
   final PreferredSizeWidget? bottom;
   const MyCustomAppBar({
@@ -15,6 +16,7 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.height = 28,
     required this.title,
     this.isDefault = true,
+    this.removeLeading = false,
   });
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight + height);
@@ -28,11 +30,13 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         elevation: 0,
         leadingWidth: 48,
         bottom: bottom,
-        leading: appBarIcon(
-          isDefault: isDefault,
-          icon: Icons.arrow_back_ios_new_rounded,
-          onTap: () => Navigator.pop(context),
-        ),
+        leading: removeLeading
+            ? const SizedBox()
+            : appBarIcon(
+                isDefault: isDefault,
+                icon: Icons.arrow_back_ios_new_rounded,
+                onTap: () => Navigator.pop(context),
+              ),
         centerTitle: true,
         title: Text(
           title,
