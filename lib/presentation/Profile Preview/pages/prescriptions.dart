@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
 import 'package:doctor_plus/data/model/patient.dart';
+import 'package:doctor_plus/domain/cubits/user/user_cubit.dart';
 import 'package:doctor_plus/presentation/Profile%20Preview/pages/prescription_bottom_sheet.dart';
 import 'package:doctor_plus/utils/firebase.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PatientPrescriptions extends StatelessWidget {
   final Patient patient;
@@ -12,18 +15,20 @@ class PatientPrescriptions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showModalBottomSheet(
-            context: context,
-            backgroundColor: Colors.transparent,
-            builder: (context) => PrescriptionBottomSheet(
-              patient: patient,
+      floatingActionButton: context.read<UserCubit>().getUserType() == "patient"
+          ? null
+          : FloatingActionButton(
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  backgroundColor: Colors.transparent,
+                  builder: (context) => PrescriptionBottomSheet(
+                    patient: patient,
+                  ),
+                );
+              },
+              child: const Icon(Icons.add),
             ),
-          );
-        },
-        child: const Icon(Icons.add),
-      ),
       appBar: MyCustomAppBar(
         title: '${patient.fName} ${patient.lName}',
       ),

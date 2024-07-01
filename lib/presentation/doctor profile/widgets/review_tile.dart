@@ -23,8 +23,7 @@ class ReviewTile extends StatelessWidget {
               children: [
                 const CircleAvatar(
                   radius: 30,
-                  backgroundImage: NetworkImage(
-                      "https://static.vecteezy.com/system/resources/previews/019/637/994/original/man-sneezes-and-uses-paper-napkin-how-to-sneeze-right-virus-prevention-spread-flat-illustration-seasonal-allergies-healthcare-concept-vector.jpg"),
+                  backgroundImage: AssetImage("assets/imgs/patient.jpg"),
                 ),
                 const SizedBox(width: 12.0),
                 Expanded(

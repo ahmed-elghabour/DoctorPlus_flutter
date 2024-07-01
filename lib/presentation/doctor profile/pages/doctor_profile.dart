@@ -19,7 +19,7 @@ class DoctorProfile extends StatelessWidget {
     Doctor doctor = context.read<UserCubit>().getUser();
     return Scaffold(
       appBar: MyCustomAppBar(
-        title: 'Dr. John Doe',
+        title: 'Dr. ${doctor.fName} ${doctor.lName}',
         actions: [
           appBarIcon(
               icon: Icons.logout,
@@ -39,8 +39,7 @@ class DoctorProfile extends StatelessWidget {
                 doctor: doctor,
               ),
               DoctorProfileTabs(
-                doctorId: doctor.id!,
-                doctorName: "${doctor.fName} ${doctor.lName}",
+                doctor: doctor,
               ),
             ],
           ),

@@ -2,6 +2,7 @@ import 'package:doctor_plus/core/widgets/check_box.dart';
 import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
 import 'package:doctor_plus/core/widgets/icon_picker.dart';
 import 'package:doctor_plus/core/widgets/toast.dart';
+import 'package:doctor_plus/data/data%20sources/payment_remote_data_source.dart';
 import 'package:doctor_plus/data/model/appointment.dart';
 import 'package:doctor_plus/data/model/doctor.dart';
 import 'package:doctor_plus/domain/cubits/user/user_cubit.dart';
@@ -11,6 +12,7 @@ import 'package:doctor_plus/utils/validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AppointmentPage extends StatefulWidget {
   final Doctor doctor;
@@ -77,10 +79,11 @@ class _AppointmentPageState extends State<AppointmentPage>
                             final DateTime? picked = await showDatePicker(
                                 context: context,
                                 helpText: "Select Reservation Date",
-                                initialDate: DateTime.now(),
+                                initialDate:
+                                    DateTime.now().add(const Duration(days: 1)),
                                 firstDate: DateTime.now(),
-                                lastDate:
-                                    DateTime.now().add(const Duration(days: 60)),
+                                lastDate: DateTime.now()
+                                    .add(const Duration(days: 60)),
                                 selectableDayPredicate: (DateTime day) {
                                   final List<String> allowedDays =
                                       widget.doctor.workingDays.days;
@@ -193,7 +196,8 @@ class _AppointmentPageState extends State<AppointmentPage>
                               payment: _paymentMethod,
                               doctorId: widget.doctor.id!,
                               isUrgant: isUrgant,
-                              patientId: context.read<UserCubit>().getUser().id!,
+                              patientId:
+                                  context.read<UserCubit>().getUser().id!,
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
@@ -219,32 +223,71 @@ class _AppointmentPageState extends State<AppointmentPage>
         width: double.infinity * .7,
         padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 206, 204, 204), borderRadius: BorderRadius.circular(8)),
+            color: const Color.fromARGB(255, 206, 204, 204),
+            borderRadius: BorderRadius.circular(8)),
         child: Column(
           children: [
             const Text('Booking Information',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             const SizedBox(height: 10),
-            const Text('Date & Time', style: TextStyle(fontSize: 18),),
-            Text(_dateController.text, style: const TextStyle(fontSize: 18),),
+            const Text(
+              'Date & Time',
+              style: TextStyle(fontSize: 18),
+            ),
+            Text(
+              _dateController.text,
+              style: const TextStyle(fontSize: 18),
+            ),
             const SizedBox(height: 10),
-            const Text('Appointment Type', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-            Text(_appointmentType , style: const TextStyle(fontSize: 18),),
+            const Text(
+              'Appointment Type',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              _appointmentType,
+              style: const TextStyle(fontSize: 18),
+            ),
             const SizedBox(height: 20),
             const Text('Doctor Information',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            Text("${widget.doctor.fName} ${widget.doctor.lName}", style: const TextStyle(fontSize: 18),),
+            Text(
+              "${widget.doctor.fName} ${widget.doctor.lName}",
+              style: const TextStyle(fontSize: 18),
+            ),
             const SizedBox(height: 20),
             const Text('Payment Type',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            Text(_paymentMethod, style: const TextStyle(fontSize: 18),),
+            Text(
+              _paymentMethod,
+              style: const TextStyle(fontSize: 18),
+            ),
             const SizedBox(height: 10),
-            const Text('Payment Information', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-            Text('Fees ${widget.doctor.fees} LE', style: const TextStyle(fontSize: 18),),
-            const Text('Service 50 LE', style: TextStyle(fontSize: 18),),
-            isUrgant ? const Text('Urgent Fees 100 LE', style: TextStyle(fontSize: 18),) : const SizedBox(),
-            const SizedBox(height: 10,),
-            Text('Total ${calcTotalFees()} LE', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.red),),
+            const Text(
+              'Payment Information',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              'Fees ${widget.doctor.fees} LE',
+              style: const TextStyle(fontSize: 18),
+            ),
+            const Text(
+              'Service 50 LE',
+              style: TextStyle(fontSize: 18),
+            ),
+            isUrgant
+                ? const Text(
+                    'Urgent Fees 100 LE',
+                    style: TextStyle(fontSize: 18),
+                  )
+                : const SizedBox(),
+            const SizedBox(
+              height: 10,
+            ),
+            Text(
+              'Total ${calcTotalFees()} LE',
+              style: const TextStyle(
+                  fontSize: 20, fontWeight: FontWeight.bold, color: Colors.red),
+            ),
             const SizedBox(height: 20),
           ],
         ),
@@ -259,31 +302,88 @@ class _AppointmentPageState extends State<AppointmentPage>
 
   Future<void> _bookAppointment({required AppointmentModel appointment}) async {
     try {
-      await CustomFirebase().addNewNestedCollection(
-        maincollection: "doctors",
-        data: appointment.toDoctorJson(),
-        docID: appointment.doctorId,
-        nestedcollection: "appointments",
-      );
-      await CustomFirebase().addNewNestedCollection(
-        maincollection: "patients",
-        data: appointment.toPatientJson(),
-        docID: appointment.patientId,
-        nestedcollection: "appointments",
-      );
+      // await CustomFirebase().addNewNestedCollection(
+      //   maincollection: "doctors",
+      //   data: appointment.toDoctorJson(),
+      //   docID: appointment.doctorId,
+      //   nestedcollection: "appointments",
+      // );
+      // await CustomFirebase().addNewNestedCollection(
+      //   maincollection: "patients",
+      //   data: appointment.toPatientJson(),
+      //   docID: appointment.patientId,
+      //   nestedcollection: "appointments",
+      // );
       if (_paymentMethod == "card") {
-        
+        await redirectToPaymentGateway(context);
+        SuccessToast.showToast(
+          msg: 'Appointment booked successfully via Card!',
+        );
+      } else {
+        SuccessToast.showToast(
+          msg: 'Appointment booked successfully!',
+        );
+        Navigator.pushNamed(context, Routes.home);
       }
-      SuccessToast.showToast(
-        msg: 'Appointment booked successfully!',
-      );
-      Navigator.pushNamed(context, Routes.home);
     } catch (e) {
       FailureToast.showToast(
         msg: 'Appointment Error: $e',
       );
     }
   }
+}
+
+redirectToPaymentGateway(BuildContext context) async {
+  print("Payment Auth Token: sdasdasd");
+
+  String authToken = await PaymentRemoteDataSource.getAuthToken();
+  print("Payment Auth Token: $authToken");
+  int orderId = await PaymentRemoteDataSource.createOrder(authToken, 260);
+  print("Payment Auth Token: $orderId");
+
+  String paymentURL =
+      await PaymentRemoteDataSource.getPaymentURL(orderId, authToken, 260, {
+    "apartment": "803",
+    "email": "claudette09@exa.com",
+    "floor": "42",
+    "first_name": "Clifford",
+    "street": "Ethan Land",
+    "building": "8028",
+    "phone_number": "+86(8)9135210487",
+    "shipping_method": "PKG",
+    "postal_code": "01898",
+    "city": "Jaskolskiburgh",
+    "country": "CR",
+    "last_name": "Nicolas",
+    "state": "Utah"
+  });
+  print("Payment Auth Token: $paymentURL");
+
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('You will be redirected to complete the payment.'),
+        actions: [
+          TextButton(
+            onPressed: () async {
+              try {
+                await launchUrl(Uri.parse(paymentURL));
+                Navigator.pop(context);
+              } catch (e) {
+                throw Exception(e);
+              }
+            },
+            child: const Text('OK'),
+          ),
+        ],
+      );
+    },
+  );
+
+  //     Navigator.push(context,MaterialPageRoute(
+  //   builder: (context) => PaymentWebViewPage(paymentURL: paymentURL,),
+  // ),);
 }
 
 Widget paymentButton({

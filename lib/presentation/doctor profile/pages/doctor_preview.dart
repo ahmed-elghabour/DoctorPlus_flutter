@@ -28,27 +28,28 @@ class DoctorPreview extends StatelessWidget {
             children: [
               DoctorProfileData(doctor: doctor),
               DoctorProfileTabs(
-                doctorId: doctor.id!,
-                doctorName: "${doctor.fName} ${doctor.lName}",
+                doctor: doctor,
               ),
             ],
           ),
         ),
       ),
-      floatingActionButton: CustomFloatingActionButton(
-        text: 'Book Appointment',
-        onPressed: () {
-          if (!context.read<UserCubit>().isLoggin) {
-            FailureToast.showToast(msg: "Please login first");
-          } else {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AppointmentPage(doctor: doctor),
-                ));
-          }
-        },
-      ),
+      floatingActionButton: context.read<UserCubit>().getUserType() == 'doctor'
+          ? null
+          : CustomFloatingActionButton(
+              text: 'Book Appointment',
+              onPressed: () {
+                if (!context.read<UserCubit>().isLoggin) {
+                  FailureToast.showToast(msg: "Please login first");
+                } else {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AppointmentPage(doctor: doctor),
+                      ));
+                }
+              },
+            ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
