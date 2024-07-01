@@ -18,7 +18,7 @@ class Patient extends SystemUser {
     required super.fName,
     required super.lName,
     required super.phone,
-    required super.email,
+    super.email = 'a@gmail.com',
     required super.gender,
     required super.location,
     required super.birthDate,
@@ -32,7 +32,7 @@ class Patient extends SystemUser {
     required this.exercise,
     required this.hydration,
     required this.mentalHealth,
-  });
+  }) ;
 
   Patient({
     super.id = '',
@@ -42,7 +42,7 @@ class Patient extends SystemUser {
     required super.fName,
     required super.lName,
     required super.phone,
-    required super.email,
+    super.email = 'a@gmail.com',
     required super.gender,
     required super.location,
     required super.birthDate,
@@ -114,6 +114,7 @@ class Patient extends SystemUser {
       'hydration': hydration,
       'mentalHealth': mentalHealth,
       'blood': blood,
+      'type': type,
       'favouriteDoctors': favouriteDoctors.map((doctorID) => doctorID).toList()
     };
   }

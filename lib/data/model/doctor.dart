@@ -20,7 +20,7 @@ class Doctor extends SystemUser {
     required super.fName,
     required super.lName,
     required super.phone,
-    required super.email,
+    super.email = 'jimmypc99@gmail.com',
     required super.gender,
     required super.location,
     required super.birthDate,
@@ -32,7 +32,7 @@ class Doctor extends SystemUser {
     required super.fName,
     required super.lName,
     required super.phone,
-    required super.email,
+    super.email = 'jimmypc99@gmail.com',
     required super.gender,
     required super.location,
     required super.birthDate,
@@ -63,7 +63,7 @@ class Doctor extends SystemUser {
     required super.fName,
     required super.lName,
     required super.phone,
-    required super.email,
+    super.email = 'jimmypc99@gmail.com',
     required super.gender,
     required super.location,
     required super.birthDate,
@@ -74,7 +74,7 @@ class Doctor extends SystemUser {
     required super.fName,
     required super.lName,
     required super.phone,
-    required super.email,
+    super.email = 'jimmypc99@gmail.com',
     required super.gender,
     required super.location,
     required super.birthDate,
@@ -122,6 +122,7 @@ class Doctor extends SystemUser {
       'gender': gender,
       'location': location,
       'birthDate': birthDate,
+      'type':type
     };
   }
 
