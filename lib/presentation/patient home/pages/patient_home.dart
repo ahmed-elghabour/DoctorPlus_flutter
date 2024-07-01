@@ -113,6 +113,7 @@ class RecommendationDoctors extends StatelessWidget {
         BlocBuilder<DoctorsCubit, DoctorsState>(
           builder: (context, state) {
             if (state is DoctorsLoaded) {
+              print("Doctors Loaded - ${state.doctors.length}");
               return SingleChildScrollView(
                 child: Column(
                   children: List.generate(

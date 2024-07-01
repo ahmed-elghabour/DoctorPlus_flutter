@@ -93,7 +93,7 @@ class MyApp extends StatelessWidget {
               Routes.admin: (context) => const AdminHomePage(),
               Routes.adminStatistics: (context) => const StatisticsPage(),
               Routes.adminComplaints: (context) => const AdminComplaintsPage(),
-              Routes.doctorManagement: (context) =>  DoctorManagementPage(),
+              Routes.doctorManagement: (context) => const DoctorManagementPage(),
               Routes.faq: (context) => const FAQPage(),
               Routes.home: (context) => const HomePage(),
               Routes.login: (context) => const LoginPage(),

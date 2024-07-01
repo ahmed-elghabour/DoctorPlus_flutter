@@ -306,7 +306,7 @@ List<Doctor> demoDoctorData = [
     ], startTimes: "1", endTimes: "6"),
     degrees: ['Master', 'Fellowship'],
     description:
-        "Dr. Jimmy is a board-certified cardiologist with over 15 years of experience in diagnosing and treating cardiovascular diseases. She completed her medical degree at Harvard Medical School and further specialized in cardiology during her residency at Johns Hopkins Hospital. Dr. Doe is known for her patient-centered approach, combining advanced medical knowledge with compassionate care",
+        "Dr. Jimmy is a board-certified cardiologist with over 15 years of experience in diagnosing and treating cardiovascular diseases.",
     fees: 500,
     patients: 25,
   ),

@@ -264,7 +264,7 @@ class _AppointmentPageState extends State<AppointmentPage>
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             Text(
-              'Fees ${_appointmentType == 'Consultation'? 100 : widget.doctor.fees} LE',
+              'Fees ${_appointmentType == 'Consultation' ? 100 : widget.doctor.fees} LE',
               style: const TextStyle(fontSize: 18),
             ),
             const Text(
@@ -293,7 +293,8 @@ class _AppointmentPageState extends State<AppointmentPage>
   }
 
   int calcTotalFees() {
-    int sum = (_appointmentType == 'Consultation' ? 100 : widget.doctor.fees) + 50;
+    int sum =
+        (_appointmentType == 'Consultation' ? 100 : widget.doctor.fees) + 50;
     return isUrgant ? sum += 100 : sum;
   }
 
@@ -315,12 +316,14 @@ class _AppointmentPageState extends State<AppointmentPage>
         nestedDocID: res.id,
         nestedcollection: "appointments",
       );
+      if (_paymentMethod == "cash") {
+        SuccessToast.showToast(
+          msg: 'Appointment booked successfully',
+        );
+        Navigator.pushNamed(context, Routes.home);
+      }
       if (_paymentMethod == "card") {
         await redirectToPaymentGateway(context, calcTotalFees());
-        
-        // SuccessToast.showToast(
-        //   msg: 'Appointment booked successfully via Card!',
-        // );
       }
     } catch (e) {
       FailureToast.showToast(
@@ -356,27 +359,27 @@ redirectToPaymentGateway(BuildContext context, int price) async {
   });
   print("Payment Auth Token: $paymentURL");
 
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('You will be redirected to complete the payment.'),
-          actions: [
-            TextButton(
-              onPressed: () async {
-                try {
-                  await launchUrl(Uri.parse(paymentURL));
-                  Navigator.pushNamed(context, Routes.home);
-                } catch (e) {
-                  throw Exception(e);
-                }
-              },
-              child: const Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('You will be redirected to complete the payment.'),
+        actions: [
+          TextButton(
+            onPressed: () async {
+              try {
+                await launchUrl(Uri.parse(paymentURL));
+                Navigator.pushNamed(context, Routes.home);
+              } catch (e) {
+                throw Exception(e);
+              }
+            },
+            child: const Text('OK'),
+          ),
+        ],
+      );
+    },
+  );
 }
 
 Widget paymentButton({
