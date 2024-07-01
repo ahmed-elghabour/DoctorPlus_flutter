@@ -57,6 +57,24 @@ class CustomFirebase {
     }
   }
 
+  removeDocument({
+    required String collection,
+    required String docID,
+    required String nestedCollection,
+    required String nestedDocID,
+  }) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection(collection)
+          .doc(docID)
+          .collection(nestedCollection)
+          .doc(nestedDocID)
+          .delete();
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
   Future<User?> getCurrentUser() async {
     return FirebaseAuth.instance.currentUser!;
   }
@@ -80,18 +98,29 @@ class CustomFirebase {
     }
   }
 
-  Future<void> addNewNestedCollection({
+  addNewNestedCollection({
+    String? nestedDocID,
     required String docID,
     required String maincollection,
     required String nestedcollection,
     required Map<String, dynamic> data,
   }) async {
     try {
-      await FirebaseFirestore.instance
-          .collection(maincollection)
-          .doc(docID)
-          .collection(nestedcollection)
-          .add(data);
+      if (nestedDocID == null) {
+        var res = await FirebaseFirestore.instance
+            .collection(maincollection)
+            .doc(docID)
+            .collection(nestedcollection)
+            .add(data);
+        return res;
+      } else {
+        await FirebaseFirestore.instance
+            .collection(maincollection)
+            .doc(docID)
+            .collection(nestedcollection)
+            .doc(nestedDocID)
+            .set(data);
+      }
     } catch (e) {
       throw Exception(e);
     }

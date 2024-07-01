@@ -58,18 +58,15 @@ class _AppointmentPageState extends State<AppointmentPage>
                 children: [
                   Row(
                     children: [
-                      Expanded(
-                        flex: 1,
-                        child: customCheckBox(
-                          value: isUrgant,
-                          label: "Is Urgent?",
-                          onChanged: (newVal) =>
-                              setState(() => isUrgant = newVal!),
-                        ),
+                      customCheckBox(
+                        value: isUrgant,
+                        label: "Is Urgent?",
+                        onChanged: (newVal) =>
+                            setState(() => isUrgant = newVal!),
                       ),
                       const SizedBox(width: 10),
                       Expanded(
-                        flex: 2,
+                        flex: 1,
                         child: customIconPicker(
                           label: 'Select Reservation Date',
                           icon: Icons.calendar_month,
@@ -267,7 +264,7 @@ class _AppointmentPageState extends State<AppointmentPage>
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             Text(
-              'Fees ${widget.doctor.fees} LE',
+              'Fees ${_appointmentType == 'Consultation'? 100 : widget.doctor.fees} LE',
               style: const TextStyle(fontSize: 18),
             ),
             const Text(
@@ -296,34 +293,34 @@ class _AppointmentPageState extends State<AppointmentPage>
   }
 
   int calcTotalFees() {
-    int sum = widget.doctor.fees + 50;
+    int sum = (_appointmentType == 'Consultation' ? 100 : widget.doctor.fees) + 50;
     return isUrgant ? sum += 100 : sum;
   }
 
   Future<void> _bookAppointment({required AppointmentModel appointment}) async {
     try {
-      // await CustomFirebase().addNewNestedCollection(
-      //   maincollection: "doctors",
-      //   data: appointment.toDoctorJson(),
-      //   docID: appointment.doctorId,
-      //   nestedcollection: "appointments",
+      var res = await CustomFirebase().addNewNestedCollection(
+        maincollection: "doctors",
+        data: appointment.toDoctorJson(),
+        docID: appointment.doctorId,
+        nestedcollection: "appointments",
+      );
+      // SuccessToast.showToast(
+      //   msg: "Appointment booked successfully!",
       // );
-      // await CustomFirebase().addNewNestedCollection(
-      //   maincollection: "patients",
-      //   data: appointment.toPatientJson(),
-      //   docID: appointment.patientId,
-      //   nestedcollection: "appointments",
-      // );
+      await CustomFirebase().addNewNestedCollection(
+        maincollection: "patients",
+        data: appointment.toPatientJson(),
+        docID: appointment.patientId,
+        nestedDocID: res.id,
+        nestedcollection: "appointments",
+      );
       if (_paymentMethod == "card") {
-        await redirectToPaymentGateway(context);
-        SuccessToast.showToast(
-          msg: 'Appointment booked successfully via Card!',
-        );
-      } else {
-        SuccessToast.showToast(
-          msg: 'Appointment booked successfully!',
-        );
-        Navigator.pushNamed(context, Routes.home);
+        await redirectToPaymentGateway(context, calcTotalFees());
+        
+        // SuccessToast.showToast(
+        //   msg: 'Appointment booked successfully via Card!',
+        // );
       }
     } catch (e) {
       FailureToast.showToast(
@@ -333,16 +330,16 @@ class _AppointmentPageState extends State<AppointmentPage>
   }
 }
 
-redirectToPaymentGateway(BuildContext context) async {
+redirectToPaymentGateway(BuildContext context, int price) async {
   print("Payment Auth Token: sdasdasd");
 
   String authToken = await PaymentRemoteDataSource.getAuthToken();
   print("Payment Auth Token: $authToken");
-  int orderId = await PaymentRemoteDataSource.createOrder(authToken, 260);
+  int orderId = await PaymentRemoteDataSource.createOrder(authToken, price);
   print("Payment Auth Token: $orderId");
 
   String paymentURL =
-      await PaymentRemoteDataSource.getPaymentURL(orderId, authToken, 260, {
+      await PaymentRemoteDataSource.getPaymentURL(orderId, authToken, price, {
     "apartment": "803",
     "email": "claudette09@exa.com",
     "floor": "42",
@@ -359,31 +356,27 @@ redirectToPaymentGateway(BuildContext context) async {
   });
   print("Payment Auth Token: $paymentURL");
 
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: const Text('You will be redirected to complete the payment.'),
-        actions: [
-          TextButton(
-            onPressed: () async {
-              try {
-                await launchUrl(Uri.parse(paymentURL));
-                Navigator.pop(context);
-              } catch (e) {
-                throw Exception(e);
-              }
-            },
-            child: const Text('OK'),
-          ),
-        ],
-      );
-    },
-  );
-
-  //     Navigator.push(context,MaterialPageRoute(
-  //   builder: (context) => PaymentWebViewPage(paymentURL: paymentURL,),
-  // ),);
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('You will be redirected to complete the payment.'),
+          actions: [
+            TextButton(
+              onPressed: () async {
+                try {
+                  await launchUrl(Uri.parse(paymentURL));
+                  Navigator.pushNamed(context, Routes.home);
+                } catch (e) {
+                  throw Exception(e);
+                }
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
 }
 
 Widget paymentButton({

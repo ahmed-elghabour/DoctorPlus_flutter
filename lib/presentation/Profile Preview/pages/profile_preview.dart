@@ -1,14 +1,21 @@
 import 'package:doctor_plus/core/widgets/buttons.dart';
 import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
+import 'package:doctor_plus/core/widgets/toast.dart';
+import 'package:doctor_plus/data/model/appointment.dart';
 import 'package:doctor_plus/data/model/patient.dart';
+import 'package:doctor_plus/domain/cubits/appointments/appointment_cubit.dart';
+import 'package:doctor_plus/domain/cubits/user/user_cubit.dart';
 import 'package:doctor_plus/presentation/Profile%20Preview/pages/prescriptions.dart';
 import 'package:doctor_plus/presentation/patient%20profile/profile.dart';
 import 'package:doctor_plus/utils/firebase.dart';
+import 'package:doctor_plus/utils/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PatientPreview extends StatelessWidget {
   final Patient patient;
-  const PatientPreview({super.key, required this.patient});
+  final AppointmentModel? appointment;
+  const PatientPreview({super.key, required this.patient, this.appointment});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,18 +85,58 @@ class PatientPreview extends StatelessWidget {
                         ),
                         const SizedBox(height: 10),
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 8.0),
-                          child: buildSubmitButton(
-                            widthFactor: 0.5,
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        PatientPrescriptions(patient: patient),
-                                  ));
-                            },
-                            label: 'View Prescriptions',
+                          padding: const EdgeInsets.only(
+                              bottom: 8.0, right: 8, left: 8),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                flex: 4,
+                                child: buildSubmitButton(
+                                  // widthFactor: 0.9,
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              PatientPrescriptions(
+                                                  patient: patient),
+                                        ));
+                                  },
+                                  label: 'View Prescriptions',
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              appointment == null
+                                  ? const SizedBox()
+                                  : Expanded(
+                                      flex: 2,
+                                      child: buildSubmitButton(
+                                        // widthFactor: 0.3,
+                                        bgColor: Colors.green,
+                                        onPressed: () {
+                                          try {
+                                            appointment!.doctorId = context
+                                                .read<UserCubit>()
+                                                .getUser()
+                                                .id;
+                                            context
+                                                .read<AppointmentCubit>()
+                                                .markAppointmentAsDone(
+                                                    appointment!);
+                                            Navigator.pushNamed(
+                                                context, Routes.home);
+                                            SuccessToast.showToast(
+                                              msg: "Appointment marked as done",
+                                            );
+                                          } catch (e) {
+                                            FailureToast.showToast(
+                                                msg: e.toString());
+                                          }
+                                        },
+                                        label: 'Done',
+                                      ),
+                                    ),
+                            ],
                           ),
                         ),
                       ],

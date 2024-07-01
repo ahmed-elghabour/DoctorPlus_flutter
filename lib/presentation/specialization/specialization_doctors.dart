@@ -1,23 +1,24 @@
+import 'package:doctor_plus/data/model/doctor.dart';
+import 'package:doctor_plus/presentation/doctor%20profile/pages/doctor_preview.dart';
 import 'package:doctor_plus/utils/routes.dart';
 import 'package:flutter/material.dart';
 
 class SpecializationDoctorCard extends StatelessWidget {
-  final String name;
-  final String speciality;
-  final String? imageUrl;
+  final Doctor doctor;
 
   const SpecializationDoctorCard({
     super.key,
-    required this.name,
-    required this.speciality,
-    this.imageUrl,
+    required this.doctor,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, Routes.doctorProfile);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DoctorPreview(doctor: doctor)));
       },
       child: Card(
         margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 2),
@@ -40,21 +41,20 @@ class SpecializationDoctorCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          name,
+                          "${doctor.fName} ${doctor.lName}",
                           style: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.favorite_border_outlined),
-                          onPressed: () {
-                            // TODO: Add favorite button logic
-                          },
                         ),
                       ],
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      speciality,
+                      doctor.phone,
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      doctor.specialty,
                       style: const TextStyle(fontSize: 16),
                     ),
                   ],

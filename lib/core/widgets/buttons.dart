@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 Widget buildSubmitButton({
+  Color? bgColor,
   double widthFactor = 1,
   required String label,
   required void Function()? onPressed,
@@ -9,6 +10,7 @@ Widget buildSubmitButton({
       widthFactor: widthFactor,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
+          backgroundColor: bgColor,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),

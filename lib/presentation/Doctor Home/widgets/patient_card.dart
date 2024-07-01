@@ -33,6 +33,7 @@ class PatientCard extends StatelessWidget {
         ),
         const SizedBox(width: 10),
         Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               '${patient.fName} ${patient.lName}',

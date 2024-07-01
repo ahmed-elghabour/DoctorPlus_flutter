@@ -16,6 +16,11 @@ final class AppointmentsLoaded extends AppointmentsState {
       this.upcoming, this.completed, this.canceled, this.doctors);
 }
 
+class AppointmentsDeleted extends AppointmentsState {
+  final List<AppointmentModel> upcoming;
+  AppointmentsDeleted(this.upcoming);
+}
+
 final class AppointmentsError extends AppointmentsState {
   final String message;
   AppointmentsError(this.message);

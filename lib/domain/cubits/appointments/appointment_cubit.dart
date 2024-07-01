@@ -8,31 +8,63 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppointmentCubit extends Cubit<AppointmentsState> {
   AppointmentCubit() : super(AppointmentsInitial());
-
+  List<Doctor> doctors = [];
+  late List<AppointmentModel> appointments;
+  List<AppointmentModel> upcoming = [], canceled = [], completed = [];
   void getPatientAppointments({required String patientId}) async {
     emit(AppointmentsLoading());
     try {
-      List<AppointmentModel> appointments = await AppointmentsRepository(
+      appointments = await AppointmentsRepository(
               remoteDataSource: AppointmentsRemoteDataSource())
           .getPatientAppointments(patientId);
       List<String> doctorsID = appointments.map((e) => e.doctorId).toList();
-      List<Doctor> doctors = await AppointmentsRepository(
+      doctors = await AppointmentsRepository(
               remoteDataSource: AppointmentsRemoteDataSource())
           .getAppointmentedDoctors(doctorsID);
+      filterAppointments();
+      emit(AppointmentsLoaded(upcoming, completed, canceled, doctors));
+    } catch (e) {
+      emit(AppointmentsError(e.toString()));
+    }
+  }
 
-      List<AppointmentModel> upcoming = [];
-      List<AppointmentModel> canceled = [];
-      List<AppointmentModel> completed = [];
-
-      for (var appointment in appointments) {
-        if (appointment.status == 'upcoming') {
-          upcoming.add(appointment);
-        } else if (appointment.status == 'completed') {
-          completed.add(appointment);
-        } else {
-          canceled.add(appointment);
-        }
+  filterAppointments() {
+    for (var appointment in appointments) {
+      if (appointment.status == 'upcoming') {
+        upcoming.add(appointment);
+      } else if (appointment.status == 'completed') {
+        completed.add(appointment);
+      } else {
+        canceled.add(appointment);
       }
+    }
+  }
+
+  void deleteAppointment(AppointmentModel appointment) {
+    emit(AppointmentsLoading());
+    try {
+      AppointmentsRepository(remoteDataSource: AppointmentsRemoteDataSource())
+          .deleteAppointment(appointment);
+      appointments.remove(appointment);
+      filterAppointments();
+      emit(AppointmentsLoaded(upcoming, completed, canceled, doctors));
+    } catch (e) {
+      emit(AppointmentsError(e.toString()));
+    }
+  }
+
+  markAppointmentAsDone(AppointmentModel appointment) {
+    emit(AppointmentsLoading());
+    print("Appointment done - Fun ");
+    print("Appointment done - ID: ${appointment.id}");
+    try {
+      print("Appointment done - ID: ${appointment.id}");
+      print("Appointment done - Patient: ${appointment.patientId}");
+      print("Appointment done - Doctor: ${appointment.doctorId}");
+      AppointmentsRepository(remoteDataSource: AppointmentsRemoteDataSource())
+          .markAppointmentAsDone(appointment);
+      appointments.remove(appointment);
+      filterAppointments();
       emit(AppointmentsLoaded(upcoming, completed, canceled, doctors));
     } catch (e) {
       emit(AppointmentsError(e.toString()));

@@ -1,3 +1,4 @@
+import 'package:doctor_plus/data/model/appointment.dart';
 import 'package:doctor_plus/data/model/patient.dart';
 import 'package:doctor_plus/domain/cubits/user/user_cubit.dart';
 import 'package:doctor_plus/presentation/Profile%20Preview/pages/profile_preview.dart';
@@ -95,8 +96,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                 onTap: () => Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        PatientPreview(patient: patient),
+                                    builder: (context) => PatientPreview(
+                                      patient: patient,
+                                    ),
                                   ),
                                 ),
                               ),

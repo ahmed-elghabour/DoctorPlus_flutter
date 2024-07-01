@@ -15,6 +15,7 @@ List<Widget> getSliders(List<List<dynamic>> chunkedReservations,
             context,
             MaterialPageRoute(
                 builder: (context) => PatientPreview(
+                      appointment: item,
                       patient:
                           patients.firstWhere((p) => p.id == item.patientId),
                     )),

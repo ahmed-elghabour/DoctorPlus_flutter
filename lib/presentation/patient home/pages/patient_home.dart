@@ -15,10 +15,10 @@ class PatientHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Column(
       children: [
-        FilterByLocation(),
-        SizedBox(height: 16),
+        // FilterByLocation(),
+        SizedBox(height: 8),
         AllSpecializations(),
-        SizedBox(height: 16),
+        SizedBox(height: 8),
         RecommendationDoctors(),
       ],
     );
@@ -51,14 +51,13 @@ class AllSpecializations extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 8),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
             children: doctorSpecialties.skip(1).map((specialization) {
               return SizedBox(
                 width: 150,
-                height: 120,
+                height: 115,
                 child: SpecializationCard(
                   title: specialization,
                   imagePath: 'assets/specializations/$specialization.png',
@@ -111,14 +110,13 @@ class RecommendationDoctors extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 8),
         BlocBuilder<DoctorsCubit, DoctorsState>(
           builder: (context, state) {
             if (state is DoctorsLoaded) {
               return SingleChildScrollView(
                 child: Column(
                   children: List.generate(
-                      2,
+                      3,
                       (index) => DoctorCard(
                             doctor: state.doctors[index],
                           )),

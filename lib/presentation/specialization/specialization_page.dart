@@ -1,3 +1,4 @@
+import 'package:doctor_plus/data/model/doctor.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctor_plus/presentation/specialization/specialization_doctors.dart';
@@ -51,11 +52,10 @@ class SpecializationPage extends StatelessWidget {
                 }
                 return ListView(
                   children: snapshot.data!.docs.map((doc) {
-                    var data = doc.data() as Map<String, dynamic>;
+                    var data =
+                        Doctor.fromJson(doc.data() as Map<String, dynamic>);
                     return SpecializationDoctorCard(
-                      name: data['fName'],
-                      speciality: data['specialty'],
-                      imageUrl: data['image_url'],
+                      doctor: data,
                     );
                   }).toList(),
                 );

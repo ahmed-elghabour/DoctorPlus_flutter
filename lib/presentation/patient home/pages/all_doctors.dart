@@ -13,26 +13,29 @@ class AllDoctorsPage extends StatelessWidget {
       appBar: const MyCustomAppBar(
         title: 'All Doctors',
       ),
-      body: BlocBuilder<DoctorsCubit, DoctorsState>(
-        builder: (context, state) {
-          if (state is DoctorsLoaded) {
-            return ListView.builder(
-                itemBuilder: (context, index) {
-                  return DoctorCard(
-                    doctor: state.doctors[index],
-                  );
-                },
-                itemCount: state.doctors.length);
-          } else if (state is DoctorsLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else {
-            return const Center(
-              child: Text("Errorr loading doctors"),
-            );
-          }
-        },
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: BlocBuilder<DoctorsCubit, DoctorsState>(
+          builder: (context, state) {
+            if (state is DoctorsLoaded) {
+              return ListView.builder(
+                  itemBuilder: (context, index) {
+                    return DoctorCard(
+                      doctor: state.doctors[index],
+                    );
+                  },
+                  itemCount: state.doctors.length);
+            } else if (state is DoctorsLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else {
+              return const Center(
+                child: Text("Errorr loading doctors"),
+              );
+            }
+          },
+        ),
       ),
     );
   }

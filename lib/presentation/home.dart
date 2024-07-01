@@ -72,10 +72,10 @@ class HomePage extends StatelessWidget {
                 icon: Icon(Icons.home),
                 label: 'Home',
               ),
-              const BottomNavigationBarItem(
-                icon: Icon(Icons.favorite),
-                label: 'Favorites',
-              ),
+              // const BottomNavigationBarItem(
+              //   icon: Icon(Icons.favorite),
+              //   label: 'Favorites',
+              // ),
               const BottomNavigationBarItem(
                 icon: Icon(Icons.search),
                 label: 'Search',
@@ -98,17 +98,17 @@ class HomePage extends StatelessWidget {
                 case 0:
                   navigate(context, route: Routes.home);
                   break;
+                // case 1:
+                //   // TODO: Add route for Favorites
+                //   // navigate(context, route: '/favorites');
+                //   break;
                 case 1:
-                  // TODO: Add route for Favorites
-                  // navigate(context, route: '/favorites');
-                  break;
-                case 2:
                   navigate(context, route: '/search');
                   break;
-                case 3:
+                case 2:
                   navigate(context, route: Routes.complaint);
                   break;
-                case 4:
+                case 3:
                   if (isLoggedIn) {
                     navigate(context,
                         route:

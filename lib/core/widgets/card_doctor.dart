@@ -24,9 +24,13 @@ class DoctorCard extends StatelessWidget {
         );
       },
       child: Card(
-        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 2),
+        elevation: 5,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 16),
           child: Row(
             children: [
               const CircleAvatar(
@@ -43,14 +47,9 @@ class DoctorCard extends StatelessWidget {
                       children: [
                         Text(
                           '${doctor.fName}  ${doctor.lName}',
+                          softWrap: false,
                           style: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.favorite_border_outlined),
-                          onPressed: () {
-                            //  TODO  Add favorite button logic
-                          },
                         ),
                       ],
                     ),

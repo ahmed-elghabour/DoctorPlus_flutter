@@ -27,25 +27,6 @@ class AppointmentsListView extends StatelessWidget {
                 appointment: appointments[index],
                 doctor: doctors.firstWhere(
                     (doctor) => doctor.id == appointments[index].doctorId),
-                onCancel: () async {
-                  // bool shouldCancelApppointment =
-                  //     await showCancelAppointmentDialog(context);
-
-                  // if (shouldCancelApppointment) {
-                  //   // first we change the status of the appointment to cancelled in database
-                  //   upcomingAppointmentsCubit.cancelPatientUpcomingAppointment(
-                  //     appointmentId: appointments[index].id,
-                  //     patientId: '123',
-                  //   );
-
-                  //   // then i get the appointments again
-                  //   upcomingAppointmentsCubit.getPatientUpcomingAppointments(
-                  //       patientId: '123');
-                  //   cancelledAppointmentsCubit.getPatientCancelledAppointments(
-                  //       patientId: '123');
-                  // }
-                },
-                onReschedule: () {},
               );
             },
           );

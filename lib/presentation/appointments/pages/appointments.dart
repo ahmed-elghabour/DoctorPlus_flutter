@@ -13,15 +13,15 @@ class DoctorAppointments extends StatelessWidget {
   Widget build(BuildContext context) {
     var user = context.read<UserCubit>().getUser();
     return Scaffold(
-      appBar: MyCustomAppBar(
+      appBar: const MyCustomAppBar(
         title: 'My Appointments',
-        actions: [
-          appBarIcon(
-            iconSize: 30,
-            icon: Icons.person_search,
-            onTap: () {},
-          ),
-        ],
+        // actions: [
+        //   appBarIcon(
+        //     iconSize: 30,
+        //     icon: Icons.person_search,
+        //     onTap: () {},
+        //   ),
+        // ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

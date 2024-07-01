@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:doctor_plus/data/model/appointment.dart';
 import 'package:doctor_plus/utils/firebase.dart';
 
 class AppointmentsRemoteDataSource {
@@ -92,6 +93,45 @@ class AppointmentsRemoteDataSource {
       }
 
       return appointmentedPatients;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  void deleteAppointment(AppointmentModel appointment) async {
+    try {
+      await CustomFirebase().removeDocument(
+        collection: "patients",
+        docID: appointment.patientId,
+        nestedCollection: "appointments",
+        nestedDocID: appointment.id!,
+      );
+      await CustomFirebase().removeDocument(
+        collection: "doctors",
+        docID: appointment.doctorId,
+        nestedCollection: "appointments",
+        nestedDocID: appointment.id!,
+      );
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  void markAppointmentAsDone(AppointmentModel appointment) async {
+    try {
+      await firestore
+          .collection("doctors")
+          .doc(appointment.doctorId)
+          .collection("appointments")
+          .doc(appointment.id)
+          .delete();
+
+      await firestore
+          .collection("patients")
+          .doc(appointment.patientId)
+          .collection("appointments")
+          .doc(appointment.id)
+          .update({"status": "completed"});
     } catch (e) {
       throw Exception(e);
     }

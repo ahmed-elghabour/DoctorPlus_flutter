@@ -51,4 +51,20 @@ class AppointmentsRepository {
       rethrow;
     }
   }
+
+  void deleteAppointment(AppointmentModel appointment) {
+    try {
+      remoteDataSource.deleteAppointment(appointment);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  void markAppointmentAsDone(AppointmentModel appointment) {
+    try {
+      remoteDataSource.markAppointmentAsDone(appointment);
+    } catch (e) {
+      rethrow;
+    } 
+  }
 }

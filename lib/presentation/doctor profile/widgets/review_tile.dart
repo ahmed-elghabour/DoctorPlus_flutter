@@ -30,25 +30,20 @@ class ReviewTile extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            review.patientName,
-                            style: const TextStyle(
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            review.date,
-                            style: TextStyles.font13GrayRegular,
-                          ),
-                        ],
+                      Text(
+                        review.patientName,
+                        style: const TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        review.date,
+                        style: TextStyles.font13GrayRegular,
                       ),
                       const SizedBox(height: 4.0),
                       Text(
-                        '${review.rate}',
+                        'Rate: ${review.rate}',
                         style: TextStyles.font14GrayRegular.copyWith(
                           height: 1.5,
                         ),

@@ -10,13 +10,13 @@ class AppointmentsTabs extends StatelessWidget {
   final List<Widget> _tabs = const [
     Tab(text: 'Upcoming'),
     Tab(text: 'Completed'),
-    Tab(text: 'Cancelled'),
+    // Tab(text: 'Cancelled'),
   ];
 
   final List<Widget> _views = [
     const UpcomingAppointments(),
     const CompletedAppointments(),
-    const CancelledAppointments(),
+    // const CancelledAppointments(),
   ];
 
   @override
