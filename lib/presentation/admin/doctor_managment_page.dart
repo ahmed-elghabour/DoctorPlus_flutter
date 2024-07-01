@@ -1,9 +1,10 @@
+import 'package:doctor_plus/core/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class DoctorManagementPage extends StatefulWidget {
   static const routeName = '/doctorManagementPage';
 
-  const DoctorManagementPage({Key? key}) : super(key: key);
+  const DoctorManagementPage({super.key});
 
   @override
   _DoctorManagementPageState createState() => _DoctorManagementPageState();
@@ -148,7 +149,7 @@ class _DoctorManagementPageState extends State<DoctorManagementPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('New Doctors')),
+      appBar: const MyCustomAppBar(title: 'New Doctors'),
       body: ListView.builder(
         itemCount: dummyDoctors.length,
         itemBuilder: (context, index) {
@@ -181,16 +182,16 @@ class DoctorDetailPage extends StatelessWidget {
   final Function(String) onReject;
 
   const DoctorDetailPage({
-    Key? key,
+    super.key,
     required this.doctor,
     required this.onAccept,
     required this.onReject,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('${doctor['fName']} ${doctor['lName']}')),
+      appBar: MyCustomAppBar(title: '${doctor['fName']} ${doctor['lName']}'),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -266,7 +267,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
